@@ -1,0 +1,474 @@
+
+
+<html>
+
+<head>
+
+<meta charset="utf-8"/>
+
+<title>Unoffical 2015 Pittsburgh Craft Beer Week Map</title>
+
+
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+<!--<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' />-->
+
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+<!--
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+-->
+<script src="L.Control.Sidebar.js"></script>
+<link rel="stylesheet" href="L.Control.Sidebar.css" />
+<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+
+<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+<script src="geodata.js"></script>
+
+
+<style>
+  #map {
+    height: 100%
+  }
+</style>
+</head>
+
+<body>
+<style>
+
+  /*font styles*/
+  body {
+    background: #fff;
+    color: #222;
+    padding: 0;
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1.5;
+    position: relative;
+    cursor: auto; }
+
+  p, pa, hr {
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    text-align: left;
+    text-rendering: optimizeLegibility; }
+
+  a {
+    font-family: 'Oswald', sans-serif;
+    color: #8ad3f4;
+    }
+
+  strong {
+    font-style: normal;
+    font-family: 'Oswald', sans-serif;
+    color: #fdb930;
+  }
+
+  li, ul {
+    font-family: 'Oswald', sans-serif;
+    text-align: left;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #fdb930;
+    text-rendering: optimizeLegibility;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    text-shadow: 4px 4px 4px #000;}
+
+  h1 {
+    font-size: 2.125rem;}
+
+  h2 {
+    font-size: 1.6875rem;}
+
+  h3 {
+    font-size: 1.375rem;}
+
+  table, tr, th  {
+    vertical-align: top;
+    break-word: word-wrap;
+    }
+
+  /*leaflet sidebar styles*/
+
+  .leaflet-sidebar > .leaflet-control h1, h2, h3 {
+    color: #fdb930;
+    }
+  .leaflet-sidebar > .leaflet-control strong {
+    color: #fdb930;
+    }
+  .leaflet-sidebar > .leaflet-control em {
+    color: #fdb930;
+    }
+  .leaflet-sidebar > .leaflet-control a {
+    color: #8ad3f4;
+    }
+  .leaflet-sidebar > .leaflet-control hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgba(138,211,244,0.5);
+    margin: 1em 0;
+    padding: 0;
+    }
+
+  .custom-popup .leaflet-popup-content-wrapper {
+    background: rgba(35,31,32,0.9);
+    color: white;
+    font-size: 0.9em;
+    line-height: 1.2em;
+    }
+
+  .leaflet-container a {
+    color: #8ad3f4;
+    }
+
+  .custom-popup .leaflet-popup-tip-container {
+    margin: 0 auto;
+    width: 40px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+    }
+  .custom-popup .leaflet-popup-tip {
+    width: 15px;
+    height: 15px;
+    padding: 1px;
+    margin: -8px auto 0;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background: rgba(35,31,32, 0.7);
+    }
+
+  .filter-ui {
+    background:#fff;
+    position:absolute;
+    top:10px;
+    right:10px;
+    z-index:100;
+    padding:10px;
+    border-radius:3px;
+    }
+
+  /*menu styles*/
+  .menu-ui {
+    width:100%;
+    background:#4B4B4B;
+    border-radius:3px;
+    border:1px solid rgba(0,0,0,0.4);
+    }
+  .menu-ui a {
+    font-size:0.9rem;
+    color:#fff;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#7D7D7D;
+      color:#fff;
+      }
+    .menu-ui a.active,
+    .menu-ui a.active:hover {
+      background:#fdb930;
+      color:#000;
+      }
+
+    #marker-list {
+      background:#fdb930;
+      font-size:0.9rem;
+      overflow-x:auto;
+      margin:0;
+      padding:10px;
+      border-radius:3px;
+      width:100%;
+      border:1px solid rgba(0,0,0,0.4);
+      }
+    #marker-list li {
+      padding:5px;
+      margin:0;
+      list-style-type:none;
+      }
+    #marker-list li:hover {
+      background:#ffd580;
+      }
+
+</style>
+
+
+<div id="sidebar">
+  <div>
+    <h2><a href="https://www.facebook.com/PittsburghLentenFishFryMap/">2016 Pittsburgh Lenten Fish Fry Map</a></h2>
+    <p>Helping you find your local fish fry this Lenten season!</p>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th style="width:30%;">
+        <nav class='menu-ui'>
+          <a href='#' class='active' data-filter='all'>All</a>
+          <a href='#' data-filter='pierogies'>Homemade Pierogies</a>
+          <a href='#' data-filter='lunch'>Lunch</a>
+          <a href='#' data-filter='alcohol'>Alcohol</a>
+        </nav>
+        </th>
+        <th style="width:70%;">
+          <ul id='marker-list'></ul>
+        </th>
+      </tr>
+    </table>
+  </div>
+  <div>
+
+    <hr>
+
+    <!--
+
+      lunch = star shape
+      no lunch = round shape
+
+      pierogies = plus pierogie shape
+
+      church = blue color
+      business = yellow color
+      community org = green color
+      fire dept = red color
+
+    -->
+
+    <p>Lent 2016 begins February 10. Show some community love, and enjoy fish sandwiches, pierogies/pirohi, haluski, baked goods, and other Pittsburgh fare.</p>
+    <p>The map is a fun project we've been doing--along with help from all of you--since 2012. Listing on the map is free, and the work is all volunteer. We collect fish fry information from all local media outlets as well as individuals who send us information.</p>
+    <p>If your fish fry isn't listed, send us time, date, and any menu information, and we'll get it on the map.</p>
+  </div>
+</div>
+
+
+
+<!--LEAFLET MAP-->
+<div id="map" class='custom-popup'></div>
+
+
+<!-- -----------------------
+LEAFLET SCRIPT -------------
+------------------------ -->
+
+
+
+<script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoiY2JndGhvcjYyNCIsImEiOiJzZ2NaNmo4In0.hbXzZPAvaCO5GLu45bptTw';
+  // drawn from https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
+
+  // initialize the map
+  var map = L.map('map').setView([40.4452, -79.9866], 10);
+  var markerList = document.getElementById('marker-list');
+
+  // create mapstack tile layer and add to map
+  L.tileLayer(
+  	'http://{s}.sm.mapstack.stamen.com/((toner-lite,$000%5B@80%5D,$8ad3f4%5Bhsl-color%5D,mapbox-water%5Bdestination-in%5D),(toner,$fff%5Bdifference%5D,$fdb930%5Bhsl-color%5D,mapbox-water%5Bdestination-out%5D),(toner-hybrid,$fff%5Bdifference%5D,$fdb930%5Bhsl-color%5D),(terrain-background,$000%5B@40%5D,$ffffff%5Bhsl-color%5D,mapbox-water%5Bdestination-out%5D)%5Blighter@40%5D)/{z}/{x}/{y}.png', {
+  		attribution: '<pa style="font-size:0.5rem">Library from <a style="color:black" href="http://www.mapbox.com">Mapbox</a> Map tiles by <a style="color:black" href="http://stamen.com">Stamen Design</a>, under <a style="color:black"href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> license. Data by <a style="color:black"href="http://openstreetmap.org">OpenStreetMap</a>, under <a style="color:black"href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a> license.</pa>',
+  		maxZoom: 18,
+  		minZoom: 8,
+  	}
+  ).addTo(map);
+
+  var customLayer = L.geoJson(null, {
+  	pointToLayer: function(feature, latlng) {
+  		var marker = L.marker(latlng, {
+  			icon: L.mapbox.marker.icon({
+  				'marker-size': 'small',
+  				'marker-symbol': 'beer',
+  				'marker-color': '#fdb930'
+  			})
+  		});
+  		return marker;
+  	}
+  });
+
+  var runLayer = omnivore.kml('geodata.kml', null, customLayer).addTo(map);
+
+  // Find and store a variable reference to the list of filters.
+  var filters = document.getElementById('filters');
+
+  // Wait until the marker layer is loaded in order to build a list of possible
+  // types. If you are doing this with another featureLayer, you should change
+  // map.featureLayer to the variable you have assigned to your featureLayer.
+  map.featureLayer.on('ready', function() {
+    // Collect the types of symbols in this layer. you can also just
+    // hardcode an array of types if you know what you want to filter on,
+    // like var types = ['foo', 'bar'];
+    var typesObj = {}, types = [];
+    var features = map.featureLayer.getGeoJSON().features;
+    for (var i = 0; i < features.length; i++) {
+      typesObj[features[i].properties['marker-symbol']] = true;
+    }
+    for (var k in typesObj) types.push(k);
+
+    var checkboxes = [];
+    // Create a filter interface.
+    for (var i = 0; i < types.length; i++) {
+      // Create an an input checkbox and label inside.
+      var item = filters.appendChild(document.createElement('div'));
+      var checkbox = item.appendChild(document.createElement('input'));
+      var label = item.appendChild(document.createElement('label'));
+      checkbox.type = 'checkbox';
+      checkbox.id = types[i];
+      checkbox.checked = true;
+      // create a label to the right of the checkbox with explanatory text
+      label.innerHTML = types[i];
+      label.setAttribute('for', types[i]);
+      // Whenever a person clicks on this checkbox, call the update().
+      checkbox.addEventListener('change', update);
+      checkboxes.push(checkbox);
+    }
+
+    // This function is called whenever someone clicks on a checkbox and changes
+    // the selection of markers to be displayed.
+    function update() {
+      var enabled = {};
+      // Run through each checkbox and record whether it is checked. If it is,
+      // add it to the object of types to display, otherwise do not.
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
+      }
+      map.featureLayer.setFilter(function(feature) {
+        // If this symbol is in the list, return true. if not, return false.
+        // The 'in' operator in javascript does exactly that: given a string
+        // or number, it says if that is in a object.
+        // 2 in { 2: true } // true
+        // 2 in { } // false
+        return (feature.properties['marker-symbol'] in enabled);
+      });
+    }
+  });
+
+
+  /*
+    // Filter markers that have 'day1' set to "true", and return true
+    .setFilter(function(f) {
+    		return (f.properties.day1 == "TRUE") ? true : false;
+    	})
+    	//create popup
+    	// create initial list of features (post-filter). This code is repeated with menu-ui onclick
+    	.eachLayer(function(layer) {
+    		layer.bindPopup(
+    			"<h3><a href=" + layer.toGeoJSON().properties.url + "target='_newtab'>" + layer.toGeoJSON().properties.name + "</a></h3>" +
+    			"<p>" + layer.toGeoJSON().properties.type + "</p>" +
+    			"<p><strong>" + layer.toGeoJSON().properties.location + "</strong><br>" + layer.toGeoJSON().properties.address + "</p>" +
+    			"<p>" + layer.toGeoJSON().properties.day + " - " + layer.toGeoJSON().properties.time + "</p>"
+    		)
+    		var item = markerList.appendChild(document.createElement('li'));
+    		item.innerHTML = layer.toGeoJSON().properties.name + " @ " + layer.toGeoJSON().properties.location;
+    		item.onclick = function() {
+    			map.setView(layer.getLatLng(), 12);
+    			layer.openPopup();
+    		};
+    	})
+    	.addTo(map);
+
+    //console.log(markers._geojson.features[0].properties.name);
+
+
+    $('.menu-ui a').on('click', function() {
+      // For each filter link, get the 'data-filter' attribute value.
+      var filter = $(this).data('filter');
+      $(this).addClass('active').siblings().removeClass('active');
+      // Filter markers that have a value set to "true", and return true
+      markers.setFilter(function(f) {
+        return (filter === 'all') ? true : f.properties[filter] === true;
+        return (f.properties[filter] == "TRUE") ? true : false;
+        });
+
+      //Clear existing list of venues
+      while (markerList.hasChildNodes()) {
+        markerList.removeChild(markerList.firstChild);
+        }
+      // generate new list of venues
+      markers.eachLayer(function(layer) {
+        var item = markerList.appendChild(document.createElement('li'));
+        item.innerHTML = layer.toGeoJSON().properties.name + " @ " + layer.toGeoJSON().properties.location;
+        layer.bindPopup(
+          "<h3><a href="+layer.toGeoJSON().properties.url+"target='_newtab'>"+layer.toGeoJSON().properties.name+"</a></h3>"+
+          "<p>"+layer.toGeoJSON().properties.type+"</p>"+
+          "<p><strong>"+layer.toGeoJSON().properties.location+"</strong><br>"+layer.toGeoJSON().properties.address+"</p>"+
+          "<p>"+layer.toGeoJSON().properties.day+" - "+layer.toGeoJSON().properties.time+"</p>"
+          )
+        item.onclick = function() {
+          map.setView(layer.getLatLng(), 12);
+          layer.openPopup();
+          };
+        });
+      return false;
+
+      });
+    /*
+    map.on('ready', function(e) {
+      map.eachLayer(function(layer) {
+        var item = markerList.appendChild(document.createElement('li'));
+        //item.innerHTML = markers.getGeoJSON().properties.name;
+        item.innerHTML = layer.toGeoJSON().properties.name;
+
+        item.onclick = function() {
+          map.setView(layer.getLatLng(), 14);
+          layer.openPopup();
+          };
+        });
+      });
+
+
+    /*
+    //define the icon for the data points. This will be referenced later.
+    var pierogie_icon = L.icon({
+      iconUrl: 'pierogie-01.png',
+      iconSize: [75, 75],
+      popupAnchor: [0,-18]
+      });
+    L.geoJson(pcbw_geojson, {
+      pointToLayer: function(feature, latlng) {
+        var marker = L.marker(latlng, {icon: pierogie_icon});
+        marker.bindPopup('<h3>'+feature.properties.name+'</h3><p>'+feature.properties.description+'<p/>');
+        return marker;
+        }
+      }).addTo(map);
+    */
+
+  // create sidebar and add to map (not required for maptime demonstration)
+  var sidebar = L.control.sidebar('sidebar', {
+  	closeButton: false,
+  	position: 'left'
+  });
+
+  map.addControl(sidebar);
+
+  setTimeout(function() {
+  	sidebar.show();
+  }, 500);
+</script>
+
+
+</body>
+
+</html>
