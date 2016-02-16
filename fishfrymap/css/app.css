@@ -2,6 +2,8 @@
 	height: 100%
 }
 
+
+
 /*font styles*/
 
 body {
@@ -22,8 +24,8 @@ pa,
 hr {
 	font-family: 'Oswald', sans-serif;
 	font-weight: lighter;
-	font-size: 1rem;
-	line-height: 1.5;
+	font-size: 0.9rem;
+	line-height: 1.2;
 	margin-bottom: 1.5rem;
 	text-align: left;
 	text-rendering: optimizeLegibility;
@@ -79,46 +81,7 @@ th {
 	break-word: word-wrap;
 }
 
-/*
-.filter-ui {
-	background: #fff;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	z-index: 100;
-	padding: 10px;
-	border-radius: 3px;
-}
-*/
-
-/*leaflet sidebar styles*/
-
-.leaflet-sidebar > .leaflet-control h1,
-h2,
-h3 {
-	color: #fdb930;
-}
-
-.leaflet-sidebar > .leaflet-control strong {
-	color: #fdb930;
-}
-
-.leaflet-sidebar > .leaflet-control em {
-	color: #fdb930;
-}
-
-.leaflet-sidebar > .leaflet-control a {
-	color: #8ad3f4;
-}
-
-.leaflet-sidebar > .leaflet-control hr {
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 1px solid rgba(138, 211, 244, 0.5);
-	margin: 1em 0;
-	padding: 0;
-}
+/* Pop-Up */
 
 .custom-popup .leaflet-popup-content-wrapper {
 	background: rgba(35, 31, 32, 0.9);
@@ -152,8 +115,37 @@ h3 {
 	background: rgba(35, 31, 32, 0.7);
 }
 
+/*leaflet sidebar styles*/
 
-/*menu styles*/
+.leaflet-sidebar > .leaflet-control h1,
+h2,
+h3 {
+	color: #fdb930;
+}
+
+.leaflet-sidebar > .leaflet-control strong {
+	color: #fdb930;
+}
+
+.leaflet-sidebar > .leaflet-control em {
+	color: #fdb930;
+}
+
+.leaflet-sidebar > .leaflet-control a {
+	color: #8ad3f4;
+}
+
+.leaflet-sidebar > .leaflet-control hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid rgba(138, 211, 244, 0.5);
+	margin: 1em 0;
+	padding: 0;
+}
+
+
+/*menu styles
 
 .menu-ui {
 	width: 100%;
@@ -171,7 +163,7 @@ h3 {
 	padding: 10px;
 	text-decoration: none;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-	/*text-align: center;*/
+	text-align: center;
 }
 
 .menu-ui a:first-child {
@@ -194,6 +186,8 @@ h3 {
 	color: #000;
 }
 
+*/
+
 #marker-list {
 	background: #fdb930;
 	font-size: 0.9rem;
@@ -213,4 +207,50 @@ h3 {
 
 #marker-list li:hover {
 	background: #ffd580;
+}
+
+/* Checkbox Styles */
+
+/*
+input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    background:url(check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+input[type="checkbox"]:checked + label span {
+    background:url(check_radio_sheet.png) -19px top no-repeat;
+}
+*/
+
+input[type="checkbox"] {
+  display: none;
+}
+label {
+  cursor: pointer;
+}
+input[type="checkbox"] + label:before {
+  border: 1px solid #ffffff;
+  content: "\00a0";
+  display: inline-block;
+  height: 1.375rem;
+  width: 1.375rem;
+  margin: 0.2em 0.25em 0 0;
+  padding:0;
+  vertical-align: top;
+}
+input[type="checkbox"]:checked + label:before {
+  background: #fff;
+  color: #666;
+  content: "\2713";
+  line-height: 0.75em;
+  text-align: center;
+}
+input[type="checkbox"]:checked + label:after {
+  color: #8ad3f4
 }

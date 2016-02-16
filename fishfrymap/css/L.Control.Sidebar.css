@@ -49,8 +49,8 @@
 
   @media (max-width: 767px) {
     .leaflet-sidebar {
-      width: 100%;
-      height: 50%;
+      width: 25%;
+      height: 100%;
       padding: 0; }
       .leaflet-sidebar.left.visible ~ .leaflet-left {
         left: 100%; }
@@ -86,11 +86,11 @@
         right: 390px; } }
   @media (min-width: 1200px) {
     .leaflet-sidebar {
-      width: 460px; }
+      width: 500px; }
       .leaflet-sidebar.left.visible ~ .leaflet-left {
-        left: 460px; }
+        left: 500px; }
       .leaflet-sidebar.right.visible ~ .leaflet-right {
-        right: 460px; } }
+        right: 500px; } }
   .leaflet-sidebar .close {
     position: absolute;
     right: 20px;
