@@ -2,10 +2,6 @@
 	height: 100%
 }
 
-
-/* https://www.mapbox.com/mapbox.js/example/v1.0.0/non-exclusive-markers/ */
-
-
 /*font styles*/
 
 body {
@@ -26,9 +22,9 @@ pa,
 hr {
 	font-family: 'Oswald', sans-serif;
 	font-weight: lighter;
-	font-size: 1.1rem;
-	line-height: 1.6;
-	margin-bottom: 1.25rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	margin-bottom: 1.5rem;
 	text-align: left;
 	text-rendering: optimizeLegibility;
 }
@@ -83,6 +79,17 @@ th {
 	break-word: word-wrap;
 }
 
+/*
+.filter-ui {
+	background: #fff;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 100;
+	padding: 10px;
+	border-radius: 3px;
+}
+*/
 
 /*leaflet sidebar styles*/
 
@@ -164,7 +171,7 @@ h3 {
 	padding: 10px;
 	text-decoration: none;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-	text-align: center;
+	/*text-align: center;*/
 }
 
 .menu-ui a:first-child {

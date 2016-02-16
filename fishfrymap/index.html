@@ -8,9 +8,9 @@
 
 	<script src='js/mapbox.js'></script>
 	<script src='js/leaflet-omnivore.min.js'></script>
-	<link href="css/leaflet.css" rel="stylesheet" type="text/css"/>
+	<link href="css/leaflet.css" rel="stylesheet" type="text/css" />
 	<script src="js/L.Control.Sidebar.js"></script>
-	<link href="css/L.Control.Sidebar.css" rel="stylesheet" type="text/css"/>
+	<link href="css/L.Control.Sidebar.css" rel="stylesheet" type="text/css" />
 	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 	<script src='js/jquery-1.11.0.min.js'></script>
 	<link href="css/app.css" rel="stylesheet" type="text/css" />
@@ -21,71 +21,73 @@
 
 	<div id="sidebar">
 		<div>
-			<h2><a href="https://www.facebook.com/PittsburghLentenFishFryMap/">2016 Pittsburgh Lenten Fish Fry Map</a></h2>
+			<h1><a href="https://www.facebook.com/PittsburghLentenFishFryMap/">2016 Pittsburgh Lenten Fish Fry Map</a></h1>
 			<p>Helping you find your local fish fry this Lenten season!</p>
 		</div>
-		<div>
-			<table>
-				<tr>
-					<th style="width:30%;">
-						<nav class='menu-ui'>
-							<a href='#' class='active' data-filter='all'>All</a>
-							<a href='#' data-filter='lunch'>Open for Lunch</a>
-							<a href='#' data-filter='alcohol'>Serves Alcohol</a>
-                            <a href='#' data-filter='pierogies'>Serves Homemade Pierogies</a>
-						</nav>
-					</th>
-					<th style="width:70%;">
-						<ul id='marker-list'></ul>
-					</th>
-				</tr>
-			</table>
+		<hr>
+		<div id='filters' class='filter-ui'>
+			<h2>Other than fish, these are the things I'm looking for in my Fish Fry:</h2>
+			<div>
+				<h3>
+					<input type='checkbox' checked class='filter' name='filter' id='lunch' value='lunch' />
+					<label for='lunch'>Open for Lunch</label>
+				</h3>
+			</div>
+			<div>
+				<h3>
+					<input type='checkbox' checked class='filter' name='filter' id='pierogie' value='pierogie' />
+					<label for='pierogie'>Homemade Pierogies</label>
+				</h3>
+			</div>
+			<div>
+				<h3>
+					<input type='checkbox' checked class='filter' name='filter' id='booze' value='booze' />
+					<label for='booze'>Serves Alcohol</label>
+				</h3>
+			</div>
 		</div>
-		<div>
 
+		<div>
 			<hr>
-<!--
 			<p>Lent 2016 begins February 10. Show some community love, and enjoy fish sandwiches, pierogies/pirohi, haluski, baked goods, and other Pittsburgh fare.</p>
 			<p>The map is a fun project we've been doing--along with help from all of you--since 2012. Listing on the map is free, and the work is all volunteer. We collect fish fry information from all local media outlets as well as individuals who send us information.</p>
 			<p>If your fish fry isn't listed, send us time, date, and any menu information, and we'll get it on the map.</p>
 		</div>
 	</div>
--->
-
 
 	<!--LEAFLET MAP-->
 	<div id="map" class='custom-popup'></div>
 
 
-	<!-- -----------------------
-LEAFLET SCRIPT -------------
------------------------- -->
-
-
-
 	<script>
+		// get all the checkboxes
+		var checkboxes = document.getElementsByClassName('filter');
+		//uncheck all checkboxes all by default
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].type == 'checkbox') {
+				checkboxes[i].checked = false;
+			}
+		}
+
 		L.mapbox.accessToken = 'pk.eyJ1IjoiY2JndGhvcjYyNCIsImEiOiJzZ2NaNmo4In0.hbXzZPAvaCO5GLu45bptTw';
 		// drawn from https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
 
 		// initialize the map
 		var map = L.map('map').setView([40.4452, -79.9866], 10);
-		var markerList = document.getElementById('marker-list');
+		// var markerList = document.getElementById('marker-list');
 
 		// create mapstack tile layer and add to map
-		L.tileLayer(
-			'http://{s}.sm.mapstack.stamen.com/((toner-lite,$000%5B@80%5D,$8ad3f4%5Bhsl-color%5D,mapbox-water%5Bdestination-in%5D),(toner,$fff%5Bdifference%5D,$fdb930%5Bhsl-color%5D,mapbox-water%5Bdestination-out%5D),(toner-hybrid,$fff%5Bdifference%5D,$fdb930%5Bhsl-color%5D),(terrain-background,$000%5B@40%5D,$ffffff%5Bhsl-color%5D,mapbox-water%5Bdestination-out%5D)%5Blighter@40%5D)/{z}/{x}/{y}.png', {
-				attribution: '<pa style="font-size:0.5rem">Library from <a style="color:black" href="http://www.mapbox.com">Mapbox</a> Map tiles by <a style="color:black" href="http://stamen.com">Stamen Design</a>, under <a style="color:black"href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> license. Data by <a style="color:black"href="http://openstreetmap.org">OpenStreetMap</a>, under <a style="color:black"href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a> license.</pa>',
-				maxZoom: 18,
-				minZoom: 8,
-			}
-		).addTo(map);
+		L.tileLayer('http://{s}.sm.mapstack.stamen.com/((toner-lite,$000%5B@80%5D,$8ad3f4%5Bhsl-color%5D,mapbox-water%5Bdestination-in%5D),(toner,$fff%5Bdifference%5D,$fdb930%5Bhsl-color%5D,mapbox-water%5Bdestination-out%5D),(toner-hybrid,$fff%5Bdifference%5D,$fdb930%5Bhsl-color%5D),(terrain-background,$000%5B@40%5D,$ffffff%5Bhsl-color%5D,mapbox-water%5Bdestination-out%5D)%5Blighter@40%5D)/{z}/{x}/{y}.png', {
+			attribution: '<pa style="font-size:0.5rem">Library from <a style="color:black" href="http://www.mapbox.com">Mapbox</a> Map tiles by <a style="color:black" href="http://stamen.com">Stamen Design</a>, under <a style="color:black"href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> license. Data by <a style="color:black"href="http://openstreetmap.org">OpenStreetMap</a>, under <a style="color:black"href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a> license.</pa>',
+			maxZoom: 18,
+			minZoom: 8,
+		}).addTo(map);
 
 		var customLayer = L.geoJson(null, {
 			pointToLayer: function(feature, latlng) {
 				var marker = L.marker(latlng, {
 					icon: L.mapbox.marker.icon({
 						'marker-size': 'small',
-						'marker-symbol': 'beer',
 						'marker-color': '#fdb930'
 					})
 				});
@@ -93,93 +95,77 @@ LEAFLET SCRIPT -------------
 			}
 		});
 
-		var runLayer = omnivore.kml('geodata.kml', null, customLayer) /*.addTo(map);*/
+		var runLayer = omnivore.kml('geodata.kml', null, L.mapbox.featureLayer())
+			.addTo(map);
 
-/*
-		  // Filter markers that have 'day1' set to "true", and return true
-		  .setFilter(function(f) {
-		  		return (f.properties.day1 == "TRUE") ? true : false;
-		  	})
-		  	//create popup
-		  	// create initial list of features (post-filter). This code is repeated with menu-ui onclick
-
-		  	.eachLayer(function(layer) {
-		  		layer.bindPopup(
-		  			"<h3><a href=" + layer.toGeoJSON().properties.url + "target='_newtab'>" + layer.toGeoJSON().properties.name + "</a></h3>" +
-		  			"<p>" + layer.toGeoJSON().properties.type + "</p>" +
-		  			"<p><strong>" + layer.toGeoJSON().properties.location + "</strong><br>" + layer.toGeoJSON().properties.address + "</p>" +
-		  			"<p>" + layer.toGeoJSON().properties.day + " - " + layer.toGeoJSON().properties.time + "</p>"
-		  		)
-		  		var item = markerList.appendChild(document.createElement('li'));
-		  		item.innerHTML = layer.toGeoJSON().properties.name + " @ " + layer.toGeoJSON().properties.location;
-		  		item.onclick = function() {
-		  			map.setView(layer.getLatLng(), 12);
-		  			layer.openPopup();
-		  		};
-		  	})
-		  	*/
-		  	.addTo(map);
-
-		  //console.log(markers._geojson.features[0].properties.name);
+		$("input[type='checkbox']").click(function() {
+			//setFilter applies a function (the parameter) to every feature
+			//what will happen in showFeatures
+			console.log("******************")
+			runLayer.setFilter(showFeatures)
+		});
 
 
-		  $('.menu-ui a').on('click', function() {
-		    // For each filter link, get the 'data-filter' attribute value.
-		    var filter = $(this).data('filter');
-		    $(this).addClass('active').siblings().removeClass('active');
-		    // Filter markers that have a value set to "true", and return true
-		    markers.setFilter(function(f) {
-              // If the data-filter attribute is set to "all", return
-              // all (true). Otherwise, filter on markers that have
-              // a value set to true based on the filter name.
-		      return (filter === 'all') ? true : f.properties[filter] === true;
-		      });
-            return false;
-          });
-/*
-		    //Clear existing list of venues
-		    while (markerList.hasChildNodes()) {
-		      markerList.removeChild(markerList.firstChild);
-		      }
-		    // generate new list of venues
-		    markers.eachLayer(function(layer) {
-		      var item = markerList.appendChild(document.createElement('li'));
-		      item.innerHTML = layer.toGeoJSON().properties.name + " @ " + layer.toGeoJSON().properties.location;
-		      layer.bindPopup(
-		        "<h3><a href="+layer.toGeoJSON().properties.url+"target='_newtab'>"+layer.toGeoJSON().properties.name+"</a></h3>"+
-		        "<p>"+layer.toGeoJSON().properties.type+"</p>"+
-		        "<p><strong>"+layer.toGeoJSON().properties.location+"</strong><br>"+layer.toGeoJSON().properties.address+"</p>"+
-		        "<p>"+layer.toGeoJSON().properties.day+" - "+layer.toGeoJSON().properties.time+"</p>"
-		        )
-		      item.onclick = function() {
-		        map.setView(layer.getLatLng(), 12);
-		        layer.openPopup();
-		        };
-		      });
-		    return false;
+		function showFeatures(feature) {
+			console.log("__________________")
+			console.log(">>> ", feature.properties.name)
+				/*
+				This function evaluates every feature once
+				It can only can pass a single boolean: true or false to setFilter
+				That means we have to figure out whether the feature matches the checkboxes.
+				if the feature properties match the corresponding checkbox fields, return true
+				if there is a mismatch between any checkbox and feature property, return false
+				if no checkboxes are checked (all checkboxes return false), then this
+				 function always returns true, which will end up meaning setFilter keeps all features on
+				*/
+			checkboxed = []
 
-		    });
-		  /*
-		  map.on('ready', function(e) {
-		    map.eachLayer(function(layer) {
-		      var item = markerList.appendChild(document.createElement('li'));
-		      //item.innerHTML = markers.getGeoJSON().properties.name;
-		      item.innerHTML = layer.toGeoJSON().properties.name;
+			// our filters (these can be turned into a function):
 
-		      item.onclick = function() {
-		        map.setView(layer.getLatLng(), 14);
-		        layer.openPopup();
-		        };
-		      });
-		    });
-		  */
+			var lunch_box = $("#lunch").prop("checked")
+			var lunch_prop = feature.properties["Serves Lunch?"] === "Yes"
+			var lunch = (lunch_box === lunch_prop)
+			if (lunch_box) checkboxed.push(lunch)
+				//console.log("lunch ", lunch)
+
+			var pier_box = $("#pierogie").prop("checked")
+			var pier_prop = feature.properties["Homemade Pierogies?"] === "Yes"
+			var pier = (pier_box === pier_prop)
+			if (pier_box) checkboxed.push(pier)
+				//console.log("pierogie ", pier)
+
+			var booze_box = $("#booze").prop("checked")
+			var booze_prop = feature.properties["Alcohol?"] === "Yes"
+			var booze = (booze_box === booze_prop)
+			if (booze_box) checkboxed.push(booze)
+				//console.log("booze ", booze)
+
+			// the business of filtering:
+			if (lunch_box == false && booze_box == false && pier_box == false) {
+				//console.log("All boxes unchecked")
+				show = true
+			} else
+			//console.log(checkboxed, (checkboxed.indexOf(false) != -1))
+			// we care about matches for the the ones that are checked
+			// we don't care about matches for the ones that aren't checked
+			// get the match results for those with checked-boxes
+			// if there are any non-matches, the feature is false
+			if (checkboxed.indexOf(false) != -1)
+				show = false
+				// if one/all are matches, feature is true
+			else
+				show = true
+
+			//console.log("setFilter on", feature.properties.title, show)
+			return show
+		}
+
 
 		// create sidebar and add to map (not required for maptime demonstration)
 		var sidebar = L.control.sidebar('sidebar', {
 			closeButton: false,
 			position: 'left'
 		});
-
 		map.addControl(sidebar);
 
 		setTimeout(function() {
