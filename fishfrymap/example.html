@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--
-https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
+started with https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/ and went from there...
+- CBG 2016/02/15
 -->
 <html>
 
@@ -22,12 +23,7 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
 			bottom: 0;
 			width: 100%;
 		}
-	</style>
-</head>
 
-<body>
-
-	<style>
 		.filter-ui {
 			background: #fff;
 			position: absolute;
@@ -37,87 +33,34 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
 			padding: 10px;
 			border-radius: 3px;
 		}
-
-		.menu-ui {
-			background: #fff;
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			z-index: 1;
-			border-radius: 3px;
-			width: 120px;
-			border: 1px solid rgba(0, 0, 0, 0.4);
-		}
-
-		.menu-ui a {
-			font-size: 13px;
-			color: #404040;
-			display: block;
-			margin: 0;
-			padding: 0;
-			padding: 10px;
-			text-decoration: none;
-			border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-			text-align: center;
-		}
-
-		.menu-ui a:first-child {
-			border-radius: 3px 3px 0 0;
-		}
-
-		.menu-ui a:last-child {
-			border: none;
-			border-radius: 0 0 3px 3px;
-		}
-
-		.menu-ui a:hover {
-			background: #f8f8f8;
-			color: #404040;
-		}
-
-		.menu-ui a.active,
-		.menu-ui a.active:hover {
-			background: #3887BE;
-			color: #FFF;
-		}
 	</style>
+</head>
+
+<body>
+
+	<div id='filters' class='filter-ui'>
+		<div>
+			<input type='checkbox' checked class='filter' name='filter' id='rentals' value='rentals' />
+			<label for='rentals'>Rentals</label>
+		</div>
+		<div>
+			<input type='checkbox' checked class='filter' name='filter' id='tackleshop' value='tackleshop' />
+			<label for='tackleshop'>Tackleshop</label>
+		</div>
+		<div>
+			<input type='checkbox' checked class='filter' name='filter' id='fuel' value='fuel' />
+			<label for='fuel'>Fuel</label>
+		</div>
+	</div>
 
 	<!-- jQuery is required for this example. -->
 	<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
-	<!--
-	<nav class='menu-ui'>
-		<a href='#' class='active' data-filter='all'>Show all</a>
-		<a href='#' data-filter='rentals'>Rentals</a>
-		<a href='#' data-filter='tackleshop'>Tackle shop</a>
-		<a href='#' data-filter='fuel'>Fuel station</a>
-	</nav>
-	<nav id='filters' class='filter-ui'></nav>
-	-->
-
-<div id='filters' class='filter-ui'>
-	<div>
-		<input type='checkbox' checked class='filter' name='filter' id='rentals' value='rentals' />
-		<label for='rentals'>Rentals</label>
-	</div>
-	<div>
-		<input type='checkbox' checked class='filter' name='filter' id='tackleshop' value='tackleshop' />
-		<label for='tackleshop'>Tackleshop</label>
-	</div>
-	<div>
-		<input type='checkbox' checked class='filter' name='filter' id='fuel' value='fuel' />
-		<label for='fuel'>Fuel</label>
-	</div>
-</div>
-
 
 	<div id='map'></div>
 
 	<script>
 		L.mapbox.accessToken = 'pk.eyJ1IjoiY2JndGhvcjYyNCIsImEiOiJzZ2NaNmo4In0.hbXzZPAvaCO5GLu45bptTw';
 
-		// In the propeties object for each marker define key's
-		// like `rentals`, `fuel`, `tackleshop` that are set to true for false
-		// depending on whether or they exist at a location.
 		var geojson = [{
 			"type": "Feature",
 			"geometry": {
@@ -200,17 +143,17 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
 			//what will happen in showFeatures
 			console.log("__________________")
 			console.log("------------------")
-			/*
-			if ($("#rentals").prop("checked"))
-				console.log("rentals checked")
-			else console.log("rentals unchecked")
-			if ($("#tackleshop").prop("checked"))
-				console.log("tackleshop checked")
-			else console.log("tackleshop unchecked")
-			if ($("#fuel").prop("checked"))
-				console.log("fuel checked")
-			else console.log("fuel unchecked")
-			*/
+				/*
+				if ($("#rentals").prop("checked"))
+					console.log("rentals checked")
+				else console.log("rentals unchecked")
+				if ($("#tackleshop").prop("checked"))
+					console.log("tackleshop checked")
+				else console.log("tackleshop unchecked")
+				if ($("#fuel").prop("checked"))
+					console.log("fuel checked")
+				else console.log("fuel unchecked")
+				*/
 			myLayer.setFilter(showFeatures)
 		});
 
@@ -218,15 +161,15 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
 		function showFeatures(feature) {
 			console.log("__________________")
 			console.log(">>> ", feature.properties.title)
-			/*
-			This function evaluates every feature once
-			It can only can pass a single boolean: true or false to setFilter
-			That means we have to figure out whether the feature matches the checkboxes.
-			if the feature properties match the corresponding checkbox fields, return true
-			if there is a mismatch between any checkbox and feature property, return false
-			if no checkboxes are checked (all checkboxes return false), then this
-			 function always returns true, which will end up meaning setFilter to keep all features on
-			*/
+				/*
+				This function evaluates every feature once
+				It can only can pass a single boolean: true or false to setFilter
+				That means we have to figure out whether the feature matches the checkboxes.
+				if the feature properties match the corresponding checkbox fields, return true
+				if there is a mismatch between any checkbox and feature property, return false
+				if no checkboxes are checked (all checkboxes return false), then this
+				 function always returns true, which will end up meaning setFilter to keep all features on
+				*/
 			checkboxed = []
 
 			var rentals_box = $("#rentals").prop("checked")
@@ -251,23 +194,23 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
 				console.log("All boxes unchecked")
 				show = true
 			} else
-				console.log(checkboxed, (checkboxed.indexOf(false)!= -1))
+				console.log(checkboxed, (checkboxed.indexOf(false) != -1))
 				// we care about matches for the the ones that are checked
 				// we don't care about matches for the ones that aren't checked
 				// get the match results for those with checked-boxes
 				// if there are any non-matches, the feature is false
-				if (checkboxed.indexOf(false)!= -1)
-					show = false
+			if (checkboxed.indexOf(false) != -1)
+				show = false
 				// if one/all are matches, feature is true
-				else
-					show = true
+			else
+				show = true
 
 			console.log("setFilter on", feature.properties.title, show)
 			return show
 		}
 
 		/*
-		// for auto-generating checkboxes 
+		// for auto-generating checkboxes
 		var types = ['rentals', 'tackleshop', 'fuel'];
 		var checkboxes = [];
 		// Create a filter interface.
@@ -287,7 +230,6 @@ https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-multiple-filters/
 			checkboxes.push(checkbox);
 		}
 */
-
 	</script>
 
 </body>
