@@ -30,9 +30,9 @@
 					<th style="width:30%;">
 						<nav class='menu-ui'>
 							<a href='#' class='active' data-filter='all'>All</a>
-							<a href='#' data-filter='pierogies'>Homemade Pierogies</a>
-							<a href='#' data-filter='lunch'>Lunch</a>
-							<a href='#' data-filter='alcohol'>Alcohol</a>
+							<a href='#' data-filter='lunch'>Open for Lunch</a>
+							<a href='#' data-filter='alcohol'>Serves Alcohol</a>
+                            <a href='#' data-filter='pierogies'>Serves Homemade Pierogies</a>
 						</nav>
 					</th>
 					<th style="width:70%;">
@@ -44,27 +44,13 @@
 		<div>
 
 			<hr>
-
-			<!--
-
-      lunch = star shape
-      no lunch = round shape
-
-      pierogies = plus pierogie shape
-
-      church = blue color
-      business = yellow color
-      community org = green color
-      fire dept = red color
-
-    -->
-
+<!--
 			<p>Lent 2016 begins February 10. Show some community love, and enjoy fish sandwiches, pierogies/pirohi, haluski, baked goods, and other Pittsburgh fare.</p>
 			<p>The map is a fun project we've been doing--along with help from all of you--since 2012. Listing on the map is free, and the work is all volunteer. We collect fish fry information from all local media outlets as well as individuals who send us information.</p>
 			<p>If your fish fry isn't listed, send us time, date, and any menu information, and we'll get it on the map.</p>
 		</div>
 	</div>
-
+-->
 
 
 	<!--LEAFLET MAP-->
@@ -107,18 +93,16 @@ LEAFLET SCRIPT -------------
 			}
 		});
 
-		var runLayer = omnivore.kml('geodata.kml', null, customLayer).addTo(map);
+		var runLayer = omnivore.kml('geodata.kml', null, customLayer) /*.addTo(map);*/
 
-
-
-
-		/*
+/*
 		  // Filter markers that have 'day1' set to "true", and return true
 		  .setFilter(function(f) {
 		  		return (f.properties.day1 == "TRUE") ? true : false;
 		  	})
 		  	//create popup
 		  	// create initial list of features (post-filter). This code is repeated with menu-ui onclick
+
 		  	.eachLayer(function(layer) {
 		  		layer.bindPopup(
 		  			"<h3><a href=" + layer.toGeoJSON().properties.url + "target='_newtab'>" + layer.toGeoJSON().properties.name + "</a></h3>" +
@@ -133,6 +117,7 @@ LEAFLET SCRIPT -------------
 		  			layer.openPopup();
 		  		};
 		  	})
+		  	*/
 		  	.addTo(map);
 
 		  //console.log(markers._geojson.features[0].properties.name);
@@ -144,10 +129,14 @@ LEAFLET SCRIPT -------------
 		    $(this).addClass('active').siblings().removeClass('active');
 		    // Filter markers that have a value set to "true", and return true
 		    markers.setFilter(function(f) {
+              // If the data-filter attribute is set to "all", return
+              // all (true). Otherwise, filter on markers that have
+              // a value set to true based on the filter name.
 		      return (filter === 'all') ? true : f.properties[filter] === true;
-		      return (f.properties[filter] == "TRUE") ? true : false;
 		      });
-
+            return false;
+          });
+/*
 		    //Clear existing list of venues
 		    while (markerList.hasChildNodes()) {
 		      markerList.removeChild(markerList.firstChild);
@@ -183,22 +172,6 @@ LEAFLET SCRIPT -------------
 		        };
 		      });
 		    });
-
-
-		  /*
-		  //define the icon for the data points. This will be referenced later.
-		  var pierogie_icon = L.icon({
-		    iconUrl: 'pierogie-01.png',
-		    iconSize: [75, 75],
-		    popupAnchor: [0,-18]
-		    });
-		  L.geoJson(pcbw_geojson, {
-		    pointToLayer: function(feature, latlng) {
-		      var marker = L.marker(latlng, {icon: pierogie_icon});
-		      marker.bindPopup('<h3>'+feature.properties.name+'</h3><p>'+feature.properties.description+'<p/>');
-		      return marker;
-		      }
-		    }).addTo(map);
 		  */
 
 		// create sidebar and add to map (not required for maptime demonstration)
