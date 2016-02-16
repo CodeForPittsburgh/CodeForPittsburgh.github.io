@@ -1,6 +1,6 @@
-# 2016 Pittsburgh Lenten Fish Fry Map
+# [2016 Pittsburgh Lenten Fish Fry Map](openpgh.github.io/fishfrymap)
 
-Website: https://www.facebook.com/PittsburghLentenFishFryMap/
+Facebook: https://www.facebook.com/PittsburghLentenFishFryMap/
 
 ## Dependencies
 
