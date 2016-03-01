@@ -14,14 +14,22 @@ so that the points can be georeferenced and converted in geojson
 
 Requires:
 xmltodict: https://github.com/martinblech/xmltodict
-"""
 
+Improvements to make:
+- Ensure unicode is being handled appropriately
+- Ensure <![CDATA ]]> under the description tag is preserved during file.write() function
+- Automatically handle differences between Google's KML structures (e.g., some 
+methods of export insert an additional 'Folder' hierarchy above 'Document')
+"""
 import xmltodict, sys
 
-in_kml = r'/home/gassc/openpgh.github.io/fishfrymap/geodata.kml'
-out_kml = r'/home/gassc/openpgh.github.io/fishfrymap/geodata_fixed.kml'
-#in_kml = sys.arv[0]
-#out_kml = sys.arv[1]
+# test inputs
+#in_kml = r'/home/gassc/openpgh.github.io/fishfrymap/geodata.kml'
+#out_kml = r'/home/gassc/openpgh.github.io/fishfrymap/geodata_fixed.kml'
+
+#inputs
+in_kml = sys.arv[0]
+out_kml = sys.arv[1]
 
 #open the kml as a python file object (read/write mode)
 in_kml_file = open(in_kml,'r')
