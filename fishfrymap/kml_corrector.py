@@ -18,27 +18,43 @@ xmltodict: https://github.com/martinblech/xmltodict
 
 import xmltodict, sys
 
-
 in_kml = r'/home/gassc/openpgh.github.io/fishfrymap/geodata.kml'
-in_kml = sys.arv[0]
-out_kml = sys.arv[1]
+out_kml = r'/home/gassc/openpgh.github.io/fishfrymap/geodata_fixed.kml'
+#in_kml = sys.arv[0]
+#out_kml = sys.arv[1]
 
-kml_dict = xmltodict.parse(open(in_kml,'r'))
-#list_placemarks = kml['kml']['Document']['Folder']['Placemark']
+#open the kml as a python file object (read/write mode)
+in_kml_file = open(in_kml,'r')
+# use xmltodict to parse an opened kml file into a python dictionary
+kml_dict = xmltodict.parse(in_kml_file)
+in_kml_file.close()
 
-for e in kml_dict['kml']['Document']['Folder']['Placemark']:
+# print the number of markers to be analyzed
+marker_count = len(kml_dict['kml']['Document']['Placemark'])
+print("Analyzing {0} kml placemarks".format(marker_count))
+
+# for each placemark:
+for e in kml_dict['kml']['Document']['Placemark']:
     try:
+        #check if address key exists
         if 'address' in e.keys():
-            addy = e['address']
-            name = e['name']
-            if addy == 'geocoded':
-                new_addy = e['ExtendedData']['Data'][0]['value']
-                print("FIXED: {0} is at {1}".format(name,new_addy))
+            addy = unicode(e['address'])
+            #if the address value == 'geocoded':
+            if addy == unicode('geocoded'):
+                #get the address string from within the extended data attributes
+                new_addy = unicode(e['ExtendedData']['Data'][0]['value'])
+                #write that string value to the address key
                 e['address'] = new_addy
             else:
-                print("GOOD!: {0} is at {1}".format(name,addy))
+                pass
+        # if the address key doesn't exists
         else:
-            e['address'] = e['ExtendedData']['Data'][0]['value']
-            print("FIXED: {0} is at {1}".format(e['name'],e['address']))
+            # add address key and populate with address
+            e['address'] = unicode(e['ExtendedData']['Data'][0]['value'])
     except:
-        print("Error with placemark {0}".format(e))
+        print(unicode("Error with placemark {0}".format(e)))
+
+kml_fixed = xmltodict.unparse(kml_dict)
+out_kml_file = open(out_kml,'w')
+out_kml_file.write(kml_fixed.encode('utf8'))
+out_kml_file.close()
