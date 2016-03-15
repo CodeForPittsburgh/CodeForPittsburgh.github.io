@@ -5,19 +5,31 @@
 	<meta charset="utf-8" />
 
 	<title>2016 Lenten Fish Fry Map</title>
-
+	<!--Mapbox + Leafleft-->
 	<script src='js/mapbox.js'></script>
 	<script src='js/leaflet-omnivore.min.js'></script>
 	<link href="css/leaflet.css" rel="stylesheet" type="text/css" />
 	<script src="js/L.Control.Sidebar.js"></script>
 	<link href="css/L.Control.Sidebar.css" rel="stylesheet" type="text/css" />
-	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+	<!--jQuery-->
 	<script src='js/jquery-1.11.0.min.js'></script>
+	<!--Mapbox Directions API v0.4.0-->
+	<script src='js/mapbox.directions.js'></script>
+	<link rel='stylesheet' href='css/mapbox.directions.css' type='text/css' />
+	<!--Mapbox Marker Clustering-->
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+	<!--custom-->
+	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 	<link href="css/app.css" rel="stylesheet" type="text/css" />
+
 
 </head>
 
 <body>
+
 
 	<div id="sidebar">
 		<div>
@@ -28,6 +40,7 @@
 			<p>The map is a fun project we've been doing--along with help from all of you--since 2012. Listing on the map is free, and the work is all volunteer. We collect fish fry information from all local media outlets as well as individuals who send us information.</p>
 			<p>If your fish fry isn't listed, send us time, date, and any menu information, and we'll get it on the map.</p>
 			-->
+
 		</div>
 
 		<hr>
@@ -56,14 +69,24 @@
 		</div>
 		<hr>
 		<div id='info' class='info'>
-			<!--venue description here-->
+			<!--fish fry info shows here:-->
+		</div>
+
+		<!--Directions-->
+		<div id='inputs'></div>
+		<div id='errors'></div>
+		<div id='directions'>
+			<div id='routes'></div>
+			<div id='instructions'></div>
 		</div>
 
 	</div>
 
+
+
+
 	<!--LEAFLET MAP-->
 	<div id="map" class='custom-popup'></div>
-
 
 	<script>
 
@@ -79,6 +102,7 @@
 			}
 		}
 
+
 		// -------------------------
 		// MAP
 
@@ -91,12 +115,15 @@
 			//.addControl(L.mapbox.shareControl());
 		// var markerList = document.getElementById('marker-list');
 
+		//map.attributionControl.setPosition('bottomleft');
+
 		// get the Stamen Mapstack tile layer and add to map
 		L.tileLayer('http://{s}.sm.mapstack.stamen.com/((toner-lite,$000%5B@80%5D,$8ad3f4%5Bhsl-color%5D,mapbox-water%5Bdestination-in%5D),(toner,$fff%5Bdifference%5D,$fdb930%5Bhsl-color%5D,mapbox-water%5Bdestination-out%5D),(toner-hybrid,$fff%5Bdifference%5D,$fdb930%5Bhsl-color%5D),(terrain-background,$000%5B@40%5D,$ffffff%5Bhsl-color%5D,mapbox-water%5Bdestination-out%5D)%5Blighter@40%5D)/{z}/{x}/{y}.png', {
 			attribution: '<pa style="font-size:0.9rem">Library from <a style="color:black" href="http://www.mapbox.com">Mapbox</a>, Map tiles from <a style="color:black" href="http://stamen.com">Stamen Design</a>, under <a style="color:black"href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> license. Basemap data by <a style="color:black"href="http://openstreetmap.org">OpenStreetMap</a>, under <a style="color:black"href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a> license.</pa>',
 			maxZoom: 18,
 			minZoom: 8,
 		}).addTo(map);
+
 
 		// -------------------------
 		// LOAD DATA
@@ -126,7 +153,6 @@
 		var runLayer = omnivore.kml('geodata.kml', null, customLayer)
 			.addTo(map);
 
-
 		// -------------------------
 		// RENDER AND INTERACT WITH DATA
 
@@ -141,7 +167,7 @@
 			marker.bindPopup(content)
 		});
 
-		// show the previously bound pop-up on mousover
+		// show the previously bound pop-up on mouseover
 		runLayer.on('mouseover', function(e) {
 			e.layer.openPopup();
 		});
@@ -149,22 +175,79 @@
 			e.layer.closePopup();
 		});
 
+
+		// -------------------------
+		// DIRECTIONS
+
+		// create the initial directions object, from which the layer
+		// and inputs will pull data.
+		var directions = L.mapbox.directions();
+
+		var directionsLayer = L.mapbox.directions.layer(directions)
+				.addTo(map);
+		var directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
+				.addTo(map);
+		var directionsErrorsControl = L.mapbox.directions.errorsControl('errors', directions)
+				.addTo(map);
+		var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
+				.addTo(map);
+		var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
+				.addTo(map);
+
+		/* Dummy origin marker for testing
+		var origin = {
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-79.8,40.5]
+			},
+			"properties": {
+				"title": 'You',
+				"description": '',
+				"marker-color": "#ff0000",
+				"marker-size": "large",
+				"marker-symbol": "heart"
+			}
+		};
+		*/
+
+		/* We a point is clicked...
 		// generate the feature description in the info div
+		// AND populate a temporary destination geojson with xy of feature
+		// AND use that to set the destination value of the directions object
+		*/
 		runLayer.on('click', function(e) {
 			// Force the popup closed.
-			//e.layer.closePopup();
-			var feature = e.layer.feature;
+			// e.layer.closePopup();
+			var f = e.layer.feature;
 			var content =
-			'<h2>'+feature.properties.name+'<\/h2>'+
-			'<p>'+feature.properties.description+'<\/p>';
+				'<h2>' + f.properties.name + '<\/h2>' +
+				'<p>' + f.properties.description + '<\/p><hr>' +
+				'<h3>Directions<\/h3>' +
+				'<p>Take me to get some delicious fish from <strong>' + f.properties.name + '<\/strong> at <strong>' + f.properties.Address + '<\/strong>:<\/p>';
 			info.innerHTML = content;
+			var destination = {
+				"type": "Feature",
+				"geometry": {
+					"type": "Point",
+					"coordinates": [f.geometry.coordinates[0], f.geometry.coordinates[1]]
+				},
+				"properties": {
+					"title": f.properties.name,
+					"description": f.properties.Address,
+					"marker-color": "#3ca0d3",
+					"marker-size": "large",
+					"marker-symbol": "b"
+				}
+			};
+			directions.setDestination(destination).query();
 		});
 
 		// clear the info div when clicking away from markers
 		map.on('click', empty);
 		empty();
 		function empty() {
-			info.innerHTML = '<div><strong>Click a marker</strong></div>';
+			info.innerHTML = '<div><p><strong>Click a marker for info about a fish fry and to get directions</strong></p></div>';
 			}
 
 		// -------------------------
@@ -239,7 +322,7 @@
 		// -------
 		// SIDEBAR
 
-		// create sidebar and add to map (not required for maptime demonstration)
+		// create sidebar and add to map
 		var sidebar = L.control.sidebar('sidebar', {
 			closeButton: false,
 			position: 'left'
@@ -248,6 +331,12 @@
 		setTimeout(function() {
 			sidebar.show();
 		}, 500);
+
+
+	//directions.setDestination(destination).query();
+	console.log(directions);
+
+
 	</script>
 
 

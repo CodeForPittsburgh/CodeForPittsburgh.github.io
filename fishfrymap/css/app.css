@@ -2,8 +2,6 @@
 	height: 100%
 }
 
-
-
 /*font styles*/
 
 body {
@@ -24,8 +22,8 @@ pa,
 hr {
 	font-family: 'Oswald', sans-serif;
 	font-weight: lighter;
-	font-size: 0.9rem;
-	line-height: 1.2;
+	font-size: 1rem;
+	line-height: 1.2rem;
 	margin-bottom: 1.5rem;
 	text-align: left;
 	text-rendering: optimizeLegibility;
@@ -38,13 +36,11 @@ a {
 
 strong {
 	font-style: normal;
-	font-family: 'Oswald', sans-serif;
 	color: #fdb930;
 }
 
 li,
 ul {
-	font-family: 'Oswald', sans-serif;
 	text-align: left;
 }
 
@@ -144,50 +140,6 @@ h3 {
 	padding: 0;
 }
 
-
-/*menu styles
-
-.menu-ui {
-	width: 100%;
-	background: #4B4B4B;
-	border-radius: 3px;
-	border: 1px solid rgba(0, 0, 0, 0.4);
-}
-
-.menu-ui a {
-	font-size: 0.9rem;
-	color: #fff;
-	display: block;
-	margin: 0;
-	padding: 0;
-	padding: 10px;
-	text-decoration: none;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-	text-align: center;
-}
-
-.menu-ui a:first-child {
-	border-radius: 3px 3px 0 0;
-}
-
-.menu-ui a:last-child {
-	border: none;
-	border-radius: 0 0 3px 3px;
-}
-
-.menu-ui a:hover {
-	background: #7D7D7D;
-	color: #fff;
-}
-
-.menu-ui a.active,
-.menu-ui a.active:hover {
-	background: #fdb930;
-	color: #000;
-}
-
-*/
-
 #marker-list {
 	background: #fdb930;
 	font-size: 0.9rem;
@@ -208,25 +160,6 @@ h3 {
 #marker-list li:hover {
 	background: #ffd580;
 }
-
-/* Checkbox Styles */
-
-/*
-input[type="checkbox"] {
-    display:none;
-}
-input[type="checkbox"] + label span {
-    display:inline-block;
-    width:19px;
-    height:19px;
-    margin:-1px 4px 0 0;
-    background:url(check_radio_sheet.png) left top no-repeat;
-    cursor:pointer;
-}
-input[type="checkbox"]:checked + label span {
-    background:url(check_radio_sheet.png) -19px top no-repeat;
-}
-*/
 
 input[type="checkbox"] {
   display: none;
@@ -253,4 +186,40 @@ input[type="checkbox"]:checked + label:before {
 }
 input[type="checkbox"]:checked + label:after {
   color: #8ad3f4
+}
+
+#inputs,
+#errors,
+#directions {
+    position: relative;
+		/*
+    width: 33.3333%;
+    max-width: 300px;
+    min-width: 200px;
+    */
+}
+
+#inputs {
+    z-index: 10;
+    top: 10px;
+    left: 10px;
+}
+
+#directions {
+    z-index: 99;
+    /*background: rgba(0,0,0,.8);*/
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+#errors {
+    z-index: 8;
+    opacity: 0;
+    padding: 10px;
+    border-radius: 0 0 3px 3px;
+    background: rgba(0,0,0,.25);
+    top: 90px;
+    left: 10px;
 }
