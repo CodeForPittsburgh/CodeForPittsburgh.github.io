@@ -28,8 +28,10 @@ import xmltodict, sys
 #out_kml = r'/home/gassc/openpgh.github.io/fishfrymap/geodata_fixed.kml'
 
 #inputs
-in_kml = sys.arv[0]
-out_kml = sys.arv[1]
+in_kml = sys.argv[1]
+out_kml = sys.argv[2]
+
+print in_kml, out_kml
 
 #open the kml as a python file object (read/write mode)
 in_kml_file = open(in_kml,'r')
@@ -37,12 +39,20 @@ in_kml_file = open(in_kml,'r')
 kml_dict = xmltodict.parse(in_kml_file)
 in_kml_file.close()
 
+# depending on how the data was downloaded from Google, it may
+# have an extra nesting:
+try:
+    placemarks = kml_dict['kml']['Document']['Placemark']
+except:
+    placemarks = kml_dict['kml']['Document']['Folder']['Placemark']
+
 # print the number of markers to be analyzed
-marker_count = len(kml_dict['kml']['Document']['Placemark'])
+marker_count = len(placemarks)
 print("Analyzing {0} kml placemarks".format(marker_count))
 
 # for each placemark:
-for e in kml_dict['kml']['Document']['Placemark']:
+#for e in kml_dict['kml']['Document']['Placemark']:
+for e in placemarks:
     try:
         #check if address key exists
         if 'address' in e.keys():
@@ -66,3 +76,11 @@ kml_fixed = xmltodict.unparse(kml_dict)
 out_kml_file = open(out_kml,'w')
 out_kml_file.write(kml_fixed.encode('utf8'))
 out_kml_file.close()
+
+"""
+this script strips and CDATA markers used in description field.
+Need to make sure those are not removed, or add them back in:
+change '<description> to '<description><![CDATA['
+change '</description>' to ']]></description>'
+..in out_kml
+"""
