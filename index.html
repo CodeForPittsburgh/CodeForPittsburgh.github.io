@@ -21,10 +21,8 @@
 	<!-- bog-standard leaflet URL hash -->
 	<script type="text/javascript" src="https://cdn.rawgit.com/mlevans/leaflet-hash/master/leaflet-hash.js"></script>
 
-
 	<!-- Google Fonts -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-	<!--link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"-->
 
 	<!-- CSS Reset -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
@@ -32,7 +30,7 @@
 	<!-- Milligram CSS minified -->
 	<link rel="stylesheet" href="assets/css/milligram.css">
 
-
+	<!-- inline styles -->
 	<style type="text/css">
 
 		body {
@@ -52,6 +50,7 @@
 			z-index:-1;
 		}
 		#overlay {
+			color: #fff;
 			position: absolute;
 			height:100%;
 			width: 100%;
@@ -59,16 +58,36 @@
 			padding: 0px;
 			z-index: 1;
 		}
-		h1 {
-			text-align: left;
-			font-weight: 700;
-		}
 		a {
 			color: #fff;
 		}
-		.title {
-			font-size: 7.5em;
+
+		h1 {
+			font-weight: 700;
 		}
+
+		@media (min-width: 80rem) {
+			h1 {
+				font-size: 10.0rem;
+			}
+
+			h2 {
+				font-size: 6.4rem;
+			}
+
+			h3 {
+				font-size: 4.8rem;
+			}
+
+			h4 {
+				font-size: 3.6rem;
+			}
+
+			p, ul {
+				font-size: 2.8rem;
+			}
+		}
+
 		.block {
 			background-color: rgba(0,0,0,0.6);
 			color: #fff;
@@ -85,23 +104,18 @@
 		<div class="container block">
 			<div class="row">
 				<div class="column">
-					<h1 class="title">Code For Pittsburgh</h1>
+					<h1>Code For Pittsburgh</h1>
 				</div>
 				<div class="column">
-					<h2>
-						<br>Formerly known as <em>OpenPGH</em>, we are Pittsburgh's Code for America Brigade.
-					</h2>
+					<h5>Formerly known as <em>OpenPGH</em>, we are Pittsburgh's Code for America Brigade.</h5>
+					<p>We help make the Pittsburgh region a better place through the use of info & tech.</p>
 				</div>
 			</div>
-			<br>
 			<div class="row">
-				<div class="column column-75">
-					</br>
-					<h4>We're currently working to move things over from our old site.
-					</br>In the meantime, keep tabs on us:</h4>
+				<div class="column">
+					<p>We're currently working on a little website housekeeping. In the meantime, keep tabs on us:</p>
 				</div>
 				<div class="column">
-					<h4>
 					<blockquote>
 					<ul>
 						<li>
@@ -112,7 +126,6 @@
 						</li>
 					</ul>
 					</blockquote>
-					</h4>
 				</div>
 			</div>
 		</div>
