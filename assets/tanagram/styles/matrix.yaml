@@ -1,0 +1,246 @@
+# Author @patriciogv - 2015
+
+import:
+    - default.yaml
+    - https://tangrams.github.io/blocks/generative/random.yaml
+    - https://tangrams.github.io/blocks/space/tile.yaml
+    - https://tangrams.github.io/blocks/geometry/normal.yaml
+    - https://tangrams.github.io/blocks/shapes/cross.yaml
+
+scene:
+    background:
+        color: black
+
+layers:
+    water:
+        data: { source: osm }
+        draw:
+            water:
+                color: [0.201,0.481,0.264]
+    earth:
+        data: { source: osm }
+        draw:
+            lines:
+                order: global.order-top
+                color: white
+                width: 2px
+            earth:
+                color: [0.201,0.481,0.264]
+    landuse:
+        data: { source: osm }
+        draw:
+            landuse:
+                color: [0.643,0.851,0.690]
+                visible: false
+    roads:
+        data: { source: osm }
+        filter: { not: { kind: [rail, ferry] } }
+        draw:
+            roads:
+                color: [0, 0, 0]
+                width: 8
+            text:
+                font:
+                    family: Courier
+                    size: 14px
+                    fill: white
+                    stroke: { color: black , width: 6 }
+        oneway:
+            filter: { oneway: yes }
+            draw: { roads: { color: red } }
+    buildings:
+        data: { source: osm }
+        draw:
+            buildings:
+                color: [0, 0, 0]
+                extrude: true
+            buildingsLines:
+                order: global.order
+                color: [0.643,0.851,0.690]
+                width: [[12, .1px], [14, 0.5px], [15, 1.5px], [17, 1.5px], [18, 2px]]
+                extrude: true
+    places:
+        data: { source: osm }
+        filter: { name: true }
+        draw:
+            places_label:
+                font:
+                    family: Courier
+                    size: 20px
+                    weight: bold
+                    fill: white
+                    stroke: { color: black , width: 6 }
+            places_icons:
+                color: [0.643,0.851,0.690]
+                size: [[13, 40px], [15, 60px]]
+                interactive: true
+styles:
+    matrix:
+        mix: [space-tile, generative-random]
+        texcoords: true
+        shaders:
+            blocks:
+                global: |
+                    //  Matrix
+                    //=============================
+                    float randomChar(in vec2 outer,in vec2 inner){
+                        float grid = 5.;
+                        vec2 margin = vec2(.2,.05);
+                        float seed = 23.;
+                        vec2 borders = step(margin,inner)*step(margin,1.-inner);
+                        return step(.5,random(outer*seed+floor(inner*grid))) * borders.x * borders.y;
+                    }
+    tiledCross:
+        base: polygons
+        mix: [space-tile, shapes-cross]
+        animated: false
+        shaders:
+            blocks:
+                color: |
+                    vec2 pos = (getTileCoords()+vec2(.5));
+                    float pct = clamp(cross(fract(pos),vec2(.007,.002)),0.0,1.0);
+                    color.rgb *= pct;
+                    pos = (getTileCoords()*10.+vec2(.5));
+                    pct = clamp(cross(fract(pos),vec2(.3,.1)),0.0,0.8);
+                    color.rgb = clamp(color.rgb+vec3(0.173,0.235,0.200)*pct,vec3(0.0),vec3(1.0));
+    water:
+        base: polygons
+        mix: matrix
+        animated: false
+        shaders:
+            blocks:
+                global: |
+                    // GridTile
+                    //=============================
+                    bool gridLine(vec2 st, float res, float press){
+                        vec2 grid = fract(st*res);
+                        return grid.x < res*press || grid.y < res*press;
+                    }
+                    float TileGrid(float res){
+                        vec2 st = getTileCoords()*100.*res;
+                        float pct = 0.0;
+                        float press = 0.4+(1.0-fract(u_map_position.z))*0.1;
+                        if (gridLine(st,0.01,press)) pct += 0.5;
+                        if (gridLine(st,0.1,press)) pct += 0.1;
+                        return pct;
+                    }
+                    float TileGrid(){ return mix(TileGrid(1.),TileGrid(2.),fract(u_map_position.z)); }
+                color: |
+                    color.rgb = mix(vec3(0.031,0.047,0.035),color.rgb,TileGrid());
+    earth:
+        base: polygons
+        mix: tiledCross
+    landuse:
+        base: polygons
+        mix: tiledCross
+    roads:
+        base: lines
+        mix: matrix
+        animated: true
+        shaders:
+            blocks:
+                color: |
+                    vec2 st = fract(v_texcoord.xy*vec2(1.,.1));
+                    vec2 rows = vec2(1.,20.);
+                    float t = u_time*12.;
+                    vec2 ipos = vec2(0.);
+                    if ( v_color.r < 0.5) {
+                        rows.x = 2.;
+                        if (fract(st.x*rows.x * 0.5) < 0.5){
+                            t *= -1.0;
+                        } 
+                    }
+                    ipos = floor(st*rows);
+                    ipos.y -= floor(t);
+                    vec2 fpos = fract(st*rows);
+                    vec2 center = (.5-fpos);
+                    float pct = random(ipos);
+                    color.rgb = vec3(0.7,0.999,0.780) * ( randomChar(ipos,fpos) * pct * 1.5 );
+    buildings:
+        base: polygons
+        mix: [matrix, geometry-normal]
+        blend: add
+        animated: true
+        shaders:
+            blocks:
+                global: |
+                    //  Grid
+                    //=============================
+                    float grid (in vec2 _pos, in float _zoom, in float _lineWidth){
+                        _pos = fract(_pos*_zoom);
+                        vec2 g = smoothstep(vec2(0.5-_lineWidth),vec2(0.5),_pos) -
+                                 smoothstep(vec2(0.5),vec2(0.5+_lineWidth),_pos);
+                        return clamp(g.x+g.y,0.0,1.0);
+                    }
+                position: |
+                    position.z *= max(1.0,0.5+(1.0-(u_map_position.z/20.0))*5.0);
+                color: |
+                    vec3 pos = worldPosition().xyz*0.01;
+                    vec2 uv = v_texcoord.xy;
+                    float pct = grid(v_texcoord,10.,0.1)*0.5;
+                    if (isWall()) {
+                        // Wall
+                        vec2 st = v_texcoord.xy;
+                        float rows = 30.0;
+                        vec2 ipos = floor(st*rows)+1.;
+                        ipos += vec2(.0,floor(u_time*20.*random(ipos.x)));
+                        vec2 fpos = fract(st*rows);
+                        vec2 center = (.5-fpos);
+
+                        float pct = random(ipos);
+                        float glow = (1.-dot(center,center)*3.)*2.0;
+
+                        color.rgb = vec3(0.643,0.851,0.690) * ( randomChar(ipos,fpos) * pct )* 0.5;
+                        color.rgb += (vec3(0.027,0.180,0.063) * pct * glow)*0.25;               
+                    }
+    buildingsLines:
+        base: lines
+        lighting: false
+        blend: add
+        shaders:
+            blocks:
+                width: |
+                    width *= 0.2+min(pow(position.z*0.006,2.),.6);
+                position: |
+                    position.z *= max(1.0,0.5+(1.0-(u_map_position.z/20.0))*5.0);
+    places_icons:
+        base: points
+        mix: [shapes-cross]
+        animated: false
+        shaders:
+            blocks:
+                global: |
+                    mat2 rotate2d(float _angle){
+                        return mat2(cos(_angle),-sin(_angle),
+                                    sin(_angle),cos(_angle));
+                    }
+                color: |
+                    vec2 st = v_texcoord.xy;
+                    st -= vec2(0.5);
+                    st = rotate2d(0.78539816339)*st;
+                    st += vec2(0.5);
+                    color.rgb = vec3(0.0);
+                    color.a = clamp(cross(st,vec2(.5,.3)),0.,1.)*.9;
+                    color += v_color * clamp(cross(st,vec2(.3,.1)),0.,1.)*.9;
+    places_label:
+        base: text
+        animated: false
+        shaders:
+            blocks:
+                position: |
+                    position.y -= 10.0* u_meters_per_pixel;
+                color: |
+                    vec4 sum = vec4(0.0);
+                    vec2 st = v_texcoord;
+                    float time = u_time;
+                    float rows = 300.;
+                    vec3 col = vec3(0.);
+                    col.r = texture2D(u_texture, vec2(st.x+0.003,st.y)).r;
+                    col.g = texture2D(u_texture, vec2(st.x+0.000,st.y)).g;
+                    col.b = texture2D(u_texture, vec2(st.x-0.003,st.y)).b;
+                    col = clamp(col * 0.5 + 0.5 * col * col * 1.2,0.0,1.0);
+                    col *= 0.7 + 0.3 * 20.0 * st.x * (1.0-st.x) * st.y * (1.0-st.y);
+                    col *= vec3(0.643,0.851,0.690)*1.5;
+                    col *= 0.9 + 0.1 * sin(10.0 * time + st.y * rows);
+                    col *= 0.97 + 0.03 * sin(110.0 * time);
+                    color = vec4(col,max(col.x,max(col.y,col.z)));
