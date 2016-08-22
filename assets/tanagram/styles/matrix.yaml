@@ -42,8 +42,8 @@ layers:
             text:
                 font:
                     family: Courier
-                    size: 14px
-                    fill: white
+                    size: 12px
+                    fill: [125, 125, 125]
                     stroke: { color: black , width: 6 }
         oneway:
             filter: { oneway: yes }
@@ -66,9 +66,9 @@ layers:
             places_label:
                 font:
                     family: Courier
-                    size: 20px
+                    size: 16px
                     weight: bold
-                    fill: white
+                    fill: [125,125,125]
                     stroke: { color: black , width: 6 }
             places_icons:
                 color: [0.643,0.851,0.690]
