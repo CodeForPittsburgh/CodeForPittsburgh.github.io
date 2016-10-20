@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="CodeForPittsburgh">
+        <meta name="author" content="Mark Howe">
+        <title>Bike Crash Heat Map</title>
+        <link rel="icon" href="img/myicon.png">
+        <link rel="stylesheet" href="css/bootstrap.css">
+
+        <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
+        <script src="js/heatmap.js"></script>
+        
+        <style>
+            #mapsection {
+                width:100%;
+                height:750px;
+                float:left;
+                padding:10px; 
+            }
+            #info-box {
+                background-color: #eeeeee;
+                border: 2px solid black;
+                bottom: 125px;
+                height: 60px;
+                padding: 10px;
+
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h2 class="text-center"> Bicycle Crash Data Heat Map 2004-2015</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-10">
+                    <div id ="mapsection">
+                    </div>
+                </div>
+
+
+                <div class="col-sm-2">
+
+                    <div id="nav">
+                        <div id="info-box">?</div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+
