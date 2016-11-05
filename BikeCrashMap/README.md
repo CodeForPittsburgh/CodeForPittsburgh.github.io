@@ -12,15 +12,15 @@ and uses only Bike Crash information
 
 This is a work in progress.
 
-http://web-pblotter-v1-elb-1058384347.us-west-2.elb.amazonaws.com/SQLCrashData/
+http://codeforpittsburgh.github.io/BikeCrashMap/
 
 With a heat map at
 
-http://web-pblotter-v1-elb-1058384347.us-west-2.elb.amazonaws.com/SQLCrashData/CrashHeatMap.php
+http://codeforpittsburgh.github.io/CrashHeatMap/
 
 Bike rental locations from
 
-https://healthyridepgh.com/data/
+https://healthyridepgh.com/data
 
 
 ## Change requests
