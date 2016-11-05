@@ -4,21 +4,44 @@ src = "bootstrap.js";
 src = "citymapoverlays.js";
 
 var state = {"map": null,
-	     "filter": {"startYear": 2001,
-		        "endYear": 2015,
-		        "severity": [0, 1, 2, 3, 4, 8, 9]
-		       }
-	    };
+	         "filter": {
+                 "startYear": 2001,
+                 "endYear": 2015,
+		         "severity": ["Not injured",
+                              "Killed", 
+                              "Major injury", 
+                              "Moderate injury", 
+                              "Minor injury", 
+                              "Injury/ Unknown Severity", 
+                              "Unknown"]
+             }
+};
+
+ var getSelectValues =  function(select) {
+    var result = [];
+    var options = select && select.options;
+    var opt;
+
+    for (var i=0, iLen=options.length; i<iLen; i++) {
+        opt = options[i];
+
+        if (opt.selected) {
+            result.push(opt.value || opt.text);
+        }
+    }
+    return result;
+}
 
 function update(){
-    var severity  = $("crashSeverityFilter").val();
+    var severity  = getSelectValues(document.getElementById("crashSeverityFilter"));
     if (severity.length == 0){
-	return;
+        console.log("Fails");
+	    return;
     }
-    var startYear = $("crashYearFilterStart").val();
-    var endYear   = $("crashYearFilterEnd").val();
+    var startYear = document.getElementById("crashYearFilterStart").value;
+    var endYear   = document.getElementById("crashYearFilterEnd").value;
     if (endYear < startYear){
-	return;
+	    return;
     }
 
     state.filter.startYear = startYear;
@@ -28,7 +51,18 @@ function update(){
     initialize();
 }
 
+var bindEvent = function(element, type, handler) {
+    if (element.addEventListener) {
+        element.addEventListener(type, handler, false);
+    } else {
+        element.attachEvent('on'+type, handler);
+    }
+}
+
 function initialize() {
+    bindEvent(document.getElementById("crashYearFilterStart"), "change", update);
+    bindEvent(document.getElementById("crashYearFilterEnd"), "change", update);
+    bindEvent(document.getElementById("crashSeverityFilter"), "change", update);
     county = new google.maps.Data();
     
     county.loadGeoJson("./resources/Allegheny_County_Municipal_Boundaries.json");
@@ -81,7 +115,7 @@ function initialize() {
     bikeLayer.setMap(state.map);
 
     setBikeMarkers(state.map, locations)
-
+    console.log(state.filter.severity);
     // Change this depending on the name of your PHP file
     downloadUrl("./crashdata.xml", function (data) {
         var xml = data.responseXML;
@@ -90,21 +124,25 @@ function initialize() {
         for (var i = 0; i < markers.length; i++) {
             var name = markers[i].getAttribute("NAME");
             var crashyear = markers[i].getAttribute("CRASH_YEAR");
-	    if (crashyear < state.filter.startYear || crashyear > state.filter.endYear){
-		continue;
-	    }
+            if (crashyear < state.filter.startYear || crashyear > state.filter.endYear){
+                continue;
+            }
             var crashdate = markers[i].getAttribute("CRASH_MONTH");
             var crashtime = markers[i].getAttribute("TIME_OF_DAY");
-	    var crashmin, crashhour;
-	    if (crashtime.length == 3){
-		crashmin = crashtime.substring(1);
-		crashhour = crashtime.substring(0, 1);
-	    } else{
-		crashmin = crashtime.substring(2);
-		crashhour = crashtime.substring(0, 2);
-	    }
+            var crashmin, crashhour;
+            if (crashtime.length == 3){
+                crashmin = crashtime.substring(1);
+                crashhour = crashtime.substring(0, 1);
+            } 
+            else{
+                crashmin = crashtime.substring(2);
+                crashhour = crashtime.substring(0, 2);
+            }
             var address = markers[i].getAttribute("STREET_NAME");
             var description = markers[i].getAttribute("MAX_SEVERITY_LEVEL");
+            if (!state.filter.severity.includes(description)){
+                continue;
+            }
             var point = new google.maps.LatLng(
                     parseFloat(markers[i].getAttribute("lat")),
                     parseFloat(markers[i].getAttribute("lng")));
