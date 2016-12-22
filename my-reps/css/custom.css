@@ -1,0 +1,70 @@
+@import url(https://fonts.googleapis.com/css?family=Bitter:400,400italic,700);
+
+body {
+    font-size: 16px;
+    font-family: 'Open Sans', 'Arial', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Bitter', serif;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 48px;
+    padding-bottom: 10px;
+}
+
+h1 a, h1 a:hover {
+    color: #444444;
+    text-decoration: none;
+}
+
+.table > thead > tr > th { 
+    white-space: nowrap;
+}
+
+.about {
+    font-size: 90%;
+}
+
+/* center the nav pills */
+.centered-pills {
+    text-align: center
+}
+.centered-pills ul.nav-pills {
+    display: inline-block
+}
+.centered-pills li {
+    display: inline
+}
+.centered-pills a {
+    float: left
+}
+* html .centered-pills ul.nav-pills, *+html .centered-pills ul.nav-pills {
+    display: inline
+}
+
+.headshot {
+    max-width: 50px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.label-dem {
+    color: #0294C7;
+}
+
+.label-rep {
+    color: #D1220E;
+}
+
+.label-ind {
+    color: #418B07;
+}
+
+#contactModal {
+    font-size: 0.9em;
+}
