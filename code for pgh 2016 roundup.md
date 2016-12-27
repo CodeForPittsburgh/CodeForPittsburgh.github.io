@@ -29,9 +29,9 @@ There were also monthly outposts with Code and Supply, and a few one-off events.
 ~~January~~ 	| ~~No Meeting (just SUDS work night)~~						| ~~***N/A***~~
 February 		| Police Blotter, Fish Fry Map 							| 13
 March 			| Work Night (Public Herald)							| 10
-April 			| Civic Hack Night (no Theme) 							| 4
+April 			| Civic Hack Night (no Theme) 							| 4 (low)
 May 			| Pittsburgh Downtown Partnership Commuter Survey Data	| 12
-June  			| Bicycle Crash Data Workshop and Hack Night 			| 40
+June  			| Bicycle Crash Data Workshop and Hack Night 			| 40+ (high)
 July 			| Carnegie Library Summer Reading Data					| 15
 August 			| Show and Tell Pizza Party 							| 12
 September  		| Civic Idea Speed Dating 								| 8
@@ -83,8 +83,7 @@ New Members, by Month.
 
 **Month**		| **New Members on Meetup**
 ------			| ------
-Pre-2016		| `277`
----				| ---
+**Pre-2016**		| `277`
 January			| 15
 February		| 17
 March			| 20
@@ -97,9 +96,8 @@ September		| 20
 October			| 22
 November		| 25
 December		| 27
-Total for 2016	| `225`
----				| ---
-Current Total	| `502`
+**Total for 2016**	| `225`
+**Current Total**	| `502`
 
 ## Communication Channels
 Twitter has seen steady engagement, especially during and after the Code for America Summit.
