@@ -5,7 +5,7 @@ title: Code for Pittsburgh
 #subtitle: Pittsburgh's Code for America Brigade
 email: info@codeforpittsburgh.org
 description: We are Pittsburgh's Code for America Brigade
-baseurl: "/" # the subpath of your site, e.g. /blog
+#baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://codeforpittsburgh.github.io"
 author:
 street_address: 
