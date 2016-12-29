@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	
+-->
+<html>
+
+{% include head.html %}
+
+<body>
+
+    {% include header.html %}
+
+    <!-- Banner -->
+    <section id="banner" class="major">
+        <div class="inner">
+            <header class="major">
+                <h1>{{ site.title }}</h1>
+            </header>
+            <div class="content">
+                <p style="text-transform: uppercase;">
+					{{ site.description }}
+				</p>
+            </div>
+			<div class="content">
+                <ul class="actions">
+                    <li><a href="#intro" class="button scrolly">About CfP</a></li>
+					<li><a href="#projects" class="button scrolly">Things We've Made</a></li>
+					<li><a href="#blog" class="button scrolly">Stuff We Think</a></li>
+					<li><a href="#contact" class="button scrolly">Get in Touch, Yinz!</a></li>
+                </ul>
+			</div>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <div id="main">
+
+        <!-- SECTION 1: content from index.md  -->
+        <section id="intro">
+            <div class="inner">
+                <header class="major">
+                    <h3>{{ page.landing-title }}</h3>
+                </header>
+                <p>{{ content }}</p>
+                <!--ul class="actions">
+                    <li><a href="landing.html" class="button next">Get Started</a></li>
+                </ul-->
+            </div>
+        </section>
+
+        <!-- SECTION 2: tiles generated from project pages -->
+		<div id="projects" class="inner">
+			<header class="major">
+				<h2>Projects</h2>
+			</header>
+
+		</div>
+		{% include tiles-projects.html %}
+
+        <!-- SECTION 3: tiles generated from blog posts  -->
+		<div id="blog" class="inner">
+			<header class="major">
+				<h2>Blog</h2>
+			</header>
+		</div>
+		{% include tiles-posts.html %}
+
+    </div>
+
+    {% include contact.html %}
+	
+	{% include footer.html %}
+
+</body>
+
+</html>

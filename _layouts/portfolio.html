@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+	
+	portfolio.html is the template used to list all projects from the _projects folder
+
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+{% include head.html %}
+
+<body>
+
+	{% include header.html %}
+
+    <!-- Banner -->
+    <section id="banner" class="major">
+        <div class="inner">
+            <header class="major">
+                <h1>{{ page.landing-title }}</h1>
+            </header>
+			
+			{{ content }}
+			
+        </div>
+    </section>
+	
+
+	{% include tiles-projects.html %}
+	
+	{% include footer.html %}
+
+</body>
+
+</html>

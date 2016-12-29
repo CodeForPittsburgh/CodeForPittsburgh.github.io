@@ -1,0 +1,57 @@
+# ------------------------------------
+# SITE INFO SETTINGS
+
+title: Code for Pittsburgh
+#subtitle: Pittsburgh's Code for America Brigade
+email: info@codeforpittsburgh.org
+description: We are Pittsburgh's Code for America Brigade
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://codeforpittsburgh.github.io"
+author:
+street_address: 
+city: Pittsburgh
+state: PA
+zip_code: 55555
+country: United States of America
+phone: (412) 555-5555
+
+# Social media
+github_url: https://github.com/codeforpittsburgh
+twitter_url: https://twitter.com/codeforpittsburgh
+meetup_url: https://www.meetup.com/codeforpgh
+slack_url: http://slackinvite.me/to/codeforpgh
+500px_url:
+facebook_url:
+gitlab_url: 
+googleplus_url: 
+instagram_url: 
+linkedin_url: 
+pinterest_url:
+
+
+# Logos
+logo:
+  banner: /assets/images/logos/banner.svg
+  banner-white: /assets/images/logos/banner-white.svg
+  banner-img: /assets/images/logos/banner.png
+  icon-banner: /assets/images/logos/icon-banner.svg
+  icon: /assets/images/logos/icon.svg
+
+# ------------------------------------
+# SITE CONFIG SETTINGS
+
+sass:
+    sass_dir: _sass
+
+# Homepage tiles, tiles-source accepts "posts" or "pages"
+tiles-source: pages
+tiles-count: 6
+
+# COLLECTIONS
+collections:
+  projects:
+    output: true
+
+# Build settings
+markdown: kramdown
+permalink: pretty
