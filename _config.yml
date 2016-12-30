@@ -42,10 +42,9 @@ logo:
 
 sass:
     sass_dir: _sass
-
-# Homepage tiles, tiles-source accepts "posts" or "pages"
-tiles-source: pages
-tiles-count: 6
+    
+# post publication settings
+future: false
 
 # COLLECTIONS
 collections:
