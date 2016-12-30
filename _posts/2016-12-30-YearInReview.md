@@ -56,7 +56,7 @@ The event saw 80 participants, 10 articles created, and 61 articles improved.
 
 You can read a full report [here](https://artandfeminismpgh.files.wordpress.com/2016/02/artandfeminismpgh-report1.pdf) (pdf link).
 
-Endless thanks to Alexandra Oliver & Vicky Clark for hosting - Code for Pittsburgh (OpenPGH at the time) was able to provide logistical support and day-of staffing, but it was very much their event, and they did a fabulous job.
+Endless thanks to [Alexandra Oliver](https://twitter.com/aolivex) & [Vicky Clark](https://en.wikipedia.org/wiki/Vicky_A._Clark) for hosting - Code for Pittsburgh (OpenPGH at the time) was able to provide logistical support and day-of staffing, but it was very much their event, and they did a fabulous job.
 
 The leadership team will be contacting Alex & Vicky shortly to find out the status of a 2017 Edit-a-Thon.
 
