@@ -1,16 +1,19 @@
 ---
 layout: post
-title: Code for Pittsburgh - Annual Governance Meeting - Minutes
-description: from January 7, 2017
+title: 2017 Annual Governance Meeting
+description: Minutes from our Annual Governance Meeting on January 7, 2017
 image: assets/images/staywoke.jpg
 author: Dale Sheldon-Hess, Coral Sheldon-Hess, Connor Sites-Bowen
 ---
 
 # Code for Pittsburgh - Annual Governance Meeting - Minutes
+
 January 7, 1017
 
 ## Attendance
+
 8 in attendance:
+
 * Connor Sites-Bowen, presiding
 * Dale Sheldon-Hess
 * Coral Sheldon-Hess
@@ -21,6 +24,7 @@ January 7, 1017
 * Hollen Barmer
 
 ## 2016 Recap
+
 Connor has written a year-in-review [blog post](https://codeforpittsburgh.github.io/2016/12/30/YearInReview/), summed up here:
 
 * Held events every month except January (cold) and November (c4a conference).
@@ -40,7 +44,7 @@ Connor has written a year-in-review [blog post](https://codeforpittsburgh.github
     * Twitter follows are now >1,000
     * Recently added a Slack channel
 * Changed name from Open Pittsburgh to Code For Pittsburgh
-* C4A Summit:
+* CfA Summit:
     * National organization is no longer officially supporting local brigades
     * Will advise local brigades at they each try their own thing
     * So what do we do now?
@@ -50,9 +54,9 @@ Connor has written a year-in-review [blog post](https://codeforpittsburgh.github
 
 ### Background:
 
-* 4 or 5 years ago, C4A was providing money to local brigades
-* C4A is no longer giving out money - moving away from building network to other goals
-    * Local brigades can continue to use branding if they use the C4A Code of Conduct
+* 4 or 5 years ago, CfA was providing money to local brigades
+* CfA is no longer giving out money - moving away from building network to other goals
+    * Local brigades can continue to use branding if they use the CfA Code of Conduct
     * Brigades can pursue whatever organizational structure will work for them, such as
         * Consulting firms (LLCs)
         * Nonprofits (401c3s)
@@ -77,6 +81,7 @@ Connor has written a year-in-review [blog post](https://codeforpittsburgh.github
 
 
 ### So what sort of things do we want to do?
+
 * Do more of our most-successful events
     * Wikipedia Edit-a-thon
     * Partner with community groups; BikePgh went great; how about WalkPgh, others? 
@@ -107,6 +112,7 @@ Connor has written a year-in-review [blog post](https://codeforpittsburgh.github
 * Tasks described cover many roles; could you hire someone else to do part of it while continuing your current job?
 
 ### But Going Back to the Previous Questions, What Do We Want to Do?
+
 * Would like to do something “very Pittsburgh”
     * Like the Fish Fry or Pierogi maps
 * Take public stances 
@@ -130,9 +136,10 @@ Connor has written a year-in-review [blog post](https://codeforpittsburgh.github
 * Captain — Connor
 * Storyteller (Communications) — Hollen
 * Community Organizer (Recruiting) — Toby
-* Delivery Lead (Point of Contact for Projects) — Christian, perhaps also Mark again; delegate more by-project 
+* Delivery Lead (Point of Contact for Projects) — Christian and Mark again; delegate more by-project 
 
 ### Optional Positions
+
 Duties will be carried out by someone in a required position unless someone volunteers:
 
 * Training Organizer (Onboardiing) — Toby
@@ -175,7 +182,7 @@ If the organization formalizes as a non-profit, should, or will, the Executive D
 
 * The CoC is in GitHub, but it needs to be on the website
 * Needs to have contact information for group that handles potential CoC violations
-* There is a Slack contact, but that username is for the C4A Slack and needs to be removed
+* There is a Slack contact, but that username is for the CfA Slack and needs to be removed
 * So, CoC Group
     * Members: Connor, Coral, Eleanor, Hollen, Matt - open to more volunters!
     * Group should all be reachable via a single email (safespace@…)
