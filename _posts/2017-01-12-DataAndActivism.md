@@ -6,9 +6,7 @@ image: assets/images/activism3.jpg
 author: Coral Sheldon-Hess, Connor Sites-Bowen
 ---
 
-# Code for Pittsburgh - January Meetup - Data and Activism
-
-## Tools to Speak to Power, Tools to Shield Speech From Power
+Tools to Speak to Power, Tools to Shield Speech From Power
 
 ## Presentation
 
