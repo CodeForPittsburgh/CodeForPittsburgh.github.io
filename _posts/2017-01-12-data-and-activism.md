@@ -1,7 +1,7 @@
 ---
 layout: post
 title: January Meetup: Data + Activism
-description: January 12, 2017
+description: Minutes from our meetup January 12, 2017
 image: assets/images/activism3.jpg
 author: Coral Sheldon-Hess, Connor Sites-Bowen
 ---
