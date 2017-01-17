@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Code for Pittsburgh - January Data + Activism Meetup
-description: from January 12, 2017
+title: January Meetup: Data + Activism
+description: January 12, 2017
 image: assets/images/activism3.jpg
 author: Coral Sheldon-Hess, Connor Sites-Bowen
 ---
