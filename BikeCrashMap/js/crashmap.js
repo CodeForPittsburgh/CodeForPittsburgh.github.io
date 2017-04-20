@@ -6,7 +6,7 @@ src = "citymapoverlays.js";
 var state = {"map": null,
 	         "filter": {
                  "startYear": 2001,
-                 "endYear": 2015,
+                 "endYear": 2016,
 		         "severity": ["Not injured",
                               "Killed", 
                               "Major injury", 
