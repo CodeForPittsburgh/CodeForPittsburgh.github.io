@@ -22,7 +22,7 @@ var mapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 var featureStyle = {
-    fillColor: 'green',
+    fillColor: 'white',
     strokeWeight: 1,
     clickable: 'true'
 
@@ -35,8 +35,8 @@ var originalgradient = [
 ];
 
 var pointArray = new google.maps.MVCArray(pittsburghData);
-var data0 = new google.maps.Data();
-var data1 = new google.maps.Data();
+var county = new google.maps.Data();
+//var data1 = new google.maps.Data();
 
 function initialize()
 {
@@ -44,14 +44,14 @@ function initialize()
             mapOptions);
 
     countymapcode();
-    neighborhoodmapcode();
+    //neighborhoodmapcode();
     getxmlfile();
     heatmapcode();
 
 }
 function getxmlfile()
 {
-    downloadUrl("./crashdata.xml", function (data) {
+    downloadUrl("./crashdata3.xml", function (data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName("marker");
         //alert(markers.length);
@@ -82,43 +82,62 @@ function countymapcode()
 {
 
     //data0 = new google.maps.Data();
-    data0.loadGeoJson("./resources/Allegheny_County_Municipal_Boundaries.json");
-    data0.setStyle(featureStyle);
-    data0.addListener('mouseover', function (event) {
-        data0.revertStyle();
-        data0.overrideStyle(event.feature, {strokeWeight: 4});
+    county.loadGeoJson("./resources/ccmerge.geojson");
+    county.setStyle(featureStyle);
+    county.addListener('mouseover', function (event) {
+        county.revertStyle();
+        county.overrideStyle(event.feature, {strokeWeight: 4});
 
-        document.getElementById('info-box').textContent =
-                event.feature.getProperty("LABEL");
+        var label = event.feature.getProperty("LABEL");
+        var name = event.feature.getProperty("NAME");
+        var hood = event.feature.getProperty("hood");
+        var contentlabel = "";
+        console.log("label " + label + " name " + name + " hood " + hood);
 
+        if (hood === null)
+        {
+            contentlabel = label;
+        }
+
+        if (label === "Pittsburgh" || name === "PITTSBURGH")
+        {
+            contentlabel = hood;
+        }
+
+        if (label === null && name === null && hood !== null)
+        {
+            contentlabel = hood;
+        }
+        document.getElementById('info-box').textContent = contentlabel;
+        });
+
+    county.addListener('mouseout', function (event) {
+        county.revertStyle();
     });
-    data0.addListener('mouseout', function (event) {
-        data0.revertStyle();
-    });
 
-    data0.setMap(map);
+    county.setMap(map);
 
 }
 
-function neighborhoodmapcode()
-{
-    //data1 = new google.maps.Data();
-    data1.loadGeoJson("./resources/Neighborhood.json");
-    data1.setStyle(featureStyle);
-    data1.setMap(map);
-    data1.addListener('mouseover', function (event) {
-        data1.revertStyle();
-        data1.overrideStyle(event.feature, {strokeWeight: 4});
-
-        document.getElementById('info-box').textContent =
-                event.feature.getProperty("HOOD");
-
-    });
-    data1.addListener('mouseout', function (event) {
-        data1.revertStyle();
-    });
-    data1.setMap(map);
-}
+//function neighborhoodmapcode()
+//{
+//    //data1 = new google.maps.Data();
+//    data1.loadGeoJson("./resources/Neighborhood.json");
+//    data1.setStyle(featureStyle);
+//    data1.setMap(map);
+//    data1.addListener('mouseover', function (event) {
+//        data1.revertStyle();
+//        data1.overrideStyle(event.feature, {strokeWeight: 4});
+//
+//        document.getElementById('info-box').textContent =
+//                event.feature.getProperty("HOOD");
+//
+//    });
+//    data1.addListener('mouseout', function (event) {
+//        data1.revertStyle();
+//    });
+//    data1.setMap(map);
+//}
 
 
 
