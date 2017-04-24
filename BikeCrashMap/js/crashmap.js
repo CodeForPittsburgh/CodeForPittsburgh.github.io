@@ -4,25 +4,26 @@ src = "bootstrap.js";
 src = "citymapoverlays.js";
 
 var state = {"map": null,
-	         "filter": {
-                 "startYear": 2001,
-                 "endYear": 2016,
-		         "severity": ["Not injured",
-                              "Killed", 
-                              "Major injury", 
-                              "Moderate injury", 
-                              "Minor injury", 
-                              "Injury/ Unknown Severity", 
-                              "Unknown"]
-             }
+    "filter": {
+        "startYear": 2004,
+        "endYear": 2016,
+        "severity": ["Not injured",
+            "Killed",
+            "Major injury",
+            "Moderate injury",
+            "Minor injury",
+            "Injury/ Unknown Severity",
+            "Unknown"]
+    }
 };
 
- var getSelectValues =  function(select) {
+var markers = [];
+var getSelectValues = function (select) {
     var result = [];
     var options = select && select.options;
     var opt;
 
-    for (var i=0, iLen=options.length; i<iLen; i++) {
+    for (var i = 0, iLen = options.length; i < iLen; i++) {
         opt = options[i];
 
         if (opt.selected) {
@@ -30,18 +31,18 @@ var state = {"map": null,
         }
     }
     return result;
-}
+};
 
-function update(){
-    var severity  = getSelectValues(document.getElementById("crashSeverityFilter"));
-    if (severity.length == 0){
+function update() {
+    var severity = getSelectValues(document.getElementById("crashSeverityFilter"));
+    if (severity.length === 0) {
         console.log("Fails");
-	    return;
+        return;
     }
     var startYear = document.getElementById("crashYearFilterStart").value;
-    var endYear   = document.getElementById("crashYearFilterEnd").value;
-    if (endYear < startYear){
-	    return;
+    var endYear = document.getElementById("crashYearFilterEnd").value;
+    if (endYear < startYear) {
+        return;
     }
 
     state.filter.startYear = startYear;
@@ -51,22 +52,22 @@ function update(){
     initialize();
 }
 
-var bindEvent = function(element, type, handler) {
+var bindEvent = function (element, type, handler) {
     if (element.addEventListener) {
         element.addEventListener(type, handler, false);
     } else {
-        element.attachEvent('on'+type, handler);
+        element.attachEvent('on' + type, handler);
     }
-}
+};
 
 function initialize() {
     bindEvent(document.getElementById("crashYearFilterStart"), "change", update);
     bindEvent(document.getElementById("crashYearFilterEnd"), "change", update);
     bindEvent(document.getElementById("crashSeverityFilter"), "change", update);
     county = new google.maps.Data();
-    
-    county.loadGeoJson("./resources/Allegheny_County_Municipal_Boundaries.json");
-    
+
+    county.loadGeoJson("./resources/ccmerge.geojson");
+
 
     var infoWindow = new google.maps.InfoWindow;
     var redStar = {
@@ -82,12 +83,26 @@ function initialize() {
         zoom: 10,
         mapTypeId: 'roadmap'
     });
+    var zoomlevel = state.map.getZoom();
+    console.log('Zoom: ' + zoomlevel);
+
     var featureStyle = {
         fillColor: 'White',
         strokeWeight: 1,
         clickable: 'true'
 
     };
+    state.map.addListener('zoom_changed', function () {
+        var zoomlevel = state.map.getZoom();
+        console.log('Zoom: ' + zoomlevel);
+        if (zoomlevel > 12)
+        {
+            toggleBikeMarkers(state.map, infoWindow, true);
+        } else
+        {
+            toggleBikeMarkers(state.map, infoWindow, false);
+        }
+    });
 
     county.setStyle(featureStyle);
 
@@ -97,50 +112,74 @@ function initialize() {
         county.revertStyle();
         county.overrideStyle(event.feature, {strokeWeight: 4});
 
-        document.getElementById('info-box').textContent =
-                event.feature.getProperty("LABEL");
+        var label = event.feature.getProperty("LABEL");
+        var name = event.feature.getProperty("NAME");
+        var hood = event.feature.getProperty("hood");
+        var contentlabel = "";
+        console.log("label " + label + " name " + name + " hood " + hood);
+
+        if (hood === null)
+        {
+            contentlabel = label;
+        }
+
+        if (label === "Pittsburgh" || name === "PITTSBURGH")
+        {
+            contentlabel = hood;
+        }
+
+        if (label === null && name === null && hood !== null)
+        {
+            contentlabel = hood;
+        }
+
+
+
+        document.getElementById('info-box').textContent = contentlabel;
 
     });
     county.addListener('mouseout', function (event) {
         county.revertStyle();
     });
 
-
+    county.addListener('zoom_changed', function () {
+        console.log('Zoom: ' + county.getZoom());
+    });
 
     county.setMap(state.map);
-    
 
     var type = "Crash";
     var bikeLayer = new google.maps.BicyclingLayer();
     bikeLayer.setMap(state.map);
 
-    setBikeMarkers(state.map, locations)
+    //setBikeMarkers(state.map, locations);
+    //getBikeLocations(county.map, infoWindow);
+
     console.log(state.filter.severity);
     // Change this depending on the name of your PHP file
-    downloadUrl("./crashdata.xml", function (data) {
+    downloadUrl("./crashdata3.xml", function (data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName("marker");
         //alert(markers.length);            
         for (var i = 0; i < markers.length; i++) {
             var name = markers[i].getAttribute("NAME");
             var crashyear = markers[i].getAttribute("CRASH_YEAR");
-            if (crashyear < state.filter.startYear || crashyear > state.filter.endYear){
+            if (crashyear < state.filter.startYear || crashyear > state.filter.endYear) {
                 continue;
             }
             var crashdate = markers[i].getAttribute("CRASH_MONTH");
             var crashtime = markers[i].getAttribute("TIME_OF_DAY");
             var crashmin, crashhour;
-            if (crashtime.length == 3){
+            if (crashtime.length === 3) {
                 crashmin = crashtime.substring(1);
                 crashhour = crashtime.substring(0, 1);
-            } 
-            else{
+            } else {
                 crashmin = crashtime.substring(2);
                 crashhour = crashtime.substring(0, 2);
             }
             var address = markers[i].getAttribute("STREET_NAME");
             var description = markers[i].getAttribute("MAX_SEVERITY_LEVEL");
-            if (!state.filter.severity.includes(description)){
+            if (!state.filter.severity.includes(description)) {
                 continue;
             }
             var point = new google.maps.LatLng(
@@ -162,7 +201,12 @@ function initialize() {
             bindInfoWindow(marker, state.map, infoWindow, html);
         }
     });
+    
+    
+    getBikeLocations(state.map, infoWindow);
     setMarkers(state.map);
+    toggleBikeMarkers(state.map,infoWindow,false);
+    //getBikeLocations(state.map, infoWindow);
 }
 
 function bindInfoWindow(marker, map, infoWindow, html) {
@@ -177,6 +221,7 @@ function bindInfoWindow(marker, map, infoWindow, html) {
 }
 
 function downloadUrl(url, callback) {
+    console.log(url);
     var request = window.ActiveXObject ?
             new ActiveXObject('Microsoft.XMLHTTP') :
             new XMLHttpRequest;
@@ -200,6 +245,79 @@ function setMarkers(map) {
     var marker = new google.maps.Marker({
         map: map
     });
+}
+
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
+function showMarkers(map) {
+        setMapOnAll(map);
+      }
+ function clearMarkers() {
+        setMapOnAll(null);
+      }
+function getBikeLocations(map, infoWindow)
+{
+    var locations = new Array;
+    //['1000','Liberty & Stanwix',16,40.441326,-80.004679],
+    downloadUrl("https://api.nextbike.net/maps/nextbike-live.xml?&city=254", function (data) {
+        var xml = data.responseXML;
+        var markers = xml.documentElement.getElementsByTagName("place");
+        //console.log(markers.length);
+        for (var i = 0; i < markers.length; i++) {
+
+            var address = markers[i].getAttribute("name");
+            var bike_racks = markers[i].getAttribute("bike_racks");
+            var number = markers[i].getAttribute("number");
+            // var point = new google.maps.LatLng(
+            var lat = parseFloat(markers[i].getAttribute("lat"));
+            var lng = parseFloat(markers[i].getAttribute("lng"));
+
+            locations[i] = "\"" + number + "," + address + "," + bike_racks + "," + lat + "," + lng + "\"";
+            //}
+            //console.log(locations[i]);
+        }
+        setBikeMarkers2(map, locations, infoWindow);
+    });
+}
+function setBikeMarkers2(map, locations, infoWindow) {
+    //console.log("setBikeMarkers");
+    var Bikeimage = {
+        url: 'img/bicycle.ico',
+        size: new google.maps.Size(26, 26)
+    };
+    for (var i = 0; i < locations.length; i++) {
+        var bikelocations = locations[i].split(",");
+        //console.log("BL" + bikelocations);
+        var point = new google.maps.LatLng(
+                parseFloat(bikelocations[3]),
+                parseFloat(bikelocations[4]));
+        //var myLatLng = new google.maps.LatLng(bikelocations[3], bikelocations[4]);
+        var html = "<b>" + bikelocations[1] + "</b> <br/> Rack Count " + bikelocations[2] + "<br/>";
+        var marker = new google.maps.Marker({
+            position: point,
+            map: map,
+            icon: Bikeimage
+
+        });
+        //console.log(html);
+        markers.push(marker);
+        bindInfoWindow(marker, map, infoWindow, html);
+    }
+}
+function toggleBikeMarkers(map, infoWindow, turnon)
+{
+    console.log("turnon " + turnon);
+    if (turnon === false)
+    {
+        clearMarkers(map);
+    } else
+    {
+       // getBikeLocations(map, infoWindow);
+        showMarkers(map);
+    }
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 

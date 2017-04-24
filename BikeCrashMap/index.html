@@ -1,133 +1,135 @@
 <html lang="en">
 
-<head>
-  <title>AC Bike Crash Data</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="CodeForPittsburgh">
-  <meta name="author" content="Mark Howe">
-  <link rel="icon" href="img/myicon.png">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
-  <script src="js/crashmap.js"></script>
-  <script src="js/BikeRentalLocation.js"></script>
+    <head>
+        <title>AC Bike Crash Data</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="CodeForPittsburgh">
+        <meta name="author" content="Mark Howe">
+        <link rel="icon" href="img/myicon.png">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
+        
+        <script src="js/crashmap.js"></script>
+        <script src="js/BikeRentalLocation.js"></script>
 
 
-  <style>
-    #mapsection {
-      width: 100%;
-      height: 750px;
-      float: left;
-      padding: 10px;
-    }
-    
-    #info-box {
-      background-color: #eeeeee;
-      border: 2px solid black;
-      bottom: 125px;
-      height: 60px;
-      padding: 10px;
-      float: left;
-    }
-  </style>
-</head>
+        <style>
+            #mapsection {
+                width: 100%;
+                height: 450px;
+                float: left;
+                padding: 10px;
+            }
 
-<body>
-  <div class="container">
-    <div class="jumbotron">
-      <h2 class="text-center">AC Bicycle Crash Data 2004-2016</h2>
-    </div>
-    <div class="row">
-      <div class="col-sm-2">
-        <div id="filters">
-          <div id="crashSeverityContainer">
-            <label for="crashSeverityFilter">Crash Severity:</label>
-            <select id="crashSeverityFilter" onchange="function(){update();}" multiple>
-              <option value="Not injured" selected="selected">Not injured</option>
-              <option value="Killed" selected="selected">Killed</option>
-              <option value="Major injury" selected="selected">Major injury</option>
-              <option value="Moderate injury" selected="selected">Moderate injury</option>
-              <option value="Minor injury" selected="selected">Minor injury</option>
-              <option value="Injury/ Unknown Severity" selected="selected">Injury/Unknown Severity</option>
-              <option value="Unknown" selected="selected">Unknown</option>
-	          </select>
-          </div>
-          <div id="crashYearRangeContainer">
-            <b>Date Range:</b>
-            <div id="crashYearStartContainer">
-              <label for="crashYearFilterStart">From:</label>
-              <select id="crashYearFilterStart" onchange="function(){update();}">
-                <option value='2004' selected="selected">2004</option>
-                <option value='2005'>2005</option>
-                <option value='2006'>2006</option>
-                <option value='2007'>2007</option>
-                <option value='2008'>2008</option>
-                <option value='2009'>2009</option>
-                <option value='2010'>2010</option>
-                <option value='2011'>2011</option>
-                <option value='2012'>2012</option>
-                <option value='2013'>2013</option>
-                <option value='2014'>2014</option>
-                <option value='2015'>2015</option>
-                <option value='2016'>2016</option>
-              </select>
+            #info-box {
+                background-color: #eeeeee;
+                border: 2px solid black;
+                bottom: 125px;
+                height: 60px;
+                padding: 10px;
+                float: left;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h2 class="text-center">AC Bicycle Crash Data 2004-2016</h2>
             </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div id="filters">
+                        <div id="crashSeverityContainer">
+                            <label for="crashSeverityFilter">Crash Severity:</label>
+                            <select multiple id="crashSeverityFilter" onchange="update()">
+                                <option value="Not injured" selected="selected">Not injured</option>
+                                <option value="Killed" selected="selected">Killed</option>
+                                <option value="Major injury" selected="selected">Major injury</option>
+                                <option value="Moderate injury" selected="selected">Moderate injury</option>
+                                <option value="Minor injury" selected="selected">Minor injury</option>
+                                <option value="Injury/ Unknown Severity" selected="selected">Injury/Unknown Severity</option>
+                                <option value="Unknown" selected="selected">Unknown</option>
+                            </select>
+                        </div>
+                        <div id="crashYearRangeContainer">
+                            <b>Date Range:</b>
+                            <div id="crashYearStartContainer">
+                                <label for="crashYearFilterStart">From:</label>
+                                <select id="crashYearFilterStart" onchange="update()">
+                                    <option value='2004'>2004</option>
+                                    <option value='2005'>2005</option>
+                                    <option value='2006'>2006</option>
+                                    <option value='2007'>2007</option>
+                                    <option value='2008'>2008</option>
+                                    <option value='2009'>2009</option>
+                                    <option value='2010'>2010</option>
+                                    <option value='2011' selected="selected">2011</option>
+                                    <option value='2012'>2012</option>
+                                    <option value='2013'>2013</option>
+                                    <option value='2014'>2014</option>
+                                    <option value='2015'>2015</option>
+                                    <option value='2016'>2016</option>
+                                </select>
+                            </div>
 
-            <div id="crashYearEndContainer">
-              <label for="crashYearFilterEnd">To:</label>
-              <select id="crashYearFilterEnd" onchange="function(){update();}">
-                <option value='2004'>2004</option>
-                <option value='2005'>2005</option>
-                <option value='2006'>2006</option>
-                <option value='2007'>2007</option>
-                <option value='2008'>2008</option>
-                <option value='2009'>2009</option>
-                <option value='2010'>2010</option>
-                <option value='2011'>2011</option>
-                <option value='2012'>2012</option>
-                <option value='2013'>2013</option>
-                <option value='2014'>2014</option>
-                <option value='2015'>2015</option>
-                <option value='2016' selected="selected">2016</option>
-              </select>
+                            <div id="crashYearEndContainer">
+                                <label for="crashYearFilterEnd">To:</label>
+                                <select id="crashYearFilterEnd" onchange="update()">
+                                    <option value='2004'>2004</option>
+                                    <option value='2005'>2005</option>
+                                    <option value='2006'>2006</option>
+                                    <option value='2007'>2007</option>
+                                    <option value='2008'>2008</option>
+                                    <option value='2009'>2009</option>
+                                    <option value='2010'>2010</option>
+                                    <option value='2011'>2011</option>
+                                    <option value='2012'>2012</option>
+                                    <option value='2013'>2013</option>
+                                    <option value='2014'>2014</option>
+                                    <option value='2015'>2015</option>
+                                    <option value='2016' selected="selected">2016</option>
+                                </select>
+                            </div>
+                            <!--
+                            <div id="bikeshareToggleContainer">
+                              <label for="bikeshareToggle">Show stations:</label>
+                              <input type="checkbox" id="bikeshareToggle">
+                            </div>
+                            -->
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-8">
+                    <div id="mapsection">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+
+                    <div id="nav">
+                        <div id="info-box">?</div>
+                        <br>
+                        <div id="legend">
+                            <h2>Legend</h2>
+                            <img title="Crashes" src="./img/roundbg_check_black.png" alt="Crashes"> Bike Crashes 
+                            <br> <img title="Killed" src="./img/mm_20_star.png" alt="Killed"> Killed 
+                            <br> <img title="Rentals" src="./img/bicycle.ico" alt="Bike"> Rental Locations 
+                            <br> <b>Bike-friendly Roads</b>
+                            <br> <img alt="dark-green" src="./img/bikeTrail.jpg" width="16"> Trails without auto traffic.
+                            <br> <img alt="light-green" src="./img/bikeLane.jpg" width="16"> Dedicated bike lanes
+                            <br> <img alt="dotted-light-green" src="./img/bikeSafe.jpg" width="16">  Cyclist-recommended roads
+                            <!--<br> Brown: Unpaved trails are off-road dirt paths.-->
+                            <br>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--
-            <div id="bikeshareToggleContainer">
-              <label for="bikeshareToggle">Show stations:</label>
-              <input type="checkbox" id="bikeshareToggle">
-            </div>
-            -->
-          </div>
         </div>
 
-
-      </div>
-      <div class="col-sm-8">
-        <div id="mapsection">
-        </div>
-      </div>
-      <div class="col-sm-2">
-
-        <div id="nav">
-          <div id="info-box">?</div>
-          <br>
-          <div id="legend">
-            <h2>Legend</h2>
-            <img title="Crashes" src="./img/roundbg_check_black.png" alt="Crashes"> Bike Crashes 
-            <br> <img title="Killed" src="./img/mm_20_star.png" alt="Killed"> Killed 
-            <br> <img title="Rentals" src="./img/bicycle.ico" alt="Bike"> Rental Locations 
-            <br> <b>Bike-friendly Roads</b>
-            <br> <img alt="dark-green" src="./img/bikeTrail.jpg" width="16"> Trails without auto traffic.
-            <br> <img alt="light-green" src="./img/bikeLane.jpg" width="16"> Dedicated bike lanes
-            <br> <img alt="dotted-light-green" src="./img/bikeSafe.jpg" width="16">  Cyclist-recommended roads
-            <!--<br> Brown: Unpaved trails are off-road dirt paths.-->
-            <br>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</body>
+    </body>
 
 </html>
