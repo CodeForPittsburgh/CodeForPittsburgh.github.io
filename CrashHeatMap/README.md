@@ -1,4 +1,4 @@
-# SQLCrashData
+# Heat Crash Data
 ## Maps and data for Bike Crashes
 Code for Pittsburgh is working on displaying crash data
 
