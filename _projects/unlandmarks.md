@@ -28,6 +28,8 @@ It will also reveal high points - industrial achievements at a scale that might 
 
 In 2017, With the city growing in population & density, with neighborhoods changing rapidly, the map will also serve as a muse - an expansion of what communities believe is possible to build going forward. **Main Streets** across town will be filling back up shortly, and knowing *this* corner used to have a ice cream shop might encourage us today to return that building to its former use.
 
+This work grows out of our work on the **[Fish Fry Map](https://codeforpittsburgh.github.io/fishfrymap/)** and the **[Police Blotter](http://codeforpittsburgh.github.io/projects/policeblotter/)**, two previous community mapping projects.
+
 This is a big public project. We are making it as a community. We cannot make it without the larger Pittsburgh community's help.
 
 ## There are many ways to engage with the project (tap below):
@@ -55,3 +57,9 @@ We're the region's Civic Technology meetup group, part of [Code for America's Br
 We intend to learn all kinds of things in the next six months. Check out our [past Meetups](https://www.meetup.com/codeforpgh/#past) for some ideas of what we've been learning so far. We'll be hosting learning events as we build the technology. We'll be hosting community events to record landmarks. We'll be hosting online methods of adding data, and, eventually, verify, research, etc.
 
 **We are so excited to get started. Join your friends and neighbors, and lets build a map!**
+
+## Inspiration & Shoutouts
+
+Huge prior art goes to *Stuff That’s Gone* and *Things That Aren’t There Anymore*, the two [Rick Sebak](https://www.wqed.org/rick-sebak) Documentaries.
+
+Also, looks like there’s [this blog post](https://nullspace2.blogspot.de/2012/02/yunzer-caching.html) about giving these kinds of directions. H/T [Chris Briem](https://twitter.com/chrisbriem).
