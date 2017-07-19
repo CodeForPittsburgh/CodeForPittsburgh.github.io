@@ -6,7 +6,7 @@ image: assets/images/unlandmarks.jpg
 lead: Connor Sites-Bowen , Christian Gass
 url: /unlandmarks
 ---
-# Unlandmarks Map
+
 ```
 A map of everything that isn't there anymore. It gives driving directions, too.
 ```
@@ -38,11 +38,11 @@ This is a big public project. We are making it as a community. We cannot make it
 ### - [Request an invite to our Slack](https://goo.gl/forms/Hl97wNK7NtjU8WO93)
 ### - More:
 
-- If you have questions for us, email us at unlandmarks@gmail.com
+- If you have questions for us, email us at <unlandmarks@gmail.com>.
 
-- If you have lots of data points to submit, email us at unlandmarks@gmail.com.
+- If you have lots of data points to submit, email us at <unlandmarks@gmail.com>.
 
-- If you are a journalist, email us at unlandmarks@gmail.com, or interview our much-cooler friends: Carnegie Libraries of Pittsburgh, Western Pennsylvania Regional Data Center, Code and Supply, .
+- If you are a journalist, email us at <unlandmarks@gmail.com>, or interview our much-cooler friends: [Carnegie Libraries of Pittsburgh,](https://twitter.com/carnegielibrary) [Western Pennsylvania Regional Data Center](https://twitter.com/wprdc), or [Code and Supply](https://twitter.com/codeandsupply).
 
 - If you are a local nonprofit with a focus on the built environment, we'd love to work together. Email us at unlandmarks@gmail.com.
 
