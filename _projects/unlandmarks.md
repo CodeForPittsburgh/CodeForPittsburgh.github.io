@@ -38,6 +38,7 @@ This is a big public project. We are making it as a community. We cannot make it
 ### -  [Join our Meetup Group to get invites to our events going forward.](https://www.meetup.com/codeforpgh/) 
 ### - [Follow us on twitter.](https://twitter.com/codeforpgh)
 ### - [Request an invite to our Slack.](https://goo.gl/forms/Hl97wNK7NtjU8WO93)
+### - [Bookmark www.unlandmarks.com- we'll host the map here!](http://www.unlandmarks.com)
 ### - More:
 
 - If you have questions for us, email us at <unlandmarks@gmail.com>.
