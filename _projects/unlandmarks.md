@@ -46,11 +46,11 @@ This is a big public project. We are making it as a community. We cannot make it
 
 - If you are a journalist, email us at <unlandmarks@gmail.com>, or interview our much-cooler friends: [Carnegie Libraries of Pittsburgh,](https://twitter.com/carnegielibrary) [Western Pennsylvania Regional Data Center](https://twitter.com/wprdc), or [Code and Supply](https://twitter.com/codeandsupply).
 
-- If you are a local nonprofit with a focus on the built environment, we'd love to work together. Email us at unlandmarks@gmail.com.
+- If you are a local nonprofit with a focus on the built environment, we'd love to work together. Email us at <unlandmarks@gmail.com>.
 
 ## Code for Pittsburgh?
 
-We're the region's Civic Technology meetup group, part of Code for America's Volunteer Brigades. We're a loose association of change-makers, enthusiasts, hobbyists, coders, artists, map-makers, and other focused on making life in Pittsburgh better. We place an emphasis on technology's role in shaping our public experiences, and in knitting our city together.
+We're the region's Civic Technology meetup group, part of [Code for America's Brigade Network](http://brigade.codeforamerica.org/brigade/). We're a loose association of change-makers, enthusiasts, hobbyists, coders, artists, map-makers, and other focused on making life in Pittsburgh better. We place an emphasis on technology's role in shaping our public experiences, and in knitting our city together.
 
 We intend to learn all kinds of things in the next six months. Check out our [past Meetups](https://www.meetup.com/codeforpgh/#past) for some ideas of what we've been learning so far. We'll be hosting learning events as we build the technology. We'll be hosting community events to record landmarks. We'll be hosting online methods of adding data, and, eventually, verify, research, etc.
 
