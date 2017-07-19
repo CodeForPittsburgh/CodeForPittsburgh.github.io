@@ -52,4 +52,4 @@ We're the region's Civic Technology meetup group, part of Code for America's Vol
 
 We intend to learn all kinds of things in the next six months. Check out our [past Meetups](https://www.meetup.com/codeforpgh/#past) for some ideas of what we've been learning so far. We'll be hosting learning events as we build the technology. We'll be hosting community events to record landmarks. We'll be hosting online methods of adding data, and, eventually, verify, research, etc.
 
-**We are so excited to get started. Join your friends and neighbors, and lets build a map!***
+**We are so excited to get started. Join your friends and neighbors, and lets build a map!**
