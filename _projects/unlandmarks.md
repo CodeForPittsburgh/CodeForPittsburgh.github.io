@@ -14,7 +14,7 @@ Pittsburghers have serious respect for their city’s history. Many of them are 
 
 We are a city in many ways haunted by the past, and you can see in the physical grid of the city the spaces where great engines of industry once stood.
 
-Newcomes get lost in our city. It isn’t easy to give them directions. Three rights never make a left.The waypoints described are often long-gone, making the directions useless to someone who is new in town.
+Newcomers get lost in our city. It isn’t easy to give them directions. Three rights never make a left.The waypoints described are often long-gone, making the directions useless to someone who is new in town.
 
 It’s a friction point - a split between the city’s newer residents and those who have lived here for decades.
 
