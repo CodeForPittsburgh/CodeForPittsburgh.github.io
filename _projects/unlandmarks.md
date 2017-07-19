@@ -7,9 +7,8 @@ lead: Connor Sites-Bowen , Christian Gass
 url: /unlandmarks
 ---
 
-```
-A map of everything that isn't there anymore. It gives driving directions, too.
-```
+## A map of everything that isn't there anymore. It gives driving directions, too.
+
 
 Pittsburghers have serious respect for their city’s history. Many of them are also long-term residents of their particular neighborhoods, and proud of the many local businesses and monuments that once existed in their surround.
 
