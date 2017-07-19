@@ -32,8 +32,8 @@ In 2017, With the city growing in population & density, with neighborhoods chang
 This is a big public project. We are making it as a community. We cannot make it without the larger Pittsburgh community's help.
 
 ## There are many ways to engage with the project (tap below):
-### -  **[Nominate a point.](https://goo.gl/forms/4Zm4Mxx2sneri0sJ2)**
-### - [Join us for drinks on August 1 as we kick off the project in style](https://www.meetup.com/codeforpgh/events/241846293/)
+### -  **[Nominate a landmark for inclusion on the map.](https://goo.gl/forms/4Zm4Mxx2sneri0sJ2)**
+### - [Join us for drinks on August 1 as we kick off the project in style.](https://www.meetup.com/codeforpgh/events/241846293/)
 ### - [Come to our August 10th work night and dig into the data we've collected so far.](https://www.meetup.com/codeforpgh/events/241846018/)
 ### -  [Join our Meetup Group to get invites to our events going forward.](https://www.meetup.com/codeforpgh/) 
 ### - [Follow us on twitter.](https://twitter.com/codeforpgh)
