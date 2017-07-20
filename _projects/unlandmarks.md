@@ -14,7 +14,7 @@ Pittsburghers have serious respect for their city’s history. Many of them are 
 
 We are a city in many ways haunted by the past, and you can see in the physical grid of the city the spaces where great engines of industry once stood.
 
-Newcomers get lost in our city. It isn’t easy to give them directions. Three rights never make a left.The waypoints described are often long-gone, making the directions useless to someone who is new in town.
+Newcomers get lost in our city. It isn’t easy to give them directions. Three rights never make a left. The waypoints described are often long-gone, making the directions useless to someone who is new in town.
 
 It’s a friction point - a split between the city’s newer residents and those who have lived here for decades.
 
@@ -26,7 +26,7 @@ The Unlandmarks Map will reveal and detail historical injustices. It will show t
 
 It will also reveal high points - industrial achievements at a scale that might not be seen again, bustling neighborhood shops, art from an earlier age.
 
-In 2017, With the city growing in population & density, with neighborhoods changing rapidly, the map will also serve as a muse - an expansion of what communities believe is possible to build going forward. **Main Streets** across town will be filling back up shortly, and knowing *this* corner used to have a ice cream shop might encourage us today to return that building to its former use.
+In 2017, with the city growing in population & density, with neighborhoods changing rapidly, the map will also serve as a muse - an expansion of what communities believe is possible to build going forward. **Main Streets** across town will be filling back up shortly, and knowing *this* corner used to have a ice cream shop might encourage us today to return that building to its former use.
 
 This work grows out of our work on the **[Fish Fry Map](https://codeforpittsburgh.github.io/fishfrymap/)** and the **[Police Blotter](http://codeforpittsburgh.github.io/projects/policeblotter/)**, two previous community mapping projects.
 
