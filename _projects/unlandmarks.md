@@ -33,8 +33,8 @@ This work grows out of our work on the **[Fish Fry Map](https://codeforpittsburg
 This is a big public project. We are making it as a community. We cannot make it without the larger Pittsburgh community's help.
 
 ## There are many ways to engage with the project (tap below):
-# -  **[Nominate a landmark for inclusion on the map. (click here!)](https://goo.gl/forms/4Zm4Mxx2sneri0sJ2)**
-
+## -  **[Nominate a landmark for inclusion on the map. (click here!)](https://goo.gl/forms/4Zm4Mxx2sneri0sJ2)**
+### - [Join us for our September Work Night](https://www.meetup.com/codeforpgh/events/243141304/)
 ### -  [Join our Meetup Group to get invites to our events going forward.](https://www.meetup.com/codeforpgh/) 
 ### - [Follow us on twitter.](https://twitter.com/codeforpgh)
 ### - [Request an invite to our Slack.](https://goo.gl/forms/Hl97wNK7NtjU8WO93)
