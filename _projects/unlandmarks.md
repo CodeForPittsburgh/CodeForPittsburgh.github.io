@@ -18,9 +18,9 @@ Newcomers get lost in our city. It isn’t easy to give them directions. Three r
 
 It’s a friction point - a split between the city’s newer residents and those who have lived here for decades.
 
-But it isn’t - it is endearing and is a sort of oral tradition that cements the knowledge of what came before into the memories of a new group of residents.
+But it isn’t - it is endearing and it cements the knowledge of what came before into the memories of a new group of residents. It means neighbors talk to neighbors, and that's always good in this town.
 
-### **For the next six months, Code for Pittsburgh will be building a map of landmarks that are gone. Buildings, businesses, public art, noteworthy trees, we want to hear about it all. We want to get it all down in one place that everyone can access. We want to make a free and open record of those historical landmarks, and the stories people have there.**
+### **Through the end of 2017, Code for Pittsburgh will be building a map of landmarks that are gone. Buildings, businesses, public art, noteworthy trees, we want to hear about it all. We want to get it all down in one place that everyone can access. We want to make a free and open record of those historical landmarks, and the stories people have there.**
 
 The Unlandmarks Map will reveal and detail historical injustices. It will show the rent-raising which closed down minority-owned businesses, the murals which were painted over, the unique houses which were knocked down for bland concrete apartments, the jazz nightclubs lost to the Civic Arena.
 
@@ -33,9 +33,8 @@ This work grows out of our work on the **[Fish Fry Map](https://codeforpittsburg
 This is a big public project. We are making it as a community. We cannot make it without the larger Pittsburgh community's help.
 
 ## There are many ways to engage with the project (tap below):
-# -  **[Nominate a landmark for inclusion on the map.](https://goo.gl/forms/4Zm4Mxx2sneri0sJ2)**
-### - [Join us for drinks on August 1 as we kick off the project in style.](https://www.meetup.com/codeforpgh/events/241846293/)
-### - [Come to our August 10th work night and dig into the data we've collected so far.](https://www.meetup.com/codeforpgh/events/241846018/)
+# -  **[Nominate a landmark for inclusion on the map. (click here!)](https://goo.gl/forms/4Zm4Mxx2sneri0sJ2)**
+
 ### -  [Join our Meetup Group to get invites to our events going forward.](https://www.meetup.com/codeforpgh/) 
 ### - [Follow us on twitter.](https://twitter.com/codeforpgh)
 ### - [Request an invite to our Slack.](https://goo.gl/forms/Hl97wNK7NtjU8WO93)
