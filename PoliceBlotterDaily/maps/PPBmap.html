@@ -54,7 +54,10 @@
 
             function initialize() {
                 //alert("Running load " + ShapeNameDescription[ShapeNameLocation]);
+
                 processmap();
+                var filename = "../xml/PoliceBlotterDate.xml";
+                readXml(filename);
             }
 
             function processmap()
@@ -73,6 +76,7 @@
 
                 downloadUrl("../xml/PoliceBlotterDaily.xml", function (data) {
                     xml = data.responseXML;
+                    
                     var markers = xml.documentElement.getElementsByTagName("marker");
                     for (var i = 0; i < markers.length; i++) {
                         var zone = markers[i].getAttribute("zone");
@@ -193,6 +197,29 @@
 
                 //google.maps.event.addDomListener(window, 'load', initialize);
             }
+            function readXml(xmlFile) {
+
+                var xmlDoc;
+
+                if (typeof window.DOMParser !== "undefined") {
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", xmlFile, false);
+                    if (xmlhttp.overrideMimeType) {
+                        xmlhttp.overrideMimeType('text/xml');
+                    }
+                    xmlhttp.send();
+                    xmlDoc = xmlhttp.responseXML;
+                } else {
+                    xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                    xmlDoc.async = "false";
+                    xmlDoc.load(xmlFile);
+                }
+                var tagObj = xmlDoc.getElementsByTagName("incidentdates");
+//var typeValue = tagObj[0].getElementsByTagName("type")[0].childNodes[0].nodeValue;
+                var titleValue = tagObj[0].getElementsByTagName("incidentdate")[0].childNodes[0].nodeValue;
+                //alert(titleValue);
+                document.getElementById("TBD").innerHTML = " for " + titleValue;
+            }
             google.maps.event.addDomListener(window, 'load', initialize);
         </script>
         <style>
@@ -227,7 +254,8 @@
 
         <div class="container">
             <div class="jumbotron">
-                <h2 class="text-center">Pittsburgh Police Daily Blotter <BR> for TBD</h2>
+                <h2 class="text-center">Pittsburgh Police Daily Blotter <BR></h2>
+                <p id="TBD" class="text-center"></p>
                 <h5 id="demo" class="text-center">
                     <script>
                         CurrentYear("demo");
