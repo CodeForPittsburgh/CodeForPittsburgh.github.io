@@ -34,7 +34,7 @@ This is a big public project. We are making it as a community. We cannot make it
 
 ## There are many ways to engage with the project (tap below):
 ## -  **[Nominate a landmark for inclusion on the map. (click here!)](https://goo.gl/forms/4Zm4Mxx2sneri0sJ2)**
-### - [Join us for our September Work Night](https://www.meetup.com/codeforpgh/events/243141304/)
+### - [Join us for our November Work Night](https://www.meetup.com/codeforpgh/events/244515820/)
 ### -  [Join our Meetup Group to get invites to our events going forward.](https://www.meetup.com/codeforpgh/) 
 ### - [Follow us on twitter.](https://twitter.com/codeforpgh)
 ### - [Request an invite to our Slack.](https://goo.gl/forms/Hl97wNK7NtjU8WO93)
@@ -48,6 +48,18 @@ This is a big public project. We are making it as a community. We cannot make it
 - If you are a journalist, email us at <unlandmarks@gmail.com>, or interview our much-cooler friends: [Carnegie Libraries of Pittsburgh,](https://twitter.com/carnegielibrary) [Western Pennsylvania Regional Data Center](https://twitter.com/wprdc), or [Code and Supply](https://twitter.com/codeandsupply).
 
 - If you are a local nonprofit with a focus on the built environment, we'd love to work together. Email us at <unlandmarks@gmail.com>.
+
+## Creating a new Commons
+
+The intent of the project is to create a shared set of community memories. The places and stories of the past are individual - this map brings them together, and forms a set of data meant for the whole community.
+
+Community submissions to the map are gifts - gifts of memory, research, stories, history. Community members who nominate Unlandmarks, research build and destruction dates, interview their neighbors, write up histories, these community members are collectively building a common, personal history.
+
+These are not gifts for Code for Pittsburgh - they are gifts to the greater Pittsburgh community. As such, they are available under the Creative Commons Zero (CC0) license, which allows for full and complete use and re-use, with no need for attribution (though it's nice!).
+
+In simple terms, the map and all associated community data is in the Public Domain as soon as it is submitted. Anyone in the world is free to use, reuse, borrow, write up, print out, research, re-use, or in all other ways make use of the data. The community made it, and *everyone* gets to use it.
+
+Together, we are building a shared, available, open public history, for ourselves, and for generations to come. Thank you to everyone who has gifted their stories so far.
 
 ## Code for Pittsburgh?
 
