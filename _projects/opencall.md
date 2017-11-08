@@ -60,6 +60,7 @@ If you choose to create a Creative Highlight and submit it, you'll be doing so f
 
 * Your highlight of a now-gone landmark will lift that unlandmark up, expanding the number of people in the world who know its story.
 * Interviewing a relative or friend about their memories of the city is deeply rewarding as an activity in its own right. It creates community, and brings you together over a shared love of place. Highlights can serve to honor or remember the *people* associated with a place too.
+* Your highlight can be in service to your community - a public remembrance and reminder of the great achievements of your neighborhood, industry, or social group, over the city's history.
 * More than 50,000 patrons are expected to pass through the Carnegie Library Main during December (the month of the exhibit).
 * The deadline is less than a week away - what a perfect time for a flash-project!
 * You and the other submitters will get a chance to meet at special pre-events and post-events around the Opening Reception (early December), the Closing Reception (late December), and the other events we'll have going on in the space.
