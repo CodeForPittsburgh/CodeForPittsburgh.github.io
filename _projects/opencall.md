@@ -7,10 +7,13 @@ lead: Connor Sites-Bowen
 url: /opencall
 ---
 
-# Unlandmarks “Creative Highlight” Open Call
+# Open Call for **Creative Highlights** for the Unlandmarks Map Exhibition
 
-### Deadline: November 15, 2017.
-### Format: Digital Files (to be printed & mounted)
+
+### Exhibition: December 3 thru December 30, 2017
+### Location: Carnegie Library Main (Oakland), 1st floor Gallery Hall
+### Submission Format: Digital Files (to be printed & mounted)
+### Submission Deadline: November 15, 2017.
 
 Code for Pittsburgh, the city’s civic technology meetup, is building the [Unlandmarks Map](http://www.unlandmarks.com), a map of now-gone landmarks around the city. The mobile-friendly map will let residents and visitors alike interact with the past, forming a collective memory of things that are gone.
 
