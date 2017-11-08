@@ -64,10 +64,14 @@ If you choose to create a Creative Highlight and submit it, you'll be doing so f
 * Previous aspects of this project have gotten quite a lot of local press - this show will presumably as well.
 
 
-### Calendar
+### Calendar (watch for updates!)
 
 Nov 8: Call goes out
+
 Nov 15: Submission Deadline
+
 Nov 20: All submissions prepped for printing & finalized (a collaborative back-and-forth between submitters and Code for Pittsburgh)
+
 Dec 3 or 4 (TBD): Opening Reception
+
 Later in December: Closing Reception & work taken down.
