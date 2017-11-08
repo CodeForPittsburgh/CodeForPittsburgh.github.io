@@ -35,7 +35,7 @@ Code for Pittsburgh is seeking those creative highlights: stories, quotes, photo
 
 ### Rules:
 
-* Submissions must be digital - a zipped folder containing a variety of files and file-formats is fine. Email them to unlandmarks@gmail.com
+* Submissions must be digital - a zipped folder containing a variety of files and file-formats is fine. Email them to <unlandmarks@gmail.com>
 * Submissions must be designed to be printed on paper no wider or taller than 20in, and using no more than 1500 sq. inches ( ~ 8 pages of 8.5x11 paper) of paper total. Work chosen for the final slots will be printed and mounted by the Library.
 * Display layout is flexible - we are working with 30in wide mounting bars, which can have wires hung from them, off of which multiple works can be hung. Past exhibitions have seen as many as 30 post-card sized pieces of paper on one bar (5 wires, 6 post-cards hanging in a vertical line from each wire), or as few as a *single* 20in x 60in poster.
 * Submissions must be your work (or yours to share). This includes historic photographs, which should either be public domain already or must come for your personal (or your relative's personal) photography.
@@ -43,7 +43,7 @@ Code for Pittsburgh is seeking those creative highlights: stories, quotes, photo
 * Digital files submitted will be added to the Public Domain.
 * All submissions should include a separate document or drawing describing how the work is intended to be displayed - a vision for layout.
 
-Submissions must be emailed by November 15 to unlandmarks@gmail.com. Code for Pittsburgh will select eight submissions and work with those submitters to finalize the presentation & printing of each creative highlight. Works will be finalized by November 20th. They will be displayed in the library during December.
+Submissions must be emailed by November 15 to <unlandmarks@gmail.com>. Code for Pittsburgh will select eight submissions and work with those submitters to finalize the presentation & printing of each creative highlight. Works will be finalized by November 20th. They will be displayed in the library during December.
 
 ### What do I get out of this?
 
