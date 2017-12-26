@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
 <incidentdates>
+<<<<<<< HEAD
   <incidentdate>2017-12-25</incidentdate>
+=======
+  <incidentdate>2017-12-19</incidentdate>
+>>>>>>> origin/master
 </incidentdates>
