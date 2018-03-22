@@ -1,24 +1,24 @@
 # ------------------------------------
 # SITE INFO SETTINGS
 
-title: Code for Pittsburgh
+title: Open NC Collabrative
 #subtitle: Pittsburgh's Code for America Brigade
-email: info@codeforpittsburgh.org
-description: We are Pittsburgh's Code for America Brigade
+email: info@open-nccollabrative.org
+description: We are a collaborative group of Code for America volunteer brigades from North Carolina 
 #baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://codeforpittsburgh.github.io"
+url: "https://christhedba.github.io"
 author:
 street_address: 
-city: Pittsburgh
-state: PA
+city: 
+state: NC
 zip_code: 55555
 country: United States of America
-phone: (412) 555-5555
+phone: (919) 555-5555
 
 # Social media
-github_url: https://github.com/codeforpittsburgh
-twitter_url: https://twitter.com/codeforpgh
-meetup_url: https://www.meetup.com/codeforpgh
+github_url: https://github.com/opennccollab
+twitter_url: https://twitter.com/opennccallab
+meetup_url: https://www.meetup.com/opennccollab
 slack_url: https://t.co/I6wuTtmtYa
 500px_url:
 facebook_url:
