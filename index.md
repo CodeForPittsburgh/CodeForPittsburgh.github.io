@@ -1,10 +1,11 @@
 ---
 layout: home
 title: Home
-landing-title: 'We Are Code for Pittsburgh'
+landing-title: 'We Are the Open NC Collabrative'
 description: null
 image: null
 author: null
 ---
 
-**Code for Pittsburgh**, the Pittsburgh region's [Code for America Brigade](https://www.codeforamerica.org/), makes the Pittsburgh region a better place through the use of information and technology. Despite the name, we're not only focused on computer programming! We are a grass-roots organization that works as a civic relationship-builder and is inclusive of different interests, skill-sets, and communities. We foster inclusive connections between government, nonprofit, academic, for-profit companies, residents, civic technologists, analysts, designers, and many others. Our members use projects, events, and advocacy to improve communities and enable civic engagement in a fun, educational atmosphere.
+**Open NC Collabrative**, North Carolina's [Code for America Brigade](https://www.codeforamerica.org/), working to leverage our skills and interests to serve the people of our state. We hope to create a new model of civic tech that weaves the individual existing organizations together into a more powerful network that better serves our whole state.
+
