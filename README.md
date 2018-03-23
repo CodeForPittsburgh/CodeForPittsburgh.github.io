@@ -1,6 +1,6 @@
-# Code for Pittsburgh website
+# Open NC Collabrative website
 
-This Code for Pittsburgh's Jekyll-powered GitHub pages website. It's based on a heavily modified version the Forty Jekyll Theme by <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a>, which is based on the <a href="https://html5up.net" target="_blank">HTML5 UP</a> Forty Jekyll Theme by <a href="https://twitter.com/ajlkn" target="_blank">ajkln</a>. This code is free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+This Open NC's Jekyll-powered GitHub pages website. It's based on a heavily modified version the Forty Jekyll Theme by <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a>, which is based on the <a href="https://html5up.net" target="_blank">HTML5 UP</a> Forty Jekyll Theme by <a href="https://twitter.com/ajlkn" target="_blank">ajkln</a>. This code is free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
 ---
 
