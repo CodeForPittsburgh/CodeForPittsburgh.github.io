@@ -1,10 +1,11 @@
 ---
 layout: project
 title: Bicycle Crash Maps
-description: 
+description: null
 image: assets/images/bikecrashes.jpg
 lead: Mark Howe
 url: /BikeCrashMap
+published: true
 ---
 
 In 2016, years of vehicular [crash data](https://data.wprdc.org/dataset/allegheny-county-crash-data) was released by Allegheny County.
