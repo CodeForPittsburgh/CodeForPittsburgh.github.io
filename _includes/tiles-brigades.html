@@ -1,0 +1,13 @@
+<section id="brigade-list" class="tiles">
+	{% for brigade in site.brigades %}
+	<article>
+		<span class="image">
+			<img src="{{ brigade.image }}" alt="" />
+		</span>
+		<header class="major">
+			<h3><a href="{{ brigade.url | relative_url }}" class="link">{{ brigade.title }}</a></h3>
+			<p>{{ brigade.description }}</p>
+		</header>
+	</article>
+	{% endfor %}
+</section>
