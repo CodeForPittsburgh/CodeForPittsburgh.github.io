@@ -2,7 +2,7 @@
 layout: post
 title: Code for Raleigh becomes Open Raleigh Brigade
 description: Name change hopes to better serve the Raleigh civic tech community
-image: assets/images/staywoke.jpg
+image: assets/images/raleigh_brigade_green-on-white_720x280.png
 author: Jason Hibbets
 published: true
 ---
