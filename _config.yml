@@ -6,7 +6,7 @@ title: Open NC Collabrative
 email: info@open-nccollabrative.org
 description: We are a collaborative group of Code for America volunteer brigades from North Carolina 
 #baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://christhedba.github.io"
+url: "https://open-nc.github.io"
 author:
 street_address: 
 city: 
@@ -19,7 +19,7 @@ phone: (919) 555-5555
 github_url: https://github.com/opennccollab
 twitter_url: https://twitter.com/opennccallab
 meetup_url: https://www.meetup.com/opennccollab
-slack_url: https://t.co/I6wuTtmtYa
+slack_url: 
 500px_url:
 facebook_url:
 gitlab_url: 
