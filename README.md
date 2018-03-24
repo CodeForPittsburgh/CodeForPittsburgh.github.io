@@ -101,7 +101,7 @@ html5up.net | aj@lkn.io | @ajlkn
 
 https://github.com/andrewbanchich/Forty-Jekyll-Theme
 
-## Code For Pittsburgh WEbsite
+## Code For Pittsburgh Website
 
 https://github.com/CodeForPittsburgh/CodeForPittsburgh.github.io
 
