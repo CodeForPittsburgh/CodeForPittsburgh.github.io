@@ -1,5 +1,5 @@
 ---
-layout: portfolio
+layout: brigade
 title: Brigades
 landing-title: 'Brigades'
 description: null
