@@ -77,7 +77,7 @@ The other content on those pages, such as the tiled project and blog post lists,
 
 ## Alternate Method for content creation
 
-If you don't want to go through and manually edit the content on Github or work on local copy using traditional Github pull/add/commit/push mechanism there is an excellent open source WYSIWYG editor called [prose.io](https://prose.io). The app provides the ability to edit front matter, edit pages and other web publishing fundementals without going through the process editing code. ** The site is already authorized in the app. All you have to do is sign up. **
+If you don't want to go through and manually edit the content on Github or work on local copy using traditional Github pull/add/commit/push mechanism there is an excellent open source WYSIWYG editor called [prose.io](https://prose.io). The app provides the ability to edit front matter, edit pages and other web publishing fundementals without going through the process editing code. **The site is already authorized in the app. All you have to do is sign up.**
 
 ## Contact Information
 
