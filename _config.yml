@@ -49,6 +49,7 @@ future: false
 # COLLECTIONS
 collections:
   brigades:
+    output: true
   projects:
     output: true
 
