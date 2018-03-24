@@ -7,7 +7,7 @@ author: Jason Hibbets
 published: true
 ---
 
-/This announcement was approved by Open Raleigh Brigade captains Zach Ambrose, Jason Hibbets, and Chris Mathews./
+*This announcement was approved by Open Raleigh Brigade captains Zach Ambrose, Jason Hibbets, and Chris Mathews.*
 
 It's with great excitement to let you know that as of February 7, 2018, Code for Raleigh will now be known as the Open Raleigh Brigade. We hope you are as excited as Chris, Zach, and I. I'd like to give you a little background about this change.
 
@@ -19,7 +19,7 @@ Basically, the group that was planning CityCamp Raleigh in 2011 and 2012, just b
 
 Fast forward to today. CityCamp Raleigh eventually became CityCamp NC. And CityCamp NC began a great partnership with NC DataPalooza two years ago. Now, our teams have joined forces to plan an annual event series called NC Open Pass. But we, Code for Raleigh, never really did much coding and weren’t very successful at sustaining civic tech projects.
 
-*Fun fact*: February 7, six years ago, the City of Raleigh city council unanimously passed their open government resolution. 
+**Fun fact**: February 7, six years ago, the City of Raleigh city council unanimously passed their open government resolution. 
 
 ## Why Open Raleigh Brigade?
 
