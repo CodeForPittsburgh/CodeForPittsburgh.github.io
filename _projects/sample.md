@@ -4,7 +4,7 @@ title: Sample Project
 description: null
 image: assets/images/Square.jpg
 lead: John Doe
-url: /BikeCrashMap
+url: 
 published: true
 ---
 
