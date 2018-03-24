@@ -49,6 +49,7 @@ future: false
 # COLLECTIONS
 collections:
   brigades:
+  projects:
     output: true
 
 # Build settings
