@@ -48,7 +48,7 @@ At the top of each post, add Jekyll front-matter using these categories:
 ```
 ---
 layout: project
-title: A CfP Project
+title: An Open NC Project
 description: a clever subtitle for the project
 image: assets/images/aRepresentativeImageOfTheProject.jpg
 lead: Name of person who lead the project
@@ -62,10 +62,11 @@ Push changes to the repository when done. It will be added to the project lists 
 
 ## Home, Blog, and Projects pages
 
-The website site is comprised of 3 main pages:
+The website site is comprised of 4 main pages:
 
 * the **home** page: core content is authored in `index.md`.
 * the **blog** page: core content is authored in `blog.md`
+* the **brigades** page: core content is authored in `brigades.md`
 * the **projects** page: core content is authored in `projects.md`
 
 These markdown files live in the root of the directory folder, and they automatically get links on the site's menu.
@@ -81,7 +82,7 @@ The other content on those pages, such as the tiled project and blog post lists,
 
 ## Site Configuration
 
-The `_config.yml` configuration file runs those show. Basic site information content (e.g., web site title, contact info, social media) and some important configuration settings that make the site work are stored here.
+The `_config.yml` configuration file runs the show. Basic site information content (e.g., web site title, contact info, social media) and some important configuration settings that make the site work are stored here.
 
 ---
 
@@ -99,6 +100,10 @@ html5up.net | aj@lkn.io | @ajlkn
 ## Forty Jekyll Theme by Andrew Banchich
 
 https://github.com/andrewbanchich/Forty-Jekyll-Theme
+
+## Code For Pittsburgh WEbsite
+
+https://github.com/CodeForPittsburgh/CodeForPittsburgh.github.io
 
 ## Icons:
 * Font Awesome (fontawesome.github.com/Font-Awesome)
