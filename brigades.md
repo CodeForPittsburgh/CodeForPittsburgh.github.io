@@ -1,5 +1,5 @@
 ---
-layout: brigade
+layout: brigade-port
 title: Brigades
 landing-title: 'Brigades'
 description: null
