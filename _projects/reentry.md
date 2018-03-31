@@ -2,7 +2,7 @@
 layout: project
 title: NC Re-Entry Project
 description: null
-image: assets/images/Square.jpg
+image: assets/images/re-entry.jpg
 lead: Eric Jackson & Jason Marshall
 url: 
 published: true
