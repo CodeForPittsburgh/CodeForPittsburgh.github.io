@@ -2,7 +2,7 @@
 layout: project
 title: Are We Represented
 description: null
-image: assets/images/Square.jpg
+image: assets/images/square.jpg
 lead: John Doe
 url: 
 published: true
