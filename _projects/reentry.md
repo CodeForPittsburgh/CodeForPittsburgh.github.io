@@ -1,4 +1,12 @@
-
+---
+layout: project
+title: NC Re-Entry Project
+description: null
+image: assets/images/Square.jpg
+lead: Eric Jackson & Jason Marshall
+url: 
+published: true
+---
 ## Purpose
 
 Accessible, accurate and safe information on resources for those returning to the community after a period of incarceration or suffering the consequences of a criminal conviction on their record can be very hard to come by. Not only is the information dispersed across many different sites, but there is a tremendous amount of inaccurate, outdated information out there and a lot of places that are looking to exploit the vulnerable. The challenge is there not only for those contending with the issue, but also for those trying to help them: defense lawyers, parole officers, prison counselors, etc.
