@@ -2,7 +2,7 @@
 layout: project
 title: The Police Blotter
 description: 
-image: assets/images/policezones.jpg
+image: assets/images/PoliceZones.jpg
 lead: Mark Howe
 ---
 
