@@ -6,7 +6,7 @@ src = "citymapoverlays.js";
 var state = {"map": null,
     "filter": {
         "startYear": 2004,
-        "endYear": 2016,
+        "endYear": 2017,
         "severity": ["Not injured",
             "Killed",
             "Major injury",
@@ -42,14 +42,23 @@ function update() {
     var startYear = document.getElementById("crashYearFilterStart").value;
     var endYear = document.getElementById("crashYearFilterEnd").value;
     if (endYear < startYear) {
-        return;
+        console.log("Year DIFF");
+        console.log(state.filter.startYear);
+        console.log(state.filter.startYear);
+        //return;
     }
-
+else
+{
     state.filter.startYear = startYear;
     state.filter.endYear = endYear;
     state.filter.severity = severity;
+    console.log("Year RESULTS");
+    console.log(state.filter.startYear);
+    console.log(state.filter.startYear);
+    console.log(state.filter.severity);
 
     initialize();
+}
 }
 
 var bindEvent = function (element, type, handler) {
