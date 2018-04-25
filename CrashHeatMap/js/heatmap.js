@@ -51,7 +51,7 @@ function initialize()
 }
 function getxmlfile()
 {
-    downloadUrl("./crashdata3.xml", function (data) {
+    downloadUrl("./crashdata2017.xml", function (data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName("marker");
         //alert(markers.length);
