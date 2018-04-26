@@ -51,10 +51,12 @@ function initialize()
 }
 function getxmlfile()
 {
+    var markerlength = 0;
     downloadUrl("./crashdata2017.xml", function (data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName("marker");
-        //alert(markers.length);
+        markerlength = markers.length;
+        console.log("FILE LOADED " + markerlength);
         for (var i = 0; i < markers.length; i++) {
             q1 = parseFloat(markers[i].getAttribute("lat"));
             q2 = parseFloat(markers[i].getAttribute("lng"));
@@ -65,7 +67,6 @@ function getxmlfile()
             };
             pointArray.push(weightedLoc);
         }
-
     });
 }
 function heatmapcode()
@@ -74,8 +75,8 @@ function heatmapcode()
         data: pointArray
     });
 
-    heatmap.set('opacity', 0.8); // default 0.7 range 0 to 1
-    heatmap.set('radius', 20); // default 20 range 10 to 50
+    heatmap.set('opacity', .7); // default 0.7 range 0 to 1
+    heatmap.set('radius', 10); // default 20 range 10 to 50
     heatmap.setMap(map);
 }
 function countymapcode()
@@ -109,7 +110,7 @@ function countymapcode()
             contentlabel = hood;
         }
         document.getElementById('info-box').textContent = contentlabel;
-        });
+    });
 
     county.addListener('mouseout', function (event) {
         county.revertStyle();
@@ -119,25 +120,6 @@ function countymapcode()
 
 }
 
-//function neighborhoodmapcode()
-//{
-//    //data1 = new google.maps.Data();
-//    data1.loadGeoJson("./resources/Neighborhood.json");
-//    data1.setStyle(featureStyle);
-//    data1.setMap(map);
-//    data1.addListener('mouseover', function (event) {
-//        data1.revertStyle();
-//        data1.overrideStyle(event.feature, {strokeWeight: 4});
-//
-//        document.getElementById('info-box').textContent =
-//                event.feature.getProperty("HOOD");
-//
-//    });
-//    data1.addListener('mouseout', function (event) {
-//        data1.revertStyle();
-//    });
-//    data1.setMap(map);
-//}
 
 
 
@@ -147,31 +129,32 @@ function toggleHeatmap() {
 
 
 function changeGradient() {
-    var gradient = [
-        'rgba(0, 255, 255, 0)',
-        'rgba(0, 255, 255, 1)',
-        'rgba(0, 191, 255, 1)',
-        'rgba(0, 127, 255, 1)',
-        'rgba(0, 63, 255, 1)',
-        'rgba(0, 0, 255, 1)',
-        'rgba(0, 0, 223, 1)',
-        'rgba(0, 0, 191, 1)',
-        'rgba(0, 0, 159, 1)',
-        'rgba(0, 0, 127, 1)',
-        'rgba(63, 0, 91, 1)',
-        'rgba(127, 0, 63, 1)',
-        'rgba(191, 0, 31, 1)',
-        'rgba(255, 0, 0, 1)'
-    ];
+
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ];
     heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 
 function changeRadius() {
-    heatmap.set('radius', heatmap.get('radius') ? null : 45);
+    heatmap.set('radius', heatmap.get('radius') ? null : 20);
 }
 
 function changeOpacity() {
-    heatmap.set('opacity', heatmap.get('opacity') ? null : 0.9);
+    heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
 }
 
 function downloadUrl(url, callback) {

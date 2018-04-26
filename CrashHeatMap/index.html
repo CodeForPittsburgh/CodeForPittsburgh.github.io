@@ -14,7 +14,7 @@
 
         <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
         <script src="js/heatmap.js"></script>
-        
+
         <style>
             #mapsection {
                 width:100%;
@@ -54,6 +54,12 @@
                         <div id="info-box">?</div>
                         <br>
                     </div>
+                </div>
+                <div id="floating-panel">
+                    <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+                    <button onclick="changeGradient()">Change gradient</button>
+                    <button onclick="changeRadius()">Change radius</button>
+                    <button onclick="changeOpacity()">Change opacity</button>
                 </div>
             </div>
         </div>
