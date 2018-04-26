@@ -37,22 +37,23 @@ var originalgradient = [
 var pointArray = new google.maps.MVCArray(pittsburghData);
 var county = new google.maps.Data();
 //var data1 = new google.maps.Data();
-
+google.maps.event.addDomListener(window, 'load', initialize);
 function initialize()
 {
     map = new google.maps.Map(document.getElementById('mapsection'),
             mapOptions);
 
-    countymapcode();
+    //countymapcode();
     //neighborhoodmapcode();
     getxmlfile();
     heatmapcode();
+    countymapcode();
 
 }
 function getxmlfile()
 {
     var markerlength = 0;
-    downloadUrl("./crashdata2017.xml", function (data) {
+    downloadUrl("./crashdata3.xml", function (data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName("marker");
         markerlength = markers.length;
@@ -65,7 +66,8 @@ function getxmlfile()
             var weightedLoc = {
                 location: latLng
             };
-            pointArray.push(weightedLoc);
+            //pointArray.push(weightedLoc);
+            pointArray.push(latLng);
         }
     });
 }
@@ -75,8 +77,8 @@ function heatmapcode()
         data: pointArray
     });
 
-    heatmap.set('opacity', .7); // default 0.7 range 0 to 1
-    heatmap.set('radius', 10); // default 20 range 10 to 50
+    heatmap.set('opacity', 1); // default 0.7 range 0 to 1
+    heatmap.set('radius', 50); // default 20 range 10 to 50
     heatmap.setMap(map);
 }
 function countymapcode()
@@ -130,31 +132,20 @@ function toggleHeatmap() {
 
 function changeGradient() {
 
-        var gradient = [
-          'rgba(0, 255, 255, 0)',
-          'rgba(0, 255, 255, 1)',
-          'rgba(0, 191, 255, 1)',
-          'rgba(0, 127, 255, 1)',
-          'rgba(0, 63, 255, 1)',
-          'rgba(0, 0, 255, 1)',
-          'rgba(0, 0, 223, 1)',
-          'rgba(0, 0, 191, 1)',
-          'rgba(0, 0, 159, 1)',
-          'rgba(0, 0, 127, 1)',
-          'rgba(63, 0, 91, 1)',
-          'rgba(127, 0, 63, 1)',
-          'rgba(191, 0, 31, 1)',
-          'rgba(255, 0, 0, 1)'
-        ];
+    var gradient = [
+        'rgba(0, 255, 255, 0)',
+        'rgba(0, 255, 255, 1)',
+        'rgba(0, 191, 255, 1)'
+    ];
     heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 
 function changeRadius() {
-    heatmap.set('radius', heatmap.get('radius') ? null : 20);
+    heatmap.set('radius', heatmap.get('radius') ? null : 50);
 }
 
 function changeOpacity() {
-    heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+    heatmap.set('opacity', heatmap.get('opacity') ? null : 1);
 }
 
 function downloadUrl(url, callback) {
@@ -176,7 +167,7 @@ function downloadUrl(url, callback) {
 
 function doNothing() {
 }
-google.maps.event.addDomListener(window, 'load', initialize);
+//google.maps.event.addDomListener(window, 'load', initialize);
 
 
 
