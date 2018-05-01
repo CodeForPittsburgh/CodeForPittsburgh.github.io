@@ -35,7 +35,6 @@
                 border: 1px solid #999;
                 left: 25%;
                 padding: 5px;
-                position: absolute;
                 top: 10px;
                 z-index: 5;
             }
@@ -46,8 +45,16 @@
     <body>
 
         <div class="container">
+
             <div class="page-header">
+                <div id="floating-panel">
+                    <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+                    <button onclick="changeGradient()">Change gradient</button>
+                    <button onclick="changeRadius()">Change radius</button>
+                    <button onclick="changeOpacity()">Change opacity</button>
+                </div>
                 <h2 class="text-center"> Bicycle Crash Data Heat Map 2013-2017</h2>
+                <h2 class="text-center"> Under Construction</h2>
             </div>
 
             <div class="row">
@@ -66,12 +73,7 @@
                 </div>
 
             </div>
-            <div id="floating-panel">
-                <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-                <button onclick="changeGradient()">Change gradient</button>
-                <button onclick="changeRadius()">Change radius</button>
-                <button onclick="changeOpacity()">Change opacity</button>
-            </div>
+
         </div>
 
     </body>
