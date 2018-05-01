@@ -22,16 +22,16 @@ var mapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 var featureStyle = {
-    fillColor: 'rgba(255, 255, 255, .4)',
+    fillColor: 'rgba(255, 255, 255, .1)',
     strokeWeight: 1,
     clickable: 'true'
 
 };
 
 var originalgradient = [
-    'rgba(0, 255, 255, 0)',
-    'rgba(0, 255, 255, 1)',
-    'rgba(0, 191, 255, 1)'
+    'rgba(0, 0, 0, 0)',
+    'rgba(0, 0, 0, 1)',
+    'rgba(0, 0, 0, 1)'
 ];
 
 var pointArray = new google.maps.MVCArray(pittsburghData);
@@ -45,9 +45,9 @@ function initialize()
 
     //countymapcode();
     //neighborhoodmapcode();
+    citymapcode();
     getxmlfile();
     heatmapcode();
-    citymapcode();
 
 }
 function getxmlfile()
@@ -77,8 +77,8 @@ function heatmapcode()
         data: pointArray
     });
 
-    heatmap.set('opacity', 0.7); // default 0.7 range 0 to 1
-    heatmap.set('radius', 10); // default 20 range 10 to 50
+    heatmap.set('opacity', 1); // default 0.7 range 0 to 1
+    heatmap.set('radius', 50); // default 20 range 10 to 50
     heatmap.setMap(map);
 }
 function citymapcode()
@@ -134,7 +134,7 @@ function toggleHeatmap() {
 function changeGradient() {
 
     var gradient = [
-          'rgba(0, 255, 255, 0)',
+          'rgba(255, 255, 255, 0)',
           'rgba(0, 255, 255, 1)',
           'rgba(0, 191, 255, 1)',
           'rgba(0, 127, 255, 1)',
@@ -149,15 +149,15 @@ function changeGradient() {
           'rgba(191, 0, 31, 1)',
           'rgba(255, 0, 0, 1)'
     ];
-    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+   // heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 
 function changeRadius() {
-    heatmap.set('radius', heatmap.get('radius') ? null : 15);
+   // heatmap.set('radius', heatmap.get('radius') ? null : 25);
 }
 
 function changeOpacity() {
-    heatmap.set('opacity', heatmap.get('opacity') ? null : 1);
+    //heatmap.set('opacity', heatmap.get('opacity') ? null : .5);
 }
 
 function downloadUrl(url, callback) {
