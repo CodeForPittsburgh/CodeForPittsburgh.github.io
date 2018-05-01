@@ -22,7 +22,7 @@ var mapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 var featureStyle = {
-    fillColor: 'black',
+    fillColor: 'rgba(255, 255, 255, .4)',
     strokeWeight: 1,
     clickable: 'true'
 
@@ -35,7 +35,7 @@ var originalgradient = [
 ];
 
 var pointArray = new google.maps.MVCArray(pittsburghData);
-var county = new google.maps.Data();
+var city = new google.maps.Data();
 //var data1 = new google.maps.Data();
 google.maps.event.addDomListener(window, 'load', initialize);
 function initialize()
@@ -47,7 +47,7 @@ function initialize()
     //neighborhoodmapcode();
     getxmlfile();
     heatmapcode();
-    countymapcode();
+    citymapcode();
 
 }
 function getxmlfile()
@@ -81,44 +81,45 @@ function heatmapcode()
     heatmap.set('radius', 10); // default 20 range 10 to 50
     heatmap.setMap(map);
 }
-function countymapcode()
+function citymapcode()
 {
 
     //data0 = new google.maps.Data();
-    county.loadGeoJson("./resources/testcountydata.json");
-    county.setStyle(featureStyle);
-    county.addListener('mouseover', function (event) {
-        county.revertStyle();
-        county.overrideStyle(event.feature, {strokeWeight: 4});
+    city.loadGeoJson("./resources/Neighborhood.json");
+    city.setStyle(featureStyle);
+    city.addListener('mouseover', function (event) {
+        city.revertStyle();
+        city.overrideStyle(event.feature, {strokeWeight: 4});
 
         var label = event.feature.getProperty("LABEL");
         var name = event.feature.getProperty("NAME");
-        var hood = event.feature.getProperty("hood");
-        var contentlabel = "";
-        console.log("label " + label + " name " + name + " hood " + hood);
-
-        if (hood === null)
-        {
-            contentlabel = label;
-        }
-
-        if (label === "Pittsburgh" || name === "PITTSBURGH")
-        {
-            contentlabel = hood;
-        }
-
-        if (label === null && name === null && hood !== null)
-        {
-            contentlabel = hood;
-        }
+        var hood = event.feature.getProperty("HOOD");
+        var contentlabel = hood;
+//        console.log("label " + label + " name " + name + " hood " + hood);
+//
+//        if (hood === null)
+//        {
+//            contentlabel = label;
+//        }
+//
+//        if (label === "Pittsburgh" || name === "PITTSBURGH")
+//        {
+//            contentlabel = hood;
+//        }
+//
+//        if (label === null && name === null && hood !== null)
+//        {
+//            contentlabel = hood;
+//            console.log( " hood " + hood);
+//        }
         document.getElementById('info-box').textContent = contentlabel;
     });
 
-    county.addListener('mouseout', function (event) {
-        county.revertStyle();
+    city.addListener('mouseout', function (event) {
+        city.revertStyle();
     });
 
-    county.setMap(map);
+    city.setMap(map);
 
 }
 
