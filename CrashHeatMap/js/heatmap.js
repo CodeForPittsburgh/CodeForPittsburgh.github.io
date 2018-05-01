@@ -22,7 +22,7 @@ var mapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 var featureStyle = {
-    fillColor: 'white',
+    fillColor: 'black',
     strokeWeight: 1,
     clickable: 'true'
 
@@ -77,15 +77,15 @@ function heatmapcode()
         data: pointArray
     });
 
-    heatmap.set('opacity', 1); // default 0.7 range 0 to 1
-    heatmap.set('radius', 50); // default 20 range 10 to 50
+    heatmap.set('opacity', 0.7); // default 0.7 range 0 to 1
+    heatmap.set('radius', 10); // default 20 range 10 to 50
     heatmap.setMap(map);
 }
 function countymapcode()
 {
 
     //data0 = new google.maps.Data();
-    county.loadGeoJson("./resources/ccmerge.geojson");
+    county.loadGeoJson("./resources/testcountydata.json");
     county.setStyle(featureStyle);
     county.addListener('mouseover', function (event) {
         county.revertStyle();
@@ -152,7 +152,7 @@ function changeGradient() {
 }
 
 function changeRadius() {
-    heatmap.set('radius', heatmap.get('radius') ? null : 50);
+    heatmap.set('radius', heatmap.get('radius') ? null : 15);
 }
 
 function changeOpacity() {
