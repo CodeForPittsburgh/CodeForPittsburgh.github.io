@@ -17,7 +17,7 @@ var snl = 0;
 var mylen = 0;
 
 var mapOptions = {
-    zoom: 10,
+    zoom: 12,
     center: new google.maps.LatLng(lat, lng),
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
@@ -28,11 +28,22 @@ var featureStyle = {
 
 };
 
-var originalgradient = [
-    'rgba(0, 0, 0, 0)',
-    'rgba(0, 0, 0, 1)',
-    'rgba(0, 0, 0, 1)'
-];
+//var originalgradient = [
+//    'rgba(0, 255, 255, 0)',
+//    'rgba(0, 255, 255, 1)',
+//    'rgba(0, 191, 255, 1)',
+//    'rgba(0, 127, 255, 1)',
+//    'rgba(0, 63, 255, 1)',
+//    'rgba(0, 0, 255, 1)',
+//    'rgba(0, 0, 223, 1)',
+//    'rgba(0, 0, 191, 1)',
+//    'rgba(0, 0, 159, 1)',
+//    'rgba(0, 0, 127, 1)',
+//    'rgba(63, 0, 91, 1)',
+//    'rgba(127, 0, 63, 1)',
+//    'rgba(191, 0, 31, 1)',
+//    'rgba(255, 0, 0, 1)'
+//];
 
 var pointArray = new google.maps.MVCArray(pittsburghData);
 var city = new google.maps.Data();
@@ -66,8 +77,8 @@ function getxmlfile()
             var weightedLoc = {
                 location: latLng
             };
-            //pointArray.push(weightedLoc);
-            pointArray.push(latLng);
+            pointArray.push(weightedLoc);
+           // pointArray.push(latLng);
         }
     });
 }
@@ -78,7 +89,8 @@ function heatmapcode()
     });
 
     heatmap.set('opacity', 1); // default 0.7 range 0 to 1
-    heatmap.set('radius', 50); // default 20 range 10 to 50
+    heatmap.set('radius', 10); // default 20 range 10 to 50
+    heatmap.set('dissipating', false); // default true
     heatmap.setMap(map);
 }
 function citymapcode()
@@ -134,26 +146,26 @@ function toggleHeatmap() {
 function changeGradient() {
 
     var gradient = [
-          'rgba(255, 255, 255, 0)',
-          'rgba(0, 255, 255, 1)',
-          'rgba(0, 191, 255, 1)',
-          'rgba(0, 127, 255, 1)',
-          'rgba(0, 63, 255, 1)',
-          'rgba(0, 0, 255, 1)',
-          'rgba(0, 0, 223, 1)',
-          'rgba(0, 0, 191, 1)',
-          'rgba(0, 0, 159, 1)',
-          'rgba(0, 0, 127, 1)',
-          'rgba(63, 0, 91, 1)',
-          'rgba(127, 0, 63, 1)',
-          'rgba(191, 0, 31, 1)',
-          'rgba(255, 0, 0, 1)'
+        'rgba(255, 255, 255, 0)',
+        'rgba(0, 255, 255, 1)',
+        'rgba(0, 191, 255, 1)',
+        'rgba(0, 127, 255, 1)',
+        'rgba(0, 63, 255, 1)',
+        'rgba(0, 0, 255, 1)',
+        'rgba(0, 0, 223, 1)',
+        'rgba(0, 0, 191, 1)',
+        'rgba(0, 0, 159, 1)',
+        'rgba(0, 0, 127, 1)',
+        'rgba(63, 0, 91, 1)',
+        'rgba(127, 0, 63, 1)',
+        'rgba(191, 0, 31, 1)',
+        'rgba(255, 0, 0, 1)'
     ];
-   // heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+    // heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 
 function changeRadius() {
-   // heatmap.set('radius', heatmap.get('radius') ? null : 25);
+    // heatmap.set('radius', heatmap.get('radius') ? null : 25);
 }
 
 function changeOpacity() {
