@@ -11,4 +11,4 @@ Vehicular [crash data](https://data.wprdc.org/dataset/allegheny-county-crash-dat
 
 Bicycle [Crash Map](https://codeforpittsburgh.github.io/BikeCrashMap). The Crash Heat Map has been removed. 
 
-Connect to [Bike Pittsburgh] (https://www.bikepgh.org/) and CMU's Metro21 launched a series of transport-themed events, including [Transportation Camp](http://transportationcamp.org/events/pittsburgh2018/).
+Connect to [Bike Pittsburgh](https://www.bikepgh.org/) and CMU's Metro21 launched a series of transport-themed events, including [Transportation Camp](http://transportationcamp.org/events/pittsburgh2018/).
