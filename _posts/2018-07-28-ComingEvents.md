@@ -3,7 +3,7 @@ layout: post
 title: Coming Events
 description: August
 date: 2018-07-28
-image: 
+image: assets/images/OurGroup.jpg
 author: Mark Howe
 ---
 
