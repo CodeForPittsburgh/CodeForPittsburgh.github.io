@@ -38,6 +38,8 @@ author: Mark Howe
 
 #### Join us on August 16 as we celebrate National Day of Civic Hacking – a nationwide day of action that brings together civic leaders, designers, coders, and data scientists to partner with local governments and tackle some our toughest challenges.
 
-#### We'll learn about data and work on some fun activities! All experience levels are welcomed. Food & drinks provided
+#### We'll learn about data and work on some fun activities 
+#### by working on humanitarian webmapping for areas around the world stricken by natural disasters and flooding
+#### All experience levels are welcomed. Food & drinks provided
 
 # https://www.meetup.com/codeforpgh
