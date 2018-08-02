@@ -9,22 +9,6 @@ author: Mark Howe
 
 # August Events
 
-## Tech Drinks! at Mario's Shadyside
-### Wednesday, August 1, 2018
-### 7:00 PM to 9:00 PM
-### Mario's East Side Saloon
-### 5442 Walnut Street
-### Pittsburgh, PA
-
-#### Come hang out with the fine people of Pittsburgh Tech Happy Hour!
-
-#### They'll have free Yuengling, Miller and Coors.
-
-#### Plus
-
-#### 1/2 Price Pizza / $3 Sam Adams Seasonal
-#### $2 Tacos 5pm-10pm
-#### Wine Night 5pm-midnight
 
 ## National Day of Civic Hacking
 
