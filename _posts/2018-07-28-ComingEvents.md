@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coming Events
-description: Fall 2018
+description: Aug and Sept 2018
 date: 2018-07-28
 image: assets/images/OurGroup.jpg
 author: Mark Howe
@@ -35,6 +35,6 @@ author: Mark Howe
 
 From the event website:
 
-[Utilize data](data.pa.gov) open data portal to generate ideas that will help Pennsylvania turn data into insights for the opioid Epidemic. Participants will use a variety of datasets at least one from the PA Open Data Portal and any other open dataset related to opioids may be integrated to develop a solution that will help Pennsylvania address the Opioid Epidemic.
+[Utilize data](https://data.pa.gov/) open data portal to generate ideas that will help Pennsylvania turn data into insights for the opioid Epidemic. Participants will use a variety of datasets at least one from the PA Open Data Portal and any other open dataset related to opioids may be integrated to develop a solution that will help Pennsylvania address the Opioid Epidemic.
 
 Grand Prize of recognition with the Governor’s Office, photo and press release, video on website and lunch with key Commonwealth staff.
