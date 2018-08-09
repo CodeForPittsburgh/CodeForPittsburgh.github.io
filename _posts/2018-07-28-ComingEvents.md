@@ -30,7 +30,7 @@ author: Mark Howe
 
 # Code for PA 2018 Codeathon
 ## Friday, September 21, 2018, 5:30 PM to Saturday, September 22, 2018, 3:00 PM
-[Register](http://www.code4pa.tech/schedule/) for this great civic tech event! 
+[Register](http://www.code4pa.tech/register/) for this great civic tech event! 
 ### (Make sure to register for the Pitt Public Health location, as the CMU location is only for CMU students.)
 
 From the event website:
