@@ -1,30 +1,25 @@
 ---
 layout: post
-title: Coming Events
-description: Aug and Sept 2018
-date: 2018-07-28
+title: Code for Pittsburgh Coming Events
+description: Sept 2018
+date: 2018-08-27
 image: assets/images/OurGroup.jpg
 author: Mark Howe
 ---
 
-# August Events
+# Coming Events
 
 
-## National Day of Civic Hacking
+## Hack Night: Restaurant Inspection Madness with Tableau!
 
-### Thursday, August 16, 2018
-### 6:00 PM to 9:00 PM
+### Wednesday, September 12, 2018
+### 6:00 PM to 8:30 PM
 ### Code & Supply Community Center
 
 ### 5648 Friendship Ave, 
 ### 3rd Floor
 ### Pittsburgh, PA
 
-#### Join us on August 16 as we celebrate National Day of Civic Hacking – a nationwide day of action that brings together civic leaders, designers, coders, and data scientists to partner with local governments and tackle some our toughest challenges.
-
-#### We'll learn about data and work on some fun activities 
-#### by working on humanitarian webmapping for areas around the world stricken by natural disasters and flooding
-#### All experience levels are welcomed. Food & drinks provided
 
 [Our meetup page](https://www.meetup.com/codeforpgh)
 
