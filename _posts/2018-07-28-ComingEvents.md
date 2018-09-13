@@ -10,17 +10,6 @@ author: Mark Howe
 # Coming Events
 
 
-## Hack Night: Restaurant Inspection Madness with Tableau!
-
-### Wednesday, September 12, 2018
-### 6:00 PM to 8:30 PM
-### Code & Supply Community Center
-
-### 5648 Friendship Ave, 
-### 3rd Floor
-### Pittsburgh, PA
-
-
 [Our meetup page](https://www.meetup.com/codeforpgh)
 
 # Code for PA 2018 Codeathon
