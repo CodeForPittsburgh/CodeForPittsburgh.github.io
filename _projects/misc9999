@@ -6,5 +6,5 @@ image: assets/images/PoliceZones.jpg
 lead: Mark Howe
 ---
 
-The [**Police Blotter**](/Misc9999) Code for Pittsburgh's project in researching the Police Department use of the Misc 9999 for various reports. Lead tirelessly by [Mark Howe](https://twitter.com/mhowe0422), the project entailed the creation of scripts that scraped public police crime data from City of Pittsburgh `csv` files, parsed and loaded the text to a PostgresSQL database, geocoded it, and displayed the results on fully searchable map.
+The [**Police Blotter Misc 9999**](/Misc9999) Code for Pittsburgh's project in researching the Police Department use of the Misc 9999 for various reports. Lead tirelessly by [Mark Howe](https://twitter.com/mhowe0422), the project entailed the creation of scripts that scraped public police crime data from City of Pittsburgh `csv` files, parsed and loaded the text to a PostgresSQL database, geocoded it, and displayed the results on fully searchable map.
 
