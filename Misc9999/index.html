@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Police Blotter Misc Report</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="CodeForPittsburgh">
+        <meta name="author" content="Mark Howe">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="icon" href="./img/myicon.png">
+        <link rel="stylesheet" href="./css/bootstraporg.css">
+        <script src="./js/jquery-1.11.2.js"></script>
+        <script src="./js/bootstrap.js"></script>
+        <script src="./js/CurrentYear.js"></script>
+
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="text-center">Pittsburgh Police Blotter Misc Reports </h1>
+                <h5 id="demo" class="text-center">
+                    <script>
+                        CurrentYear("demo");
+                    </script>
+                </h5>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="text-center" id="Maps">Map:</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">           
+                    <a href="./maps/PPBmap.html" class="btn btn-link btn-block" role="button">Misc Blotter Data</a>
+                </div>
+
+
+            </div>
+            <div class="row text-center">
+                <BR>
+                <p>Take a look at the <a href="https://pittsburghpa.shinyapps.io/BurghsEyeView/" target="_blank">City Bird's Eye</a>, the City's Information Portal</p>
+                <div class="col-sm-12 text-justify">
+                    <h3 class="text-center">About the Police Blotter:</h3>
+                    <p>The <a href="https://twitter.com/codeforpgh" target="_blank">@codeforpgh</a> project reads the City of Pittsburgh Police <a href="http://communitysafety.pittsburghpa.gov/Blotter.aspx" target="_blank">Blotter</a> daily report, reads the .csv file and loads the data into a PostgreSQL database. The address geo-coding is done using the Allegheny County Address <a href="http://geodata.alleghenycounty.us/arcgis/rest/services/Geocoders/EAMS_Composite_Loc/GeocodeServer" target="_blank">REST </a> service. The Council District number comes from a PostGIS lookup using the addresses lat and lng. This is a daily manual process based on yesterday's data. You can also follow City of Pittsburgh Police Incident Data from the <a href="http://www.wprdc.org/" target="_blank">Western Pennsylvania Regional Data Center</a> under Public Safety & Justice. </p>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="text-center">Disclaimer</h3>
+            </div>
+        </div>
+        <div class="row col-sm-12 text-justify">
+            <p>The Pittsburgh Bureau of Police csv file is processed every morning for the previous day of the city's police incidents. The display is limited to the accuracy of the contents and the number of incidents provided by the police and might not include all incidents for the day. It is important that any decisions based on this data be confirmed using additional resources. As the city says, "The City of Pittsburgh has provided this information as a service. The City assumes no responsibility for the use of information posted on this site." Mark Howe supports the project. Tim Condello, Mark Howe, Andrew McGill, Andy Somerville and Sunil Mogadati are the Original CodeForPittsburgh Project Team Members.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center"> 
+                <p><a href="resources/CityDisclaimer.html" target="_blank"> City Disclaimer Public Access Level Comment</a></p>
+                <h5 id="Disclaimer" class="text-center">
+                    <script>
+                        CurrentYear("Disclaimer");
+                    </script>
+                </h5>
+
+                <h4 class="text-center"> <a href="https://twitter.com/codeforpgh" target="_blank">@codeforpgh</a></h4>';
+
+                <!--
+                <h3 class="text-center">Disclaimer</h3>
+
+                <p>The Pittsburgh Bureau of Police csv file is processed every morning at 0300 for the previous day of the city's police incidents. The display is limited to the accuracy of the contents and the number of incidents provided by the police and might not include all incidents for the day. It is important that any decisions based on this data be confirmed using additional resources. As the city says, "The City of Pittsburgh has provided this information as a service. The City assumes no responsibility for the use of information posted on this site." Mark Howe and Sunil Mogadati are the current team. Tim Condello, Mark Howe, Andrew McGill, Andy Somerville are the Original CodeForPittsburgh Project Team Members.</p>
+                <?php
+                include ('./resources/copyright.php');
+                ?>
+                <h4 <a href="https://twitter.com/codeforpgh" target="_blank">@codeforpgh</a></h4>
+                -->
+            </div>
+        </div>
+
+
+    </body>
+</html>
+

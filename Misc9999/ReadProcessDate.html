@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Police Blotter Date</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="CodeForPittsburgh">
+        <meta name="author" content="Mark Howe">
+        <link rel="icon" href="img/myicon.png">
+        <link rel="stylesheet" href="css/bootstraporg.css">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            function initialize() {
+                var filename = "xml/PoliceBlotterDate.xml";
+                readXml(filename);
+            }
+
+            function CurrentYear(id) {
+                var d = new Date();
+                var n = d.getFullYear();
+                document.getElementById(id).innerHTML = "Code For Pittsburgh © " + n;
+                //document.getElementById("Disclaimer").innerHTML = "Code For Pittsburgh © " + n;
+            }
+
+            function readXml(xmlFile) {
+
+                var xmlDoc;
+
+                if (typeof window.DOMParser !== "undefined") {
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", xmlFile, false);
+                    if (xmlhttp.overrideMimeType) {
+                        xmlhttp.overrideMimeType('text/xml');
+                    }
+                    xmlhttp.send();
+                    xmlDoc = xmlhttp.responseXML;
+                } else {
+                    xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                    xmlDoc.async = "false";
+                    xmlDoc.load(xmlFile);
+                }
+                var tagObj = xmlDoc.getElementsByTagName("incidentdates");
+//var typeValue = tagObj[0].getElementsByTagName("type")[0].childNodes[0].nodeValue;
+                var titleValue = tagObj[0].getElementsByTagName("incidentdate")[0].childNodes[0].nodeValue;
+                //alert(titleValue);
+                document.getElementById("TBD").innerHTML = " for "+ titleValue ;
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h2 class="text-center">Pittsburgh Police Daily Blotter <BR></h2>
+                <p id="TBD" class="text-center"></p>
+                <h5 id="demo" class="text-center">
+                    <script>
+                        CurrentYear("demo");
+                    </script>
+                </h5>
+            </div>
+
+        </div>
+
+
+    </body>
+</html>
+
+
+

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Police Blotter Misc Report</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="CodeForPittsburgh">
+        <meta name="author" content="Mark Howe">
+        <link rel="icon" href="../img/myicon.png">
+        <link rel="stylesheet" href="../css/bootstraporg.css">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!--
+                <script src="js/jquery-1.11.2.js"></script>
+        -->
+        <script src="../js/bootstrap.js"></script>
+        <script src="../js/PoliceZoneInformation.js"></script>
+        <script src="../js/citymapoverlays.js"></script>
+
+        <!--
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw"></script>
+        -->
+        <script type="text/javascript">
+
+
+
+
+            var infoWindow = new google.maps.InfoWindow;
+
+            // var featureStyle = {
+            //     fillColor: 'green',
+            //     strokeWeight: 1
+            // };
+
+            var customIcons = {
+                ARREST: {
+                    icon: '../img/mm_20_blue.png'
+                            //icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png'
+                },
+                OFFENSE: {
+                    icon: '../img/mm_20_yellow.png'
+                },
+                BOTH: {
+                    icon: '../img/mm_20_red.png'
+                }
+            };
+
+            function CurrentYear(id) {
+                var d = new Date();
+                var n = d.getFullYear();
+                document.getElementById(id).innerHTML = "Code For Pittsburgh © " + n;
+                //document.getElementById("Disclaimer").innerHTML = "Code For Pittsburgh © " + n;
+            }
+
+            function initialize() {
+                //alert("Running load " + ShapeNameDescription[ShapeNameLocation]);
+
+                processmap();
+                //var filename = "../xml/PoliceBlotterDate.xml";
+                //readXml(filename);
+            }
+
+            function processmap()
+            {
+                //alert("Process Map " + ShapeNameLocation);
+                map = new google.maps.Map(document.getElementById("mapsection"), {
+                    center: new google.maps.LatLng(40.435467, -79.996404),
+                    zoom: 12,
+                    mapTypeId: 'roadmap'
+                });
+
+                processGeoJson(2);
+
+                // Change this depending on the name of your PHP file
+                //downloadUrl("PoliceBlotterMap2_1.php", function (data) {
+
+                downloadUrl("../xml/PoliceBlotterMisc9999.xml", function (data) {
+                    xml = data.responseXML;
+                    
+                    var markers = xml.documentElement.getElementsByTagName("marker");
+                    for (var i = 0; i < markers.length; i++) {
+                        var zone = markers[i].getAttribute("zone");
+                        var address = markers[i].getAttribute("address");
+                        var type = markers[i].getAttribute("type");
+                        var incidentdate = markers[i].getAttribute("incidentdate");
+                        var incidenttime = markers[i].getAttribute("incidenttime");
+                        if (incidenttime === null)
+                        {
+                            incidenttime = "N/A";
+                        }
+                        var age = markers[i].getAttribute("age");
+                        if (age === "")
+                        {
+                            age = "N/A";
+                        }
+                        var gender = markers[i].getAttribute("gender");
+                        if (gender === "")
+                        {
+                            gender = "N/A";
+                        }
+                        var incidentnumber = markers[i].getAttribute("incidentnumber");
+                        var description = markers[i].getAttribute("description");
+                        var point = new google.maps.LatLng(
+                                parseFloat(markers[i].getAttribute("lat")),
+                                parseFloat(markers[i].getAttribute("lng")));
+                        var html = "<b>" + incidentnumber + "</b> <br/>" + type + "<br/>" + incidentdate + " " + incidenttime + "<br/>" + zone + "<br/>" + address + "<br/>Age: " + age + " Gender: " + gender + "<br/>" + description;
+
+                        var icon = customIcons[type] || {};
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: point,
+                            icon: icon.icon
+                        });
+                        //marker.addListener('click', bindInfoWindow(marker, map, infoWindow, html));
+                        bindInfoWindow(marker, map, infoWindow, html);
+                    }
+                });
+                setMarkers(map, stations);
+
+            }
+
+            function bindInfoWindow(marker, map, infoWindow, html) {
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.setContent(html);
+                    infoWindow.open(map, marker);
+                    //infoWindow.open(marker.get('map'), marker);
+
+                });
+
+                marker.addListener('mousedown', function () {
+                    infoWindow.setContent(html);
+                    infoWindow.open(map, marker);
+                });
+            }
+
+            function downloadUrl(url, callback) {
+                var request = window.ActiveXObject ?
+                        new ActiveXObject('Microsoft.XMLHTTP') :
+                        new XMLHttpRequest;
+
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4) {
+                        request.onreadystatechange = doNothing;
+                        callback(request, request.status);
+                    }
+                };
+
+                request.open('GET', url, true);
+                //request.setRequestHeader();
+                request.send(null);
+            }
+
+            function doNothing() {
+            }
+
+            function setMarkers(map, locations) {
+                // Add markers to the map
+
+                // Marker sizes are expressed as a Size of X,Y
+                // where the origin of the image (0,0) is located
+                // in the top left of the image.
+
+                // Origins, anchor positions and coordinates of the marker
+                // increase in the X direction to the right and in
+                // the Y direction down.
+                var image = {
+                    url: '../img/PittsburghPolice.png',
+                    // This marker is 20 pixels wide by 32 pixels tall.
+                    size: new google.maps.Size(17, 19)
+                            // The origin for this image is 0,0.
+                            //origin: new google.maps.Point(0, 0),
+                            // The anchor for this image is the base of the flagpole at 0,32.
+                            //anchor: new google.maps.Point(0, 32)
+                };
+                // Shapes define the clickable region of the icon.
+                // The type defines an HTML &lt;area&gt; element 'poly' which
+                // traces out a polygon as a series of X,Y points. The final
+                // coordinate closes the poly by connecting to the first
+                // coordinate.
+                //var shape = {
+                //    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                //    type: 'poly'
+                //};
+                for (var i = 0; i < locations.length; i++) {
+                    var station = locations[i];
+                    var myLatLng = new google.maps.LatLng(station[1], station[2]);
+                    var marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        icon: image,
+                        //shape: shape,
+                        title: station[0],
+                        zIndex: station[3]
+                    });
+                }
+
+                //google.maps.event.addDomListener(window, 'load', initialize);
+            }
+            function readXml(xmlFile) {
+
+                var xmlDoc;
+
+                if (typeof window.DOMParser !== "undefined") {
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", xmlFile, false);
+                    if (xmlhttp.overrideMimeType) {
+                        xmlhttp.overrideMimeType('text/xml');
+                    }
+                    xmlhttp.send();
+                    xmlDoc = xmlhttp.responseXML;
+                } else {
+                    xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                    xmlDoc.async = "false";
+                    xmlDoc.load(xmlFile);
+                }
+                var tagObj = xmlDoc.getElementsByTagName("incidentdates");
+//var typeValue = tagObj[0].getElementsByTagName("type")[0].childNodes[0].nodeValue;
+                var titleValue = tagObj[0].getElementsByTagName("incidentdate")[0].childNodes[0].nodeValue;
+                //alert(titleValue);
+                document.getElementById("TBD").innerHTML = " for " + titleValue;
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+        <style>
+            #mapsection {
+                width:100%;
+                height:500px;
+                float:left;
+                padding:10px; 
+            }
+            #info-box {
+                background-color: #eeeeee;
+                border: 2px solid black;
+                bottom: 125px;
+                height: 40px;
+                padding: 10px;
+                float:left;
+
+            }
+            #panel {
+                position: absolute;
+                top: 5px;
+                left: 50%;
+                margin-left: -180px;
+                z-index: 5;
+                background-color: #fff;
+                padding: 5px;
+                border: 1px solid #999;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h2 class="text-center">Pittsburgh Police Misc Report <BR></h2>
+                <p id="TBD" class="text-center"></p>
+                <h5 id="demo" class="text-center">
+                    <script>
+                        CurrentYear("demo");
+                    </script>
+                </h5>
+            </div>
+            <div class="row">
+
+
+                <div class="col-sm-10">
+                    <div id ="mapsection">
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-2">
+
+                    <div id="nav">
+                        <input onclick="processGeoJson(0);" type=button value= "CouncilDistrict" id ="CouncilDistrict">
+                        <br>
+                        <input onclick="processGeoJson(1);" type=button value= "Neighborhood" id = "Neighborhood">
+                        <br>
+                        <input onclick="processGeoJson(2);" type=button value= "PoliceZone" id = "PoliceZone">
+                        <br>
+
+                        <div id="info-box">?</div>
+                        <br>
+                        <div id="legend">
+                            <h2>Legend</h2>
+                            Arrests <img title="Arrests" src="../img/mm_20_blue.png" alt="Arrests" >
+                            <br>
+                            Offense 2.0 <img title="Offense 2.0" src="../img/mm_20_yellow.png" alt="Police Stations" >
+                            <br>
+                            Police Stations <img title="Police Stations" src="../img/PittsburghPolice.png" alt="Police Stations" >
+                            <br>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="text-center">Disclaimer</h3>
+                    <p>The Pittsburgh Bureau of Police csv file is processed every morning for the previous day of the city's police incidents. The display is limited to the accuracy of the contents and the number of incidents provided by the police and might not include all incidents for the day. It is important that any decisions based on this data be confirmed using additional resources. As the city says, "The City of Pittsburgh has provided this information as a service. The City assumes no responsibility for the use of information posted on this site." Mark Howe supports the project. Tim Condello, Mark Howe, Andrew McGill, Andy Somerville and Sunil Mogadati are the Original CodeForPittsburgh Project Team Members.</p>
+                    <p><a href="../resources/CityDisclaimer.html" target="_blank"> City Disclaimer Public Access Level Comment</a></p>
+                    <h5 id="Disclaimer" class="text-center">
+                        <script>
+                            CurrentYear("Disclaimer");
+                        </script>
+                    </h5>
+
+                    <h4 class="text-center"> <a href="https://twitter.com/codeforpgh" target="_blank">@codeforpgh</a></h4>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+
