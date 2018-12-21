@@ -13,6 +13,7 @@
         <!--
                 <script src="js/jquery-1.11.2.js"></script>
         -->
+        <script src="../js/markerclusterer.js"></script>
         <script src="../js/bootstrap.js"></script>
         <script src="../js/PoliceZoneInformation.js"></script>
         <script src="../js/citymapoverlays.js"></script>
@@ -24,7 +25,7 @@
 
 
 
-
+var mymarker = [];
             var infoWindow = new google.maps.InfoWindow;
 
             // var featureStyle = {
@@ -111,9 +112,11 @@
                             position: point,
                             icon: icon.icon
                         });
+                        mymarker.push(marker);
                         //marker.addListener('click', bindInfoWindow(marker, map, infoWindow, html));
                         bindInfoWindow(marker, map, infoWindow, html);
                     }
+                    var markerCluster = new MarkerClusterer(map, mymarker);
                 });
                 setMarkers(map, stations);
 
