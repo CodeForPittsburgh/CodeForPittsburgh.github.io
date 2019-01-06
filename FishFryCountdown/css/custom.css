@@ -1,0 +1,247 @@
+body {
+    font-family: 'Alegreya Sans', sans-serif;
+    margin: 0px;  
+    color: white;  
+    font-size: 20px;
+
+}
+
+.header {
+    background: url("../img/fishfrymap.jpg");
+    background-size: 50%;
+    background-repeat: no-repeat; 
+    padding-top: 40px;
+    padding: 30px 0;
+    padding-left: 300px;
+    height: 50%;
+
+    background-color: white;
+
+}
+
+
+.content {
+    background-color: darkblue;
+    text-align:center;
+    padding: 10px 50px;
+    float: left;
+}
+
+.footer{
+    text-align: center;
+    background-color: #729f98;
+}
+
+.about {
+    padding: 0 30px;
+    max-width: 600px;
+}
+
+.thumb {
+    width: 32%;
+    float: left;
+}
+
+.headshots img {
+    max-width: 160px;
+    float: left;
+    padding-right: 10px;
+}
+
+.center{
+    text-align:center;
+}
+
+.clearfix {
+    clear: both;
+}
+
+h1, h2, h3, .h1, .h2, .h3 {
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: 800;
+}
+.h1 {
+    font-size: 34px;
+}
+.h2 {
+    font-size: 30px;  
+}
+
+.small{
+    font-size: 16px;
+}
+
+a, a:visited{
+    color: #283018;
+    text-decoration: none;
+}
+a:hover, a:active{
+    color: #eee;
+}
+
+#clock {
+    font-size: 50px;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+}
+#clock>div {
+    display: inline-block;
+    min-width: 75px;
+
+}
+#months, #days, #hours, #minutes, #seconds, #govdays {
+    display: inline-block;
+    height: 40px;
+    justify-content: center;
+
+}
+
+#reasons {
+    height: 100px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+#reason {
+    font-size: 26px;
+}
+
+#do-something{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 2px;
+    background-color: #aa863a;
+    text-align:center;
+}
+
+
+.no-pad-bottom {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+
+button{
+    background-color: inherit;
+    outline:none;
+    border: 1px solid;
+    border-color: #eee;
+    border-radius: 12px;
+    font-family: 'Alegreya Sans', sans-serif;
+    font-size: 20px;
+    color: #eee;
+    padding: 8px;
+    margin: 8px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+}
+button:hover, button:active{
+    border-color: #283018;
+    color: #283018;
+}
+
+.btn-next {
+    background-color: #720b00;
+}
+
+.btn-act {
+    background-color: #219139;
+}
+
+
+/* medium screens */
+@media only screen and (max-width : 767px) {
+
+    #content{
+        padding: 10px 10px;
+    }
+    #reasons{
+        margin-left: 0px;
+        margin-right: 0px;
+        height: 120px;
+    }
+    #reason {
+        font-size: 20px;
+    }
+
+    button{
+        border-radius: 12px;
+        font-size: 18px;
+        color: #eee;
+        padding: 4px;
+        margin: 4px;
+        border-radius: 8px;
+
+    }
+
+    .headshots {
+        display: none;
+    }
+
+
+
+}
+
+/* lil screens */
+@media only screen and (max-width : 380px) {
+    body{
+        font-size: 16px;
+    }
+    .h1 {
+        font-size: 26px;
+    }
+    .h2 {
+        font-size: 26px;
+        margin-top: 4px;
+    }
+    #reason {
+        font-size: 20px;
+    }
+    .small{
+        font-size: 14px;
+    }
+
+    button{
+
+        border-radius: 12px;
+        font-size: 16px;
+        color: #eee;
+        padding: 4px;
+        margin: 4px;
+        border-radius: 8px;
+
+    }
+
+
+    .header{
+        padding: 10px 0px;
+    }
+    .content{
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    #do-something {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    #reasons{
+        margin-left: 0px;
+        margin-right: 0px;
+        height: 120px;
+    }
+
+
+    #clock {
+        font-size: 40px;
+        margin-top: 0px;
+    }
+    #clock>div {
+        min-width: 48px;
+    }
+
+    .headshots img {
+        display: none;
+    }
+
+}
