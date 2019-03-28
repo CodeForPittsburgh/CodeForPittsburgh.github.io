@@ -6,7 +6,7 @@
  */
 
 
-var endtime = 'March 6 2019 00:00:00 GMT-0500';
+var endtime = 'April 19 2019 00:00:00 GMT-0400';
 
 
 var clock = "";
