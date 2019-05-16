@@ -24,3 +24,5 @@ $RECYCLE.BIN/
 *.komodoproject
 *.kpf
 /CrashHeatMap/nbproject/private/
+/FishFryCountdown/nbproject/private/
+/nbproject/private/
