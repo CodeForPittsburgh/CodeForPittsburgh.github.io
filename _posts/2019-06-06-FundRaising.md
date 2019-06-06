@@ -12,14 +12,14 @@ author: Mark Howe
 ## What we've done
 ### Since 2014, we've feed hungry nerds and provided space
 ### for them to build awesome community apps such as:
--* Fish Fry Map
--* Police Blotter
--* Bike Crash Map
+* Fish Fry Map
+* Police Blotter
+* Bike Crash Map
 
 ## and in progress now:
--* Donation tool for @412FoodRescue
--* Food Access Map for @PghFoodPolicy
--* Centralized Calendar for all government/public meetings
+* Donation tool for @412FoodRescue
+* Food Access Map for @PghFoodPolicy
+* Centralized Calendar for all government/public meetings
 
 
 [Donate](https://www.codeforamerica.org/donate) to help your local Code for Pittsburgh brigade! 
