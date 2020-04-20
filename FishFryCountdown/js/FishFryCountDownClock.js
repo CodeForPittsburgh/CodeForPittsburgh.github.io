@@ -6,7 +6,7 @@
  */
 
 
-var endtime = 'February 26 2020 00:00:00 GMT-0500';
+var endtime = 'February 17 2021 00:00:00 GMT-0500';
 
 
 var clock = "";
