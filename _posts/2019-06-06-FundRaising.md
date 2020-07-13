@@ -22,6 +22,6 @@ author: Mark Howe
 * Centralized Calendar for all government/public meetings
 
 
-[Donate](https://secure.codeforamerica.org/page/contribute/donate-to-a-brigade-today?source_codes=Brigade-page&brigade=Code%20for%20Pittsburgh) to help your local Code for Pittsburgh brigade! 
+[Donate](https://www.codeforamerica.org/donate-to-a-brigade?utm_campaign=Code%20for%20Pittsburgh&utm_source=CodeforPittsburgh%20site) to help your local Code for Pittsburgh brigade! 
 
 [Our meetup page](https://www.meetup.com/codeforpgh)
