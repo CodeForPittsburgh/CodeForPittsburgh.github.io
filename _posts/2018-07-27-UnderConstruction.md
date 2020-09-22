@@ -3,7 +3,7 @@ layout: post
 title: Under Construction
 description: BLOG help needed
 date: 2018-07-27
-image: assets/images/BrokenHumptyDumpty.jpg
+image: assets/images/workzone.jpg
 author: Mark Howe
 ---
 
