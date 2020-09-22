@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Code for Pittsburgh Fund Raising
-description: Spring 2019
+description: Reason for Supporting Code for Pittsburgh
 date: 2019-06-06
 image: assets/images/OurGroup.jpg
 author: Mark Howe

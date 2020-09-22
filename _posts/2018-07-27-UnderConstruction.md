@@ -7,7 +7,7 @@ image: assets/images/BrokenHumptyDumpty.jpg
 author: Mark Howe
 ---
 
-# Under Construction
-## Our BLOGing is a work in progress.
-### We had changed leadership and this page grew dusty.
-### Sorry about that. 
+# Help us Construct this page
+## Our BLOGing is a important way to get the message out
+### Help dust off this page
+### Be Safe. 
