@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Under Construction
+title: Work Zone
 description: BLOG help needed
 date: 2018-07-27
 image: assets/images/workzone.jpg
