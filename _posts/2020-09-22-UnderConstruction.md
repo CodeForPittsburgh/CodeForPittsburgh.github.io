@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Under Construction
-description: New BLOGs Coming
+description: New BLOGs Needed
 date: 2020-09-22
 image: assets/images/BrokenHumptyDumpty.jpg
 author: Mark Howe
