@@ -10,7 +10,7 @@ src = "citymapoverlays.js";
 var state = {"map": null,
     "filter": {
         "startYear": 2004,
-        "endYear": 2018,
+        "endYear": 2019,
         "severity": ["Not injured",
             "Killed",
             "Major injury",
@@ -170,7 +170,7 @@ function initialize() {
 
     console.log(state.filter.severity);
     // Change this depending on the name of your PHP file
-    downloadUrl("./crashdataprod2018.xml", function (data) {
+    downloadUrl("./data/bikecrash.xml", function (data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName("marker");
         //alert(markers.length);            
