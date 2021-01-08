@@ -2,7 +2,7 @@
 layout: post
 title: Code for Pittsburgh Fund Raising
 description: Reason for Supporting Code for Pittsburgh
-date: 2019-06-06
+date: 2021-01-07
 image: assets/images/OurGroup.jpg
 author: Mark Howe
 ---
@@ -22,6 +22,6 @@ author: Mark Howe
 * Centralized Calendar for all government/public meetings
 
 
-[Donate](https://secure.codeforamerica.org/page/contribute/donate-to-a-brigade-today?source_codes=Brigade-page&brigade=Code%20for%20Pittsburgh) to help your local Code for Pittsburgh brigade! 
+[Donate](https://www.codeforamerica.org/donate) to help your local Code for Pittsburgh brigade use the pull down menu to find us! 
 
 [Our meetup page](https://www.meetup.com/codeforpgh)
