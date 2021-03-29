@@ -6,14 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="CodeForPittsburgh">
         <meta name="author" content="Mark Howe">
-        <link rel="icon" href="./img/codeforpittsburgh.png">
-        <link rel="stylesheet" href="./css/PoliceBlotter.css">
+        <link rel="icon" href="../img/codeforpittsburgh.png">
+        <link rel="stylesheet" href="../css/PoliceBlotter.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
         <script type="text/javascript">
-            var ShapeName = new Array("./resources/Pittsburgh_City_Council_Districts.geojson", "./resources/Neighborhoods.geojson", "./resources/Police_Zones.geojson", "./resources/Allegheny_County_Zip_Code_Boundaries.geojson");
+            var ShapeName = new Array("../resources/Pittsburgh_City_Council_Districts.geojson", "../resources/Neighborhoods.geojson", "../resources/Police_Zones.geojson", "../resources/Allegheny_County_Zip_Code_Boundaries.geojson");
             var ShapeNameDescription = new Array("council", "hood", "zone", "ZIP");
             var ShapeNameLocation = 2;
             //var ShapeLocationValue;
@@ -103,14 +103,14 @@
 
             var customIcons = {
                 ARREST: {
-                    icon: './img/mm_20_blue.png'
+                    icon: '../img/mm_20_blue.png'
                             //icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png'
                 },
                 OFFENSE: {
-                    icon: './img/mm_20_yellow.png'
+                    icon: '../img/mm_20_yellow.png'
                 },
                 BOTH: {
-                    icon: './images/people35.png'
+                    icon: '../images/people35.png'
                 }
             };
 
@@ -124,7 +124,7 @@
             function initialize() {
                 //alert("Running load " + ShapeNameDescription[ShapeNameLocation]);
                 processmap();
-                                var filename = "./xml/PoliceBlotterDate.xml";
+                                var filename = "../xml/PoliceBlotterDate.xml";
                 readXml(filename);
             }
             function processGeoJson(ShapeNameLocation)
@@ -275,7 +275,7 @@
                 processGeoJson(2);
 
                 // Change this depending on the name of your PHP file
-                downloadUrl("./xml/PoliceBlotterDaily.xml", function (data) {
+                downloadUrl("../xml/PoliceBlotterDaily.xml", function (data) {
                     xml = data.responseXML;
                     var markers = xml.documentElement.getElementsByTagName("marker");
                     for (var i = 0; i < markers.length; i++) {
@@ -367,7 +367,7 @@
                 // increase in the X direction to the right and in
                 // the Y direction down.
                 var image = {
-                    url: './img/PittsburghPolice.png',
+                    url: '../img/PittsburghPolice.png',
                     // This marker is 20 pixels wide by 32 pixels tall.
                     size: new google.maps.Size(17, 19)
                             // The origin for this image is 0,0.
@@ -464,7 +464,7 @@
                         <br>
                         <div id="legend">
                             <h2>Legend</h2>
-                            Police Stations <img title="Police Stations" src="./img/PittsburghPolice.png" alt="Police Stations" >
+                            Police Stations <img title="Police Stations" src="../img/PittsburghPolice.png" alt="Police Stations" >
                             <br>
                         </div>
                     </div>
@@ -476,7 +476,7 @@
                 <div class="col-sm-12">
                     <h3 class="text-center">Disclaimer</h3>
                     <p>The Pittsburgh Bureau of Police csv file is processed every morning for the previous day of the city's police incidents. The display is limited to the accuracy of the contents and the number of incidents provided by the police and might not include all incidents for the day. It is important that any decisions based on this data be confirmed using additional resources. As the city says, "The City of Pittsburgh has provided this information as a service. The City assumes no responsibility for the use of information posted on this site." Mark Howe supports the project. Tim Condello, Mark Howe, Andrew McGill, Andy Somerville and Sunil Mogadati are the Original CodeForPittsburgh Project Team Members.</p>
-                    <p><a href="./resources/CityDisclaimer.html" target="_blank"> City Disclaimer Public Access Level Comment</a></p>
+                    <p><a href="../resources/CityDisclaimer.html" target="_blank"> City Disclaimer Public Access Level Comment</a></p>
                     <h5 id="Disclaimer" class="text-center">
                         <script>
                             CurrentYear("Disclaimer");
