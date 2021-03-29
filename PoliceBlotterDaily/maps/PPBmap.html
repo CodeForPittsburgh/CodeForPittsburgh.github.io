@@ -1,34 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Police Blotter Daily</title>
+        <title>Police Blotter Address Map</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="CodeForPittsburgh">
         <meta name="author" content="Mark Howe">
-        <link rel="icon" href="../img/homepc.png">
-       <!-- <link rel="stylesheet" href="../css/bootstraporg.css"> -->
+        <link rel="icon" href="../img/codeforpittsburgh.png">
+        <link rel="stylesheet" href="../css/policeblotter.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <!--
-                <script src="js/jquery-1.11.2.js"></script>
-        -->
-       <!-- <script src="../js/bootstrap.js"></script> -->
-        <script src="../js/PoliceZoneInformation.js"></script>
-        <script src="../js/citymapoverlays.js"></script>
 
-        <!--
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw"></script>
-        -->
         <script type="text/javascript">
+            var ShapeName = new Array("../resources/Pittsburgh_City_Council_Districts.geojson", "../resources/Neighborhoods.geojson", "../resources/Police_Zones.geojson", "../resources/Allegheny_County_Zip_Code_Boundaries.geojson");
+            var ShapeNameDescription = new Array("council", "hood", "zone", "ZIP");
+            var ShapeNameLocation = 2;
+            //var ShapeLocationValue;
+            //        var map  = new google.maps.Map(document.getElementById("section"), {
+            //                center: new google.maps.LatLng(40.435467, -79.996404),
+            //                zoom: 12,
+            //                mapTypeId: 'roadmap'
+            //
+            //            });
 
+            var Zone = new Array;
+            var ZoneAddress = new Array;
+            var ZoneZipCode = new Array;
+            var ZonePhone = new Array;
+            var LatLng = new Array;
 
+            var xml = "";
 
+            Zone[1] = "Zone 1 Police Station";
+            ZoneAddress[1] = "1501 Brighton Road";
+            ZoneZipCode[1] = "15212";
+            ZonePhone[1] = "412-323-7201";
+            LatLng[1] = "40.4569461,-80.0160926";
+
+            Zone[2] = "Zone 2 Police Station";
+            ZoneAddress[2] = "2000 Centre Avenue";
+            ZoneZipCode[2] = "15219";
+            ZonePhone[2] = "412-255-2827";
+            LatLng[2] = "40.443561,-79.98004";
+
+            Zone[3] = "Zone 3 Police Station";
+            ZoneAddress[3] = "830 E Warrington";
+            ZoneZipCode[3] = "15210";
+            ZonePhone[3] = "412-488-8326";
+            LatLng[3] = "40.4216635,-79.99245";
+
+            Zone[4] = "Zone 4 Police Station";
+            ZoneAddress[4] = "5858 Northumberland Street";
+            ZoneZipCode[4] = "15217";
+            ZonePhone[4] = "412-422-6520";
+            LatLng[4] = "40.4414741,-79.9210908";
+
+            Zone[5] = "Zone 5 Police Station";
+            ZoneAddress[5] = "1401 Washington Blvd";
+            ZoneZipCode[5] = "Pittsburgh, PA 15206";
+            ZonePhone[5] = "412-665-3605";
+            LatLng[5] = "40.4703218,-79.9086526";
+
+            Zone[6] = "Zone 6 Police Station";
+            ZoneAddress[6] = "312 S. Main Street";
+            ZoneZipCode[6] = "15220";
+            ZonePhone[6] = "412-937-3051";
+            LatLng[6] = "40.442020898212775, -80.032275981864032";
+
+            Zone[0] = "HQ";
+            ZoneAddress[0] = "1203 Western Avenue";
+            ZoneZipCode[0] = "Pittsburgh, PA 15233";
+            ZonePhone[0] = "412-323-7837";
+            LatLng[0] = "40.4504595,-80.0211859";
+
+            var stations = [
+                ['Zone 1', 40.4569461, -80.0160926, 1],
+                ['Zone 2', 40.443561, -79.98004, 2],
+                ['Zone 3', 40.4216635, -79.99245, 3],
+                ['Zone 4', 40.4414741, -79.9210908, 4],
+                ['Zone 5', 40.4703218, -79.9086526, 5],
+                ['Zone 6', 40.442020898212775, -80.032275981864032, 6],
+                ['HQ', 40.4504595, -80.0211859, 7]
+            ];
+            var map;
+            data0 = new google.maps.Data();
+            data0.loadGeoJson(ShapeName[0]);
+            data1 = new google.maps.Data();
+            data1.loadGeoJson(ShapeName[1]);
+            data2 = new google.maps.Data();
+            data2.loadGeoJson(ShapeName[2]);
+            data3 = new google.maps.Data();
+            data3.loadGeoJson(ShapeName[3]);
+            var oldfeature = ShapeNameLocation;
 
             var infoWindow = new google.maps.InfoWindow;
 
@@ -46,7 +110,7 @@
                     icon: '../img/mm_20_yellow.png'
                 },
                 BOTH: {
-                    icon: '../img/mm_20_red.png'
+                    icon: '../images/people35.png'
                 }
             };
 
@@ -59,12 +123,146 @@
 
             function initialize() {
                 //alert("Running load " + ShapeNameDescription[ShapeNameLocation]);
-
                 processmap();
-                var filename = "../xml/PoliceBlotterDate.xml";
+                                var filename = "../xml/PoliceBlotterDate.xml";
                 readXml(filename);
             }
+            function processGeoJson(ShapeNameLocation)
+            {
 
+
+                if (ShapeNameLocation === 0)
+                {
+                    document.getElementById('CouncilDistrict').style.backgroundColor = 'Green';
+                    document.getElementById('Neighborhood').style.backgroundColor = 'Gray';
+                    document.getElementById('PoliceZone').style.backgroundColor = 'Gray';
+                    document.getElementById('Postal').style.backgroundColor = 'Gray';
+                    data1.setMap(null);
+                    data2.setMap(null);
+                    data3.setMap(null);
+                    //data0.setMap(map);
+                    var featureStyle = {
+                        fillColor: 'green',
+                        strokeWeight: 1,
+                        clickable: 'true'
+
+                    };
+
+                    data0.setStyle(featureStyle);
+                    // When the user hovers, tempt them to click by outlining the letters.
+                    // Call revertStyle() to remove all overrides. This will use the style rules
+                    // defined in the function passed to setStyle()
+                    data0.addListener('mouseover', function (event) {
+                        data0.revertStyle();
+                        data0.overrideStyle(event.feature, {strokeWeight: 4});
+                        document.getElementById('info-box').textContent =
+                                event.feature.getProperty(ShapeNameDescription[ShapeNameLocation]); // COUNCIL // HOOD // ZONE
+                    });
+
+                    data0.addListener('mouseout', function (event) {
+                        //data0.revertStyle();
+                    });
+                    data0.setMap(map);
+                }
+                if (ShapeNameLocation === 1)
+                {
+                    document.getElementById('CouncilDistrict').style.backgroundColor = 'Gray';
+                    document.getElementById('Neighborhood').style.backgroundColor = 'Green';
+                    document.getElementById('PoliceZone').style.backgroundColor = 'Gray';
+                    document.getElementById('Postal').style.backgroundColor = 'Gray';
+                    data0.setMap(null);
+                    data2.setMap(null);
+                    data3.setMap(null);
+                    //data1.setMap(map);
+                    var featureStyle = {
+                        fillColor: 'green',
+                        strokeWeight: 1,
+                        clickable: 'true'
+
+                    };
+
+                    data1.setStyle(featureStyle);
+                    // When the user hovers, tempt them to click by outlining the letters.
+                    // Call revertStyle() to remove all overrides. This will use the style rules
+                    // defined in the function passed to setStyle()
+                    data1.addListener('mouseover', function (event) {
+                        data1.revertStyle();
+                        data1.overrideStyle(event.feature, {strokeWeight: 4});
+                        document.getElementById('info-box').textContent =
+                                event.feature.getProperty(ShapeNameDescription[ShapeNameLocation]); // COUNCIL // HOOD // ZONE
+                    });
+
+                    data1.addListener('mouseout', function (event) {
+                        //data1.revertStyle();
+                    });
+                    data1.setMap(map);
+                }
+                if (ShapeNameLocation === 2)
+                {
+                    document.getElementById('CouncilDistrict').style.backgroundColor = 'Gray';
+                    document.getElementById('Neighborhood').style.backgroundColor = 'Gray';
+                    document.getElementById('PoliceZone').style.backgroundColor = 'Green';
+                    document.getElementById('Postal').style.backgroundColor = 'Gray';
+                    data0.setMap(null);
+                    data1.setMap(null);
+                    data3.setMap(null);
+                    //data2.setMap(map);
+                    var featureStyle = {
+                        fillColor: 'green',
+                        strokeWeight: 1,
+                        clickable: 'true'
+                    };
+                    data2.setStyle(featureStyle);
+                    // When the user hovers, tempt them to click by outlining the letters.
+                    // Call revertStyle() to remove all overrides. This will use the style rules
+                    // defined in the function passed to setStyle()
+                    data2.addListener('mouseover', function (event) {
+                        data2.revertStyle();
+                        data2.overrideStyle(event.feature, {strokeWeight: 4});
+                        document.getElementById('info-box').textContent =
+                                event.feature.getProperty(ShapeNameDescription[ShapeNameLocation]); // COUNCIL // HOOD // ZONE
+                    });
+
+                    data2.addListener('mouseout', function (event) {
+                        //data2.revertStyle();
+                    });
+                    data2.setMap(map);
+                }
+                if (ShapeNameLocation === 3)
+                {
+                    document.getElementById('CouncilDistrict').style.backgroundColor = 'Gray';
+                    document.getElementById('Neighborhood').style.backgroundColor = 'Gray';
+                    document.getElementById('PoliceZone').style.backgroundColor = 'Gray';
+                    document.getElementById('Postal').style.backgroundColor = 'Green';
+                    data0.setMap(null);
+                    data1.setMap(null);
+                    data2.setMap(null);
+                    //data2.setMap(map);
+                    var featureStyle = {
+                        fillColor: 'green',
+                        strokeWeight: 1,
+                        clickable: 'true'
+                    };
+                    data3.setStyle(featureStyle);
+                    // When the user hovers, tempt them to click by outlining the letters.
+                    // Call revertStyle() to remove all overrides. This will use the style rules
+                    // defined in the function passed to setStyle()
+                    data3.addListener('mouseover', function (event) {
+                        data3.revertStyle();
+                        data3.overrideStyle(event.feature, {strokeWeight: 4});
+                        document.getElementById('info-box').textContent =
+                                event.feature.getProperty(ShapeNameDescription[ShapeNameLocation]);
+                    });
+
+                    data3.addListener('mouseout', function (event) {
+                        //data2.revertStyle();
+                    });
+                    data3.setMap(map);
+                }
+
+
+
+            }
             function processmap()
             {
                 //alert("Process Map " + ShapeNameLocation);
@@ -77,39 +275,37 @@
                 processGeoJson(2);
 
                 // Change this depending on the name of your PHP file
-                //downloadUrl("PoliceBlotterMap2_1.php", function (data) {
-
                 downloadUrl("../xml/PoliceBlotterDaily.xml", function (data) {
                     xml = data.responseXML;
-                    
                     var markers = xml.documentElement.getElementsByTagName("marker");
                     for (var i = 0; i < markers.length; i++) {
-                        var zone = markers[i].getAttribute("zone");
                         var address = markers[i].getAttribute("address");
-                        var type = markers[i].getAttribute("type");
-                        var incidentdate = markers[i].getAttribute("incidentdate");
-                        var incidenttime = markers[i].getAttribute("incidenttime");
-                        if (incidenttime === null)
-                        {
-                            incidenttime = "N/A";
-                        }
-                        var age = markers[i].getAttribute("age");
-                        if (age === "")
-                        {
-                            age = "N/A";
-                        }
-                        var gender = markers[i].getAttribute("gender");
-                        if (gender === "")
-                        {
-                            gender = "N/A";
-                        }
-                        var incidentnumber = markers[i].getAttribute("incidentnumber");
+                        var neighborhood = markers[i].getAttribute("neighbhorhood");
+                        var zone = markers[i].getAttribute("zone");
+                        var councildistrict = markers[i].getAttribute("councildistrict");
                         var description = markers[i].getAttribute("description");
+
+
                         var point = new google.maps.LatLng(
                                 parseFloat(markers[i].getAttribute("lat")),
                                 parseFloat(markers[i].getAttribute("lng")));
-                        var html = "<b>" + incidentnumber + "</b> <br/>" + type + "<br/>" + incidentdate + " " + incidenttime + "<br/>" + zone + "<br/>" + address + "<br/>Age: " + age + " Gender: " + gender + "<br/>" + description;
-
+                        var table = "<table align='center' cellpadding='5' border=1>";
+                        table += "<tr>";
+                        table += "<th>" + 'Address' + "</th>";
+                        table += "<th>" + 'Neighborhood' + "</th>";
+                        table += "<th>" + 'Zone' + "</th>";
+                        table += "<th>" + 'Council District' + "</th>";
+                        table += "</tr>";
+                        table += "<tr>";
+                        table += "<td>" + address + "</td>";
+                        table += "<td>" + neighborhood + "</td>";
+                        table += "<td>" + zone + "</td>";
+                        table += "<td>" + councildistrict + "</td>";
+                        table += "</tr>";
+                        table += "</table><br/>";
+                        var html = table + description;
+                        //var html = "<b>" + address + "</b> <br/>" + neighborhood + "<br/>" + zone + "<br/>Council District " + councildistrict + "<br/>"+ description;
+                        var type = "BOTH";
                         var icon = customIcons[type] || {};
                         var marker = new google.maps.Marker({
                             map: map,
@@ -121,22 +317,23 @@
                     }
                 });
                 setMarkers(map, stations);
-
             }
 
             function bindInfoWindow(marker, map, infoWindow, html) {
 
                 google.maps.event.addListener(marker, 'click' || 'touchstart', function () {
+                    //alert('TouchStart or Click');
                     infoWindow.setContent(html);
                     infoWindow.open(map, marker);
                     //infoWindow.open(marker.get('map'), marker);
 
                 });
 
-                marker.addListener('mousedown', function () {
-                    infoWindow.setContent(html);
-                    infoWindow.open(map, marker);
-                });
+//                marker.addListener('touchstart', function () {
+//                    alert('TouchStart');
+//                    infoWindow.setContent(html);
+//                    infoWindow.open(map, marker);
+//                });
             }
 
             function downloadUrl(url, callback) {
@@ -202,7 +399,7 @@
 
                 //google.maps.event.addDomListener(window, 'load', initialize);
             }
-            function readXml(xmlFile) {
+             function readXml(xmlFile) {
 
                 var xmlDoc;
 
@@ -227,37 +424,11 @@
             }
             google.maps.event.addDomListener(window, 'load', initialize);
         </script>
-        <style>
-            #mapsection {
-                width:100%;
-                height:500px;
-                float:left;
-                padding:10px; 
-            }
-            #info-box {
-                background-color: #eeeeee;
-                border: 2px solid black;
-                bottom: 125px;
-                height: 40px;
-                padding: 10px;
-                float:left;
 
-            }
-            #panel {
-                position: absolute;
-                top: 5px;
-                left: 50%;
-                margin-left: -180px;
-                z-index: 5;
-                background-color: #fff;
-                padding: 5px;
-                border: 1px solid #999;
-            }
-        </style>
     </head>
     <body>
 
-        <div class="container">
+       <div class="container">
             <div class="jumbotron">
                 <h2 class="text-center">Pittsburgh Police Daily Blotter <BR></h2>
                 <p id="TBD" class="text-center"></p>
@@ -270,14 +441,14 @@
             <div class="row">
 
 
-                <div class="col-sm-10">
+                <div class="col-lg-10">
                     <div id ="mapsection">
                     </div>
 
                 </div>
 
 
-                <div class="col-sm-2">
+                <div class="col-lg-2">
 
                     <div id="nav">
                         <input onclick="processGeoJson(0);" type=button value= "CouncilDistrict" id ="CouncilDistrict">
@@ -286,15 +457,13 @@
                         <br>
                         <input onclick="processGeoJson(2);" type=button value= "PoliceZone" id = "PoliceZone">
                         <br>
+                        <input onclick="processGeoJson(3);" type=button value= "Postal" id = "Postal">
+                        <br>
 
                         <div id="info-box">?</div>
                         <br>
                         <div id="legend">
                             <h2>Legend</h2>
-                            Arrests <img title="Arrests" src="../img/mm_20_blue.png" alt="Arrests" >
-                            <br>
-                            Offense 2.0 <img title="Offense 2.0" src="../img/mm_20_yellow.png" alt="Police Stations" >
-                            <br>
                             Police Stations <img title="Police Stations" src="../img/PittsburghPolice.png" alt="Police Stations" >
                             <br>
                         </div>
@@ -303,7 +472,6 @@
 
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-12">
                     <h3 class="text-center">Disclaimer</h3>
@@ -325,4 +493,5 @@
 
     </body>
 </html>
+
 
