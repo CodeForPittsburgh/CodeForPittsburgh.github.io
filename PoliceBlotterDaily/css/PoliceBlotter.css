@@ -9,23 +9,44 @@ and open the template in the editor.
 */
 
 
+#mapsection {
+    width:100%;
+    height:500px;
+    float:left;
+    padding:10px;
+    border: 5px solid black;
+}
+
+#panel {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    margin-left: -180px;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    width:100%;
+    border: 5px solid black;
+}
+
 
 #info-box {
     background-color: #eeeeee;
-    border: 1px solid black;
+    border: 5px solid black;
     bottom: 125px;
-    height: 20px;
+    height: 100px;
     padding: 10px;
+    width:100%;
     float:left;
 
 }
 
 #nav {
     line-height:30px;
-    border: 1px solid black;
+    border: 5px solid black;
     background-color:#eeeeee;
     height:80%;
-    width:20%;
+    width:100%;
     float:left;
     padding:10px; 
 }
@@ -60,18 +81,9 @@ and open the template in the editor.
     padding:5px; 
     height:45%;
 }
-#panel {
-    position: absolute;
-    top: 5px;
-    margin-left: 18px;
-    z-index: 5;
-    background-color: red;
-    color: white;
-    padding: 5px;
-    border: 1px solid #999;
-}
+
 button, button a{position:relative;}
-button a{top:0;left:0;bottom:0;right:0;}
+button a{top:0;left:0;bottom:0;right:0;width:100%}
 /* unvisited link */
 a:link {
     color: #FF0000;
