@@ -18,10 +18,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="CodeForPittsburgh">
         <meta name="author" content="Mark Howe">
-        <link rel="icon" href="img/homepc.png">
+        <link rel="icon" href="img/c4picon.png">
         <link rel="stylesheet" href="css/bootstrap.css">
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization"></script>
+        <script src="js/jquery.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/crashmap.js"></script>
         <script src="js/BikeRentalLocation.js"></script>
@@ -42,6 +43,7 @@
                 height: 60px;
                 padding: 10px;
                 float: left;
+                margin-left: 800px;
             }
         </style>
     </head>
@@ -49,7 +51,7 @@
     <body>
         <div class="container">
             <div class="page-header">
-                <h2 class="text-center">AC Bicycle Crash Data 2004-2019</h2>
+                <h2 class="text-center">AC Bicycle Crash Data Available: 2004-2019</h2>
             </div>
             <div class="row">
                 <div class="col-sm-2">
@@ -83,10 +85,10 @@
                                     <option value='2013'>2013</option>
                                     <option value='2014'>2014</option>
                                     <option value='2015'>2015</option>
-                                    <option value='2016' selected="selected">2016</option>
+                                    <option value='2016'>2016</option>
                                     <option value='2017'>2017</option>
                                     <option value='2018'>2018</option>
-                                    <option value='2019'>2019</option>
+                                    <option value='2019' selected="selected">2019</option>
                                 </select>
                             </div>
 
@@ -111,42 +113,44 @@
                                     <option value='2019' selected="selected">2019</option>
                                 </select>
                             </div>
-                            <!--
+
                             <div id="bikeshareToggleContainer">
-                              <label for="bikeshareToggle">Show stations:</label>
-                              <input type="checkbox" id="bikeshareToggle">
+                                <label for="bikeshareToggle">Show rental locations:</label>
+                                <input type="checkbox" id="bikeshareToggle">
                             </div>
-                            -->
+                            <div id="legend">
+                                <h2>Legend</h2>
+                                <img title="Crashes" src="./img/roundbg_check_black.png" alt="Crashes"> Bike Crashes 
+                                <br> <img title="Killed" src="./img/mm_20_star.png" alt="Killed"> Killed 
+                                <br> <img title="Rentals" src="./img/bicycle.ico" alt="Bike"> Rental Locations 
+                                <br> <b>Bike-friendly Roads</b>
+                                <br> <img alt="dark-green" src="./img/bikeTrail.jpg" width="16"> Trails without auto traffic.
+                                <br> <img alt="light-green" src="./img/bikeLane.jpg" width="16"> Dedicated bike lanes
+                                <br> <img alt="dotted-light-green" src="./img/bikeSafe.jpg" width="16">  Cyclist-recommended roads
+                                <!--<br> Brown: Unpaved trails are off-road dirt paths.-->
+                                <br>
+                            </div> 
                         </div>
                     </div>
 
 
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-10">
                     <div id="mapsection">
                     </div>
                 </div>
-                <div class="col-sm-2">
 
-                    <div id="nav">
-                        <div id="info-box">?</div>
-                        <br>
-                        <div id="legend">
-                            <h2>Legend</h2>
-                            <img title="Crashes" src="./img/roundbg_check_black.png" alt="Crashes"> Bike Crashes 
-                            <br> <img title="Killed" src="./img/mm_20_star.png" alt="Killed"> Killed 
-                            <br> <img title="Rentals" src="./img/bicycle.ico" alt="Bike"> Rental Locations 
-                            <br> <b>Bike-friendly Roads</b>
-                            <br> <img alt="dark-green" src="./img/bikeTrail.jpg" width="16"> Trails without auto traffic.
-                            <br> <img alt="light-green" src="./img/bikeLane.jpg" width="16"> Dedicated bike lanes
-                            <br> <img alt="dotted-light-green" src="./img/bikeSafe.jpg" width="16">  Cyclist-recommended roads
-                            <!--<br> Brown: Unpaved trails are off-road dirt paths.-->
-                            <br>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+
+        <div class="row">
+
+                
+                <div id="info-box">?</div>  
+                
+
+        </div>
+
 
     </body>
 

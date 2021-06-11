@@ -1,7 +1,7 @@
 //src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCb3EA0lfao273s6Jkp8tfTzJfUSkswpOw&libraries=visualization";
-src='https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"';
-src='"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"';
-src='"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"';
+src = 'https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"';
+src = '"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"';
+src = '"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"';
 
 //src = "jquery-1.11.2.js";
 //src = "bootstrap.js";
@@ -9,7 +9,7 @@ src = "citymapoverlays.js";
 
 var state = {"map": null,
     "filter": {
-        "startYear": 2004,
+        "startYear": 2019,
         "endYear": 2019,
         "severity": ["Not injured",
             "Killed",
@@ -37,6 +37,21 @@ var getSelectValues = function (select) {
     return result;
 };
 
+function updateBikeShare()
+{
+    var locationupdate = document.getElementById('bikeshareToggle');
+    var infoWindow = new google.maps.InfoWindow;
+    console.log('Bike Share Checkbox update: ' + locationupdate.checked);
+    toggleBikeMarkers(state.map, infoWindow, false);
+    if (locationupdate.checked)
+    {
+        toggleBikeMarkers(state.map, infoWindow, true);
+    } else
+    {
+        toggleBikeMarkers(state.map, infoWindow, false);
+    }
+}
+
 function update() {
     var severity = getSelectValues(document.getElementById("crashSeverityFilter"));
     if (severity.length === 0) {
@@ -50,19 +65,18 @@ function update() {
         console.log(state.filter.startYear);
         console.log(state.filter.startYear);
         //return;
-    }
-else
-{
-    state.filter.startYear = startYear;
-    state.filter.endYear = endYear;
-    state.filter.severity = severity;
-    console.log("Year RESULTS");
-    console.log(state.filter.startYear);
-    console.log(state.filter.startYear);
-    console.log(state.filter.severity);
+    } else
+    {
+        state.filter.startYear = startYear;
+        state.filter.endYear = endYear;
+        state.filter.severity = severity;
+        console.log("Year RESULTS");
+        console.log(state.filter.startYear);
+        console.log(state.filter.startYear);
+        console.log(state.filter.severity);
 
-    initialize();
-}
+        initialize();
+    }
 }
 
 var bindEvent = function (element, type, handler) {
@@ -77,6 +91,9 @@ function initialize() {
     bindEvent(document.getElementById("crashYearFilterStart"), "change", update);
     bindEvent(document.getElementById("crashYearFilterEnd"), "change", update);
     bindEvent(document.getElementById("crashSeverityFilter"), "change", update);
+
+    bindEvent(document.getElementById("bikeshareToggle"), "change", updateBikeShare);
+
     county = new google.maps.Data();
 
     county.loadGeoJson("./resources/ccmerge.geojson");
@@ -105,17 +122,42 @@ function initialize() {
         clickable: 'true'
 
     };
+
+    
     state.map.addListener('zoom_changed', function () {
+        var locationupdate = document.getElementById('bikeshareToggle');
+        console.log('Location update: ' + locationupdate.checked);
         var zoomlevel = state.map.getZoom();
         console.log('Zoom: ' + zoomlevel);
-        if (zoomlevel > 12)
+        toggleBikeMarkers(state.map, infoWindow, false);
+        if (locationupdate.checked)
         {
-            toggleBikeMarkers(state.map, infoWindow, true);
-        } else
-        {
-            toggleBikeMarkers(state.map, infoWindow, false);
+            console.log('Zoom: ' + zoomlevel);
+            if (zoomlevel > 12)
+            {
+                toggleBikeMarkers(state.map, infoWindow, true);
+            } else
+            {
+                toggleBikeMarkers(state.map, infoWindow, false);
+            }
         }
     });
+
+    //document.addListener("change", function () {
+
+//    var locationupdate = document.getElementById('bikeshareToggle');
+//    console.log('Location update: ' + locationupdate.checked);
+//         state.map.addListener("change", function () {
+//
+//        console.log('Location update: ' + locationupdate.checked);
+//        if (locationupdate.checked)
+//        {
+//            toggleBikeMarkers(state.map, infoWindow, true);
+//        } else
+//        {
+//            toggleBikeMarkers(state.map, infoWindow, false);
+//        }
+//    });
 
     county.setStyle(featureStyle);
 
@@ -212,14 +254,16 @@ function initialize() {
             });
             //marker.addListener('click', bindInfoWindow(marker, map, infoWindow, html));
             bindInfoWindow(marker, state.map, infoWindow, html);
+  
         }
     });
-    
-    
-    getBikeLocations(state.map, infoWindow);
-    setMarkers(state.map);
+
+
+     getBikeLocations(state.map, infoWindow);
+    //setMarkers(state.map);
     toggleBikeMarkers(state.map,infoWindow,false);
     //getBikeLocations(state.map, infoWindow);
+    //toggleBikeMarkers(state.map, infoWindow, false);
 }
 
 function bindInfoWindow(marker, map, infoWindow, html) {
@@ -266,11 +310,11 @@ function setMapOnAll(map) {
     }
 }
 function showMarkers(map) {
-        setMapOnAll(map);
-      }
- function clearMarkers() {
-        setMapOnAll(null);
-      }
+    setMapOnAll(map);
+}
+function clearMarkers() {
+    setMapOnAll(null);
+}
 function getBikeLocations(map, infoWindow)
 {
     var locations = new Array;
@@ -319,16 +363,17 @@ function setBikeMarkers2(map, locations, infoWindow) {
         markers.push(marker);
         bindInfoWindow(marker, map, infoWindow, html);
     }
+     toggleBikeMarkers(state.map,infoWindow,false);
 }
 function toggleBikeMarkers(map, infoWindow, turnon)
 {
-    console.log("turnon " + turnon);
+    console.log("Bike Locations are: " + turnon);
     if (turnon === false)
     {
         clearMarkers(map);
     } else
     {
-       // getBikeLocations(map, infoWindow);
+        // getBikeLocations(map, infoWindow);
         showMarkers(map);
     }
 }
