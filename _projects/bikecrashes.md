@@ -13,4 +13,4 @@ Bicycle [Crash Map](https://codeforpittsburgh.github.io/BikeCrashMap).
 
 Connect to [Bike Pittsburgh](https://www.bikepgh.org/)
 
-Show [Bike Bike Racks](https://spcgis-spc.hub.arcgis.com/datasets/bike-racks/explore?location=40.401499%2C-79.895751%2C11.87)
+Show [Bike Racks](https://spcgis-spc.hub.arcgis.com/datasets/bike-racks/explore?location=40.401499%2C-79.895751%2C11.87)
