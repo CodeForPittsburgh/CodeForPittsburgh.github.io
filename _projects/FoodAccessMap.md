@@ -2,7 +2,7 @@
 layout: project
 title: Food Access Map
 description: 
-image: assets/imagesFoodAccessMap.jpg
+image: assets/images/FoodAccessMap.jpg
 url: http://codeforpittsburgh.github.io/FoodAccessMap/index.html
 lead: Ellie Newman
 ---
