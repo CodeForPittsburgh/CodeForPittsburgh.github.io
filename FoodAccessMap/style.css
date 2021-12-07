@@ -1,0 +1,76 @@
+body,
+html {
+  height: 100%;
+  font-family:Arial;
+}
+  
+#map {
+  width: 100%;
+  height: 100%;
+  z-index:100;
+}
+#mapSearchContainer{
+  position:fixed;
+  top:20px;
+  right: 40px;
+  height:30px;
+  width:180px;
+  z-index:110;
+  font-size:10pt;
+  color:#5d5d5d;
+  border:solid 1px #bbb;
+  background-color:#f8f8f8;
+}
+.pointer{
+  position:absolute;
+  top:86px;
+  left:60px;
+  z-index:99999;
+}
+
+.descriptor-control {
+    padding:5px 10px;
+    background-color:#f8f8f8;
+    color: #333;
+    font-size: 11px;
+    line-height: 18px;
+    border-radius: 5px;
+}
+
+.descriptorTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #AA3333;
+}
+
+.descriptorBody {
+  font-size: 12px;
+}
+
+
+.descriptor-control:empty {
+    display: none;
+}
+
+.sourceOrg{
+  font-size: 10px;
+  color: #999;
+}
+
+.featureName{
+  font-size: 16px;
+  font-weight: bold;
+  color: #A83;
+}
+
+.descriptionTitle{
+  width: auto;
+  border-top: 1px solid #999;
+}
+.locationDescription{
+  margin-top: 5px;
+}
+.locationAddress{
+  margin-top: 5px;
+  color: #999;
+}
