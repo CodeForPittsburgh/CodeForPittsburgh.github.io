@@ -2,7 +2,7 @@
 layout:
 title: Fish Fry Clock
 description: 
-image: 
+image: assets/images/FishFry.png
 link: http://codeforpittsburgh.github.io/FishFryCountdown/index.html
 lead: Mark Howe
 ---
