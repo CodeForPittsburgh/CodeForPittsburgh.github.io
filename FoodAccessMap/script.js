@@ -69,9 +69,6 @@ var geojsonMarkerOptions = {
 
 //SIDEBAR
 var sidebar = L.control.sidebar('sidebar').addTo(map);
-setTimeout(function () {
-    sidebar.open();
-}, 500);
 
 /*
 
@@ -299,12 +296,12 @@ map.on('click', function(ev) {
       map.openPopup(popup);
       popup.popupClose = function(){
         locateOnClick( ev.latlng );
-        sidebar.open();
+        sidebar.open("results");
       } 
       firstUse = false;
     } else {
       locateOnClick( ev.latlng );
-      sidebar.open();
+      sidebar.open("results");
     }
   /*
     if ( confirm('Would you like to search for nearby resources from here?') ){
@@ -317,7 +314,7 @@ setTimeout(function () {
   $(".pointer").fadeOut("slow");
 }, 3400);
 setTimeout(function () {
-   sidebar.open();
+   sidebar.open("home");
 }, 500);
 
 // let llk = leafletKnn(gjp);
