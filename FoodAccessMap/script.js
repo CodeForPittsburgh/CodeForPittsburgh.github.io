@@ -67,6 +67,11 @@ var geojsonMarkerOptions = {
   weight: 1
 };
 
+//SIDEBAR
+var sidebar = L.control.sidebar('sidebar').addTo(map);
+setTimeout(function () {
+    sidebar.open();
+}, 500);
 
 /*
 
@@ -294,10 +299,12 @@ map.on('click', function(ev) {
       map.openPopup(popup);
       popup.popupClose = function(){
         locateOnClick( ev.latlng );
+        sidebar.open();
       } 
       firstUse = false;
     } else {
       locateOnClick( ev.latlng );
+      sidebar.open();
     }
   /*
     if ( confirm('Would you like to search for nearby resources from here?') ){
@@ -309,6 +316,9 @@ map.on('click', function(ev) {
 setTimeout(function () {
   $(".pointer").fadeOut("slow");
 }, 3400);
+setTimeout(function () {
+   sidebar.open();
+}, 500);
 
 // let llk = leafletKnn(gjp);
 // let nearestPlaces = llk.nearest(L.latLng(40,-79,10));
