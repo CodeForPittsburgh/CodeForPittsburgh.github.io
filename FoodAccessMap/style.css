@@ -21,6 +21,16 @@ html {
   border:solid 1px #bbb;
   background-color:#f8f8f8;
 }
+
+input[type=text] {
+  float: left;
+  padding: 6px;
+  border: solid 1px #bbb;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
 .pointer{
   position:absolute;
   top:86px;

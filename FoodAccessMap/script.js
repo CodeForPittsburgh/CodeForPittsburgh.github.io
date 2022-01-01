@@ -241,6 +241,7 @@ var animateCircle = function(){
    }, 20);
 }
 
+
 var setSearchLocation = function( latlng ){
     // TODO - the default pan is pretty simplistic.  
     // Esri's zoomto is too fast and too close.
@@ -269,6 +270,56 @@ var setSearchLocation = function( latlng ){
         });
       }
     }).addTo(map);
+    // Add search locations to sidebar 
+    $("#results").empty();
+    for (var i = 0; i < Object.entries(foodLocations._layers).length; i++) {
+      entry = Object.entries(foodLocations._layers)[i][1].feature.properties;
+      var heading = $("<h2></h2>").text(entry.name);
+      var siteTypeText = entry.type;
+      if (siteTypeText != null) {
+        siteTypeText = (siteTypeText.charAt(0).toUpperCase() + siteTypeText.slice(1));
+      }
+      var siteType = $("<p></p>").text(siteTypeText);
+      var addressText = (entry.address + ", " + entry.city + ", " + entry.zip_code);
+      var address = $("<p></p>").text(addressText);
+      var googleMapsUrl = "https://www.google.com/maps/place/" + addressText.replace(" ", "+");
+      var googleMapsLink = $("<a />", {
+          name : "link",
+          href : googleMapsUrl,
+          text : "Find On Google Maps"
+      });
+      if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {
+        $("#results").append("<p>Accepts</p>");        
+        var acceptsText = $("<ul></ul>");
+        if (entry.SNAP == 1) {
+          acceptsText.append($("<li></li>").text("SNAP"));
+        }
+        if (entry.WIC == 1) {
+          acceptsText.append($("<li></li>").text("WIC"));
+        } 
+        if (entry.food_bucks == 1) {
+          acceptsText.append($("<li></li>").text("Food Bucks"));
+        }
+        $("#results").append(acceptsText);
+      }
+
+
+      if (entry.fresh_produce == 1) {
+        $("#results").append("<p>Offers fresh produce</p>");
+      }
+      if (entry.FMNP == 1) {
+        $("#results").append("<p>Part of Farmer's Market Nutrition Program</p>");
+      }
+
+
+      $("#results").append(heading);
+      $("#results").append(siteType);
+      $("#results").append(address);
+      $("#results").append(googleMapsLink);
+      console.log(entry);
+      // .feature.properties;
+      // console.log(entry);
+    }
     
 }
 
@@ -296,12 +347,12 @@ map.on('click', function(ev) {
       map.openPopup(popup);
       popup.popupClose = function(){
         locateOnClick( ev.latlng );
-        sidebar.open("results");
+        sidebar.open("search");
       } 
       firstUse = false;
     } else {
       locateOnClick( ev.latlng );
-      sidebar.open("results");
+      sidebar.open("search");
     }
   /*
     if ( confirm('Would you like to search for nearby resources from here?') ){
