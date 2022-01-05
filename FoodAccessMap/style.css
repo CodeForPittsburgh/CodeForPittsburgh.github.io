@@ -22,19 +22,70 @@ html {
   background-color:#f8f8f8;
 }
 
-input[type=text] {
+#results {
+  clear:  left;
+}
+
+.entryDiv {
+  background-color: #88e1eb;
+  border:  solid 1px #bbb;
+  border-radius:  25px;
+  padding-left:  10px;
+  padding-right:  10px;
+  padding-bottom:  5px;
+  padding-top:  5px;
+}
+
+.entryDiv > h2 {
+  font-size: 16px;
+  margin-botton:  5px;
+}
+.entryDiv > p {
+  margin: 2px;
+}
+
+.accepts_icon {
+  border-radius:  5px;
+  font-weight:  bold;
+  padding:  3px;
+}
+
+.snap {
+  background-color:  darkgreen;
+  color:  white;
+}
+
+.wic {
+  background-color:  #ba55d3;
+}
+
+.foodbucks {
+  background-color: #32cd32;
+}
+
+.freshproduce {
+  background-color: orangered;
+}
+
+.fmnp {
+  background-color:  darkred;
+  color:  white;
+}
+
+input[type=text], button[type="button"] {
   float: left;
   padding: 6px;
   border: solid 1px #bbb;
   margin-top: 8px;
   margin-right: 16px;
+  margin-bottom: 8px;
   font-size: 17px;
 }
 
 .pointer{
   position:absolute;
   top:86px;
-  left:60px;
+  left:40vw;
   z-index:99999;
 }
 
