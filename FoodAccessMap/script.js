@@ -175,7 +175,7 @@ var descriptorContent =
     "<div class='descriptorTitle'>Welcome to the Pittsburgh Food Access Map</div>" +
     "<div class='descriptorBody'>Click on the map to see food resources that are within walkable distance.</div>";
 myDescriptorControl.setContent(descriptorContent);
-
+var locationTypes;
 
 //L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png", {
 //  attribution:
@@ -190,7 +190,7 @@ $.get(
     // Use PapaParse to convert string to array of objects
     var data = Papa.parse(csvString, { header: true, dynamicTyping: true })
       .data;
-
+    locationTypes = [...new Set(data.map(item => item.type))];
     for (var i in data) {
       var row = data[i];
       points.push({
@@ -215,10 +215,26 @@ $.get(
         });
       }
     }).addTo(map);
+
+    var legend = L.control({position: 'bottomleft'});
+legend.onAdd = (map) => {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Legend</h4>";
+  for (locationType of locationTypes){
+    console.log(getIcon(locationType));
+    div.innerHTML += `<i class="icon" style="background-image: url(${getIcon(locationType)?.options.iconUrl});background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
   }
+  return div;
+};
+legend.addTo(map);
+
+  }
+
 );
 var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
 // let gjp = new L.geoJson(points);
+
+
 
 foodLocations.addTo(map);
 var results = new L.LayerGroup().addTo(map);
