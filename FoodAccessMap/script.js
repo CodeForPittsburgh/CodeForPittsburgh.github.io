@@ -110,10 +110,10 @@ zip_code: 15301
 function onEachFeature(feature, layer) {
   // does this feature have a property named popupContent?
   if (feature.properties && feature.properties.name) {
-    
+
     var description = ( !feature.properties.location_description || feature.properties.location_description == "other" ) ? "" : feature.properties.location_description;
-    
-    
+
+
     var popup = L.popup().setContent(
       "<div class='sourceOrg'>" + feature.properties.source_org + "</div>" +
         "<div class='featureName'>" + feature.properties.name + "</div>" +
@@ -137,7 +137,7 @@ function onEachFeature(feature, layer) {
         (feature.properties.SNAP != "NA" ? "SNAP</br>" : "") +
         (feature.properties.food_bucks == "1" ? "Food Bucks</br>" : "") +
         (feature.properties.fresh_produce != "NA" ? "Fresh Produce" : "")
-        
+
     );
     layer.bindPopup(popup);
   }
@@ -173,11 +173,34 @@ var DescriptorControl = L.Control.extend({
     }
 });
 var myDescriptorControl =  new DescriptorControl().addTo(map);
-var descriptorContent = 
+var descriptorContent =
     "<div class='descriptorTitle'>Welcome to the Pittsburgh Food Access Map</div>" +
     "<div class='descriptorBody'>Click on the map to see food resources that are within walkable distance.</div>";
 myDescriptorControl.setContent(descriptorContent);
 var locationTypes;
+
+
+
+var FilterControl = L.Control.extend({
+    options: {
+        // Default control position
+        position: 'bottomright'
+    },
+    onAdd: function (map) {
+        // Create a container with classname and return it
+        return L.DomUtil.create('div', 'filter-control');
+    },
+    setContent: function (content) {
+        // Set the innerHTML of the container
+        this.getContainer().innerHTML = content;
+    }
+});
+var filterContent =
+    "<div class='filterTitle'>yyy</div>" +
+    "<div class='filterBody' onClick=\"updateOnFilter(event,['supermarket','convenience store'])\">xxx</div>";
+var myFilterControl =  new FilterControl().addTo(map);
+myFilterControl.setContent(filterContent);
+
 
 //L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png", {
 //  attribution:
@@ -207,6 +230,7 @@ $.get(
       });
     }
 
+    /*
     let allLocations = L.geoJson(points, {
       filter: (x) => true,
       onEachFeature,
@@ -217,24 +241,42 @@ $.get(
         });
       }
     }).addTo(map);
+    */
+
+    // initial map population
+    parseFilter();
 
     var legend = L.control({position: 'bottomleft'});
-legend.onAdd = (map) => {
-  var div = L.DomUtil.create("div", "legend");
-  div.innerHTML += "<h4>Legend</h4>";
-  for (locationType of locationTypes){
-    console.log(getIcon(locationType));
-    div.innerHTML += `<i class="icon" style="background-image: url(${getIcon(locationType)?.options.iconUrl});background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
+    legend.onAdd = (map) => {
+      var div = L.DomUtil.create("div", "legend");
+      div.innerHTML += "<h4>Legend</h4>";
+      for (locationType of locationTypes){
+        console.log(getIcon(locationType));
+        div.innerHTML += `<i class="icon" style="background-image: url(${getIcon(locationType)?.options.iconUrl});background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
+      }
+      return div;
+    };
+    legend.addTo(map);
   }
-  return div;
-};
-legend.addTo(map);
-
-  }
-
 );
 var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
 // let gjp = new L.geoJson(points);
+
+
+var getFilteredLocations = function(locTypes) {
+  return L.geoJson(points, {
+            filter: function(feature, layer) {
+                return locTypes.includes(feature.properties.type);
+            },
+            onEachFeature,
+            pointToLayer: function (feature, latlng) {
+              return L.marker(latlng, {
+                ...geojsonMarkerOptions,
+                icon: getIcon(feature.properties.type)
+              });
+            }
+        });
+}
 
 
 
@@ -244,10 +286,10 @@ var results = new L.LayerGroup().addTo(map);
 var animateCircle = function(){
   var _animCircleRadius = 0;
   var endpoints = [filterCircle.getLatLng(), filterCircle.getLatLng()];
-  let timer = setInterval( function() {    
+  let timer = setInterval( function() {
     _animCircleRadius += 50
-    if (_animCircleRadius >= RADIUS ) {       
-      clearInterval(timer); 
+    if (_animCircleRadius >= RADIUS ) {
+      clearInterval(timer);
     } else {
       endpoints[1][0] += .01;
       map.removeLayer(distanceLine);
@@ -259,18 +301,18 @@ var animateCircle = function(){
 
 
 var setSearchLocation = function( latlng ){
-    // TODO - the default pan is pretty simplistic.  
+    // TODO - the default pan is pretty simplistic.
     // Esri's zoomto is too fast and too close.
     // a nice pan will help the user follow where the map is panning to by providing enough distance context
     // to allow the user to reorient
-    // also, should only pan if the new position is 
+    // also, should only pan if the new position is
     // 1. off map or 2. 'near' edge of map or 3. past a threshold distance from previous point
     map.panTo(latlng, { duration: 1 } );
     filterCircle.setRadius(0);
     filterCircle.setLatLng(latlng);
     filterCircle.setStyle({ opacity: 0.9, fillOpacity: 0.25 });
     animateCircle();
-    map.removeLayer(foodLocations); 
+    map.removeLayer(foodLocations);
     foodLocations = L.geoJson(points, {
       filter: (x) =>
         latlng.distanceTo(
@@ -286,7 +328,8 @@ var setSearchLocation = function( latlng ){
         });
       }
     }).addTo(map);
-    // Add search locations to sidebar 
+
+    // Add search locations to sidebar
     $("#results").empty();
     for (var i = 0; i < Object.entries(foodLocations._layers).length; i++) {
       entry = Object.entries(foodLocations._layers)[i][1].feature.properties;
@@ -310,7 +353,7 @@ var setSearchLocation = function( latlng ){
       entryDiv.append(address);
       entryDiv.append(googleMapsLink);
       entryDiv.append($("<br>"));
-      if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {   
+      if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {
         var acceptsText = $("<div></div>");
         if (entry.SNAP == 1) {
           acceptsText.append($("<span class=\"snap accepts_icon\"></span>").text("SNAP"));
@@ -318,7 +361,7 @@ var setSearchLocation = function( latlng ){
         if (entry.WIC == 1) {
           acceptsText.append($("<span class=\"wic accepts_icon\"></span>").text("WIC"));
 
-        } 
+        }
         if (entry.food_bucks == 1) {
           acceptsText.append($("<span class=\"foodbucks accepts_icon\"></span>").text("Food Bucks"));
         }
@@ -340,7 +383,7 @@ var setSearchLocation = function( latlng ){
       $("#results").append(entryDiv)
       console.log(entry);
     }
-    
+
 }
 
 searchControl.on("results", function (data) {
@@ -348,13 +391,48 @@ searchControl.on("results", function (data) {
   for (var i = data.results.length - 1; i >= 0; i--) {
     results.addLayer(L.marker(data.results[i].latlng));
   }
-  setSearchLocation(data.results[0].latlng);  
+  setSearchLocation(data.results[0].latlng);
 });
 
 var locateOnClick = function( latlng ) {
   results.clearLayers();
   setSearchLocation(latlng);
   results.addLayer(L.marker(latlng));
+}
+
+var fi=0;
+
+var parseFilter = function() {
+  var selected = [];
+  $('#filterControls input:checked').each(function() {
+      selected.push($(this).attr('name'));
+  });
+  updateOnFilter(selected);
+}
+
+var updateOnFilter = function( matches ) {
+  //event.stopPropagation();
+  map.removeLayer(foodLocations);
+  foodLocations = getFilteredLocations(matches).addTo(map);
+
+/*
+  if ( fi==0 ){
+    foodLocations = getFilteredLocations("supermarket").addTo(map);
+  }
+  if ( fi==1 ){
+    foodLocations = getFilteredLocations("convenience store").addTo(map);
+  }
+  if ( fi==2 ){
+    foodLocations = getFilteredLocations("Grow PGH Garden").addTo(map);
+  }
+  if ( fi==3 ){
+    foodLocations = getFilteredLocations("farmer's market").addTo(map);
+  }
+
+  fi++;
+  if ( fi > 3) { fi =  0; }
+  console.log("hi " + fi );
+  */
 }
 
 var firstUse = true;
@@ -368,7 +446,7 @@ map.on('click', function(ev) {
       popup.popupClose = function(){
         locateOnClick( ev.latlng );
         sidebar.open("search");
-      } 
+      }
       firstUse = false;
     } else {
       locateOnClick( ev.latlng );
@@ -387,6 +465,7 @@ setTimeout(function () {
 setTimeout(function () {
    sidebar.open("home");
 }, 500);
+
 
 // let llk = leafletKnn(gjp);
 // let nearestPlaces = llk.nearest(L.latLng(40,-79,10));
