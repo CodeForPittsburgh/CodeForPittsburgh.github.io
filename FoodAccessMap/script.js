@@ -158,48 +158,8 @@ var filterCircle = L.circle(L.latLng(40.440624, -79.995888), RADIUS, {
   fillColor: "#CC9933",
   color: "#AA6600"
 }).addTo(map);
-var DescriptorControl = L.Control.extend({
-    options: {
-        // Default control position
-        position: 'bottomleft'
-    },
-    onAdd: function (map) {
-        // Create a container with classname and return it
-        return L.DomUtil.create('div', 'descriptor-control');
-    },
-    setContent: function (content) {
-        // Set the innerHTML of the container
-        this.getContainer().innerHTML = content;
-    }
-});
-var myDescriptorControl =  new DescriptorControl().addTo(map);
-var descriptorContent =
-    "<div class='descriptorTitle'>Welcome to the Pittsburgh Food Access Map</div>" +
-    "<div class='descriptorBody'>Click on the map to see food resources that are within walkable distance.</div>";
-myDescriptorControl.setContent(descriptorContent);
+
 var locationTypes;
-
-
-
-var FilterControl = L.Control.extend({
-    options: {
-        // Default control position
-        position: 'bottomright'
-    },
-    onAdd: function (map) {
-        // Create a container with classname and return it
-        return L.DomUtil.create('div', 'filter-control');
-    },
-    setContent: function (content) {
-        // Set the innerHTML of the container
-        this.getContainer().innerHTML = content;
-    }
-});
-var filterContent =
-    "<div class='filterTitle'>yyy</div>" +
-    "<div class='filterBody' onClick=\"updateOnFilter(event,['supermarket','convenience store'])\">xxx</div>";
-var myFilterControl =  new FilterControl().addTo(map);
-myFilterControl.setContent(filterContent);
 
 
 //L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png", {
@@ -246,7 +206,7 @@ $.get(
     // initial map population
     parseFilter();
 
-    var legend = L.control({position: 'bottomleft'});
+    var legend = L.control({position: 'bottomright'});
     legend.onAdd = (map) => {
       var div = L.DomUtil.create("div", "legend");
       div.innerHTML += "<h4>Legend</h4>";
