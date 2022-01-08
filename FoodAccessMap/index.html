@@ -24,7 +24,7 @@
             <li><a href="#home" role="tab"><i class="fa fa-bars"><img src="home.png" alt="Home" width="25" height="25"><!-- Make sure to vertically center this -->
 </i></a></li>
             <li><a href="#search" role="tab"><i class="fa fa-user"><img src="search.png" alt="Home" width="25" height="25"></i></a></li>
-            <li><a href="#filterControls" role="tab"><i class="fa fa-user">F</i></a></li>
+            <li><a href="#filter" role="tab"><i class="fa fa-user">F</i></a></li>
             <li><a href="#about" role="tab"><i class="fa fa-user">?</i></a></li>
             <li><a href="#other" role="tab"><i class="fa fa-user">O</i></a></li>
             <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
@@ -63,12 +63,22 @@
             <br>
             <div id="results"></div>
         </div>
-        <div class="sidebar-pane" id="filterControls">
+        <div class="sidebar-pane" id="filter">
             <h1 class="sidebar-header">filter<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <p><input type="checkbox" id="filterSupermarket" name="supermarket" checked="checked" onClick="parseFilter()"> Supermarket</p>
-            <p><input type="checkbox" id="filterConvenienceStore" name="convenience store" checked="checked" onClick="parseFilter()"> Convenience Store</p>
-            <p><input type="checkbox" id="filterGrowPGHGarden" name="Grow PGH Garden" checked="checked" onClick="parseFilter()"> Grow PGH Garden</p>
-            <p><input type="checkbox" id="filterFarmersMarket" name="farmer's market" checked="checked" onClick="parseFilter()"> Farmer's Market</p>
+            <div id="typeFilter">
+              <p><input type="checkbox" id="filterSupermarket" name="supermarket" checked="checked" onClick="parseFilter()"> Supermarket</p>
+              <p><input type="checkbox" id="filterConvenienceStore" name="convenience store" checked="checked" onClick="parseFilter()"> Convenience Store</p>
+              <p><input type="checkbox" id="filterGrowPGHGarden" name="Grow PGH Garden" checked="checked" onClick="parseFilter()"> Grow PGH Garden</p>
+              <p><input type="checkbox" id="filterFarmersMarket" name="farmer's market" checked="checked" onClick="parseFilter()"> Farmer's Market</p>
+            </div>
+            <div id="servicesFilter">
+              <p><input type="checkbox" id="filterSNAP" name="SNAP" checked="checked" onClick="parseFilter()"> SNAP</p>
+              <p><input type="checkbox" id="filterWIC" name="WIC" checked="checked" onClick="parseFilter()"> WIC</p>
+              <p><input type="checkbox" id="filterFMNP" name="FMNP" checked="checked" onClick="parseFilter()"> FMNP</p>
+              <p><input type="checkbox" id="filterFoodBucks" name="food_bucks" checked="checked" onClick="parseFilter()"> Food Bucks</p>
+              <p><input type="checkbox" id="filterFreshProduce" name="fresh_produce" checked="checked" onClick="parseFilter()"> Fresh Produce</p>
+              <p><input type="checkbox" id="filterFreeDistribution" name="free_distribution" checked="checked" onClick="parseFilter()"> Free Distribution</p>
+            </div>
         </div>
         <div class="sidebar-pane" id="about">
             <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>

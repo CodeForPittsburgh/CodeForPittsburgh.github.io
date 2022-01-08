@@ -223,10 +223,22 @@ var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(ma
 // let gjp = new L.geoJson(points);
 
 
-var getFilteredLocations = function(locTypes) {
+var getFilteredLocations = function(filters) {
   return L.geoJson(points, {
             filter: function(feature, layer) {
-                return locTypes.includes(feature.properties.type);
+                let include = false;
+                include = filters.types.includes(feature.properties.type);
+                let found = false;
+
+                // SNAP WIC FMNP food_bucks fresh_produce free_distribution
+                for ( let i=0; i<filters.services.length; i++ ){
+                  let token = filters.services[i];
+                  if ( feature.properties[token] == 1 ) {
+                    found = true;
+                  }
+                }
+
+                return include && found;
             },
             onEachFeature,
             pointToLayer: function (feature, latlng) {
@@ -363,36 +375,22 @@ var locateOnClick = function( latlng ) {
 var fi=0;
 
 var parseFilter = function() {
-  var selected = [];
-  $('#filterControls input:checked').each(function() {
-      selected.push($(this).attr('name'));
+  var selectedTypes = [];
+  $('#typeFilter input:checked').each(function() {
+      selectedTypes.push($(this).attr('name'));
   });
-  updateOnFilter(selected);
+  var selectedServices = [];
+  $('#servicesFilter input:checked').each(function() {
+      selectedServices.push($(this).attr('name'));
+  });
+
+  updateOnFilter({ types: selectedTypes, services: selectedServices });
 }
 
 var updateOnFilter = function( matches ) {
   //event.stopPropagation();
   map.removeLayer(foodLocations);
   foodLocations = getFilteredLocations(matches).addTo(map);
-
-/*
-  if ( fi==0 ){
-    foodLocations = getFilteredLocations("supermarket").addTo(map);
-  }
-  if ( fi==1 ){
-    foodLocations = getFilteredLocations("convenience store").addTo(map);
-  }
-  if ( fi==2 ){
-    foodLocations = getFilteredLocations("Grow PGH Garden").addTo(map);
-  }
-  if ( fi==3 ){
-    foodLocations = getFilteredLocations("farmer's market").addTo(map);
-  }
-
-  fi++;
-  if ( fi > 3) { fi =  0; }
-  console.log("hi " + fi );
-  */
 }
 
 var firstUse = true;
