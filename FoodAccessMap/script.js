@@ -374,6 +374,14 @@ var locateOnClick = function( latlng ) {
 
 var fi=0;
 
+var toggleFilters = function() {
+  if ( $('#filtersPane').is(":hidden") ) {
+    $('#filtersPane').show();
+  } else {
+    $('#filtersPane').hide();
+  }
+}
+
 var parseFilter = function() {
   var selectedTypes = [];
   $('#typeFilter input:checked').each(function() {
