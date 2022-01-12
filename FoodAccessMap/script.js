@@ -158,48 +158,8 @@ var filterCircle = L.circle(L.latLng(40.440624, -79.995888), RADIUS, {
   fillColor: "#CC9933",
   color: "#AA6600"
 }).addTo(map);
-var DescriptorControl = L.Control.extend({
-    options: {
-        // Default control position
-        position: 'bottomleft'
-    },
-    onAdd: function (map) {
-        // Create a container with classname and return it
-        return L.DomUtil.create('div', 'descriptor-control');
-    },
-    setContent: function (content) {
-        // Set the innerHTML of the container
-        this.getContainer().innerHTML = content;
-    }
-});
-var myDescriptorControl =  new DescriptorControl().addTo(map);
-var descriptorContent =
-    "<div class='descriptorTitle'>Welcome to the Pittsburgh Food Access Map</div>" +
-    "<div class='descriptorBody'>Click on the map to see food resources that are within walkable distance.</div>";
-myDescriptorControl.setContent(descriptorContent);
+
 var locationTypes;
-
-
-
-var FilterControl = L.Control.extend({
-    options: {
-        // Default control position
-        position: 'bottomright'
-    },
-    onAdd: function (map) {
-        // Create a container with classname and return it
-        return L.DomUtil.create('div', 'filter-control');
-    },
-    setContent: function (content) {
-        // Set the innerHTML of the container
-        this.getContainer().innerHTML = content;
-    }
-});
-var filterContent =
-    "<div class='filterTitle'>yyy</div>" +
-    "<div class='filterBody' onClick=\"updateOnFilter(event,['supermarket','convenience store'])\">xxx</div>";
-var myFilterControl =  new FilterControl().addTo(map);
-myFilterControl.setContent(filterContent);
 
 
 //L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png", {
@@ -246,7 +206,7 @@ $.get(
     // initial map population
     parseFilter();
 
-    var legend = L.control({position: 'bottomleft'});
+    var legend = L.control({position: 'bottomright'});
     legend.onAdd = (map) => {
       var div = L.DomUtil.create("div", "legend");
       div.innerHTML += "<h4>Legend</h4>";
@@ -263,10 +223,22 @@ var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(ma
 // let gjp = new L.geoJson(points);
 
 
-var getFilteredLocations = function(locTypes) {
+var getFilteredLocations = function(filters) {
   return L.geoJson(points, {
             filter: function(feature, layer) {
-                return locTypes.includes(feature.properties.type);
+                let include = false;
+                include = filters.types.includes(feature.properties.type);
+                let found = false;
+
+                // SNAP WIC FMNP food_bucks fresh_produce free_distribution
+                for ( let i=0; i<filters.services.length; i++ ){
+                  let token = filters.services[i];
+                  if ( feature.properties[token] == 1 ) {
+                    found = true;
+                  }
+                }
+
+                return include && found;
             },
             onEachFeature,
             pointToLayer: function (feature, latlng) {
@@ -402,37 +374,31 @@ var locateOnClick = function( latlng ) {
 
 var fi=0;
 
+var toggleFilters = function() {
+  if ( $('#filtersPane').is(":hidden") ) {
+    $('#filtersPane').show();
+  } else {
+    $('#filtersPane').hide();
+  }
+}
+
 var parseFilter = function() {
-  var selected = [];
-  $('#filterControls input:checked').each(function() {
-      selected.push($(this).attr('name'));
+  var selectedTypes = [];
+  $('#typeFilter input:checked').each(function() {
+      selectedTypes.push($(this).attr('name'));
   });
-  updateOnFilter(selected);
+  var selectedServices = [];
+  $('#servicesFilter input:checked').each(function() {
+      selectedServices.push($(this).attr('name'));
+  });
+
+  updateOnFilter({ types: selectedTypes, services: selectedServices });
 }
 
 var updateOnFilter = function( matches ) {
   //event.stopPropagation();
   map.removeLayer(foodLocations);
   foodLocations = getFilteredLocations(matches).addTo(map);
-
-/*
-  if ( fi==0 ){
-    foodLocations = getFilteredLocations("supermarket").addTo(map);
-  }
-  if ( fi==1 ){
-    foodLocations = getFilteredLocations("convenience store").addTo(map);
-  }
-  if ( fi==2 ){
-    foodLocations = getFilteredLocations("Grow PGH Garden").addTo(map);
-  }
-  if ( fi==3 ){
-    foodLocations = getFilteredLocations("farmer's market").addTo(map);
-  }
-
-  fi++;
-  if ( fi > 3) { fi =  0; }
-  console.log("hi " + fi );
-  */
 }
 
 var firstUse = true;
