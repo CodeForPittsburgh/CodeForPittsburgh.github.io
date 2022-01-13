@@ -22,6 +22,10 @@ html {
   background-color:#f8f8f8;
 }
 
+#searchInput {
+   width:180px;
+}
+
 #results {
   clear:  left;
 }
