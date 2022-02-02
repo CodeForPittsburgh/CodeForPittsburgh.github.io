@@ -219,7 +219,11 @@ $.get(
     legend.addTo(map);
   }
 );
-var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
+// var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
+var search = new  L.esri.BootstrapGeocoder.search({
+  inputTag: 'searchInput',
+  placeholder: 'ex. Bloomfield'
+}).addTo(map);
 // let gjp = new L.geoJson(points);
 
 
@@ -358,13 +362,13 @@ var setSearchLocation = function( latlng ){
 
 }
 
-searchControl.on("results", function (data) {
-  results.clearLayers();
-  for (var i = data.results.length - 1; i >= 0; i--) {
-    results.addLayer(L.marker(data.results[i].latlng));
-  }
-  setSearchLocation(data.results[0].latlng);
-});
+// searchControl.on("results", function (data) {
+//   results.clearLayers();
+//   for (var i = data.results.length - 1; i >= 0; i--) {
+//     results.addLayer(L.marker(data.results[i].latlng));
+//   }
+//   setSearchLocation(data.results[0].latlng);
+// });
 
 var locateOnClick = function( latlng ) {
   results.clearLayers();
