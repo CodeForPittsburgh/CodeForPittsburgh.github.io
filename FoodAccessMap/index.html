@@ -2,12 +2,22 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - FOOD SEARCH PLEASE</title>
-  <link rel="stylesheet" href="./leaflet.css" />
-<script src="./leaflet.js"></script>
-<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
-<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+  <title>Food Access Map</title>
+  <!-- <link rel="stylesheet" href="./leaflet.css" /> -->
+<!-- <script src="./leaflet.js"></script> -->
+<!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script> -->
+<!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
+
+<script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet-debug.js"></script>
+
+<script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder-debug.js"></script>
 <link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="./leaflet-sidebar.css" />
 
@@ -15,7 +25,7 @@
 <body>
 <!-- partial:index.partial.html -->
 <div id="map"></div>
-<div class='pointer'><< Click search button</div>
+<!-- <div class='pointer'><< Click search button</div> -->
 
 <div id="sidebar" class="sidebar collapsed">
     <!-- Nav tabs -->
@@ -95,6 +105,7 @@
 <script src='https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js'></script>
 <script src='https://unpkg.com/leaflet-knn@0.1.0/leaflet-knn.js'></script>
 <script src="./leaflet-sidebar.js"></script>
+<script src="./bootstrap-geocoder.js"></script>
 <script  src="./script.js"></script>
 
 </body>
