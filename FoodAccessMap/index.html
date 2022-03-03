@@ -20,9 +20,11 @@
 <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder-debug.js"></script>
 <link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="./leaflet-sidebar.css" />
+<link rel="stylesheet" href="./introjs.css">
 
 </head>
 <body>
+    <a href='http://google.com/' data-intro='Hello step one!'></a>
 <!-- partial:index.partial.html -->
 <div id="map"></div>
 <!-- <div class='pointer'><< Click search button</div> -->
@@ -33,7 +35,7 @@
         <ul role="tablist">
             <li><a href="#home" role="tab"><i class="fa fa-bars"><img src="home.png" alt="Home" width="25" height="25"><!-- Make sure to vertically center this -->
 </i></a></li>
-            <li><a href="#search" role="tab"><i class="fa fa-user"><img src="search.png" alt="Home" width="25" height="25"></i></a></li>
+            <li id="step2"><a href="#search" role="tab"><i class="fa fa-user"><img src="search.png" alt="Home" width="25" height="25"></i></a></li>
             <li><a href="#about" role="tab"><i class="fa fa-user">?</i></a></li>
             <li><a href="#other" role="tab"><i class="fa fa-user">O</i></a></li>
             <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
@@ -106,6 +108,7 @@
 <script src='https://unpkg.com/leaflet-knn@0.1.0/leaflet-knn.js'></script>
 <script src="./leaflet-sidebar.js"></script>
 <script src="./bootstrap-geocoder.js"></script>
+<script src="./intro.js"></script>
 <script  src="./script.js"></script>
 
 </body>
