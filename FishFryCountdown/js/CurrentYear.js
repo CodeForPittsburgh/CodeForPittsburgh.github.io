@@ -49,7 +49,7 @@ function FishFryClock() {
     }
 }
 
-function FishFryStatus(targettime,ashwednesday, easter)
+function FishFryStatus(ashwednesday, easter)
 {
     var rc = 0;
     var tt =  Date.parse(new Date());
