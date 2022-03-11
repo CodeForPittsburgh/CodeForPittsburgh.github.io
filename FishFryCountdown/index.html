@@ -1,6 +1,6 @@
 <html lang="en">
     <head>
-        <title>Fish Fry List</title>
+        <title>Fish Fry Countdown Clock</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="CodeForPittsburgh">
@@ -17,151 +17,91 @@
         </div>
 
         <div class="content">
-            <!--
-                        <p id="AshWednesday"></p>
-                        <p id="GoodFriday"></p>
-                        <p id="Easter"></p>
-            -->
+
             <p id="AshWednesday"></p>            
             <p id="GoodFriday"></p>
             <p id="Easter"></p>
-            <!--
-                        <p id="AshWednesday2023"></p>
-                        <p id="GoodFriday2023"></p>
-                        <p id="Easter2023"></p>
-            
-                        <p id="AshWednesday2024"></p>
-                        <p id="GoodFriday2024"></p>
-                        <p id="Easter2024"></p>
-            -->
 
-        <div class="header" id="FishFryClock">
-
-
-
+            <div class="header" id="FishFryClock">
                 <p id="message"></p>
-
-
-                <div>
-                    Days: <span class="days"></span><br>
-
-                </div>
-                <div>
-                    Hours: <span class="hours"></span><br>
-
-                </div>
-                <div>
-                    Minutes: <span class="minutes"></span> <br>
-
-                </div>
-                <div>
-                    Seconds: <span class="seconds"></span> <br>
-
-                </div>
+                <div id="dhms"></div>
             </div>
         </div>
         <script>
-            //cy = CurrentYear();
-            //var enddate = 'April 2 2021 19:00:00 GMT-0500';
-            var message = "Fish Fry Starts in:";
+
+
             var d = new Date();
             var cy = d.getFullYear();
-            document.getElementById("message").innerHTML = message;
 
-            //cy = 2021;
-            //var ashwednesday = getAshWednesday(cy);
-            //var month = ashwednesday[0];
-            //var day = ashwednesday[1];
-            //var results = "Ash Wednesday "+ cy + " is on " + month + " " + day;
-            //var label = "AshWednesday";
-            //document.getElementById(label).innerHTML = results;
-            //document.getElementById("message").innerHTML = message;
-
-            //var GoodFriday = getGoodFriday(cy);
-            //var month = GoodFriday[0];
-            //var day = GoodFriday[1];
-            //var results = "Good Friday "+ cy + " is on " + month + " " + day;
-            //var endtime = month + " " + day + " " + cy + " 19:00:00 GMT-0400";
-            //var label = "GoodFriday";
-            //document.getElementById(label).innerHTML = results;
-            //document.getElementById("Enddate").innerHTML = endtime;
-            //initializeFishFryClock('FishFryClock', endtime);
-            //getTimeRemaining(endtime).minutes;
-
-            //var easter = getEaster(cy);
-            //var month = easter[0];
-            //var day = easter[1];
-            //var results = "Easter "+ cy + " is on " + month + " " + day;
-            //var label = "Easter";
-            //document.getElementById(label).innerHTML = results;
-
-            //cy++;
+            //alert(cy);
+            //var ny = d.getFullYear()+1;
+            //alert(ny);
             var ashwednesday = getAshWednesday(cy);
-            var month = ashwednesday[0];
-            var day = ashwednesday[1];
-            var results = "Ash Wednesday " + cy + " is on " + month + " " + day;
-            document.getElementById("AshWednesday").innerHTML = results;
-            var targettime = month + " " + day + " " + cy + " 16:00:00 GMT-0500";
-            var label = "AshWednesday";
-            document.getElementById(label).innerHTML = results;
-            //document.getElementById("Enddate").innerHTML = starttime;
-
-            var GoodFriday = getGoodFriday(cy);
-            var month = GoodFriday[0];
-            var day = GoodFriday[1];
-            var results = "Good Friday " + cy + " is on " + month + " " + day;
-            document.getElementById("GoodFriday").innerHTML = results;
-            //var endtime = month + " " + day + " " + cy + " 19:00:00 GMT-0400";
-            //initializeFishFryClock('FishFryClock', endtime);
-            //getTimeRemaining(endtime).minutes;
-
+            //alert(ashwednesday);
+            //var ashwednesday = getAshWednesday(ny);
+            //alert(ashwednesday);
             var easter = getEaster(cy);
-            var month = easter[0];
-            var day = easter[1];
-            var results = "Easter " + cy + " is on " + month + " " + day;
-            document.getElementById("Easter").innerHTML = results;
+            //alert(easter);
+            //var easter = getEaster(ny);
+            //alert(easter);
+            //var fishfrystatus = FishFryStatus(ashwednesday, easter);
+            //var message;
+            //message[0] = "Fish Fry Starts in:";
+            //message[1] = "Fish Fry has started:";
+            //message[2] = "Fish Fry Starts Next Year:";
+            //document.getElementById("message").innerHTML = message[fishfrystatus];
 
-            initializeFishFryClock('FishFryClock', targettime);
-            getTimeRemaining(targettime).minutes;
+                var d = new Date();
+                var cy = d.getFullYear();
+                var gmt = new Date().toString().match(/([A-Z]+[\+-][0-9]+)/)[1];
+                var targettime = month + " " + day + " " + cy + " 16:00:00 " + gmt;
+                // document.getElementById("message").innerHTML = message;
+
+
+                var ashwednesday = getAshWednesday(cy);
+                var month = ashwednesday[0];
+                var day = ashwednesday[1];
+                var AshWednesdayresults = "Ash Wednesday " + cy + " is on " + month + " " + day;
+                document.getElementById("AshWednesday").innerHTML = AshWednesdayresults;
+                
+                var AshWednesdaytargettime = month + " " + day + " " + cy + " 16:00:00 " + gmt;
+                var targettime = month + " " + day + " " + cy + " 16:00:00 GMT-0500";
+                //alert(targettime);
+                //var label = "AshWednesday";
+                //document.getElementById(label).innerHTML = results;
+                //document.getElementById("Enddate").innerHTML = starttime;
+
+                var GoodFriday = getGoodFriday(cy);
+                var month = GoodFriday[0];
+                var day = GoodFriday[1];
+                var GoodFridayresults = "Good Friday " + cy + " is on " + month + " " + day;
+                document.getElementById("GoodFriday").innerHTML = GoodFridayresults;
+                //var endtime = month + " " + day + " " + cy + " 19:00:00 GMT-0400";
+                //initializeFishFryClock('FishFryClock', endtime);
+                //getTimeRemaining(endtime).minutes;
+
+                //var easter = getEaster(cy);
+                var month = easter[0];
+                var day = easter[1];
+                var Easterresults = "Easter " + cy + " is on " + month + " " + day;
+                document.getElementById("Easter").innerHTML = Easterresults;
+                var Eastertargettime = month + " " + day + " " + cy + " 16:00:00 " + gmt;
+                
+                //var message;
+                var fishfrystatus = FishFryStatus(targettime,AshWednesdaytargettime, Eastertargettime);
+            message[0] = "Fish Fry Starts in:";
+            message[1] = "Fish Fry has started:";
+            message[2] = "Fish Fry Starts Next Year:";
+            document.getElementById("message").innerHTML = message[fishfrystatus];            
+                
+            if (fishfrystatus === 0)
+            {
+                dhms(targettime);
+                //initializeFishFryClock('FishFryClock', targettime);
+                //getTimeRemaining(targettime).minutes;
+            }
             
-            
-            //cy++;
-            //var ashwednesday = getAshWednesday(cy);
-            //var month = ashwednesday[0];
-            //var day = ashwednesday[1];
-            //var results = "Ash Wednesday 2023 is on " + month + " " + day;
-            //document.getElementById("AshWednesday2023").innerHTML = results;
 
-            //var GoodFriday = getGoodFriday(cy);
-            //var month = GoodFriday[0];
-            //var day = GoodFriday[1];
-            //var results = "Good Friday 2023 is on " + month + " " + day;
-            //document.getElementById("GoodFriday2023").innerHTML = results;
-
-            //var easter = getEaster(cy);
-            //var month = easter[0];
-            //var day = easter[1];
-            //var results = "Easter 2023 is on " + month + " " + day;
-            //document.getElementById("Easter2023").innerHTML = results;
-
-            //cy++;
-            //var ashwednesday = getAshWednesday(cy);
-            //var month = ashwednesday[0];
-            //var day = ashwednesday[1];
-            //var results = "Ash Wednesday 2024 is on " + month + " " + day;
-            //document.getElementById("AshWednesday2024").innerHTML = results;
-
-            //var GoodFriday = getGoodFriday(cy);
-            //var month = GoodFriday[0];
-            //var day = GoodFriday[1];
-            //var results = "Good Friday 2024 is on " + month + " " + day;
-            //document.getElementById("GoodFriday2024").innerHTML = results;
-
-            //var easter = getEaster(cy);
-            //var month = easter[0];
-            //var day = easter[1];
-            //var results = "Easter 2024 is on " + month + " " + day;
-            //document.getElementById("Easter2024").innerHTML = results;
         </script>
 
 
