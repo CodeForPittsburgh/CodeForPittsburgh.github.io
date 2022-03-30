@@ -133,7 +133,7 @@ function onEachFeature(feature, layer) {
         (feature.properties.url ? "<p><b>Website: </b>" + "<a target='_blank' href='" +
             feature.properties.url + "'>" +
             feature.properties.url + "</a></p>" : "") +
-        (feature.properties.FNMP != "NA" ? "FNMP</br>" : "") +
+        (feature.properties.FNMP != "NA" ? "FMNP</br>" : "") +
         (feature.properties.SNAP != "NA" ? "SNAP</br>" : "") +
         (feature.properties.food_bucks == "1" ? "Food Bucks</br>" : "") +
         (feature.properties.fresh_produce != "NA" ? "Fresh Produce" : "")
