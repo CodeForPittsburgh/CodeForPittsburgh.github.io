@@ -26,7 +26,7 @@ var otherIcon = new FoodIcon({
 });
 var farmerIcon = new FoodIcon({
   iconUrl:
-    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/farmers_market.png?raw=true"
+    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/farmers_market02.png?raw=true"
 });
 // var summerIcon = new FoodIcon({
 //   iconUrl:
