@@ -52,10 +52,10 @@ function getIcon(type) {
   }
   if (type === "summer meal site") {
      return summerIcon;
-//   }
-//   if (type === "food bank site") {
-//     return bankIcon;
-//   }
+   }
+   if (type === "food bank site") {
+     return bankIcon;
+   }
 
   return otherIcon;
 }
