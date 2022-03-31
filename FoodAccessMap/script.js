@@ -26,16 +26,16 @@ var otherIcon = new FoodIcon({
 });
 var farmerIcon = new FoodIcon({
   iconUrl:
-    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/farmers_market.png?raw=true"
+    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/farmers_market_02.png?raw=true"
 });
-// var summerIcon = new FoodIcon({
-//   iconUrl:
-//     "https://this-page-intentionally-left-blank.org/"
-// });
-// var bankIcon = new FoodIcon({
-//   iconUrl:
-//     "https://this-page-intentionally-left-blank.org/"
-// });
+var summerIcon = new FoodIcon({
+  iconUrl:
+     "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/summer_food.png?raw=true"
+ });
+ var bankIcon = new FoodIcon({
+   iconUrl:
+     "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/food_bank_01.png?raw=true"
+ });
 
 function getIcon(type) {
   if (type === "supermarket") {
@@ -50,12 +50,12 @@ function getIcon(type) {
   if (type === "farmer's market") {
     return farmerIcon;
   }
-//   if (type === "summer meal site") {
-//     return summerIcon;
-//   }
-//   if (type === "food bank site") {
-//     return bankIcon;
-//   }
+  if (type === "summer meal site") {
+     return summerIcon;
+   }
+   if (type === "food bank site") {
+     return bankIcon;
+   }
 
   return otherIcon;
 }
@@ -133,7 +133,7 @@ function onEachFeature(feature, layer) {
         (feature.properties.url ? "<p><b>Website: </b>" + "<a target='_blank' href='" +
             feature.properties.url + "'>" +
             feature.properties.url + "</a></p>" : "") +
-        (feature.properties.FNMP != "NA" ? "FNMP</br>" : "") +
+        (feature.properties.FNMP != "NA" ? "FMNP</br>" : "") +
         (feature.properties.SNAP != "NA" ? "SNAP</br>" : "") +
         (feature.properties.food_bucks == "1" ? "Food Bucks</br>" : "") +
         (feature.properties.fresh_produce != "NA" ? "Fresh Produce" : "")
