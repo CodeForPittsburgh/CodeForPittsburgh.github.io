@@ -51,14 +51,13 @@ function getIcon(type) {
     return farmerIcon;
   }
   if (type === "summer meal site") {
-    return summerIcon;
-    //   }
-    //   if (type === "food bank site") {
-    //     return bankIcon;
-    //   }
-  }
-    return otherIcon;
-  
+     return summerIcon;
+   }
+   if (type === "food bank site") {
+     return bankIcon;
+   }
+
+  return otherIcon;
 }
 
 var geojsonMarkerOptions = {
@@ -117,27 +116,27 @@ function onEachFeature(feature, layer) {
 
     var popup = L.popup().setContent(
       "<div class='sourceOrg'>" + feature.properties.source_org + "</div>" +
-      "<div class='featureName'>" + feature.properties.name + "</div>" +
-      "<div class='descriptionTitle'><div>" +
-      "<div class='locationDescription'>" + description + "</div>" +
-      "<div class='locationAddress'>" + feature.properties.address + "<br>" +
-      feature.properties.city + ", " +
-      feature.properties.state + " " +
-      feature.properties.zip_code +
-      "<br><a target='_blank' href='https://www.google.com/maps/dir//" +
-      feature.properties.address + " " +
-      feature.properties.city + ", " +
-      feature.properties.state + " " +
-      feature.properties.zip_code +
-      "'>Google Map Directions</a></div>" +
-      (feature.properties.phone ? "<p><b>Phone: </b>" + feature.properties.phone + "</p>" : "") +
-      (feature.properties.url ? "<p><b>Website: </b>" + "<a target='_blank' href='" +
-        feature.properties.url + "'>" +
-        feature.properties.url + "</a></p>" : "") +
-      (feature.properties.FNMP != "NA" ? "FNMP</br>" : "") +
-      (feature.properties.SNAP != "NA" ? "SNAP</br>" : "") +
-      (feature.properties.food_bucks == "1" ? "Food Bucks</br>" : "") +
-      (feature.properties.fresh_produce != "NA" ? "Fresh Produce" : "")
+        "<div class='featureName'>" + feature.properties.name + "</div>" +
+        "<div class='descriptionTitle'><div>" +
+        "<div class='locationDescription'>" + description + "</div>" +
+        "<div class='locationAddress'>" + feature.properties.address + "<br>" +
+        feature.properties.city + ", " +
+        feature.properties.state + " " +
+        feature.properties.zip_code +
+        "<br><a target='_blank' href='https://www.google.com/maps/dir//" +
+        feature.properties.address + " " +
+        feature.properties.city + ", " +
+        feature.properties.state + " " +
+        feature.properties.zip_code +
+        "'>Google Map Directions</a></div>" +
+        (feature.properties.phone ? "<p><b>Phone: </b>" + feature.properties.phone + "</p>" : "") +
+        (feature.properties.url ? "<p><b>Website: </b>" + "<a target='_blank' href='" +
+            feature.properties.url + "'>" +
+            feature.properties.url + "</a></p>" : "") +
+        (feature.properties.FNMP != "NA" ? "FMNP</br>" : "") +
+        (feature.properties.SNAP != "NA" ? "SNAP</br>" : "") +
+        (feature.properties.food_bucks == "1" ? "Food Bucks</br>" : "") +
+        (feature.properties.fresh_produce != "NA" ? "Fresh Produce" : "")
 
     );
     layer.bindPopup(popup);
