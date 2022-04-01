@@ -76,7 +76,8 @@ html {
   color:  white;
 }
 
-input[type=text], button[type="button"] {
+
+input[type=text] {
   float: left;
   padding: 6px;
   border: solid 1px #bbb;
@@ -85,6 +86,9 @@ input[type=text], button[type="button"] {
   margin-bottom: 8px;
   font-size: 17px;
 }
+
+
+
 
 .pointer{
   position:absolute;
@@ -194,4 +198,9 @@ input[type=text], button[type="button"] {
 .legend i.icon {
   background-size: 18px;
   background-color: rgba(255, 255, 255, 1);
+}
+
+.togglepad {
+  margin-top: 10px;
+
 }
