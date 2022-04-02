@@ -1,115 +1,221 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Food Access Map</title>
-  <!-- <link rel="stylesheet" href="./leaflet.css" /> -->
-<!-- <script src="./leaflet.js"></script> -->
-<!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script> -->
-<!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css"> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Food Access Map</title>
+    <!-- <link rel="stylesheet" href="./leaflet.css" /> -->
+    <!-- <script src="./leaflet.js"></script> -->
+    <!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script> -->
+    <!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
 
-<script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet-debug.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet-debug.js"></script>
 
-<script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder-debug.js"></script>
-<link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./leaflet-sidebar.css" />
-<link rel="stylesheet" href="./introjs.css">
+    <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder-debug.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./leaflet-sidebar.css" />
+    <link rel="stylesheet" href="./introjs.css">
 
 </head>
+
 <body>
     <a href='http://google.com/' data-intro='Hello step one!'></a>
-<!-- partial:index.partial.html -->
-<div id="map"></div>
-<!-- <div class='pointer'><< Click search button</div> -->
+    <!-- partial:index.partial.html -->
+    <div id="map"></div>
+    <!-- <div class='pointer'><< Click search button</div> -->
 
-<div id="sidebar" class="sidebar collapsed">
-    <!-- Nav tabs -->
-    <div class="sidebar-tabs">
-        <ul role="tablist">
-            <li><a href="#home" role="tab"><i class="fa fa-bars"><img src="home.png" alt="Home" width="25" height="25"><!-- Make sure to vertically center this -->
-</i></a></li>
-            <li id="step2"><a href="#search" role="tab"><i class="fa fa-user"><img src="search.png" alt="Home" width="25" height="25"></i></a></li>
-            <li><a href="#about" role="tab"><i class="fa fa-user">?</i></a></li>
-            <li><a href="#other" role="tab"><i class="fa fa-user">O</i></a></li>
-            <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
-<!--             <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> Use this if we want an icon that takes you to a link-->
-        </ul>
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"><img src="home.png" alt="Home" width="25"
+                                height="25"><!-- Make sure to vertically center this -->
+                        </i></a></li>
+                <li id="step2"><a href="#search" role="tab"><i class="fa fa-user"><img src="search.png" alt="Home"
+                                width="25" height="25"></i></a></li>
+                <li><a href="#about" role="tab"><i class="fa fa-user">?</i></a></li>
+                <li><a href="#other" role="tab"><i class="fa fa-user">O</i></a></li>
+                <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+                <!--             <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> Use this if we want an icon that takes you to a link-->
+            </ul>
 
-        <ul role="tablist">
-            <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
-        </ul>
-    </div>
-
-    <!-- Tab panes -->
-    <div class="sidebar-content">
-        <div class="sidebar-pane" id="home">
-            <h1 class="sidebar-header">
-                Food Access Map
-                <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
-            </h1>
-
-            <h2>Welcome to the Pittsburgh Food Access Map</h2>
-
-            <p>Click on the map to see food resources that are within walkable distance.</p>
-
-            <p>A responsive sidebar for mapping libraries like <a href="http://leafletjs.com/">Leaflet</a> or <a href="http://openlayers.org/">OpenLayers</a>.</p>
-
-               <a href="https://github.com/Turbo87/sidebar-v2/">Fork this sidebar on Github</a>
-
-
-            <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            <ul role="tablist">
+                <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
         </div>
 
-        <div class="sidebar-pane" id="search">
-            <h1 class="sidebar-header">search<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <input type="text" placeholder="Search.." id="searchInput">
-            <button type="button">Search</button><button type="button" onClick="toggleFilters()">Filters</button>
-            <br>
-            <div id="filtersPane">
-              <div id="typeFilter">
-                <p><input type="checkbox" id="filterSupermarket" name="supermarket" checked="checked" onClick="parseFilter()"> Supermarket</p>
-                <p><input type="checkbox" id="filterConvenienceStore" name="convenience store" checked="checked" onClick="parseFilter()"> Convenience Store</p>
-                <p><input type="checkbox" id="filterGrowPGHGarden" name="Grow PGH Garden" checked="checked" onClick="parseFilter()"> Grow PGH Garden</p>
-                <p><input type="checkbox" id="filterFarmersMarket" name="farmer's market" checked="checked" onClick="parseFilter()"> Farmer's Market</p>
-              </div>
-              <div id="servicesFilter">
-                <p><input type="checkbox" id="filterSNAP" name="SNAP" checked="checked" onClick="parseFilter()"> SNAP</p>
-                <p><input type="checkbox" id="filterWIC" name="WIC" checked="checked" onClick="parseFilter()"> WIC</p>
-                <p><input type="checkbox" id="filterFMNP" name="FMNP" checked="checked" onClick="parseFilter()"> FMNP</p>
-                <p><input type="checkbox" id="filterFoodBucks" name="food_bucks" checked="checked" onClick="parseFilter()"> Food Bucks</p>
-                <p><input type="checkbox" id="filterFreshProduce" name="fresh_produce" checked="checked" onClick="parseFilter()"> Fresh Produce</p>
-                <p><input type="checkbox" id="filterFreeDistribution" name="free_distribution" checked="checked" onClick="parseFilter()"> Free Distribution</p>
-              </div>
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    Food Access Map
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                <h2>Welcome to the Pittsburgh Food Access Map</h2>
+
+                <p>Click on the map to see food resources that are within walkable distance.</p>
+
+                <p>A responsive sidebar for mapping libraries like <a href="http://leafletjs.com/">Leaflet</a> or <a
+                        href="http://openlayers.org/">OpenLayers</a>.</p>
+
+                <a href="https://github.com/Turbo87/sidebar-v2/">Fork this sidebar on Github</a>
+
+
+                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+                    sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+                    sit amet.</p>
             </div>
-            <div id="results"></div>
-        </div>
-        <div class="sidebar-pane" id="about">
-            <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-        </div>
 
-        <div class="sidebar-pane" id="other">
-            <h1 class="sidebar-header">Other<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <div class="sidebar-pane" id="search">
+                <h1 class="sidebar-header">search<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input type="text" placeholder="Search.." id="searchInput">                                
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    <button type="button" class="btn btn-md">Search</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-md" onClick="toggleFilters()">Filters</button>            
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                    
+                </div>
+                <div id="filtersPane">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="typeFilter" class="panel panel-default togglepad" >
+                                <div class="panel-heading">Types</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" id="filterSupermarket" name="supermarket" checked="checked" data-toggle="toggle">Supermarket                            
+                                            </label>                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="checkbox-inline togglepad">
+                                                <input type="checkbox" id="filterConvenienceStore" name="convenience store" checked="checked" data-toggle="toggle">Convenience Store
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="checkbox-inline togglepad">
+                                                <input type="checkbox" id="filterGrowPGHGarden" name="Grow PGH Garden" checked="checked" data-toggle="toggle">Grow PGH Garden
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="checkbox-inline togglepad">
+                                                <input type="checkbox" id="filterFarmersMarket" name="farmer's market" checked="checked" data-toggle="toggle">Farmer's Market
+                                            </label>
+                                        </div>
+                                    </div>                                                                            
+                                </div>                    
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="row">                    
+                        <div class="col-md-12">
+                        <div id="servicesFilter" class="panel panel-default togglepad">
+                            <div class="panel-heading">Services</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" id="filterSNAP" name="SNAP" checked="checked" data-toggle="toggle">SNAP
+                                        </label>                                    
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline togglepad">
+                                            <input type="checkbox" id="filterWIC" name="WIC" checked="checked" data-toggle="toggle">WIC
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline togglepad">
+                                            <input type="checkbox" id="filterFMNP" name="FMNP" checked="checked" data-toggle="toggle">FMNP
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline togglepad">
+                                            <input type="checkbox" id="filterFoodBucks" name="food_bucks" checked="checked" data-toggle="toggle">Food Bucks
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline togglepad">
+                                            <input type="checkbox" id="filterFreshProduce" name="fresh_produce" checked="checked" data-toggle="toggle">Fresh Produce
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline togglepad">
+                                            <input type="checkbox" id="filterFreeDistribution" name="free_distribution" checked="checked" data-toggle="toggle">Free Distribution
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="results"></div>
+            </div>
+            <div class="sidebar-pane" id="about">
+                <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+
+            <div class="sidebar-pane" id="other">
+                <h1 class="sidebar-header">Other<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
         </div>
     </div>
-</div>
-<div id="map" class="sidebar-map"></div>
+    <div id="map" class="sidebar-map"></div>
 
 
-<!-- partial -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js'></script>
-<script src='https://unpkg.com/leaflet-knn@0.1.0/leaflet-knn.js'></script>
-<script src="./leaflet-sidebar.js"></script>
-<script src="./bootstrap-geocoder.js"></script>
-<script src="./intro.js"></script>
-<script  src="./script.js"></script>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js'></script>
+    <script src='https://unpkg.com/leaflet-knn@0.1.0/leaflet-knn.js'></script>
+    <script src="./leaflet-sidebar.js"></script>
+    <script src="./bootstrap-geocoder.js"></script>
+    <script src="./intro.js"></script>
+    <script src="./script.js"></script>
 
 </body>
+
 </html>
