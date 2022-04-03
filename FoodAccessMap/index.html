@@ -14,8 +14,12 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 
     <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet-debug.js"></script>
 
@@ -27,7 +31,10 @@
 </head>
 
 <body>
-    <a href='http://google.com/' data-intro='Hello step one!'></a>
+    <div id="rotate-device-warning">
+        <p><h1><b>Mobile users:</b> For the best experience, please hold your device in the landscape orientation.</h1></p>
+    </div>
+    <!-- <a href='http://google.com/' data-intro='Hello step one!'></a> -->
     <!-- partial:index.partial.html -->
     <div id="map"></div>
     <!-- <div class='pointer'><< Click search button</div> -->
@@ -36,20 +43,18 @@
         <!-- Nav tabs -->
         <div class="sidebar-tabs">
             <ul role="tablist">
-                <li><a href="#home" role="tab"><i class="fa fa-bars"><img src="home.png" alt="Home" width="25"
-                                height="25"><!-- Make sure to vertically center this -->
+                <li><a href="#home" role="tab"><i class="fa fa-home fa-lg"><!-- Make sure to vertically center this -->
                         </i></a></li>
-                <li id="step2"><a href="#search" role="tab"><i class="fa fa-user"><img src="search.png" alt="Home"
-                                width="25" height="25"></i></a></li>
-                <li><a href="#about" role="tab"><i class="fa fa-user">?</i></a></li>
-                <li><a href="#other" role="tab"><i class="fa fa-user">O</i></a></li>
-                <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+                <li id="step2"><a href="#search" role="tab"><i class="fa fa-search fa-lg"></i></a></li>                
+                <li><a href="#resultlist" role="tab"><i class="fa fa-bars fa-lg"></i></a></li>
+                <li><a href="#about" role="tab"><i class="fa fa-info fa-lg"></i></a></li>
+                <!-- <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li> -->
                 <!--             <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> Use this if we want an icon that takes you to a link-->
             </ul>
 
-            <ul role="tablist">
+            <!-- <ul role="tablist">
                 <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
-            </ul>
+            </ul> -->
         </div>
 
         <!-- Tab panes -->
@@ -80,7 +85,7 @@
             </div>
 
             <div class="sidebar-pane" id="search">
-                <h1 class="sidebar-header">search<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                <h1 class="sidebar-header">Search<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
                 <div class="row">
                     <div class="col-md-10">
@@ -192,18 +197,18 @@
                         </div>
                     </div>
                 </div>
+                
+            </div>            
+        </div>
+            <div class="sidebar-pane" id="resultlist">
+                <h1 class="sidebar-header">Results<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
                 <div id="results"></div>
             </div>
             <div class="sidebar-pane" id="about">
                 <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
             </div>
-
-            <div class="sidebar-pane" id="other">
-                <h1 class="sidebar-header">Other<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            </div>
-        </div>
     </div>
-    <div id="map" class="sidebar-map"></div>
+    <!-- <div id="map" class="sidebar-map"></div> -->
 
 
     <!-- partial -->

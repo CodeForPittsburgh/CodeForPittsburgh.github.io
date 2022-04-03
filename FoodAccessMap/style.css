@@ -1,66 +1,66 @@
 body,
 html {
   height: 100%;
-  font-family:Arial;
+  font-family: Arial;
 }
 
 #map {
   width: 100%;
   height: 100%;
-  z-index:100;
+  z-index: 100;
 }
-#mapSearchContainer{
-  position:fixed;
-  top:20px;
+#mapSearchContainer {
+  position: fixed;
+  top: 20px;
   right: 40px;
-  height:30px;
-  width:180px;
-  z-index:110;
-  font-size:10pt;
-  color:#5d5d5d;
-  border:solid 1px #bbb;
-  background-color:#f8f8f8;
+  height: 30px;
+  width: 180px;
+  z-index: 110;
+  font-size: 10pt;
+  color: #5d5d5d;
+  border: solid 1px #bbb;
+  background-color: #f8f8f8;
 }
 
 #searchInput {
-   width:180px;
+  width: 180px;
 }
 
 #results {
-  clear:  left;
+  clear: left;
 }
 
 .entryDiv {
   background-color: #88e1eb;
-  border:  solid 1px #bbb;
-  border-radius:  25px;
-  padding-left:  10px;
-  padding-right:  10px;
-  padding-bottom:  5px;
-  padding-top:  5px;
+  border: solid 1px #bbb;
+  border-radius: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 .entryDiv > h2 {
   font-size: 16px;
-  margin-bottom:  5px;
+  margin-bottom: 5px;
 }
 .entryDiv > p {
   margin: 2px;
 }
 
 .accepts_icon {
-  border-radius:  5px;
-  font-weight:  bold;
-  padding:  3px;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 3px;
 }
 
 .snap {
-  background-color:  darkgreen;
-  color:  white;
+  background-color: darkgreen;
+  color: white;
 }
 
 .wic {
-  background-color:  #ba55d3;
+  background-color: #ba55d3;
 }
 
 .foodbucks {
@@ -72,12 +72,11 @@ html {
 }
 
 .fmnp {
-  background-color:  darkred;
-  color:  white;
+  background-color: darkred;
+  color: white;
 }
 
-
-input[type=text] {
+input[type='text'] {
   float: left;
   padding: 6px;
   border: solid 1px #bbb;
@@ -87,80 +86,74 @@ input[type=text] {
   font-size: 17px;
 }
 
-
-
-
-.pointer{
-  position:absolute;
-  top:86px;
-  left:40vw;
-  z-index:99999;
+.pointer {
+  position: absolute;
+  top: 86px;
+  left: 40vw;
+  z-index: 99999;
 }
 
 .descriptor-control {
-    padding:5px 10px;
-    background-color:#f8f8f8;
-    color: #333;
-    font-size: 11px;
-    line-height: 18px;
-    border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 11px;
+  line-height: 18px;
+  border-radius: 5px;
 }
 
 .descriptorTitle {
   font-size: 18px;
   font-weight: bold;
-  color: #AA3333;
+  color: #aa3333;
 }
 
 .descriptorBody {
   font-size: 12px;
 }
 
-
 .descriptor-control:empty {
-    display: none;
+  display: none;
 }
 
-
 .filter-control {
-    padding:5px 10px;
-    background-color:#f8f8f8;
-    color: #333;
-    font-size: 11px;
-    line-height: 18px;
-    border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 11px;
+  line-height: 18px;
+  border-radius: 5px;
 }
 
 .filterTitle {
   font-size: 18px;
   font-weight: bold;
-  color: #AA3333;
+  color: #aa3333;
 }
 
 .filterBody {
   font-size: 12px;
 }
 
-
-.sourceOrg{
+.sourceOrg {
   font-size: 10px;
   color: #999;
 }
 
-.featureName{
+.featureName {
   font-size: 16px;
   font-weight: bold;
-  color: #A83;
+  color: #a83;
 }
 
-.descriptionTitle{
+.descriptionTitle {
   width: auto;
   border-top: 1px solid #999;
 }
-.locationDescription{
+.locationDescription {
   margin-top: 5px;
 }
-.locationAddress{
+.locationAddress {
   margin-top: 5px;
   color: #999;
 }
@@ -202,5 +195,24 @@ input[type=text] {
 
 .togglepad {
   margin-top: 10px;
+}
+@media screen and (orientation: landscape) {
+  #rotate-device-warning {
+    display: none;
+  }
+}
 
+@media screen and (orientation: portrait) {
+  #rotate-device-warning {
+    display: block;
+    width: 100%;
+    background-color: lightyellow;
+    padding: 10px;
+    border: 2px solid red;
+  }
+}
+@media screen and (orientation: portrait) and (min-device-width: 320px) {
+  .sidebar {
+    display: none;
+  }
 }
