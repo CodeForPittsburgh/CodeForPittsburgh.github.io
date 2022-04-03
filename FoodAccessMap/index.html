@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Food Access Map</title>
+    <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/7076673?s=200&v=4">
     <!-- <link rel="stylesheet" href="./leaflet.css" /> -->
     <!-- <script src="./leaflet.js"></script> -->
     <!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script> -->
@@ -67,21 +68,13 @@
 
                 <h2>Welcome to the Pittsburgh Food Access Map</h2>
 
-                <p>Click on the map to see food resources that are within walkable distance.</p>
+                <p class="lorem">The aim of this project, made by Code for Pittsburgh w/ Pittsburgh Food Policy Council, is to create an app for mapping and locating food resources in Pittsburgh. The goal is to address food insecurity by allowing individuals to access the app and find what food resources are in their area.</p>
 
-                <p>A responsive sidebar for mapping libraries like <a href="http://leafletjs.com/">Leaflet</a> or <a
-                        href="http://openlayers.org/">OpenLayers</a>.</p>
-
-                <a href="https://github.com/Turbo87/sidebar-v2/">Fork this sidebar on Github</a>
-
-
-                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                    sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                    sit amet.</p>
+                <p>Users can interact with the map in two ways. 
+                    <ul>
+                        <li>By clicking directly on the map to see food resources that are within walkable distance.</li>
+                        <li>Or using the search tab to select food locations by type and service provided.</li>
+                    </ul> </p>
             </div>
 
             <div class="sidebar-pane" id="search">
@@ -202,10 +195,23 @@
         </div>
             <div class="sidebar-pane" id="resultlist">
                 <h1 class="sidebar-header">Results<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <br>
+                <p>Click on the map to get a list of food resources that are within walkable distance.</p>
                 <div id="results"></div>
             </div>
             <div class="sidebar-pane" id="about">
                 <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <br>
+                <p>This app was made by Code for Pittsburgh using:</p>
+                <ul>
+                    <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
+                    <li><a href="https://introjs.com/">Intro JS</a></li>
+                    <li><a href="http://leafletjs.com/">Leaflet</a></li>
+                    <li><a href="https://github.com/Turbo87/sidebar-v2/">Leaflet Sidebar v2</a></li>                    
+                    <li><a href="https://github.com/domoritz/leaflet-locatecontrol">Leaflet Locate Control</a></li>
+                    <li><a href="https://fontawesome.com/">Font Awesome</a></li>
+                    
+                </ul>            
             </div>
     </div>
     <!-- <div id="map" class="sidebar-map"></div> -->
