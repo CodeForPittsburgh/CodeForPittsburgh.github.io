@@ -6,7 +6,6 @@ function CurrentYear() {
 }
 function getTimeRemaining(targettime) {
     var t = Date.parse(targettime) - Date.parse(new Date());
-    var seconds = Math.floor((t / 1000) % 60);
     var minutes = Math.floor((t / 1000 / 60) % 60);
     var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
     var days = Math.floor(t / (1000 * 60 * 60 * 24));
@@ -14,11 +13,30 @@ function getTimeRemaining(targettime) {
         'total': t,
         'days': days,
         'hours': hours,
-        'minutes': minutes,
-        'seconds': seconds
+        'minutes': minutes
     };
 }
+function nextyeardates(cy)
+{
+    var ashwednesday = getAshWednesday(cy);
+    //gmt = getGMT(ashwednesday);
+    //alert(ashwednesday);
+    var month = ashwednesday[0];
+    var day = ashwednesday[1];
+    var AshWednesdayresults = "Ash Wednesday " + cy + " is on " + month + " " + day;
+    document.getElementById("AshWednesday").innerHTML = AshWednesdayresults;
+    var GoodFriday = getGoodFriday(cy);
+    var month = GoodFriday[0];
+    var day = GoodFriday[1];
+    var GoodFridayresults = "Good Friday " + cy + " is on " + month + " " + day;
+    document.getElementById("GoodFriday").innerHTML = GoodFridayresults;
 
+    var easter = getEaster(cy);
+    var month = easter[0];
+    var day = easter[1];
+    var Easterresults = "Easter " + cy + " is on " + month + " " + day;
+    document.getElementById("Easter").innerHTML = Easterresults;
+}
 
 
 function initializeFishFryClock(id) {
@@ -26,7 +44,7 @@ function initializeFishFryClock(id) {
     daysSpan = clock.querySelector('.days');
     hoursSpan = clock.querySelector('.hours');
     minutesSpan = clock.querySelector('.minutes');
-    secondsSpan = clock.querySelector('.seconds');
+
     FishFryClock();
     timeinterval = setInterval(FishFryClock, 1000);
     //alert(timeinterval);
@@ -41,7 +59,7 @@ function FishFryClock() {
     daysSpan.innerHTML = t.days;
     hoursSpan.innerHTML = t.hours;
     minutesSpan.innerHTML = t.minutes;
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
     if (t.total <= 0) {
 
         clearInterval(timeinterval);
@@ -49,25 +67,38 @@ function FishFryClock() {
     }
 }
 
-function FishFryStatus(ashwednesday, easter)
+function FishFryStatus(ashwednesday, goodfriday)
 {
     var rc = 0;
-    var tt =  Date.parse(new Date());
+    days = 0;
+
+    var t = addDays(new Date(), days);
+
+    var tt =  Date.parse(t);
     //alert(tt);
     var at = Date.parse(ashwednesday);
     //alert(at);
-    var et = Date.parse(easter);
-
-      if (tt >= at && tt < et)
-      {
-      rc =1;
-     }
-      if (tt > et)
-     {
-      rc =2;
-     }
-     
+    var gf = Date.parse(goodfriday);
+    //alert(t + " " + tt + " " + at + " " + gf);
+    if ((tt >= at) && (tt < gf))
+    {
+        rc = 1;
+    }
+    if (tt >= gf)
+    {
+        rc = 2;
+        var d = new Date();
+        var cy = d.getFullYear() + 1;
+        nextyeardates(cy);
+    }
+    //alert(rc);
     return rc;
+}
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    //alert(result);
+    return result;
 }
 function dhms(targettime) {
     document.getElementById("dhms").innerHTML =
@@ -84,9 +115,14 @@ function dhms(targettime) {
 
             + ' </div>'
             + '<div>'
-            + '    Seconds: <span class="seconds"></span> <br>'
+
 
             ;
     initializeFishFryClock('FishFryClock', targettime);
     getTimeRemaining(targettime).minutes;
+}
+function getGMT(date)
+{
+    var gmt = date.toString().match(/([A-Z]+[\+-][0-9]+)/)[1];
+    return gmt;
 }
