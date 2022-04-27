@@ -539,7 +539,8 @@ function startIntro() {
 $("#customRange2").on('input propertychange', function (e) {
   RADIUS = $(this).val();
   $('#rangeval').html(RADIUS);
-  updateOnFilter()
+  filterCircle.setRadius(RADIUS);
+  
 });
 
 // let llk = leafletKnn(gjp);
