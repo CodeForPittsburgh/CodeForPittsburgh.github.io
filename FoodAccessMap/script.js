@@ -1,70 +1,91 @@
-var map = L.map("map", {
-  center: [40.440624, -79.995888],
-
-  zoom: 14
+$(document).ready(function () {
+  if (window.matchMedia('(max-width: 767px)').matches) {
+    // The viewport is less than 768 pixels wide
+    console.log('This is a mobile device.');
+  } else {
+    // The viewport is at least 768 pixels wide
+    console.log('This is a tablet or desktop.');
+    startIntro();
+  }
 });
+var map = L.map('map', {
+  center: [40.440624, -79.995888],
+  zoomControl: false,
+  zoom: 14,
+});
+L.control
+  .zoom({
+    position: 'topright',
+  })
+  .addTo(map);
+L.control
+  .locate({
+    position: 'topright',
+    icon: 'fa fa-location-arrow fa-lg',
+  })
+  .addTo(map);
 var FoodIcon = L.Icon.extend({
   options: {
-    iconSize: [30, 30]
-  }
+    iconSize: [30, 30],
+  },
 });
 var convIcon = new FoodIcon({
   iconUrl:
-    "https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map/master/app/images/convenience_store.png"
+    'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map/master/app/images/convenience_store.png',
 });
 var growIcon = new FoodIcon({
   iconUrl:
-    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/fresh_access.png?raw=true"
+    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/fresh_access.png?raw=true',
 });
 var superIcon = new FoodIcon({
   iconUrl:
-    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/supermarket.png?raw=true"
+    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/supermarket.png?raw=true',
 });
 var otherIcon = new FoodIcon({
   iconUrl:
-    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/other.png?raw=true"
+    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/other.png?raw=true',
 });
 var farmerIcon = new FoodIcon({
   iconUrl:
-    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/farmers_market_02.png?raw=true"
+    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/farmers_market_02.png?raw=true',
 });
 var summerIcon = new FoodIcon({
   iconUrl:
-    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/summer_food.png?raw=true"
+    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/summer_food.png?raw=true',
 });
 var bankIcon = new FoodIcon({
   iconUrl:
-    "https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/food_bank_01.png?raw=true"
+    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/food_bank_01.png?raw=true',
 });
 
 function getIcon(type) {
-  if (type === "supermarket") {
+  if (type === 'supermarket') {
     return superIcon;
   }
-  if (type === "convenience store") {
+  if (type === 'convenience store') {
     return convIcon;
   }
-  if (type === "Grow PGH Garden") {
+  if (type === 'Grow PGH Garden') {
     return growIcon;
   }
   if (type === "farmer's market") {
     return farmerIcon;
   }
-  if (type === "summer meal site") {
-     return summerIcon;
-   }
-   if (type === "food bank site") {
-     return bankIcon;
-   }
+  if (type === 'summer meal site') {
+    return summerIcon;
+  }
+  if (type === 'food bank site') {
+    return bankIcon;
+  }
 
   return otherIcon;
 }
 
 var geojsonMarkerOptions = {
   radius: 4,
-  fillColor: "#ff7800",
-  color: "#000",
-  weight: 1
+  fillColor: '#ff7800',
+  color: '#000',
+  weight: 1,
 };
 
 //SIDEBAR
@@ -106,38 +127,58 @@ zip_code: 15301
 
 */
 
-
 function onEachFeature(feature, layer) {
   // does this feature have a property named popupContent?
   if (feature.properties && feature.properties.name) {
-
-    var description = (!feature.properties.location_description || feature.properties.location_description == "other") ? "" : feature.properties.location_description;
-
+    var description =
+      !feature.properties.location_description ||
+      feature.properties.location_description == 'other'
+        ? ''
+        : feature.properties.location_description;
 
     var popup = L.popup().setContent(
-      "<div class='sourceOrg'>" + feature.properties.source_org + "</div>" +
-        "<div class='featureName'>" + feature.properties.name + "</div>" +
+      "<div class='sourceOrg'>" +
+        feature.properties.source_org +
+        '</div>' +
+        "<div class='featureName'>" +
+        feature.properties.name +
+        '</div>' +
         "<div class='descriptionTitle'><div>" +
-        "<div class='locationDescription'>" + description + "</div>" +
-        "<div class='locationAddress'>" + feature.properties.address + "<br>" +
-        feature.properties.city + ", " +
-        feature.properties.state + " " +
+        "<div class='locationDescription'>" +
+        description +
+        '</div>' +
+        "<div class='locationAddress'>" +
+        feature.properties.address +
+        '<br>' +
+        feature.properties.city +
+        ', ' +
+        feature.properties.state +
+        ' ' +
         feature.properties.zip_code +
         "<br><a target='_blank' href='https://www.google.com/maps/dir//" +
-        feature.properties.address + " " +
-        feature.properties.city + ", " +
-        feature.properties.state + " " +
+        feature.properties.address +
+        ' ' +
+        feature.properties.city +
+        ', ' +
+        feature.properties.state +
+        ' ' +
         feature.properties.zip_code +
         "'>Google Map Directions</a></div>" +
-        (feature.properties.phone ? "<p><b>Phone: </b>" + feature.properties.phone + "</p>" : "") +
-        (feature.properties.url ? "<p><b>Website: </b>" + "<a target='_blank' href='" +
-            feature.properties.url + "'>" +
-            feature.properties.url + "</a></p>" : "") +
-        (feature.properties.FNMP != "NA" ? "FMNP</br>" : "") +
-        (feature.properties.SNAP != "NA" ? "SNAP</br>" : "") +
-        (feature.properties.food_bucks == "1" ? "Food Bucks</br>" : "") +
-        (feature.properties.fresh_produce != "NA" ? "Fresh Produce" : "")
-
+        (feature.properties.phone
+          ? '<p><b>Phone: </b>' + feature.properties.phone + '</p>'
+          : '') +
+        (feature.properties.url
+          ? '<p><b>Website: </b>' +
+            "<a target='_blank' href='" +
+            feature.properties.url +
+            "'>" +
+            feature.properties.url +
+            '</a></p>'
+          : '') +
+        (feature.properties.FNMP != 'NA' ? 'FMNP</br>' : '') +
+        (feature.properties.SNAP != 'NA' ? 'SNAP</br>' : '') +
+        (feature.properties.food_bucks == '1' ? 'Food Bucks</br>' : '') +
+        (feature.properties.fresh_produce != 'NA' ? 'Fresh Produce' : '')
     );
     layer.bindPopup(popup);
   }
@@ -150,43 +191,52 @@ var markers = new L.LayerGroup();
 var foodLocations = new L.FeatureGroup();
 var points = [];
 var RADIUS = 1000;
-var distanceLine = L.polyline([[0, 0], [0, 0]], { color: 'red' }).addTo(map);
+var distanceLine = L.polyline(
+  [
+    [0, 0],
+    [0, 0],
+  ],
+  { color: 'red' }
+).addTo(map);
 var filterCircle = L.circle(L.latLng(40.440624, -79.995888), RADIUS, {
   opacity: 0,
   weight: 1,
   fillOpacity: 0.0,
-  fillColor: "#CC9933",
-  color: "#AA6600"
+  fillColor: '#CC9933',
+  color: '#AA6600',
 }).addTo(map);
 
 var locationTypes;
 
+// USE THIS TO CHANGE BASEMAP IN LEAFLET
 
-//L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png", {
-//  attribution:
-//    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-//}).addTo(map);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+L.tileLayer(
+  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+  {
+    attribution:
+      'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+  }
+).addTo(map);
 $.get(
-  "https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv",
+  'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
   function (csvString) {
     // Use PapaParse to convert string to array of objects
-    var data = Papa.parse(csvString, { header: true, dynamicTyping: true })
-      .data;
-    locationTypes = [...new Set(data.map(item => item.type))];
+    var data = Papa.parse(csvString, {
+      header: true,
+      dynamicTyping: true,
+    }).data;
+    locationTypes = [...new Set(data.map((item) => item.type))];
     for (var i in data) {
       var row = data[i];
       points.push({
-        type: "Feature",
+        type: 'Feature',
         properties: {
-          ...row
+          ...row,
         },
         geometry: {
-          type: "Point",
-          coordinates: [row.longitude || 0, row.latitude || 0]
-        }
+          type: 'Point',
+          coordinates: [row.longitude || 0, row.latitude || 0],
+        },
       });
     }
 
@@ -208,12 +258,14 @@ $.get(
 
     var legend = L.control({ position: 'bottomright' });
     legend.onAdd = (map) => {
-      var div = L.DomUtil.create("div", "legend");
-      div.innerHTML += "<h4>Legend</h4>";
+      var div = L.DomUtil.create('div', 'legend');
+      div.innerHTML += '<h4>Legend</h4>';
       for (var locationType of locationTypes) {
         if (locationType) {
           console.log(getIcon(locationType));
-          div.innerHTML += `<i class="icon" style="background-image: url(${getIcon(locationType)?.options.iconUrl});background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
+          div.innerHTML += `<i class="icon" style="background-image: url(${
+            getIcon(locationType)?.options.iconUrl
+          });background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
         }
       }
       return div;
@@ -224,10 +276,9 @@ $.get(
 // var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
 var search = new L.esri.BootstrapGeocoder.search({
   inputTag: 'searchInput',
-  placeholder: 'ex. Bloomfield'
+  placeholder: 'ex. Bloomfield',
 }).addTo(map);
 // let gjp = new L.geoJson(points);
-
 
 var getFilteredLocations = function (filters) {
   return L.geoJson(points, {
@@ -250,13 +301,11 @@ var getFilteredLocations = function (filters) {
     pointToLayer: function (feature, latlng) {
       return L.marker(latlng, {
         ...geojsonMarkerOptions,
-        icon: getIcon(feature.properties.type)
+        icon: getIcon(feature.properties.type),
       });
-    }
+    },
   });
-}
-
-
+};
 
 foodLocations.addTo(map);
 var results = new L.LayerGroup().addTo(map);
@@ -265,18 +314,17 @@ var animateCircle = function () {
   var _animCircleRadius = 0;
   var endpoints = [filterCircle.getLatLng(), filterCircle.getLatLng()];
   let timer = setInterval(function () {
-    _animCircleRadius += 50
+    _animCircleRadius += 50;
     if (_animCircleRadius >= RADIUS) {
       clearInterval(timer);
     } else {
-      endpoints[1][0] += .01;
+      endpoints[1][0] += 0.01;
       map.removeLayer(distanceLine);
       filterCircle.setRadius(_animCircleRadius);
       // distanceLine = L.polyline( endpoints , {color: 'red'}).addTo(map);
     }
   }, 20);
-}
-
+};
 
 var setSearchLocation = function (latlng) {
   // TODO - the default pan is pretty simplistic.
@@ -301,68 +349,77 @@ var setSearchLocation = function (latlng) {
       return L.marker(latlng, {
         ...geojsonMarkerOptions,
         icon: getIcon(feature.properties.type),
-        fillColor: "#28cc00",
-        opacity: .4
+        fillColor: '#28cc00',
+        opacity: 0.4,
       });
-    }
+    },
   }).addTo(map);
 
   // Add search locations to sidebar
-  $("#results").empty();
+  $('#results').empty();
   for (var i = 0; i < Object.entries(foodLocations._layers).length; i++) {
     entry = Object.entries(foodLocations._layers)[i][1].feature.properties;
-    var entryDiv = $("<div class=\"entryDiv\"></div>")
-    var heading = $("<h2></h2>").text(entry.name);
+    var entryDiv = $('<div class="entryDiv"></div>');
+    var heading = $('<h2></h2>').text(entry.name);
     var siteTypeText = entry.type;
     if (siteTypeText != null) {
-      siteTypeText = (siteTypeText.charAt(0).toUpperCase() + siteTypeText.slice(1));
+      siteTypeText =
+        siteTypeText.charAt(0).toUpperCase() + siteTypeText.slice(1);
     }
-    var siteType = $("<p></p>").text(siteTypeText);
-    var addressText = (entry.address + ", " + entry.city + ", " + entry.zip_code);
-    var address = $("<p></p>").text(addressText);
-    var googleMapsUrl = "https://www.google.com/maps/place/" + addressText.replace(" ", "+");
-    var googleMapsLink = $("<a />", {
-      name: "link",
+    var siteType = $('<p></p>').text(siteTypeText);
+    var addressText = entry.address + ', ' + entry.city + ', ' + entry.zip_code;
+    var address = $('<p></p>').text(addressText);
+    var googleMapsUrl =
+      'https://www.google.com/maps/place/' + addressText.replace(' ', '+');
+    var googleMapsLink = $('<a />', {
+      name: 'link',
       href: googleMapsUrl,
-      text: "Find On Google Maps"
+      text: 'Find On Google Maps',
     });
     entryDiv.append(heading);
     entryDiv.append(siteType);
     entryDiv.append(address);
     entryDiv.append(googleMapsLink);
-    entryDiv.append($("<br>"));
+    entryDiv.append($('<br>'));
     if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {
-      var acceptsText = $("<div></div>");
+      var acceptsText = $('<div></div>');
       if (entry.SNAP == 1) {
-        acceptsText.append($("<span class=\"snap accepts_icon\"></span>").text("SNAP"));
+        acceptsText.append(
+          $('<span class="snap accepts_icon"></span>').text('SNAP')
+        );
       }
       if (entry.WIC == 1) {
-        acceptsText.append($("<span class=\"wic accepts_icon\"></span>").text("WIC"));
-
+        acceptsText.append(
+          $('<span class="wic accepts_icon"></span>').text('WIC')
+        );
       }
       if (entry.food_bucks == 1) {
-        acceptsText.append($("<span class=\"foodbucks accepts_icon\"></span>").text("Food Bucks"));
+        acceptsText.append(
+          $('<span class="foodbucks accepts_icon"></span>').text('Food Bucks')
+        );
       }
       if (entry.fresh_produce == 1) {
-        acceptsText.append($("<span class=\"freshproduce accepts_icon\"></span>").text("Fresh Produce"));
+        acceptsText.append(
+          $('<span class="freshproduce accepts_icon"></span>').text(
+            'Fresh Produce'
+          )
+        );
       }
       if (entry.FMNP == 1) {
-        acceptsText.append($("<br>"));
-        acceptsText.append($("<span class=\"fmnp accepts_icon\"></span>").text("Farmer's Market Nutrition Program"));
+        acceptsText.append($('<br>'));
+        acceptsText.append(
+          $('<span class="fmnp accepts_icon"></span>').text(
+            "Farmer's Market Nutrition Program"
+          )
+        );
       }
       entryDiv.append(acceptsText);
     }
 
-
-
-
-
-
-    $("#results").append(entryDiv)
+    $('#results').append(entryDiv);
     console.log(entry);
   }
-
-}
+};
 
 // searchControl.on("results", function (data) {
 //   results.clearLayers();
@@ -376,24 +433,22 @@ var locateOnClick = function (latlng) {
   results.clearLayers();
   setSearchLocation(latlng);
   results.addLayer(L.marker(latlng));
-}
+};
 
 var fi = 0;
 
 var toggleFilters = function () {
-  if ($('#filtersPane').is(":hidden")) {
+  if ($('#filtersPane').is(':hidden')) {
     $('#filtersPane').show();
   } else {
     $('#filtersPane').hide();
   }
-}
+};
 
 // Toggle Change Listener
-$('input:checkbox').change(function() {
+$('input:checkbox').change(function () {
   parseFilter();
 });
-
-
 
 var parseFilter = function () {
   var selectedTypes = [];
@@ -406,30 +461,32 @@ var parseFilter = function () {
   });
 
   updateOnFilter({ types: selectedTypes, services: selectedServices });
-}
+};
 
 var updateOnFilter = function (matches) {
   //event.stopPropagation();
   map.removeLayer(foodLocations);
   foodLocations = getFilteredLocations(matches).addTo(map);
-}
+};
 
 var firstUse = true;
 
 map.on('click', function (ev) {
   //alert(ev.latlng); // ev is an event object (MouseEvent in this case)
   if (firstUse) {
-    var popup = L.popup().setContent("Clicking in the map will search for resources in a walkable distance. Try it!");
+    var popup = L.popup().setContent(
+      'Clicking in the map will search for resources in a walkable distance. Try it!'
+    );
     popup.setLatLng(ev.latlng);
     map.openPopup(popup);
     popup.popupClose = function () {
       locateOnClick(ev.latlng);
-      sidebar.open("search");
-    }
+      sidebar.open('resultlist');
+    };
     firstUse = false;
   } else {
     locateOnClick(ev.latlng);
-    sidebar.open("search");
+    sidebar.open('resultlist');
   }
   /*
     if ( confirm('Would you like to search for nearby resources from here?') ){
@@ -439,36 +496,39 @@ map.on('click', function (ev) {
 });
 
 setTimeout(function () {
-  $(".pointer").fadeOut("slow");
+  $('.pointer').fadeOut('slow');
 }, 3400);
 setTimeout(function () {
-  sidebar.open("home");
+  sidebar.open('home');
 }, 500);
 // introJs().start();
-startIntro();
+//startIntro();
 function startIntro() {
   var intro = introJs();
   intro.setOptions({
     steps: [
       {
-        intro: "Welcome to the Pittsburgh Food Access Map! 👋 This tutorial will show you how to use the map."
+        intro:
+          'Welcome to the Pittsburgh Food Access Map! 👋 This tutorial will show you how to use the map.',
       },
       {
         element: '#step2',
-        intro: "You can click the search button to start searching for nearby food sources. ",
-        position: 'bottom'
+        intro:
+          'You can click the search button to start searching for nearby food sources. ',
+        position: 'bottom',
       },
       {
         element: '#filtersPane',
-        intro: "Select filters to limit what kinds of food sources you would like to view",
-        position: 'bottom'
-      }
-    ]
+        intro:
+          'Select filters to limit what kinds of food sources you would like to view',
+        position: 'bottom',
+      },
+    ],
   });
   intro.onbeforechange(function () {
     if (this._currentStep === 2) {
-      sidebar.open("search");
-      console.log('what is happening')
+      sidebar.open('search');
+      console.log('what is happening');
       // return ;
     }
   });
