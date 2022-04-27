@@ -190,7 +190,7 @@ L.control.scale().addTo(map);
 var markers = new L.LayerGroup();
 var foodLocations = new L.FeatureGroup();
 var points = [];
-var RADIUS = 1000;
+var RADIUS = 500;
 var distanceLine = L.polyline(
   [
     [0, 0],
@@ -495,6 +495,7 @@ map.on('click', function (ev) {
     */
 });
 
+
 setTimeout(function () {
   $('.pointer').fadeOut('slow');
 }, 3400);
@@ -534,6 +535,12 @@ function startIntro() {
   });
   intro.start();
 }
+
+$("#customRange2").on('input propertychange', function (e) {
+  RADIUS = $(this).val();
+  $('#rangeval').html(RADIUS);
+  updateOnFilter()
+});
 
 // let llk = leafletKnn(gjp);
 // let nearestPlaces = llk.nearest(L.latLng(40,-79,10));
