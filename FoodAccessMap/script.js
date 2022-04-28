@@ -277,6 +277,7 @@ $.get(
 var search = new L.esri.BootstrapGeocoder.search({
   inputTag: 'searchInput',
   placeholder: 'ex. Bloomfield',
+  useMapBounds: false
 }).addTo(map);
 // let gjp = new L.geoJson(points);
 

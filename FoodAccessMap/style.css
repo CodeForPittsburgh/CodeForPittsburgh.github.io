@@ -26,6 +26,10 @@ html {
   width: 180px;
 }
 
+.geocoder-control-selected {
+  background-color: #888888;
+}
+
 #results {
   clear: left;
 }
