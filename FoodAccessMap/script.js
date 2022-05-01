@@ -274,9 +274,15 @@ $.get(
   }
 );
 // var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
+
+var nwBoundsCorner = L.latLng(40.507486, -80.063847);
+var seBoundsCorner = L.latLng(40.385017, -79.837699);
+var mapBounds = L.latLngBounds(nwBoundsCorner, seBoundsCorner);
+
 var search = new L.esri.BootstrapGeocoder.search({
   inputTag: 'searchInput',
   placeholder: 'ex. Bloomfield',
+  searchBounds: mapBounds
 }).addTo(map);
 // let gjp = new L.geoJson(points);
 

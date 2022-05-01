@@ -26,6 +26,16 @@ html {
   width: 180px;
 }
 
+.geocoder-control-suggestion {
+  list-style-type: none;
+}
+.geocoder-control-suggestion:hover {
+  background-color: #DDD;
+}
+.geocoder-control-selected {
+  background-color: #AAA;
+}
+
 #results {
   clear: left;
 }
