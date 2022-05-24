@@ -7,6 +7,26 @@
   z-index: 2000; }
   .sidebar.collapsed {
     width: 40px; }
+  @media screen and (max-width: 767px){
+    .sidebar {
+      height: 30vh;
+      width: 82vw;
+      margin-right: 0;
+    }
+    .legend {
+      display: none;
+    }
+    #searchInput {
+      width: 100%;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    div .col-md-2, div .col-md-4 {
+      display: inline-block;
+      width: 49;
+    }
+  }
   @media (min-width: 768px) {
     .sidebar {
       top: 10px;
