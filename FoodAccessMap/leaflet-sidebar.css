@@ -7,6 +7,47 @@
   z-index: 2000; }
   .sidebar.collapsed {
     width: 40px; }
+ @media screen and (max-width: 500px){
+    .sidebar {
+      height: 170px;
+      width: 85vw;
+      margin-right: 0;
+      border-bottom-color:rgba(0, 0, 0, 0.2);
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+    }
+    .legend {
+      display: none;
+    }
+    #searchInput {
+      width: 100%;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    div .col-md-2, div .col-md-4 {
+      display: inline-block;
+      width: 49%;
+    }
+  }
+  @media (min-width: 501px) and (max-width: 767px){
+    .sidebar {
+      height: 85vh;
+      width: 35vw;
+      border-bottom-color:rgba(0, 0, 0, 0.2);
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+    }
+    .legend {
+      display: none;
+    }
+    #searchInput {
+      width: 100%;
+    }
+    h2 {
+      font-size: 18px;
+    }
+  }
   @media (min-width: 768px) {
     .sidebar {
       top: 10px;

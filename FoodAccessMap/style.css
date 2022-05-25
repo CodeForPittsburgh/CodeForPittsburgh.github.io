@@ -206,7 +206,7 @@ input[type='text'] {
 .togglepad {
   margin-top: 10px;
 }
-@media screen and (orientation: landscape) {
+/* @media screen and (orientation: landscape) {
   #rotate-device-warning {
     display: none;
   }
@@ -225,4 +225,4 @@ input[type='text'] {
   .sidebar {
     display: none;
   }
-}
+} */
