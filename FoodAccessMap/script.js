@@ -365,7 +365,8 @@ var setSearchLocation = function (latlng) {
   $('#results').empty();
   for (var i = 0; i < Object.entries(foodLocations._layers).length; i++) {
     entry = Object.entries(foodLocations._layers)[i][1].feature.properties;
-    var entryDiv = $('<div class="entryDiv"></div>');
+    var row = $('<div class="row"></div>');
+    var entryDiv = $('<div class="entryDiv col-sm border bg-secondary"></div>');
     var heading = $('<h2></h2>').text(entry.name);
     var siteTypeText = entry.type;
     if (siteTypeText != null) {
@@ -422,7 +423,8 @@ var setSearchLocation = function (latlng) {
       entryDiv.append(acceptsText);
     }
 
-    $('#results').append(entryDiv);
+    row.append(entryDiv)
+    $('#results').append(row);
     console.log(entry);
   }
 };
