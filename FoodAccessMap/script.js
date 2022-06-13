@@ -91,42 +91,6 @@ var geojsonMarkerOptions = {
 //SIDEBAR
 var sidebar = L.control.sidebar('sidebar').addTo(map);
 
-/*
-
-FMNP: "NA"
-SNAP: 1
-WIC: "NA"
-address: "139 S Main Street"
-city: "Washington"
-county: "Allegheny"
-data_issues: null
-date_from: null
-date_to: null
-file_name: "food-data/Cleaned_data_files//additional_food_bucks_sites.csv"
-food_bucks: 1
-free_distribution: 0
-fresh_produce: "NA"
-group_id: "NA"
-idField: 2
-latitude: 40.172985
-latlng_source: "Mapbox Geocode"
-location_description: null
-longitude: -80.246581
-merged_record: 0
-name: "MAIN STREET FARMERS MARKET"
-open_to_spec_group: "open to all"
-original_id: null
-phone: null
-source_file: "Additional Food Bucks sites.xlsx"
-source_org: "The Food Trust"
-state: "PA"
-timestamp: "2021-08-29 00:33:43"
-type: null
-url: null
-zip_code: 15301
-
-*/
-
 function onEachFeature(feature, layer) {
   // does this feature have a property named popupContent?
   if (feature.properties && feature.properties.name) {
@@ -186,7 +150,6 @@ function onEachFeature(feature, layer) {
 L.control.scale().addTo(map);
 
 // Create a Tile Layer and add it to the map
-//var tiles = new L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
 var markers = new L.LayerGroup();
 var foodLocations = new L.FeatureGroup();
 var points = [];
@@ -240,18 +203,6 @@ $.get(
       });
     }
 
-    /*
-    let allLocations = L.geoJson(points, {
-      filter: (x) => true,
-      onEachFeature,
-      pointToLayer: function (feature, latlng) {
-        return L.marker(latlng, {
-          ...geojsonMarkerOptions,
-          icon: getIcon(feature.properties.type)
-        });
-      }
-    }).addTo(map);
-    */
 
     // initial map population
     parseFilter();
@@ -273,7 +224,6 @@ $.get(
     legend.addTo(map);
   }
 );
-// var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
 
 var nwBoundsCorner = L.latLng(40.507486, -80.063847);
 var seBoundsCorner = L.latLng(40.385017, -79.837699);
@@ -427,14 +377,6 @@ var setSearchLocation = function (latlng) {
   }
 };
 
-// searchControl.on("results", function (data) {
-//   results.clearLayers();
-//   for (var i = data.results.length - 1; i >= 0; i--) {
-//     results.addLayer(L.marker(data.results[i].latlng));
-//   }
-//   setSearchLocation(data.results[0].latlng);
-// });
-
 var locateOnClick = function (latlng) {
   results.clearLayers();
   setSearchLocation(latlng);
@@ -470,7 +412,6 @@ var parseFilter = function () {
 };
 
 var updateOnFilter = function (matches) {
-  //event.stopPropagation();
   map.removeLayer(foodLocations);
   foodLocations = getFilteredLocations(matches).addTo(map);
 };
@@ -494,11 +435,7 @@ map.on('click', function (ev) {
     locateOnClick(ev.latlng);
     sidebar.open('resultlist');
   }
-  /*
-    if ( confirm('Would you like to search for nearby resources from here?') ){
 
-    } else {}
-    */
 });
 
 
@@ -508,8 +445,7 @@ setTimeout(function () {
 setTimeout(function () {
   sidebar.open('home');
 }, 500);
-// introJs().start();
-//startIntro();
+
 function startIntro() {
   var intro = introJs();
   intro.setOptions({
@@ -548,6 +484,3 @@ $("#customRange2").on('input propertychange', function (e) {
   filterCircle.setRadius(RADIUS);
   
 });
-
-// let llk = leafletKnn(gjp);
-// let nearestPlaces = llk.nearest(L.latLng(40,-79,10));
