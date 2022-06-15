@@ -40,15 +40,16 @@ html {
   clear: left;
 }
 
-/*.entryDiv {*/
-/*  !*background-color: #88e1eb;*!*/
-/*  !*border: solid 1px #bbb;*!*/
-/*  !*border-radius: 25px;*!*/
-/*  !*padding-left: 10px;*!*/
-/*  !*padding-right: 10px;*!*/
-/*  !*padding-bottom: 5px;*!*/
-/*  !*padding-top: 5px;*!*/
-/*}*/
+.entryDiv {
+  background-color: #0074d9;
+  color: #fff;
+  /*border: solid 1px #bbb;*/
+  /*border-radius: 25px;*/
+  /*padding-left: 10px;*/
+  /*padding-right: 10px;*/
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
 
 .entryDiv > h2 {
   font-size: 16px;
