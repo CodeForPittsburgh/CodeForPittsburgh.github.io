@@ -315,8 +315,9 @@ var setSearchLocation = function (latlng) {
   $('#results').empty();
   for (var i = 0; i < Object.entries(foodLocations._layers).length; i++) {
     entry = Object.entries(foodLocations._layers)[i][1].feature.properties;
-    var entryDiv = $('<div class="entryDiv"></div>');
-    var heading = $('<h2></h2>').text(entry.name);
+    var row = $('<div class="row"></div>');
+    var entryDiv = $('<div class="entryDiv col-sm bg-light, text-bg-light border-top border-bottom"></div>');
+    var heading = $('<h2 class="fw-bold"></h2>').text(entry.name);
     var siteTypeText = entry.type;
     if (siteTypeText != null) {
       siteTypeText =
@@ -331,6 +332,7 @@ var setSearchLocation = function (latlng) {
       name: 'link',
       href: googleMapsUrl,
       text: 'Find On Google Maps',
+      class: 'link-primary'
     });
     entryDiv.append(heading);
     entryDiv.append(siteType);
@@ -372,7 +374,8 @@ var setSearchLocation = function (latlng) {
       entryDiv.append(acceptsText);
     }
 
-    $('#results').append(entryDiv);
+    row.append(entryDiv)
+    $('#results').append(row);
     console.log(entry);
   }
 };
