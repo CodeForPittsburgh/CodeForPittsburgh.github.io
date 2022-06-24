@@ -41,19 +41,17 @@ html {
 }
 
 .entryDiv {
-  background-color: #0074d9;
-  color: #fff;
-  /*border: solid 1px #bbb;*/
-  /*border-radius: 25px;*/
-  /*padding-left: 10px;*/
-  /*padding-right: 10px;*/
-  padding-bottom: 5px;
-  padding-top: 5px;
+  background-color: white;
+  /*color: #fff;*/
+  border-bottom: solid 1px black;
+  border-top: solid 1px black;
+  /*padding-top: 5px;*/
 }
 
 .entryDiv > h2 {
   font-size: 16px;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 .entryDiv > p {
   margin: 2px;
