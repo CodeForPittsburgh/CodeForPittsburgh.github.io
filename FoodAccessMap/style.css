@@ -45,12 +45,15 @@ html {
   /*color: #fff;*/
   border-bottom: solid 1px black;
   border-top: solid 1px black;
+  padding: 0px;
   /*padding-top: 5px;*/
 }
 
 .entryDiv > h2 {
   font-size: 16px;
+  margin-top: 2px;
   margin-bottom: 5px;
+  padding: 0px;
   font-weight: bold;
 }
 .entryDiv > p {
