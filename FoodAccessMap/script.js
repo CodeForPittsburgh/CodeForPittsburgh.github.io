@@ -5,7 +5,12 @@ $(document).ready(function () {
   } else {
     // The viewport is at least 768 pixels wide
     console.log('This is a tablet or desktop.');
-    startIntro();
+    //Check local storage if intro was previously completed. If not, run it.
+    if (localStorage.getItem('intro-complete') != "true") {
+      startIntro();
+    }
+    //Then set intro was being complete afterward.
+    localStorage.setItem('intro-complete','true');
   }
 });
 var map = L.map('map', {
