@@ -17,9 +17,6 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
     <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet-debug.js"></script>
     <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder-debug.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="js/leaflet-sidebar.css" />
-    <link rel="stylesheet" href="css/introjs.css">
 
 
     <!-- Bootstrap Stylesheets   -->
@@ -28,7 +25,9 @@
 
     <!-- Custom and Miscellaneous -->
     <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/7076673?s=200&v=4">
-
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/leaflet-sidebar.css" />
+    <link rel="stylesheet" href="./css/introjs.css">
 
 </head>
 
@@ -40,7 +39,7 @@
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-home fa-lg"><!-- Make sure to vertically center this -->
                         </i></a></li>
-                <li id="step2"><a href="#search" role="tab"><i class="fa fa-search fa-lg"></i></a></li>                
+                <li id="step2"><a href="#search" role="tab"><i class="fa fa-search fa-lg"></i></a></li>
                 <li><a href="#resultlist" role="tab"><i class="fa fa-bars fa-lg"></i></a></li>
                 <li><a href="#about" role="tab"><i class="fa fa-info fa-lg"></i></a></li>
                 <!--             <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> Use this if we want an icon that takes you to a link-->
@@ -59,7 +58,7 @@
 
                 <p class="lorem">The aim of this project, made by Code for Pittsburgh w/ Pittsburgh Food Policy Council, is to create an app for mapping and locating food resources in Pittsburgh. The goal is to address food insecurity by allowing individuals to access the app and find what food resources are in their area.</p>
 
-                <p>Users can interact with the map in two ways. 
+                <p>Users can interact with the map in two ways.
                     <ul>
                         <li>By clicking directly on the map to see food resources that are within walkable distance.</li>
                         <li>Or using the search tab to select food locations by type and service provided.</li>
@@ -71,26 +70,26 @@
                 </h1>
                 <div class="row">
                     <div class="col-md-10">
-                        <input type="text" placeholder="Search.." id="searchInput">                                
+                        <input type="text" placeholder="Search.." id="searchInput">
                     </div>
                     <div class="col-md-2">
 
                     </div>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                     <button type="button" class="btn btn-md">Search</button>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-md" onClick="toggleFilters()">Filters</button>            
+                        <button type="button" class="btn btn-md" onClick="toggleFilters()">Filters</button>
                     </div>
                     <div class="col-md-8">
 
                     </div>
-                    
+
                 </div>
-                <div class="row">                    
+                <div class="row">
                     <div class="col-md-12">
                     <div id="servicesFilter" class="panel panel-default togglepad">
                         <div class="panel-heading">Radius</div>
@@ -99,7 +98,7 @@
                                 <div class="col-md-12">
                                     <label class="checkbox-inline togglepad">
                                     <input type="range" class="form-range" min="10" max="2000" value="500" id="customRange2">
-                                        
+
                                         <span id="rangeval">500<!-- Default value --></span>
                                     </label>
                                 </div>
@@ -117,8 +116,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="filterSupermarket" name="supermarket" checked="checked" data-toggle="toggle">Supermarket                            
-                                            </label>                                            
+                                                <input type="checkbox" id="filterSupermarket" name="supermarket" checked="checked" data-toggle="toggle">Supermarket
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -163,11 +162,11 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>                    
-                            </div>                            
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">                    
+                    <div class="row">
                         <div class="col-md-12">
                         <div id="servicesFilter" class="panel panel-default togglepad">
                             <div class="panel-heading">Services</div>
@@ -176,7 +175,7 @@
                                     <div class="col-md-12">
                                         <label class="checkbox-inline">
                                             <input type="checkbox" id="filterSNAP" name="SNAP" checked="checked" data-toggle="toggle">SNAP
-                                        </label>                                    
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -218,9 +217,9 @@
                         </div>
                     </div>
                 </div>
-               
-                
-            </div>            
+
+
+            </div>
         </div>
             <div class="sidebar-pane" id="resultlist">
                 <h1 class="sidebar-header">Results<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
@@ -236,12 +235,13 @@
                     <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
                     <li><a href="https://introjs.com/">Intro JS</a></li>
                     <li><a href="http://leafletjs.com/">Leaflet</a></li>
-                    <li><a href="https://github.com/Turbo87/sidebar-v2/">Leaflet Sidebar v2</a></li>                    
+                    <li><a href="https://github.com/Turbo87/sidebar-v2/">Leaflet Sidebar v2</a></li>
                     <li><a href="https://github.com/domoritz/leaflet-locatecontrol">Leaflet Locate Control</a></li>
                     <li><a href="https://fontawesome.com/">Font Awesome</a></li>
-                    
-                </ul>            
+
+                </ul>
             </div>
+        </div>
     </div>
 
     <!-- partial -->

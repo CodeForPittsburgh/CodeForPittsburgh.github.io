@@ -157,6 +157,7 @@ function onEachFeature(feature, layer) {
 L.control.scale().addTo(map);
 
 // Create a Tile Layer and add it to the map
+//var tiles = new L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
 var markers = new L.LayerGroup();
 var foodLocations = new L.FeatureGroup();
 var points = [];
@@ -210,6 +211,18 @@ $.get(
       });
     }
 
+    /*
+    let allLocations = L.geoJson(points, {
+      filter: (x) => true,
+      onEachFeature,
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {
+          ...geojsonMarkerOptions,
+          icon: getIcon(feature.properties.type)
+        });
+      }
+    }).addTo(map);
+    */
 
     // initial map population
     parseFilter();
@@ -231,6 +244,7 @@ $.get(
     legend.addTo(map);
   }
 );
+// var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
 
 var nwBoundsCorner = L.latLng(40.507486, -80.063847);
 var seBoundsCorner = L.latLng(40.385017, -79.837699);
@@ -322,9 +336,8 @@ var setSearchLocation = function (latlng) {
   $('#results').empty();
   for (var i = 0; i < Object.entries(foodLocations._layers).length; i++) {
     entry = Object.entries(foodLocations._layers)[i][1].feature.properties;
-    var row = $('<div class="row"></div>');
-    var entryDiv = $('<div class="entryDiv col-sm bg-light, text-bg-light border-top border-bottom"></div>');
-    var heading = $('<h2 class="fw-bold"></h2>').text(entry.name);
+    var entryDiv = $('<div class="entryDiv"></div>');
+    var heading = $('<h2></h2>').text(entry.name);
     var siteTypeText = entry.type;
     if (siteTypeText != null) {
       siteTypeText =
@@ -339,7 +352,6 @@ var setSearchLocation = function (latlng) {
       name: 'link',
       href: googleMapsUrl,
       text: 'Find On Google Maps',
-      class: 'link-primary'
     });
     entryDiv.append(heading);
     entryDiv.append(siteType);
@@ -381,11 +393,18 @@ var setSearchLocation = function (latlng) {
       entryDiv.append(acceptsText);
     }
 
-    row.append(entryDiv)
-    $('#results').append(row);
+    $('#results').append(entryDiv);
     console.log(entry);
   }
 };
+
+// searchControl.on("results", function (data) {
+//   results.clearLayers();
+//   for (var i = data.results.length - 1; i >= 0; i--) {
+//     results.addLayer(L.marker(data.results[i].latlng));
+//   }
+//   setSearchLocation(data.results[0].latlng);
+// });
 
 var locateOnClick = function (latlng) {
   results.clearLayers();
@@ -422,6 +441,7 @@ var parseFilter = function () {
 };
 
 var updateOnFilter = function (matches) {
+  //event.stopPropagation();
   map.removeLayer(foodLocations);
   foodLocations = getFilteredLocations(matches).addTo(map);
 };
@@ -445,7 +465,11 @@ map.on('click', function (ev) {
     locateOnClick(ev.latlng);
     sidebar.open('resultlist');
   }
+  /*
+    if ( confirm('Would you like to search for nearby resources from here?') ){
 
+    } else {}
+    */
 });
 
 
@@ -455,7 +479,8 @@ setTimeout(function () {
 setTimeout(function () {
   sidebar.open('home');
 }, 500);
-
+// introJs().start();
+//startIntro();
 function startIntro() {
   var intro = introJs();
   intro.setOptions({
@@ -494,3 +519,6 @@ $("#customRange2").on('input propertychange', function (e) {
   filterCircle.setRadius(RADIUS);
   
 });
+
+// let llk = leafletKnn(gjp);
+// let nearestPlaces = llk.nearest(L.latLng(40,-79,10));
