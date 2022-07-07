@@ -64,26 +64,28 @@ var bankIcon = new FoodIcon({
 });
 
 function getIcon(type) {
-  if (type === 'supermarket') {
-    return superIcon;
+  switch(type) {
+    case "supermarket":
+      return superIcon;
+      break;
+    case 'convenience store':
+      return convIcon;
+      break;
+    case 'Grow PGH Garden':
+      return growIcon;
+      break;
+    case "farmer's market":
+      return farmerIcon;
+      break;
+    case "summer meal site":
+      return summerIcon;
+      break;
+    case "food bank site":
+      return bankIcon;
+      break;
+    default:
+      return otherIcon;
   }
-  if (type === 'convenience store') {
-    return convIcon;
-  }
-  if (type === 'Grow PGH Garden') {
-    return growIcon;
-  }
-  if (type === "farmer's market") {
-    return farmerIcon;
-  }
-  if (type === 'summer meal site') {
-    return summerIcon;
-  }
-  if (type === 'food bank site') {
-    return bankIcon;
-  }
-
-  return otherIcon;
 }
 
 var geojsonMarkerOptions = {
@@ -378,7 +380,6 @@ var setSearchLocation = function (latlng) {
       }
       entryDiv.append(acceptsText);
     }
-
     row.append(entryDiv)
     $('#results').append(row);
     console.log(entry);
@@ -389,16 +390,6 @@ var locateOnClick = function (latlng) {
   results.clearLayers();
   setSearchLocation(latlng);
   results.addLayer(L.marker(latlng));
-};
-
-var fi = 0;
-
-var toggleFilters = function () {
-  if ($('#filtersPane').is(':hidden')) {
-    $('#filtersPane').show();
-  } else {
-    $('#filtersPane').hide();
-  }
 };
 
 // Toggle Change Listener
