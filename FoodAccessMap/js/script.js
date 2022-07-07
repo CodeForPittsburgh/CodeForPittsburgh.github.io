@@ -29,64 +29,6 @@ L.control
     icon: 'fa fa-location-arrow fa-lg',
   })
   .addTo(map);
-var FoodIcon = L.Icon.extend({
-  options: {
-    iconSize: [30, 30],
-  },
-});
-var convIcon = new FoodIcon({
-  iconUrl:
-    'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map/master/app/images/convenience_store.png',
-});
-var growIcon = new FoodIcon({
-  iconUrl:
-    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/fresh_access.png?raw=true',
-});
-var superIcon = new FoodIcon({
-  iconUrl:
-    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/supermarket.png?raw=true',
-});
-var otherIcon = new FoodIcon({
-  iconUrl:
-    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/other.png?raw=true',
-});
-var farmerIcon = new FoodIcon({
-  iconUrl:
-    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/farmers_market_02.png?raw=true',
-});
-var summerIcon = new FoodIcon({
-  iconUrl:
-    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/summer_food.png?raw=true',
-});
-var bankIcon = new FoodIcon({
-  iconUrl:
-    'https://github.com/CodeForPittsburgh/food-access-map/blob/master/app/images/food_bank_01.png?raw=true',
-});
-
-function getIcon(type) {
-    switch(type) {
-      case "supermarket":
-        return superIcon;
-        break;
-      case 'convenience store':
-        return convIcon;
-        break;
-      case 'Grow PGH Garden':
-        return growIcon;
-        break;
-      case "farmer's market":
-        return farmerIcon;
-        break;
-      case "summer meal site":
-        return summerIcon;
-        break;
-      case "food bank site":
-        return bankIcon;
-        break;
-      default:
-        return otherIcon;
-    }
-  }
 
 var geojsonMarkerOptions = {
   radius: 4,
@@ -157,8 +99,6 @@ function onEachFeature(feature, layer) {
 L.control.scale().addTo(map);
 
 // Create a Tile Layer and add it to the map
-//var tiles = new L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
-var markers = new L.LayerGroup();
 var foodLocations = new L.FeatureGroup();
 var points = [];
 var RADIUS = 500;
@@ -211,19 +151,6 @@ $.get(
       });
     }
 
-    /*
-    let allLocations = L.geoJson(points, {
-      filter: (x) => true,
-      onEachFeature,
-      pointToLayer: function (feature, latlng) {
-        return L.marker(latlng, {
-          ...geojsonMarkerOptions,
-          icon: getIcon(feature.properties.type)
-        });
-      }
-    }).addTo(map);
-    */
-
     // initial map population
     parseFilter();
 
@@ -233,7 +160,6 @@ $.get(
       div.innerHTML += '<h4>Legend</h4>';
       for (var locationType of locationTypes) {
         if (locationType) {
-          console.log(getIcon(locationType));
           div.innerHTML += `<i class="icon" style="background-image: url(${
             getIcon(locationType)?.options.iconUrl
           });background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
@@ -244,7 +170,6 @@ $.get(
     legend.addTo(map);
   }
 );
-// var searchControl = new L.esri.Controls.Geosearch({zoomToResult:false}).addTo(map);
 
 var nwBoundsCorner = L.latLng(40.507486, -80.063847);
 var seBoundsCorner = L.latLng(40.385017, -79.837699);
@@ -255,7 +180,6 @@ var search = new L.esri.BootstrapGeocoder.search({
   placeholder: 'ex. Bloomfield',
   searchBounds: mapBounds
 }).addTo(map);
-// let gjp = new L.geoJson(points);
 
 var getFilteredLocations = function (filters) {
   return L.geoJson(points, {
@@ -298,18 +222,11 @@ var animateCircle = function () {
       endpoints[1][0] += 0.01;
       map.removeLayer(distanceLine);
       filterCircle.setRadius(_animCircleRadius);
-      // distanceLine = L.polyline( endpoints , {color: 'red'}).addTo(map);
     }
   }, 20);
 };
 
 var setSearchLocation = function (latlng) {
-  // TODO - the default pan is pretty simplistic.
-  // Esri's zoomto is too fast and too close.
-  // a nice pan will help the user follow where the map is panning to by providing enough distance context
-  // to allow the user to reorient
-  // also, should only pan if the new position is
-  // 1. off map or 2. 'near' edge of map or 3. past a threshold distance from previous point
   map.panTo(latlng, { duration: 1 });
   filterCircle.setRadius(0);
   filterCircle.setLatLng(latlng);
@@ -394,32 +311,14 @@ var setSearchLocation = function (latlng) {
     }
 
     $('#results').append(entryDiv);
-    console.log(entry);
   }
 };
 
-// searchControl.on("results", function (data) {
-//   results.clearLayers();
-//   for (var i = data.results.length - 1; i >= 0; i--) {
-//     results.addLayer(L.marker(data.results[i].latlng));
-//   }
-//   setSearchLocation(data.results[0].latlng);
-// });
 
 var locateOnClick = function (latlng) {
   results.clearLayers();
   setSearchLocation(latlng);
   results.addLayer(L.marker(latlng));
-};
-
-var fi = 0;
-
-var toggleFilters = function () {
-  if ($('#filtersPane').is(':hidden')) {
-    $('#filtersPane').show();
-  } else {
-    $('#filtersPane').hide();
-  }
 };
 
 // Toggle Change Listener
@@ -441,7 +340,6 @@ var parseFilter = function () {
 };
 
 var updateOnFilter = function (matches) {
-  //event.stopPropagation();
   map.removeLayer(foodLocations);
   foodLocations = getFilteredLocations(matches).addTo(map);
 };
@@ -449,7 +347,6 @@ var updateOnFilter = function (matches) {
 var firstUse = true;
 
 map.on('click', function (ev) {
-  //alert(ev.latlng); // ev is an event object (MouseEvent in this case)
   if (firstUse) {
     var popup = L.popup().setContent(
       'Clicking in the map will search for resources in a walkable distance. Try it!'
@@ -465,11 +362,7 @@ map.on('click', function (ev) {
     locateOnClick(ev.latlng);
     sidebar.open('resultlist');
   }
-  /*
-    if ( confirm('Would you like to search for nearby resources from here?') ){
 
-    } else {}
-    */
 });
 
 
@@ -479,8 +372,7 @@ setTimeout(function () {
 setTimeout(function () {
   sidebar.open('home');
 }, 500);
-// introJs().start();
-//startIntro();
+
 function startIntro() {
   var intro = introJs();
   intro.setOptions({
@@ -506,8 +398,6 @@ function startIntro() {
   intro.onbeforechange(function () {
     if (this._currentStep === 2) {
       sidebar.open('search');
-      console.log('what is happening');
-      // return ;
     }
   });
   intro.start();
@@ -520,5 +410,3 @@ $("#customRange2").on('input propertychange', function (e) {
   
 });
 
-// let llk = leafletKnn(gjp);
-// let nearestPlaces = llk.nearest(L.latLng(40,-79,10));
