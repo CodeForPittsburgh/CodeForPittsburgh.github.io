@@ -13,42 +13,18 @@ $(document).ready(function () {
     localStorage.setItem('intro-complete','true');
   }
 });
-var map = L.map('map', {
-  center: [40.440624, -79.995888],
-  zoomControl: false,
-  zoom: 14,
-});
-L.control
-  .zoom({
-    position: 'topright',
-  })
-  .addTo(map);
-L.control
-  .locate({
-    position: 'topright',
-    icon: 'fa fa-location-arrow fa-lg',
-  })
-  .addTo(map);
-
-var geojsonMarkerOptions = {
-  radius: 4,
-  fillColor: '#ff7800',
-  color: '#000',
-  weight: 1,
-};
-
-//SIDEBAR
-var sidebar = L.control.sidebar('sidebar').addTo(map);
 
 function onEachFeature(feature, layer) {
   // does this feature have a property named popupContent?
   if (feature.properties && feature.properties.name) {
+    //Set description for feature
     var description =
       !feature.properties.location_description ||
       feature.properties.location_description == 'other'
         ? ''
         : feature.properties.location_description;
 
+    //Set popup content for feature
     var popup = L.popup().setContent(
       "<div class='sourceOrg'>" +
         feature.properties.source_org +
@@ -96,38 +72,98 @@ function onEachFeature(feature, layer) {
     layer.bindPopup(popup);
   }
 }
-L.control.scale().addTo(map);
 
-// Create a Tile Layer and add it to the map
-var foodLocations = new L.FeatureGroup();
-var points = [];
-var RADIUS = 500;
-var distanceLine = L.polyline(
-  [
-    [0, 0],
-    [0, 0],
-  ],
-  { color: 'red' }
-).addTo(map);
-var filterCircle = L.circle(L.latLng(40.440624, -79.995888), RADIUS, {
-  opacity: 0,
-  weight: 1,
-  fillOpacity: 0.0,
-  fillColor: '#CC9933',
-  color: '#AA6600',
-}).addTo(map);
+function getFilteredLocations(filters) {
+  return L.geoJson(points, {
+    filter: function (feature, layer) {
+      let include = filters.types.includes(feature.properties.type);
+      let found = false;
 
-var locationTypes;
+      // SNAP WIC FMNP food_bucks fresh_produce free_distribution
+      for (let i = 0; i < filters.services.length; i++) {
+        let token = filters.services[i];
+        if (feature.properties[token] == 1) {
+          found = true;
+        }
+      }
 
-// USE THIS TO CHANGE BASEMAP IN LEAFLET
+      return include && found;
+    },
+    onEachFeature,
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng, {
+        ...geojsonMarkerOptions,
+        icon: getIcon(feature.properties.type),
+      });
+    },
+  });
+};
 
-L.tileLayer(
-  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-  {
-    attribution:
-      'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
-  }
-).addTo(map);
+//Animates expanding circle for search functionality.
+function animateCircle() {
+  var _animCircleRadius = 0;
+  var endpoints = [filterCircle.getLatLng(), filterCircle.getLatLng()];
+  let timer = setInterval(function () {
+    _animCircleRadius += 50;
+    if (_animCircleRadius >= mapSearchRadius) {
+      clearInterval(timer);
+    } else {
+      endpoints[1][0] += 0.01;
+      map.removeLayer(distanceLine);
+      filterCircle.setRadius(_animCircleRadius);
+    }
+  }, 20);
+};
+
+
+//Clear map of previous results and add new results in radius around selected coordinates.
+function locateOnClick (latlng) {
+  results.clearLayers(); //Remove previous results.
+  map.panTo(latlng, { duration: 1 });
+  //Set coordinates and attributes of circle within which results will be exclusively displayed
+  filterCircle.setRadius(0);
+  filterCircle.setLatLng(latlng);
+  filterCircle.setStyle({ opacity: 0.9, fillOpacity: 0.25 });
+  animateCircle();
+  //Add new results in radius around selected coordinates.
+  map.removeLayer(foodLocations);
+  foodLocations = L.geoJson(points, {
+    filter: (x) =>
+        latlng.distanceTo(
+            L.latLng(x.geometry.coordinates[1], x.geometry.coordinates[0])
+        ) < mapSearchRadius,
+    onEachFeature,
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng, {
+        ...geojsonMarkerOptions,
+        icon: getIcon(feature.properties.type),
+        fillColor: '#28cc00',
+        opacity: 0.4,
+      });
+    },
+  }).addTo(map);
+
+  // Add search locations to sidebar
+  updateResultsSidebar(foodLocations);
+  results.addLayer(L.marker(latlng));
+};
+
+function parseFilter() {
+  var selectedTypes = [];
+  $('#typeFilter input:checked').each(function () {
+    selectedTypes.push($(this).attr('name'));
+  });
+  var selectedServices = [];
+  $('#servicesFilter input:checked').each(function () {
+    selectedServices.push($(this).attr('name'));
+  });
+
+  //Update foodLocations layer
+  map.removeLayer(foodLocations);
+  foodLocations = getFilteredLocations({ types: selectedTypes, services: selectedServices }).addTo(map);
+};
+
+
 $.get(
   'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
   function (csvString) {
@@ -136,7 +172,10 @@ $.get(
       header: true,
       dynamicTyping: true,
     }).data;
-    locationTypes = [...new Set(data.map((item) => item.type))];
+
+    var locationTypes = [...new Set(data.map((item) => item.type))];
+
+    //Populate each row with data from csv
     for (var i in data) {
       var row = data[i];
       points.push({
@@ -162,7 +201,8 @@ $.get(
         if (locationType) {
           div.innerHTML += `<i class="icon" style="background-image: url(${
             getIcon(locationType)?.options.iconUrl
-          });background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
+          });
+           background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
         }
       }
       return div;
@@ -171,180 +211,12 @@ $.get(
   }
 );
 
-var nwBoundsCorner = L.latLng(40.507486, -80.063847);
-var seBoundsCorner = L.latLng(40.385017, -79.837699);
-var mapBounds = L.latLngBounds(nwBoundsCorner, seBoundsCorner);
-
-var search = new L.esri.BootstrapGeocoder.search({
-  inputTag: 'searchInput',
-  placeholder: 'ex. Bloomfield',
-  searchBounds: mapBounds
-}).addTo(map);
-
-var getFilteredLocations = function (filters) {
-  return L.geoJson(points, {
-    filter: function (feature, layer) {
-      let include = false;
-      include = filters.types.includes(feature.properties.type);
-      let found = false;
-
-      // SNAP WIC FMNP food_bucks fresh_produce free_distribution
-      for (let i = 0; i < filters.services.length; i++) {
-        let token = filters.services[i];
-        if (feature.properties[token] == 1) {
-          found = true;
-        }
-      }
-
-      return include && found;
-    },
-    onEachFeature,
-    pointToLayer: function (feature, latlng) {
-      return L.marker(latlng, {
-        ...geojsonMarkerOptions,
-        icon: getIcon(feature.properties.type),
-      });
-    },
-  });
-};
-
-foodLocations.addTo(map);
-var results = new L.LayerGroup().addTo(map);
-
-var animateCircle = function () {
-  var _animCircleRadius = 0;
-  var endpoints = [filterCircle.getLatLng(), filterCircle.getLatLng()];
-  let timer = setInterval(function () {
-    _animCircleRadius += 50;
-    if (_animCircleRadius >= RADIUS) {
-      clearInterval(timer);
-    } else {
-      endpoints[1][0] += 0.01;
-      map.removeLayer(distanceLine);
-      filterCircle.setRadius(_animCircleRadius);
-    }
-  }, 20);
-};
-
-var setSearchLocation = function (latlng) {
-  map.panTo(latlng, { duration: 1 });
-  filterCircle.setRadius(0);
-  filterCircle.setLatLng(latlng);
-  filterCircle.setStyle({ opacity: 0.9, fillOpacity: 0.25 });
-  animateCircle();
-  map.removeLayer(foodLocations);
-  foodLocations = L.geoJson(points, {
-    filter: (x) =>
-      latlng.distanceTo(
-        L.latLng(x.geometry.coordinates[1], x.geometry.coordinates[0])
-      ) < RADIUS,
-    onEachFeature,
-    pointToLayer: function (feature, latlng) {
-      return L.marker(latlng, {
-        ...geojsonMarkerOptions,
-        icon: getIcon(feature.properties.type),
-        fillColor: '#28cc00',
-        opacity: 0.4,
-      });
-    },
-  }).addTo(map);
-
-  // Add search locations to sidebar
-  $('#results').empty();
-  for (var i = 0; i < Object.entries(foodLocations._layers).length; i++) {
-    entry = Object.entries(foodLocations._layers)[i][1].feature.properties;
-    var entryDiv = $('<div class="entryDiv"></div>');
-    var heading = $('<h2></h2>').text(entry.name);
-    var siteTypeText = entry.type;
-    if (siteTypeText != null) {
-      siteTypeText =
-        siteTypeText.charAt(0).toUpperCase() + siteTypeText.slice(1);
-    }
-    var siteType = $('<p></p>').text(siteTypeText);
-    var addressText = entry.address + ', ' + entry.city + ', ' + entry.zip_code;
-    var address = $('<p></p>').text(addressText);
-    var googleMapsUrl =
-      'https://www.google.com/maps/place/' + addressText.replace(' ', '+');
-    var googleMapsLink = $('<a />', {
-      name: 'link',
-      href: googleMapsUrl,
-      text: 'Find On Google Maps',
-    });
-    entryDiv.append(heading);
-    entryDiv.append(siteType);
-    entryDiv.append(address);
-    entryDiv.append(googleMapsLink);
-    entryDiv.append($('<br>'));
-    if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {
-      var acceptsText = $('<div></div>');
-      if (entry.SNAP == 1) {
-        acceptsText.append(
-          $('<span class="snap accepts_icon"></span>').text('SNAP')
-        );
-      }
-      if (entry.WIC == 1) {
-        acceptsText.append(
-          $('<span class="wic accepts_icon"></span>').text('WIC')
-        );
-      }
-      if (entry.food_bucks == 1) {
-        acceptsText.append(
-          $('<span class="foodbucks accepts_icon"></span>').text('Food Bucks')
-        );
-      }
-      if (entry.fresh_produce == 1) {
-        acceptsText.append(
-          $('<span class="freshproduce accepts_icon"></span>').text(
-            'Fresh Produce'
-          )
-        );
-      }
-      if (entry.FMNP == 1) {
-        acceptsText.append($('<br>'));
-        acceptsText.append(
-          $('<span class="fmnp accepts_icon"></span>').text(
-            "Farmer's Market Nutrition Program"
-          )
-        );
-      }
-      entryDiv.append(acceptsText);
-    }
-
-    $('#results').append(entryDiv);
-  }
-};
-
-
-var locateOnClick = function (latlng) {
-  results.clearLayers();
-  setSearchLocation(latlng);
-  results.addLayer(L.marker(latlng));
-};
+var firstUse = true;
 
 // Toggle Change Listener
 $('input:checkbox').change(function () {
   parseFilter();
 });
-
-var parseFilter = function () {
-  var selectedTypes = [];
-  $('#typeFilter input:checked').each(function () {
-    selectedTypes.push($(this).attr('name'));
-  });
-  var selectedServices = [];
-  $('#servicesFilter input:checked').each(function () {
-    selectedServices.push($(this).attr('name'));
-  });
-
-  updateOnFilter({ types: selectedTypes, services: selectedServices });
-};
-
-var updateOnFilter = function (matches) {
-  map.removeLayer(foodLocations);
-  foodLocations = getFilteredLocations(matches).addTo(map);
-};
-
-var firstUse = true;
 
 map.on('click', function (ev) {
   if (firstUse) {
@@ -365,7 +237,6 @@ map.on('click', function (ev) {
 
 });
 
-
 setTimeout(function () {
   $('.pointer').fadeOut('slow');
 }, 3400);
@@ -373,40 +244,9 @@ setTimeout(function () {
   sidebar.open('home');
 }, 500);
 
-function startIntro() {
-  var intro = introJs();
-  intro.setOptions({
-    steps: [
-      {
-        intro:
-          'Welcome to the Pittsburgh Food Access Map! 👋 This tutorial will show you how to use the map.',
-      },
-      {
-        element: '#step2',
-        intro:
-          'You can click the search button to start searching for nearby food sources. ',
-        position: 'bottom',
-      },
-      {
-        element: '#filtersPane',
-        intro:
-          'Select filters to limit what kinds of food sources you would like to view',
-        position: 'bottom',
-      },
-    ],
-  });
-  intro.onbeforechange(function () {
-    if (this._currentStep === 2) {
-      sidebar.open('search');
-    }
-  });
-  intro.start();
-}
-
 $("#customRange2").on('input propertychange', function (e) {
-  RADIUS = $(this).val();
-  $('#rangeval').html(RADIUS);
-  filterCircle.setRadius(RADIUS);
-  
+  mapSearchRadius = $(this).val();
+  $('#rangeval').html(mapSearchRadius);
+  filterCircle.setRadius(mapSearchRadius);
 });
 
