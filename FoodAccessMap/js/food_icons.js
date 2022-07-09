@@ -54,5 +54,6 @@ function getIcon(type) {
             break;
         default:
             return otherIcon;
+            break;
     }
 }
