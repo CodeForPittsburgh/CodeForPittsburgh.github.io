@@ -175,10 +175,11 @@ function onEachFeature(feature, layer) {
             feature.properties.url +
             '</a></p>'
           : '') +
-        (feature.properties.FNMP != 'NA' ? 'FMNP</br>' : '') +
-        (feature.properties.SNAP != 'NA' ? 'SNAP</br>' : '') +
+        (feature.properties.FMNP == '1' ? 'FMNP</br>' : '') +
+        (feature.properties.SNAP == '1' ? 'SNAP</br>' : '') +
+        (feature.properties.WIC == '1' ? 'WIC</br>' : '') +
         (feature.properties.food_bucks == '1' ? 'Food Bucks</br>' : '') +
-        (feature.properties.fresh_produce != 'NA' ? 'Fresh Produce' : '')
+        (feature.properties.fresh_produce == '1' ? 'Fresh Produce' : '')
     );
     layer.bindPopup(popup);
   }
@@ -190,7 +191,7 @@ L.control.scale().addTo(map);
 var markers = new L.LayerGroup();
 var foodLocations = new L.FeatureGroup();
 var points = [];
-var RADIUS = 1000;
+var RADIUS = 500;
 var distanceLine = L.polyline(
   [
     [0, 0],
@@ -300,7 +301,7 @@ var getFilteredLocations = function (filters) {
     onEachFeature,
     pointToLayer: function (feature, latlng) {
       return L.marker(latlng, {
-        ...geojsonMarkerOptions,
+        geojsonMarkerOptions,
         icon: getIcon(feature.properties.type),
       });
     },
