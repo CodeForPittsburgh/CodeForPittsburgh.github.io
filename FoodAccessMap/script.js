@@ -382,7 +382,13 @@ var setSearchLocation = function (latlng) {
     entryDiv.append(address);
     entryDiv.append(googleMapsLink);
     entryDiv.append($('<br>'));
-    if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {
+    if (
+      entry.SNAP == 1 ||
+      entry.WIC == 1 ||
+      entry.food_bucks == 1 ||
+      entry.fresh_produce == 1 ||
+      entry.FMNP == 1
+    ) {
       var acceptsText = $('<div></div>');
       if (entry.SNAP == 1) {
         acceptsText.append(
