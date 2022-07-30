@@ -144,10 +144,11 @@ function onEachFeature(feature, layer) {
             feature.properties.url +
             '</a></p>'
           : '') +
-        (feature.properties.FNMP != 'NA' ? 'FMNP</br>' : '') +
-        (feature.properties.SNAP != 'NA' ? 'SNAP</br>' : '') +
+        (feature.properties.FMNP == '1' ? 'FMNP</br>' : '') +
+        (feature.properties.SNAP == '1' ? 'SNAP</br>' : '') +
+        (feature.properties.WIC == '1' ? 'WIC</br>' : '') +
         (feature.properties.food_bucks == '1' ? 'Food Bucks</br>' : '') +
-        (feature.properties.fresh_produce != 'NA' ? 'Fresh Produce' : '')
+        (feature.properties.fresh_produce == '1' ? 'Fresh Produce' : '')
     );
     layer.bindPopup(popup);
   }
@@ -261,7 +262,7 @@ var getFilteredLocations = function (filters) {
     onEachFeature,
     pointToLayer: function (feature, latlng) {
       return L.marker(latlng, {
-        ...geojsonMarkerOptions,
+        geojsonMarkerOptions,
         icon: getIcon(feature.properties.type),
       });
     },
@@ -344,7 +345,13 @@ var setSearchLocation = function (latlng) {
     entryDiv.append(address);
     entryDiv.append(googleMapsLink);
     entryDiv.append($('<br>'));
-    if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {
+    if (
+      entry.SNAP == 1 ||
+      entry.WIC == 1 ||
+      entry.food_bucks == 1 ||
+      entry.fresh_produce == 1 ||
+      entry.FMNP == 1
+    ) {
       var acceptsText = $('<div></div>');
       if (entry.SNAP == 1) {
         acceptsText.append(
