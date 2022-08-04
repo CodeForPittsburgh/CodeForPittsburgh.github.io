@@ -163,6 +163,14 @@ function parseFilter() {
   foodLocations = getFilteredLocations({ types: selectedTypes, services: selectedServices }).addTo(map);
 };
 
+//Toggles whether to show/hide filter panes in the search tab of sidebar
+function toggleFilters() {
+  if ($('#filtersPane').is(':hidden')) {
+    $('#filtersPane').show();
+  } else {
+    $('#filtersPane').hide();
+  }
+};
 
 $.get(
   'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
