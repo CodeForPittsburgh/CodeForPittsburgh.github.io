@@ -82,7 +82,7 @@ function getFilteredLocations(filters) {
       // SNAP WIC FMNP food_bucks fresh_produce free_distribution
       for (let i = 0; i < filters.services.length; i++) {
         let token = filters.services[i];
-        if (feature.properties[token] == 1) {
+        if (feature.properties[token] == true) {
           found = true;
         }
       }
@@ -173,14 +173,13 @@ function toggleFilters() {
 };
 
 $.get(
-  'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
+  //'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
+  'https://raw.githubusercontent.com/runstache/food-access-data-transformation/main/food-data/processed-datasets/merged_datasets.ndjson',
   function (csvString) {
     // Use PapaParse to convert string to array of objects
-    var data = Papa.parse(csvString, {
-      header: true,
-      dynamicTyping: true,
-    }).data;
-
+    let rows = csvString.split(/\r?\n/);
+    let data = [];
+    rows.forEach((loc) => data.push(JSON.parse(loc)));
     var locationTypes = [...new Set(data.map((item) => item.type))];
 
     //Populate each row with data from csv

@@ -25,31 +25,31 @@ function updateResultsSidebar(foodLocations) {
         entryDiv.append(address);
         entryDiv.append(googleMapsLink);
         entryDiv.append($('<br>'));
-        if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {
+        if (entry.snap || entry.wic || entry.food_bucks) {
             var acceptsText = $('<div></div>');
-            if (entry.SNAP == 1) {
+            if (entry.snap) {
                 acceptsText.append(
                     $('<span class="snap accepts_icon"></span>').text('SNAP')
                 );
             }
-            if (entry.WIC == 1) {
+            if (entry.wic) {
                 acceptsText.append(
                     $('<span class="wic accepts_icon"></span>').text('WIC')
                 );
             }
-            if (entry.food_bucks == 1) {
+            if (entry.food_bucks) {
                 acceptsText.append(
                     $('<span class="foodbucks accepts_icon"></span>').text('Food Bucks')
                 );
             }
-            if (entry.fresh_produce == 1) {
+            if (entry.fresh_produce) {
                 acceptsText.append(
                     $('<span class="freshproduce accepts_icon"></span>').text(
                         'Fresh Produce'
                     )
                 );
             }
-            if (entry.FMNP == 1) {
+            if (entry.fmnp) {
                 acceptsText.append($('<br>'));
                 acceptsText.append(
                     $('<span class="fmnp accepts_icon"></span>').text(
