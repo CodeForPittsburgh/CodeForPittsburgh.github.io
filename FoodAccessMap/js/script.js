@@ -176,7 +176,6 @@ $.get(
   //'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
   'https://raw.githubusercontent.com/runstache/food-access-data-transformation/main/food-data/processed-datasets/merged_datasets.ndjson',
   function (csvString) {
-    // Use PapaParse to convert string to array of objects
     let rows = csvString.split(/\r?\n/);
     let data = [];
     rows.forEach((loc) => data.push(JSON.parse(loc)));
