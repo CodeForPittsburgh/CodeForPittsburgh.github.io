@@ -1,3 +1,5 @@
+document.querySelector('#reset-radius').addEventListener('click', resetResultsRadius)
+
 $(document).ready(function () {
   if (window.matchMedia('(max-width: 767px)').matches) {
     // The viewport is less than 768 pixels wide
@@ -147,6 +149,15 @@ function locateOnClick (latlng) {
   updateResultsSidebar(foodLocations);
   results.addLayer(L.marker(latlng));
 };
+
+function resetResultsRadius() {
+  results.clearLayers()
+  map.removeLayer(foodLocations)
+  filterCircle.setRadius(0)
+  filterCircle.setStyle({ opacity: 0, fillOpacity: 0 })
+  parseFilter()
+  updateResultsSidebar()
+}
 
 function parseFilter() {
   var selectedTypes = [];
