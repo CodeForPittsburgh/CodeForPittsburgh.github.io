@@ -84,7 +84,7 @@ function getFilteredLocations(filters) {
       // SNAP WIC FMNP food_bucks fresh_produce free_distribution
       for (let i = 0; i < filters.services.length; i++) {
         let token = filters.services[i];
-        if (feature.properties[token] == 1) {
+        if (feature.properties[token] == "True") {
           found = true;
         }
       }
@@ -169,6 +169,9 @@ function parseFilter() {
     selectedServices.push($(this).attr('name'));
   });
 
+  console.log(selectedTypes);
+  console.log(selectedServices);
+
   //Update foodLocations layer
   map.removeLayer(foodLocations);
   foodLocations = getFilteredLocations({ types: selectedTypes, services: selectedServices }).addTo(map);
@@ -184,7 +187,12 @@ function toggleFilters() {
 };
 
 $.get(
-  'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
+  // This is the old dataset 
+  // 'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
+
+  //This is the new dataset put together by Larry 
+  'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-data-transformation/main/food-data/processed-datasets/merged_datasets.csv',
+
   function (csvString) {
     // Use PapaParse to convert string to array of objects
     var data = Papa.parse(csvString, {
@@ -192,7 +200,17 @@ $.get(
       dynamicTyping: true,
     }).data;
 
+    //testing if papa parse is using correct delimiter -- correctly detecting pipe char "|"
+    var results =  Papa.parse(csvString);
+    console.log(results.meta.delimiter);
+
     var locationTypes = [...new Set(data.map((item) => item.type))];
+    locationTypes.sort();
+
+    //testing if array of objects correctly created
+    console.log(data);
+    console.log(data[data.findIndex(item => item.name === "Pittsburgh Market Square")])
+    console.log(data[data.findIndex(item => item.name === "Trinity Episcopal Cathedral")])
 
     //Populate each row with data from csv
     for (var i in data) {
@@ -218,10 +236,16 @@ $.get(
       div.innerHTML += '<h4>Legend</h4>';
       for (var locationType of locationTypes) {
         if (locationType) {
+          //capitalize first letter of each word in the location type 
+          let words = locationType.split(" ");
+          for (let i = 0; i < words.length; i++) {
+            words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+          };
+          //insert the icon and capitalized location type in to the legend HTML
           div.innerHTML += `<i class="icon" style="background-image: url(${
             getIcon(locationType)?.options.iconUrl
           });
-           background-repeat: no-repeat;"></i><span>${locationType}</span><br>`;
+           background-repeat: no-repeat;"></i><span>${words.join(" ")}</span><br>`;
         }
       }
       return div;

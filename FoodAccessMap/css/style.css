@@ -93,6 +93,11 @@ html {
   color: white;
 }
 
+.freedistribution {
+  background-color: rgb(182, 182, 5);
+  color: white;
+}
+
 input[type='text'] {
   float: left;
   padding: 6px;

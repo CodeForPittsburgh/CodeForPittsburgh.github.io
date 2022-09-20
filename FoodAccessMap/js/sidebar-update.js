@@ -25,35 +25,43 @@ function updateResultsSidebar(foodLocations) {
         entryDiv.append(address);
         entryDiv.append(googleMapsLink);
         entryDiv.append($('<br>'));
-        if (entry.SNAP == 1 || entry.WIC == 1 || entry.food_bucks == 1) {
+        if (entry.snap === "True" || entry.wic === "True" || entry.food_bucks === "True" || entry.fresh_produce === "True" || entry.fmnp === "True" || entry.free_distribution === "True" ) {
             var acceptsText = $('<div></div>');
-            if (entry.SNAP == 1) {
+            if (entry.snap === "True") {
                 acceptsText.append(
                     $('<span class="snap accepts_icon"></span>').text('SNAP')
                 );
             }
-            if (entry.WIC == 1) {
+            if (entry.wic === "True") {
                 acceptsText.append(
                     $('<span class="wic accepts_icon"></span>').text('WIC')
                 );
             }
-            if (entry.food_bucks == 1) {
+            if (entry.food_bucks === "True") {
                 acceptsText.append(
                     $('<span class="foodbucks accepts_icon"></span>').text('Food Bucks')
                 );
             }
-            if (entry.fresh_produce == 1) {
+            if (entry.fresh_produce === "True") {
                 acceptsText.append(
                     $('<span class="freshproduce accepts_icon"></span>').text(
                         'Fresh Produce'
                     )
                 );
             }
-            if (entry.FMNP == 1) {
+            if (entry.fmnp === "True") {
                 acceptsText.append($('<br>'));
                 acceptsText.append(
                     $('<span class="fmnp accepts_icon"></span>').text(
                         "Farmer's Market Nutrition Program"
+                    )
+                );
+            }
+            if (entry.free_distribution === "True") {
+                acceptsText.append($('<br>'));
+                acceptsText.append(
+                    $('<span class="freedistribution accepts_icon"></span>').text(
+                        "Free Distribution"
                     )
                 );
             }
