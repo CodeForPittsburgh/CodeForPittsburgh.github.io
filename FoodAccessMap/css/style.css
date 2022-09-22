@@ -181,6 +181,7 @@ input[type='text'] {
 }
 
 .legend {
+  
   padding: 6px 8px;
   font: 14px Arial, Helvetica, sans-serif;
   background: white;
@@ -218,6 +219,11 @@ input[type='text'] {
 .togglepad {
   margin-top: 10px;
 }
+
+.url {
+  word-break: break-all;
+}
+
 /* @media screen and (orientation: landscape) {
   #rotate-device-warning {
     display: none;

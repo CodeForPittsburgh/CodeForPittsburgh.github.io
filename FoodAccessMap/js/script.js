@@ -60,16 +60,18 @@ function onEachFeature(feature, layer) {
           : '') +
         (feature.properties.url
           ? '<p><b>Website: </b>' +
-            "<a target='_blank' href='" +
+            "<a target='_blank' class='url' href='" +
             feature.properties.url +
             "'>" +
             feature.properties.url +
             '</a></p>'
           : '') +
-        (feature.properties.FNMP != 'NA' ? 'FMNP</br>' : '') +
-        (feature.properties.SNAP != 'NA' ? 'SNAP</br>' : '') +
-        (feature.properties.food_bucks == '1' ? 'Food Bucks</br>' : '') +
-        (feature.properties.fresh_produce != 'NA' ? 'Fresh Produce' : '')
+        (feature.properties.snap === 'True' ? 'SNAP</br>' : '') +
+        (feature.properties.wic ==='True' ? 'WIC</br>' : '')+
+        (feature.properties.fmnp ==='True' ? 'FMNP</br>' : '') +
+        (feature.properties.food_bucks ==='True' ? 'Food Bucks</br>' : '') +
+        (feature.properties.fresh_produce ==='True' ? 'Fresh Produce</br>' : '')+
+        (feature.properties.free_distribution ==='True' ? 'Free Distribution' : '') 
     );
     layer.bindPopup(popup);
   }
@@ -81,10 +83,10 @@ function getFilteredLocations(filters) {
       let include = filters.types.includes(feature.properties.type);
       let found = false;
 
-      // SNAP WIC FMNP food_bucks fresh_produce free_distribution
+      // snap wic fmnp food_bucks fresh_produce free_distribution
       for (let i = 0; i < filters.services.length; i++) {
         let token = filters.services[i];
-        if (feature.properties[token] == "True") {
+        if (feature.properties[token] === "True") {
           found = true;
         }
       }
@@ -169,9 +171,6 @@ function parseFilter() {
     selectedServices.push($(this).attr('name'));
   });
 
-  console.log(selectedTypes);
-  console.log(selectedServices);
-
   //Update foodLocations layer
   map.removeLayer(foodLocations);
   foodLocations = getFilteredLocations({ types: selectedTypes, services: selectedServices }).addTo(map);
@@ -187,10 +186,7 @@ function toggleFilters() {
 };
 
 $.get(
-  // This is the old dataset 
-  // 'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-map-data/master/food-data/processed-datasets/merged_datasets.csv',
-
-  //This is the new dataset put together by Larry 
+  //retreive the dataset
   'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-data-transformation/main/food-data/processed-datasets/merged_datasets.csv',
 
   function (csvString) {
@@ -200,17 +196,8 @@ $.get(
       dynamicTyping: true,
     }).data;
 
-    //testing if papa parse is using correct delimiter -- correctly detecting pipe char "|"
-    var results =  Papa.parse(csvString);
-    console.log(results.meta.delimiter);
-
-    var locationTypes = [...new Set(data.map((item) => item.type))];
-    locationTypes.sort();
-
-    //testing if array of objects correctly created
-    console.log(data);
-    console.log(data[data.findIndex(item => item.name === "Pittsburgh Market Square")])
-    console.log(data[data.findIndex(item => item.name === "Trinity Episcopal Cathedral")])
+    // make a list of different location types in the dataset and alphabatize it. used to make the legend
+    var locationTypes = [...new Set(data.map((item) => item.type))].sort();
 
     //Populate each row with data from csv
     for (var i in data) {
