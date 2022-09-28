@@ -56,6 +56,15 @@
       top: calc(50% - 20px);
     }
     /*Collapse sidebar content */
+    #sidebar.collapsed{
+      position: relative;
+      height: 7%;
+    }
+    #sidebar.collapsed .sidebar-tabs{
+      z-index: 1;
+      position: absolute;
+      height: 100%;
+    }
     #sidebar.collapsed .sidebar-content {
       height: 0%;
     }
