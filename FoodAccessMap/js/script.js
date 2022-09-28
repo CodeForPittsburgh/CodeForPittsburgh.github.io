@@ -189,7 +189,7 @@ function resetResultsRadius() {
   map.removeLayer(foodLocations);
   filterCircle.setStyle({ opacity: 0, fillOpacity: 0 });
   parseFilter();
-  updateResultsSidebar();
+  document.getElementById('results').innerHTML = "";
 };
 
 // Populates the map with only locations specified in the filters and within the search radius if radius is visible
