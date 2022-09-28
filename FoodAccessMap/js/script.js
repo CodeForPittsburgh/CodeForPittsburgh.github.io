@@ -77,9 +77,11 @@ function onEachFeature(feature, layer) {
   }
 }
 
-function getFilteredLocations(filters) {
+function getFilteredLocations() {
+  let filters = getFilterValues();
+
   return L.geoJson(points, {
-    filter: function (feature, layer) {
+    filter: function (feature) {
       let include = filters.types.includes(feature.properties.type);
       let found = false;
 
@@ -119,9 +121,22 @@ function animateCircle() {
   }, 20);
 };
 
+// Returns an object with arrays containing the filtered types and services from the search tab
+function getFilterValues() {
+  let selectedTypes = [];
+  $('#typeFilter input:checked').each(function () {
+    selectedTypes.push($(this).attr('name'));
+  });
+  let selectedServices = [];
+  $('#servicesFilter input:checked').each(function () {
+    selectedServices.push($(this).attr('name'));
+  });
+
+  return { types: selectedTypes, services: selectedServices };
+}
 
 //Clear map of previous results and add new results in radius around selected coordinates.
-function locateOnClick (latlng) {
+function locateOnClick(latlng) {
   results.clearLayers(); //Remove previous results.
   map.panTo(latlng, { duration: 1 });
   //Set coordinates and attributes of circle within which results will be exclusively displayed
@@ -131,11 +146,27 @@ function locateOnClick (latlng) {
   animateCircle();
   //Add new results in radius around selected coordinates.
   map.removeLayer(foodLocations);
+
+  //Add locations to map that are both included in the filters and within the search radius
+  let filters = getFilterValues();
   foodLocations = L.geoJson(points, {
-    filter: (x) =>
-        latlng.distanceTo(
-            L.latLng(x.geometry.coordinates[1], x.geometry.coordinates[0])
-        ) < mapSearchRadius,
+    filter: function (feature, layer) {     
+      let include = filters.types.includes(feature.properties.type);
+      let found = false;
+      let withinRadius = latlng.distanceTo(
+        L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0])
+      ) < mapSearchRadius;
+
+      // snap wic fmnp food_bucks fresh_produce free_distribution
+      for (let i = 0; i < filters.services.length; i++) {
+        let token = filters.services[i];
+        if (feature.properties[token] === "True") {
+          found = true;
+        }
+      }
+
+      return include && found && withinRadius;
+    },        
     onEachFeature,
     pointToLayer: function (feature, latlng) {
       return L.marker(latlng, {
@@ -152,28 +183,29 @@ function locateOnClick (latlng) {
   results.addLayer(L.marker(latlng));
 };
 
+// Hides the search radius on the map and shows all filtered locations
 function resetResultsRadius() {
-  results.clearLayers()
-  map.removeLayer(foodLocations)
-  filterCircle.setRadius(0)
-  filterCircle.setStyle({ opacity: 0, fillOpacity: 0 })
-  parseFilter()
-  updateResultsSidebar()
-}
-
-function parseFilter() {
-  var selectedTypes = [];
-  $('#typeFilter input:checked').each(function () {
-    selectedTypes.push($(this).attr('name'));
-  });
-  var selectedServices = [];
-  $('#servicesFilter input:checked').each(function () {
-    selectedServices.push($(this).attr('name'));
-  });
-
-  //Update foodLocations layer
+  results.clearLayers();
   map.removeLayer(foodLocations);
-  foodLocations = getFilteredLocations({ types: selectedTypes, services: selectedServices }).addTo(map);
+  filterCircle.setStyle({ opacity: 0, fillOpacity: 0 });
+  parseFilter();
+  updateResultsSidebar();
+};
+
+// Populates the map with only locations specified in the filters and within the search radius if radius is visible
+function parseFilter() {
+  //Get the current location of raidus on the map
+  let latlng = filterCircle._latlng;
+
+  //Clear foodLocations layer
+  map.removeLayer(foodLocations);
+
+  // Radius is created when map is created but is invisible. Radius is made visible on click. If radius is visible only show icons within the radius.
+  if (filterCircle.options.opacity === 0) {
+    foodLocations = getFilteredLocations().addTo(map);
+  }else {
+    locateOnClick(latlng);
+  }
 };
 
 //Toggles whether to show/hide filter panes in the search tab of sidebar
@@ -243,11 +275,12 @@ $.get(
 
 var firstUse = true;
 
-// Toggle Change Listener
+// Toggle Change Listener, updates the map when filters are toggled
 $('input:checkbox').change(function () {
   parseFilter();
 });
 
+// Listens for clicks on map. If it is the first click popup appears explaining search radius. Otherwise will show the radius and populate locations inside raidus.
 map.on('click', function (ev) {
   if (firstUse) {
     var popup = L.popup().setContent(
@@ -279,4 +312,3 @@ $("#customRange2").on('input propertychange', function (e) {
   $('#rangeval').html(mapSearchRadius);
   filterCircle.setRadius(mapSearchRadius);
 });
-
