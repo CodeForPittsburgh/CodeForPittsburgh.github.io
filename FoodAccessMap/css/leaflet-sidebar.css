@@ -7,27 +7,61 @@
   z-index: 2000; }
   .sidebar.collapsed {
     width: 40px; }
- @media screen and (max-width: 500px){
-    .sidebar {
-      height: 170px;
-      width: 85vw;
-      margin-right: 0;
-      border-bottom-color:rgba(0, 0, 0, 0.2);
-      border-bottom-style: solid;
-      border-bottom-width: 2px;
+  @media screen and (max-width: 500px){
+    /* Resize map and move sidebar elements into mobile layout */
+    #map {
+      height: 93%;
     }
-    .legend {
-      display: none;
+    #sidebar {
+      display: flex;
+      flex-direction: column-reverse;
+      width: 100%;
+      border: none;
+    }
+    #sidebar .sidebar-tabs {
+      position: relative;
+      height: 7%;
+      width: 100%;
+    }
+    #sidebar .sidebar-content {
+      position: relative;
+      left: 0;
+      height: 93%;
+      transition: height 500ms;
+    }
+    /* Style sidebar elements to take up the appropriate space in the new layout */
+    #sidebar .sidebar-tabs ul {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+    #sidebar .sidebar-tabs li {
+      height: 100%;
     }
     #searchInput {
       width: 100%;
     }
-    h2 {
-      font-size: 18px;
+    .input-group{
+      width: 100%;
     }
     div .col-md-2, div .col-md-4 {
       display: inline-block;
       width: 49%;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    i { 
+      position:relative;
+      top: calc(50% - 20px);
+    }
+    /*Collapse sidebar content */
+    #sidebar.collapsed .sidebar-content {
+      height: 0%;
+    }
+    /* Hide map legend in mobile layout and hide sidebar content when collapsed. */
+    .legend {
+      display: none;
     }
   }
   @media (min-width: 501px) and (max-width: 767px){
