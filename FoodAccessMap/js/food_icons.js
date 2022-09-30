@@ -40,7 +40,7 @@ function getIcon(type) {
         case 'convenience store':
             return convIcon;
             break;
-        case 'Grow PGH Garden':
+        case 'grow pgh garden':
             return growIcon;
             break;
         case "farmer's market":

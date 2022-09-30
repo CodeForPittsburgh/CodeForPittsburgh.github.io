@@ -100,6 +100,7 @@
                                     <input type="range" class="form-range" min="10" max="2000" value="500" id="customRange2">
 
                                         <span id="rangeval">500<!-- Default value --></span>
+                                        <span> meters</span>
                                     </label>
                                 </div>
                             </div>
@@ -130,7 +131,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label class="checkbox-inline togglepad">
-                                                <input type="checkbox" id="filterGrowPGHGarden" name="Grow PGH Garden" checked="checked" data-toggle="toggle">Grow PGH Garden
+                                                <input type="checkbox" id="filterGrowPGHGarden" name="grow pgh garden" checked="checked" data-toggle="toggle">Grow PGH Garden
                                             </label>
                                         </div>
                                     </div>
@@ -174,21 +175,21 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" id="filterSNAP" name="SNAP" checked="checked" data-toggle="toggle">SNAP
+                                            <input type="checkbox" id="filterSNAP" name="snap" checked="checked" data-toggle="toggle">SNAP
                                         </label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="checkbox-inline togglepad">
-                                            <input type="checkbox" id="filterWIC" name="WIC" checked="checked" data-toggle="toggle">WIC
+                                            <input type="checkbox" id="filterWIC" name="wic" checked="checked" data-toggle="toggle">WIC
                                         </label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="checkbox-inline togglepad">
-                                            <input type="checkbox" id="filterFMNP" name="FMNP" checked="checked" data-toggle="toggle">FMNP
+                                            <input type="checkbox" id="filterFMNP" name="fmnp" checked="checked" data-toggle="toggle">FMNP
                                         </label>
                                     </div>
                                 </div>
@@ -225,6 +226,8 @@
                 <h1 class="sidebar-header">Results<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
                 <br>
                 <p>Click on the map to get a list of food resources that are within walkable distance.</p>
+                <p>If you need to change the radius of the selected area use the radius slider in the search tab, clear the results with the button below, and click on the map again.</p>
+                <button type="button" class="btn btn-md" id="reset-radius">Clear Results</button>
                 <div id="results" class="container"></div>
             </div>
             <div class="sidebar-pane" id="about">

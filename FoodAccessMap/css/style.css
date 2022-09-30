@@ -26,6 +26,10 @@ html {
   width: 180px;
 }
 
+#reset-radius {
+  margin-bottom: 20px;
+}
+
 .geocoder-control-suggestion {
   list-style-type: none;
 }
@@ -38,6 +42,7 @@ html {
 
 #results {
   clear: left;
+  padding-left: 0px;
 }
 
 .entryDiv {
@@ -85,6 +90,11 @@ html {
 
 .fmnp {
   background-color: darkred;
+  color: white;
+}
+
+.freedistribution {
+  background-color: rgb(182, 182, 5);
   color: white;
 }
 
@@ -171,6 +181,7 @@ input[type='text'] {
 }
 
 .legend {
+  
   padding: 6px 8px;
   font: 14px Arial, Helvetica, sans-serif;
   background: white;
@@ -208,6 +219,11 @@ input[type='text'] {
 .togglepad {
   margin-top: 10px;
 }
+
+.url {
+  word-break: break-all;
+}
+
 /* @media screen and (orientation: landscape) {
   #rotate-device-warning {
     display: none;
