@@ -1,4 +1,7 @@
-document.querySelector('#reset-radius').addEventListener('click', resetResultsRadius)
+// Listens for click on clear results button in results tab
+document.getElementById('reset-radius').addEventListener('click', resetResultsRadius);
+// Listens for a change in the radius slider in search tab 
+document.getElementById('customRange2').addEventListener('change', parseFilter);
 
 $(document).ready(function () {
   if (window.matchMedia('(max-width: 767px)').matches) {
@@ -183,13 +186,16 @@ function locateOnClick(latlng) {
   results.addLayer(L.marker(latlng));
 };
 
-// Hides the search radius on the map and shows all filtered locations
+// Hides the search radius on the map and shows all filtered locations, if in mobile will close results tab to show map
 function resetResultsRadius() {
   results.clearLayers();
   map.removeLayer(foodLocations);
   filterCircle.setStyle({ opacity: 0, fillOpacity: 0 });
   parseFilter();
   document.getElementById('results').innerHTML = "";
+  if (window.matchMedia('(max-width: 500px)').matches) {
+    sidebar.close('resultlist');  
+  };
 };
 
 // Populates the map with only locations specified in the filters and within the search radius if radius is visible
@@ -216,6 +222,13 @@ function toggleFilters() {
     $('#filtersPane').hide();
   }
 };
+
+// Closes search tab when user pics search result on mobile
+search.on('results', function(){
+  if (window.matchMedia('(max-width: 500px)').matches) {
+    sidebar.close('search');  
+  }
+});
 
 $.get(
   //retreive the dataset

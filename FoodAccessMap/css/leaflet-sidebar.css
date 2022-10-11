@@ -29,6 +29,9 @@
       height: 93%;
       transition: height 500ms;
     }
+    .sidebar-close .fa-caret-left {
+      display: none;
+    }
     /* Style sidebar elements to take up the appropriate space in the new layout */
     #sidebar .sidebar-tabs ul {
       display: flex;
@@ -57,16 +60,16 @@
     }
     /*Collapse sidebar content */
     #sidebar.collapsed{
-      position: relative;
-      height: 7%;
+      pointer-events: none;
     }
     #sidebar.collapsed .sidebar-tabs{
       z-index: 1;
-      position: absolute;
-      height: 100%;
+      position: relative;
+      height: 7%;
+      pointer-events: auto;
     }
     #sidebar.collapsed .sidebar-content {
-      height: 0%;
+      height: 0;
     }
     /* Hide map legend in mobile layout and hide sidebar content when collapsed. */
     .legend {
@@ -90,8 +93,14 @@
     h2 {
       font-size: 18px;
     }
+    .sidebar-close .fa-caret-down {
+      display: none;
+    }
   }
   @media (min-width: 768px) {
+    .sidebar-close .fa-caret-down {
+      display: none;
+    }
     .sidebar {
       top: 10px;
       bottom: 10px;
