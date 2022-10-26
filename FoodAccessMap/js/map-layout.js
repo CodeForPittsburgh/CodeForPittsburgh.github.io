@@ -54,7 +54,8 @@ var mapBounds = L.latLngBounds(nwBoundsCorner, seBoundsCorner);
 var search = new L.esri.BootstrapGeocoder.search({
     inputTag: 'searchInput',
     placeholder: 'ex. Bloomfield',
-    searchBounds: mapBounds
+    searchBounds: mapBounds,
+    allowMultipleResults: false
 }).addTo(map);
 
 L.tileLayer(

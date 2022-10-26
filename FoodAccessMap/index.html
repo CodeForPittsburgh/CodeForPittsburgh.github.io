@@ -37,9 +37,8 @@
         <!-- Nav tabs -->
         <div class="sidebar-tabs">
             <ul role="tablist">
-                <li><a href="#home" role="tab"><i class="fa fa-home fa-lg"><!-- Make sure to vertically center this -->
-                        </i></a></li>
-                <li id="step2"><a href="#search" role="tab"><i class="fa fa-search fa-lg"></i></a></li>
+                <!--<li><a href="#home" role="tab"><i class="fa fa-home fa-lg"></i></a></li>--><!-- Make sure to vertically center this -->     
+                <li id="step2"><a href="#search" role="tab"><i class="fa fa-home fa-lg"></i></a></li>
                 <li><a href="#resultlist" role="tab"><i class="fa fa-bars fa-lg"></i></a></li>
                 <li><a href="#about" role="tab"><i class="fa fa-info fa-lg"></i></a></li>
                 <!--             <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> Use this if we want an icon that takes you to a link-->
@@ -48,13 +47,13 @@
 
         <!-- Tab panes -->
         <div class="sidebar-content">
-            <div class="sidebar-pane" id="home">
+            <!-- <div class="sidebar-pane" id="home">
                 <h1 class="sidebar-header">
                     Food Access Map
                     <span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span>
                 </h1>
 
-                <h2>Welcome to the Pittsburgh Food Access Map</h2>
+                
 
                 <p class="lorem">The aim of this project, made by Code for Pittsburgh w/ Pittsburgh Food Policy Council, is to create an app for mapping and locating food resources in Pittsburgh. The goal is to address food insecurity by allowing individuals to access the app and find what food resources are in their area.</p>
 
@@ -63,23 +62,25 @@
                         <li>By clicking directly on the map to see food resources that are within walkable distance.</li>
                         <li>Or using the search tab to select food locations by type and service provided.</li>
                     </ul> </p>
-            </div>
+            </div> -->
 
             <div class="sidebar-pane" id="search">
-                <h1 class="sidebar-header">Search<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span>
+                <h1 class="sidebar-header">Pittsburgh Food Access Map<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span>
                 </h1>
+                <h2>Welcome to the Pittsburgh Food Access Map</h2>
                 <div class="row">
-                    <div class="col-md-10">
-                        <input type="text" placeholder="Search.." id="searchInput">
+                    <div class="col-md-12">
+                        <input type="text" placeholder="Search..." id="searchInput">
                     </div>
-                    <div class="col-md-2">
 
-                    </div>
+                    <!-- <div class="col-md-2">
+
+                    </div> -->
 
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-4">
-                    <button type="button" class="btn btn-md">Search</button>
+                    
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-md" onClick="toggleFilters()">Filters</button>
@@ -88,26 +89,8 @@
 
                     </div>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                    <div id="servicesFilter" class="panel panel-default togglepad">
-                        <div class="panel-heading">Radius</div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="checkbox-inline togglepad">
-                                    <input type="range" class="form-range" min="10" max="2000" value="500" id="customRange2">
-
-                                        <span id="rangeval">500<!-- Default value --></span>
-                                        <span> meters</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </div> -->
+                
                 <div id="filtersPane">
                     <div class="row">
                         <div class="col-md-12">
@@ -163,6 +146,13 @@
                                             </label>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="checkbox-inline togglepad">
+                                                <input type="checkbox" id="filterAllTypes" name="toggleAllTypes" checked="checked" data-toggle="toggle">Toggle All
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -214,6 +204,13 @@
                                         </label>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline togglepad">
+                                            <input type="checkbox" id="filterAllServices" name="allServices" checked="checked" data-toggle="toggle">Toggle All
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -225,15 +222,37 @@
             <div class="sidebar-pane" id="resultlist">
                 <h1 class="sidebar-header">Results<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span></h1>
                 <br>
-                <p>Click on the map to get a list of food resources that are within walkable distance.</p>
+                <p>Click on the map to get a list of nearby food resources.</p>
+
+                <div class="row"><!--Start radius slider -->
+                    <div class="col-md-12">
+                        <div id="servicesFilter" class="panel panel-default togglepad">
+                            <div class="panel-heading">Distance</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline togglepad">
+                                            <input type="range" class="form-range" min="400" max="1600" value="500" step="400" id="customRange2">
+                                            <span id="rangeval">500<!-- Default value --></span>
+                                            <span> meters</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>             <!--End radius slider -->
+
                 <button type="button" class="btn btn-md" id="reset-radius">Clear Results</button>
                 <div id="results" class="container"></div>
             </div>
             <div class="sidebar-pane" id="about">
                 <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span></h1>
                 <br>
-                <p>This app was made by Code for Pittsburgh using:</p>
-                <ul>
+                <p>This app was made by awesome volunteers from Code for Pittsburgh!</p>
+                <p>To learn more and contribute, visit our <a href="https://github.com/CodeForPittsburgh/food-access-map-data">GitHub</a> page.</p>
+                <p>Thank you to the <a href="https://www.pittsburghfoodpolicy.org/">Pittsburgh Food Policy Council</a> for ...</p>
+                <!-- <ul>
                     <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
                     <li><a href="https://introjs.com/">Intro JS</a></li>
                     <li><a href="http://leafletjs.com/">Leaflet</a></li>
@@ -241,7 +260,7 @@
                     <li><a href="https://github.com/domoritz/leaflet-locatecontrol">Leaflet Locate Control</a></li>
                     <li><a href="https://fontawesome.com/">Font Awesome</a></li>
 
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@ html {
 }
 
 #searchInput {
-  width: 180px;
+  width: 100%;
 }
 
 #reset-radius {

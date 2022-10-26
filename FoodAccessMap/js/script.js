@@ -293,6 +293,24 @@ $('input:checkbox').change(function () {
   parseFilter();
 });
 
+//Listens for change in toggle all in types pane and updates all types filters accordingly
+$('#filterAllTypes').change(function () {
+    if ($('#filterAllTypes').prop('checked')) {
+      $("#filterSupermarket,#filterConvenienceStore,#filterGrowPGHGarden,#filterFarmersMarket,#filterSummerMeals,#filterFoodBanks,#filterOther").prop('checked', true).change();
+    } else {
+      $("#filterSupermarket,#filterConvenienceStore,#filterGrowPGHGarden,#filterFarmersMarket,#filterSummerMeals,#filterFoodBanks,#filterOther").prop('checked', false).change();
+    }
+});
+
+//Listens for change in toggle all in services pane and updates all service filters accordingly
+$('#filterAllServices').change(function () {
+  if ($('#filterAllServices').prop('checked')) {
+    $("#filterSNAP,#filterWIC,#filterFMNP,#filterFoodBucks,#filterFreshProduce,#filterFreeDistribution").prop('checked', true).change();
+  } else {
+    $("#filterSNAP,#filterWIC,#filterFMNP,#filterFoodBucks,#filterFreshProduce,#filterFreeDistribution").prop('checked', false).change();
+  }
+});
+
 // Listens for clicks on map. If it is the first click popup appears explaining search radius. Otherwise will show the radius and populate locations inside raidus.
 map.on('click', function (ev) {
   if (firstUse) {
@@ -317,7 +335,7 @@ setTimeout(function () {
   $('.pointer').fadeOut('slow');
 }, 3400);
 setTimeout(function () {
-  sidebar.open('home');
+  sidebar.open('search');
 }, 500);
 
 $("#customRange2").on('input propertychange', function (e) {
