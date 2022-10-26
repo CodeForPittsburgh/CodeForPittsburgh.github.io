@@ -1,7 +1,9 @@
 // Listens for click on clear results button in results tab
 document.getElementById('reset-radius').addEventListener('click', resetResultsRadius);
-// Listens for a change in the radius slider in search tab 
+// Listens for a change in the radius slider in results tab 
 document.getElementById('customRange2').addEventListener('change', parseFilter);
+
+document.getElementById('view-tutorial').addEventListener('click', startIntro);
 
 $(document).ready(function () {
   if (window.matchMedia('(max-width: 767px)').matches) {
@@ -124,7 +126,7 @@ function animateCircle() {
   }, 20);
 };
 
-// Returns an object with arrays containing the filtered types and services from the search tab
+// Returns an object with arrays containing the filtered types and services from the home tab
 function getFilterValues() {
   let selectedTypes = [];
   $('#typeFilter input:checked').each(function () {
@@ -184,6 +186,13 @@ function locateOnClick(latlng) {
   // Add search locations to sidebar
   updateResultsSidebar(foodLocations);
   results.addLayer(L.marker(latlng));
+
+  //Check local storage if intro was previously completed. If not, run it.
+  if (localStorage.getItem('radius-intro-complete') != "true") {
+    radiusIntro();
+  }
+  //Then set intro was being complete afterward.
+  localStorage.setItem('radius-intro-complete','true');
 };
 
 // Hides the search radius on the map and shows all filtered locations, if in mobile will close results tab to show map
@@ -214,7 +223,7 @@ function parseFilter() {
   }
 };
 
-//Toggles whether to show/hide filter panes in the search tab of sidebar
+//Toggles whether to show/hide filter panes in the home tab of sidebar
 function toggleFilters() {
   if ($('#filtersPane').is(':hidden')) {
     $('#filtersPane').show();
@@ -223,10 +232,12 @@ function toggleFilters() {
   }
 };
 
-// Closes search tab when user pics search result on mobile
+// Closes home tab when user pics home result on mobile
 search.on('results', function(){
+  resetResultsRadius();
+
   if (window.matchMedia('(max-width: 500px)').matches) {
-    sidebar.close('search');  
+    sidebar.close('home');  
   }
 });
 
@@ -335,7 +346,7 @@ setTimeout(function () {
   $('.pointer').fadeOut('slow');
 }, 3400);
 setTimeout(function () {
-  sidebar.open('search');
+  sidebar.open('home');
 }, 500);
 
 $("#customRange2").on('input propertychange', function (e) {

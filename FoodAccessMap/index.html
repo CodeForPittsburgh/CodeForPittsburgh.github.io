@@ -38,8 +38,8 @@
         <div class="sidebar-tabs">
             <ul role="tablist">
                 <!--<li><a href="#home" role="tab"><i class="fa fa-home fa-lg"></i></a></li>--><!-- Make sure to vertically center this -->     
-                <li id="step2"><a href="#search" role="tab"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="#resultlist" role="tab"><i class="fa fa-bars fa-lg"></i></a></li>
+                <li id="step2"><a href="#home" role="tab"><i class="fa fa-home fa-lg"></i></a></li>
+                <li id="resultTab"><a href="#resultlist" role="tab"><i class="fa fa-bars fa-lg"></i></a></li>
                 <li><a href="#about" role="tab"><i class="fa fa-info fa-lg"></i></a></li>
                 <!--             <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> Use this if we want an icon that takes you to a link-->
             </ul>
@@ -47,36 +47,18 @@
 
         <!-- Tab panes -->
         <div class="sidebar-content">
-            <!-- <div class="sidebar-pane" id="home">
-                <h1 class="sidebar-header">
-                    Food Access Map
-                    <span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span>
-                </h1>
 
-                
-
-                <p class="lorem">The aim of this project, made by Code for Pittsburgh w/ Pittsburgh Food Policy Council, is to create an app for mapping and locating food resources in Pittsburgh. The goal is to address food insecurity by allowing individuals to access the app and find what food resources are in their area.</p>
-
-                <p>Users can interact with the map in two ways.
-                    <ul>
-                        <li>By clicking directly on the map to see food resources that are within walkable distance.</li>
-                        <li>Or using the search tab to select food locations by type and service provided.</li>
-                    </ul> </p>
-            </div> -->
-
-            <div class="sidebar-pane" id="search">
+            <div class="sidebar-pane" id="home">
                 <h1 class="sidebar-header">Pittsburgh Food Access Map<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span>
                 </h1>
                 <h2>Welcome to the Pittsburgh Food Access Map</h2>
+
+                <button type="button" class="btn btn-md" id="view-tutorial">View Tutorial</button>
+
                 <div class="row">
                     <div class="col-md-12">
                         <input type="text" placeholder="Search..." id="searchInput">
                     </div>
-
-                    <!-- <div class="col-md-2">
-
-                    </div> -->
-
                 </div>
                 <!-- <div class="row">
                     <div class="col-md-4">
@@ -86,9 +68,7 @@
                         <button type="button" class="btn btn-md" onClick="toggleFilters()">Filters</button>
                     </div>
                     <div class="col-md-8">
-
                     </div>
-
                 </div> -->
                 
                 <div id="filtersPane">
@@ -224,7 +204,7 @@
                 <br>
                 <p>Click on the map to get a list of nearby food resources.</p>
 
-                <div class="row"><!--Start radius slider -->
+                <div class="row" id="radiusSlider"><!--Start radius slider -->
                     <div class="col-md-12">
                         <div id="servicesFilter" class="panel panel-default togglepad">
                             <div class="panel-heading">Distance</div>
@@ -232,8 +212,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="checkbox-inline togglepad">
-                                            <input type="range" class="form-range" min="400" max="1600" value="500" step="400" id="customRange2">
-                                            <span id="rangeval">500<!-- Default value --></span>
+                                            <input type="range" class="form-range" min="400" max="1600" value="800" step="400" id="customRange2">
+                                            <span id="rangeval">800<!-- Default value --></span>
                                             <span> meters</span>
                                         </label>
                                     </div>

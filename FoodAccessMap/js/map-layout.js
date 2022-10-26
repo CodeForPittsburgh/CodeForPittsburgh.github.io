@@ -31,7 +31,7 @@ L.control.scale().addTo(map);
 // Create a Tile Layer and add it to the map
 var foodLocations = new L.FeatureGroup();
 var points = [];
-var mapSearchRadius = 500;
+var mapSearchRadius = 800;
 var distanceLine = L.polyline(
     [
         [0, 0],
