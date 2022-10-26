@@ -7,17 +7,17 @@ function startIntro() {
             },
             {
                 element: '#searchInput',
-                intro: 'You can use search bar to focus the map on a specific address or area of the city.',
+                intro: 'You can use the search bar to focus the map on a specific address or area of the city.',
                 position: 'right'
             },
             {
                 element: '#filtersPane',
-                intro: 'Select filters to limit what kinds of food sources you would like to view',
+                intro: 'The filters on the home tab let you limit what kinds of food sources you would like to view.',
                 position: 'right'
                 
             },
             {
-                intro: '👆 Click anywhere on the map to get a list of nearby food resources.',
+                intro: '👆 You can click anywhere on the map to get a list of nearby food resources.',
                 position: 'right'
                 
             },
@@ -44,7 +44,7 @@ function radiusIntro() {
         steps: [
             {
                 element: '#resultTab',
-                intro: 'The results tab shows a list of food sources within the circle marked on the map.',
+                intro: 'The results tab shows a list of food sources within the circled area on the map.',
                 position: 'right'
             },
             {
@@ -54,7 +54,7 @@ function radiusIntro() {
             },
             {
                 element: '#reset-radius',
-                intro: 'You can clear the circle on the map and the list of locations below using the Clear Results button.',
+                intro: 'You can clear the circle on the map and the list of locations within the circle by using the Clear Results button.',
                 position: 'right'
             },
         ],
