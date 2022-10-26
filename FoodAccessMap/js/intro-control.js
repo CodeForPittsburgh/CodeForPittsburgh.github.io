@@ -7,7 +7,7 @@ function startIntro() {
             },
             {
                 element: '#searchInput',
-                intro: 'You can use search bar to focus the map on a specific address or area in the burgh.',
+                intro: 'You can use search bar to focus the map on a specific address or area of the city.',
                 position: 'right'
             },
             {

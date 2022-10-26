@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Access Map</title>
+    <title>Pittsburgh Food Access Map</title>
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -36,8 +36,7 @@
     <div id="sidebar" class="sidebar collapsed">
         <!-- Nav tabs -->
         <div class="sidebar-tabs">
-            <ul role="tablist">
-                <!--<li><a href="#home" role="tab"><i class="fa fa-home fa-lg"></i></a></li>--><!-- Make sure to vertically center this -->     
+            <ul role="tablist">   
                 <li id="step2"><a href="#home" role="tab"><i class="fa fa-home fa-lg"></i></a></li>
                 <li id="resultTab"><a href="#resultlist" role="tab"><i class="fa fa-bars fa-lg"></i></a></li>
                 <li><a href="#about" role="tab"><i class="fa fa-info fa-lg"></i></a></li>
@@ -54,22 +53,14 @@
                 <h2>Welcome to the Pittsburgh Food Access Map</h2>
 
                 <button type="button" class="btn btn-md" id="view-tutorial">View Tutorial</button>
+                
+                <p class ='mobile'>Use the search bar to focus on an area of the city.</p>
 
                 <div class="row">
                     <div class="col-md-12">
                         <input type="text" placeholder="Search..." id="searchInput">
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md-4">
-                    
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-md" onClick="toggleFilters()">Filters</button>
-                    </div>
-                    <div class="col-md-8">
-                    </div>
-                </div> -->
                 
                 <div id="filtersPane">
                     <div class="row">
@@ -195,8 +186,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
             <div class="sidebar-pane" id="resultlist">
@@ -207,7 +196,7 @@
                 <div class="row" id="radiusSlider"><!--Start radius slider -->
                     <div class="col-md-12">
                         <div id="servicesFilter" class="panel panel-default togglepad">
-                            <div class="panel-heading">Distance</div>
+                            <div class="panel-heading">Radius</div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -232,15 +221,6 @@
                 <p>This app was made by awesome volunteers from Code for Pittsburgh!</p>
                 <p>To learn more and contribute, visit our <a href="https://github.com/CodeForPittsburgh/food-access-map-data">GitHub</a> page.</p>
                 <p>Thank you to the <a href="https://www.pittsburghfoodpolicy.org/">Pittsburgh Food Policy Council</a> for ...</p>
-                <!-- <ul>
-                    <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
-                    <li><a href="https://introjs.com/">Intro JS</a></li>
-                    <li><a href="http://leafletjs.com/">Leaflet</a></li>
-                    <li><a href="https://github.com/Turbo87/sidebar-v2/">Leaflet Sidebar v2</a></li>
-                    <li><a href="https://github.com/domoritz/leaflet-locatecontrol">Leaflet Locate Control</a></li>
-                    <li><a href="https://fontawesome.com/">Font Awesome</a></li>
-
-                </ul> -->
             </div>
         </div>
     </div>

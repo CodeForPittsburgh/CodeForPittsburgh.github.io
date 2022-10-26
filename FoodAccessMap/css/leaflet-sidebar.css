@@ -49,6 +49,9 @@
     .input-group{
       width: 100%;
     }
+    .mobile {
+      display: block;
+    }
     div .col-md-2, div .col-md-4 {
       display: inline-block;
       width: 49%;
@@ -89,6 +92,9 @@
     .legend {
       display: none;
     }
+    .mobile {
+      display: block;
+    }
     #searchInput {
       width: 100%;
     }
@@ -100,6 +106,9 @@
     }
   }
   @media (min-width: 768px) {
+    .mobile {
+      display: none;
+    }
     .sidebar-close .fa-caret-down {
       display: none;
     }

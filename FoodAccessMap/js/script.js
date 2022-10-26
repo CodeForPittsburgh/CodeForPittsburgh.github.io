@@ -2,7 +2,7 @@
 document.getElementById('reset-radius').addEventListener('click', resetResultsRadius);
 // Listens for a change in the radius slider in results tab 
 document.getElementById('customRange2').addEventListener('change', parseFilter);
-
+// Listens for click on View Tutorial button and reruns tutorial script
 document.getElementById('view-tutorial').addEventListener('click', startIntro);
 
 $(document).ready(function () {
@@ -187,12 +187,15 @@ function locateOnClick(latlng) {
   updateResultsSidebar(foodLocations);
   results.addLayer(L.marker(latlng));
 
-  //Check local storage if intro was previously completed. If not, run it.
-  if (localStorage.getItem('radius-intro-complete') != "true") {
-    radiusIntro();
+  
+  if (window.matchMedia('(min-width: 767px)').matches) {
+    //Check local storage if search raidus intro was previously completed. If not, run it.
+    if (localStorage.getItem('radius-intro-complete') != "true") {
+      radiusIntro();
+    }
+    //Then set radius intro was completed afterward.
+    localStorage.setItem('radius-intro-complete','true');
   }
-  //Then set intro was being complete afterward.
-  localStorage.setItem('radius-intro-complete','true');
 };
 
 // Hides the search radius on the map and shows all filtered locations, if in mobile will close results tab to show map
@@ -232,7 +235,7 @@ function toggleFilters() {
   }
 };
 
-// Closes home tab when user pics home result on mobile
+// Resets search radius when search bar is used, will close the home tab if user is on mobile.
 search.on('results', function(){
   resetResultsRadius();
 
