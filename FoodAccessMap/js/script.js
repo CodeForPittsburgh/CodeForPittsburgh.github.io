@@ -88,7 +88,7 @@ function onEachFeature(feature, layer) {
 
 function getFilteredLocations() {
   let filters = getFilterValues();
-  
+
   return L.geoJson(points, {
     filter: function (feature) {
       let include = filters.types.includes(feature.properties.type);
@@ -195,7 +195,7 @@ function locateOnClick(latlng) {
   if (window.matchMedia('(min-width: 767px)').matches) {
     //Check local storage if search raidus intro was previously completed. If not, run it.
     if (localStorage.getItem('radius-intro-complete') != "true") {
-      radiusIntro();
+      resultsIntro();
     }
     //Then set radius intro was completed afterward.
     localStorage.setItem('radius-intro-complete','true');

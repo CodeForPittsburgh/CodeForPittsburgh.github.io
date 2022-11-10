@@ -40,7 +40,7 @@ function startIntro() {
 function resultsIntro() {
     var intro = introJs();
     intro.setOptions({
-        scrollToElement: false,
+        // scrollToElement: false,
         steps: [
             {
                 element: '#resultTab',
