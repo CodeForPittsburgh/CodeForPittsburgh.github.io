@@ -22,7 +22,7 @@ function startIntro() {
                 
             },
             {
-                element: '#view-tutorial',
+                element: '#home-tutorial',
                 intro: 'If you need to see these instructions again you can click the View Tutorial button at any time.',
                 position: 'right'
             }
@@ -37,7 +37,7 @@ function startIntro() {
     intro.start();
 }
 
-function radiusIntro() {
+function resultsIntro() {
     var intro = introJs();
     intro.setOptions({
         scrollToElement: false,
@@ -55,6 +55,11 @@ function radiusIntro() {
             {
                 element: '#reset-radius',
                 intro: 'You can clear the circle on the map and the list of locations within the circle by using the Clear Results button.',
+                position: 'right'
+            },
+            {
+                element: '#results-tutorial',
+                intro: 'If you need to see these instructions again you can click the View Tutorial button at any time.',
                 position: 'right'
             },
         ],

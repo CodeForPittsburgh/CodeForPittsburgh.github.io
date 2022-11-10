@@ -80,7 +80,7 @@
     .legend {
       display: none;
     }
-    #view-tutorial {
+    #home-tutorial, #results-tutorial {
       display: none;
     }
   }

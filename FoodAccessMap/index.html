@@ -1,126 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pittsburgh Food Access Map</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pittsburgh Food Access Map</title>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
-
-    <!-- Leaflet Scripts-->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
-    <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet-debug.js"></script>
-    <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder-debug.js"></script>
+        <!-- Leaflet Scripts-->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+        <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet-debug.js"></script>
+        <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder-debug.js"></script>
 
 
-    <!-- Bootstrap Stylesheets   -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap Stylesheets   -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css">
 
-    <!-- Custom and Miscellaneous -->
-    <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/7076673?s=200&v=4">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/leaflet-sidebar.css" />
-    <link rel="stylesheet" href="./css/introjs.css">
+        <!-- Custom and Miscellaneous -->
+        <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/7076673?s=200&v=4">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/leaflet-sidebar.css" />
+        <link rel="stylesheet" href="./css/introjs.css">
+    </head>
 
-</head>
+    <body>
+        <!-- Map Container -->
+        <div id="map"></div>
+        
+        <!-- Sidebar Conatiner -->
+        <div id="sidebar" class="sidebar collapsed">
+            <!-- Nav tabs -->
+            <div class="sidebar-tabs">
+                <ul role="tablist">   
+                    <li id="step2"><a href="#home" role="tab"><i class="fa fa-home fa-lg"></i></a></li>
+                    <li id="resultTab"><a href="#resultlist" role="tab"><i class="fa fa-bars fa-lg"></i></a></li>
+                    <li><a href="#about" role="tab"><i class="fa fa-info fa-lg"></i></a></li>
+                    <!--             <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> Use this if we want an icon that takes you to a link-->
+                </ul>
+            </div>
 
-<body>
-    <div id="map"></div>
-    <div id="sidebar" class="sidebar collapsed">
-        <!-- Nav tabs -->
-        <div class="sidebar-tabs">
-            <ul role="tablist">   
-                <li id="step2"><a href="#home" role="tab"><i class="fa fa-home fa-lg"></i></a></li>
-                <li id="resultTab"><a href="#resultlist" role="tab"><i class="fa fa-bars fa-lg"></i></a></li>
-                <li><a href="#about" role="tab"><i class="fa fa-info fa-lg"></i></a></li>
-                <!--             <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> Use this if we want an icon that takes you to a link-->
-            </ul>
-        </div>
+            <!-- Tab panes -->
+            <div class="sidebar-content">
 
-        <!-- Tab panes -->
-        <div class="sidebar-content">
+                <!-- Home Tab -->
+                <div class="sidebar-pane" id="home">
+                    <h1 class="sidebar-header">Pittsburgh Food Access Map<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span></h1>
+                    <h2>Welcome to the Pittsburgh Food Access Map</h2>
 
-            <div class="sidebar-pane" id="home">
-                <h1 class="sidebar-header">Pittsburgh Food Access Map<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span>
-                </h1>
-                <h2>Welcome to the Pittsburgh Food Access Map</h2>
+                    <button type="button" class="btn btn-md" id="home-tutorial">View Tutorial</button>
 
-                <button type="button" class="btn btn-md" id="view-tutorial">View Tutorial</button>
-                
-                <p class ='mobile'>Use the search bar to focus on an area of the city.</p>
+                    <p class ='mobile'>Use the search bar to focus on an area of the city.</p>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="text" placeholder="Search..." id="searchInput">
-                    </div>
-                </div>
-                
-                <div id="filtersPane">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="typeFilter" class="panel panel-default togglepad" >
-                                <div class="panel-heading">Types</div>
+                            <input type="text" placeholder="Search..." id="searchInput">
+                        </div>
+                    </div>
+                    
+                    <!-- Home Tab Filters -->
+                    <div id="filtersPane">                      
+                        <!-- Type Filters -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                
+                                <div id="typeFilter" class="panel panel-default togglepad" >
+                                    <div class="panel-heading">
+                                        Types
+                                    </div>
+
+                                    <div class="panel-body">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterSupermarket" name="supermarket" checked="checked" data-toggle="toggle">Supermarket
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterConvenienceStore" name="convenience store" checked="checked" data-toggle="toggle">Convenience Store
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterGrowPGHGarden" name="grow pgh garden" checked="checked" data-toggle="toggle">Grow PGH Garden
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterFarmersMarket" name="farmer's market" checked="checked" data-toggle="toggle">Farmer's Market
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input class="switch" type="checkbox" id="filterSummerMeals" name="summer meal site" checked="checked" data-toggle="toggle">Summer Meal Site
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterFoodBanks" name="food bank site" checked="checked" data-toggle="toggle">Food Bank Site
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterOther" name="other" checked="checked" data-toggle="toggle">Other
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad filter-all">
+                                                    <input type="checkbox" id="filterAllTypes" name="toggleAllTypes" checked="checked" data-toggle="toggle"><strong>Toggle All Types</strong>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Services Filters -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="servicesFilter" class="panel panel-default togglepad">
+                                    <div class="panel-heading">
+                                        Services
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="filterSNAP" name="snap" checked="checked" data-toggle="toggle">SNAP
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterWIC" name="wic" checked="checked" data-toggle="toggle">WIC
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterFMNP" name="fmnp" checked="checked" data-toggle="toggle">FMNP
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterFoodBucks" name="food_bucks" checked="checked" data-toggle="toggle">Food Bucks
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterFreshProduce" name="fresh_produce" checked="checked" data-toggle="toggle">Fresh Produce
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterFreeDistribution" name="free_distribution" checked="checked" data-toggle="toggle">Free Distribution
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad">
+                                                    <input type="checkbox" id="filterFoodRX" name="food_rx" checked="checked" data-toggle="toggle">Food RX
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline togglepad filter-all">
+                                                    <input type="checkbox" id="filterAllServices" name="allServices" checked="checked" data-toggle="toggle"><strong>Toggle All Services</strong>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Tab -->
+                <div class="sidebar-pane" id="resultlist">
+                    <h1 class="sidebar-header">Results<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span></h1>
+                    <br>
+                    <p>Click on the map to get a list of nearby food resources.</p>
+
+                    <!--Radius Slider -->
+                    <div class="row" id="radiusSlider">
+                        <div class="col-md-12">
+                            <div id="servicesFilter" class="panel panel-default togglepad">
+                                <div class="panel-heading">
+                                    Radius
+                                </div>
+
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" id="filterSupermarket" name="supermarket" checked="checked" data-toggle="toggle">Supermarket
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
                                             <label class="checkbox-inline togglepad">
-                                                <input type="checkbox" id="filterConvenienceStore" name="convenience store" checked="checked" data-toggle="toggle">Convenience Store
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="checkbox-inline togglepad">
-                                                <input type="checkbox" id="filterGrowPGHGarden" name="grow pgh garden" checked="checked" data-toggle="toggle">Grow PGH Garden
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="checkbox-inline togglepad">
-                                                <input type="checkbox" id="filterFarmersMarket" name="farmer's market" checked="checked" data-toggle="toggle">Farmer's Market
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="checkbox-inline togglepad">
-                                                <input type="checkbox" id="filterSummerMeals" name="summer meal site" checked="checked" data-toggle="toggle">Summer Meal Site
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="checkbox-inline togglepad">
-                                                <input type="checkbox" id="filterFoodBanks" name="food bank site" checked="checked" data-toggle="toggle">Food Bank Site
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="checkbox-inline togglepad">
-                                                <input type="checkbox" id="filterOther" name="other" checked="checked" data-toggle="toggle">Other
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="checkbox-inline togglepad">
-                                                <input type="checkbox" id="filterAllTypes" name="toggleAllTypes" checked="checked" data-toggle="toggle">Toggle All
+                                                <input type="range" class="form-range" min="402.25" max="1609" value="805" step="402.25" id="customRange2">
+                                                <span id="rangeval">0.50</span><!-- Default value -->
+                                                <span>miles</span>
                                             </label>
                                         </div>
                                     </div>
@@ -128,117 +251,112 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                        <div id="servicesFilter" class="panel panel-default togglepad">
-                            <div class="panel-heading">Services</div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" id="filterSNAP" name="snap" checked="checked" data-toggle="toggle">SNAP
-                                        </label>
+
+                    <button type="button" class="btn btn-md" id="results-tutorial">View Tutorial</button>
+                    <button type="button" class="btn btn-md" id="reset-radius">Clear Results</button>
+                    <div id="results" class="container"></div>
+                </div>
+                
+                <!-- About Tab -->
+                <div class="sidebar-pane" id="about">
+                    <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span></h1>
+                    <br>
+                    <p>This app was made by awesome volunteers from Code for Pittsburgh!</p>
+                    <p>To learn more and contribute, visit our <a href="https://github.com/CodeForPittsburgh/food-access-map-data">GitHub</a> page.</p>
+                    <p>Thank you to the <a href="https://www.pittsburghfoodpolicy.org/">Pittsburgh Food Policy Council</a> for sponsoring this project!</p>
+
+                    <!-- Missing Location Form -->
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default togglepad">
+                                    <div class="panel-heading">
+                                        <p>Do you know of a location that isn't on the map?</p>
+                                        <p>Please fill out the form below so we can add it.</p>
+                                        <span>Thank you!</span>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="checkbox-inline togglepad">
-                                            <input type="checkbox" id="filterWIC" name="wic" checked="checked" data-toggle="toggle">WIC
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="checkbox-inline togglepad">
-                                            <input type="checkbox" id="filterFMNP" name="fmnp" checked="checked" data-toggle="toggle">FMNP
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="checkbox-inline togglepad">
-                                            <input type="checkbox" id="filterFoodBucks" name="food_bucks" checked="checked" data-toggle="toggle">Food Bucks
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="checkbox-inline togglepad">
-                                            <input type="checkbox" id="filterFreshProduce" name="fresh_produce" checked="checked" data-toggle="toggle">Fresh Produce
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="checkbox-inline togglepad">
-                                            <input type="checkbox" id="filterFreeDistribution" name="free_distribution" checked="checked" data-toggle="toggle">Free Distribution
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="checkbox-inline togglepad">
-                                            <input type="checkbox" id="filterAllServices" name="allServices" checked="checked" data-toggle="toggle">Toggle All
-                                        </label>
+
+                                    <div class="panel-body">
+                                        <form action="https://formsubmit.co/110975dc284b87d1236de4b330ea0dc3" method="POST" id="missing-location">
+                                            <input type="hidden" name="_subject" value="A user has submitted a location for the Pittsburgh Food Access Map.">
+                                            <span>* Required Field</span>
+                                            <div class="form-group">
+                                              <label for="name">Location Name *</label>
+                                              <input type="text" class="form-control" name="name" placeholder="Location Name" maxlength="100" required>
+                                            </div>
+                                        
+                                            <div class="form-group">
+                                                <label for="type">Location Type *</label>
+                                                <select class="form-control"  name="type" required>
+                                                    <option value="" selected></option>
+                                                    <option>Convenience Store</option>
+                                                    <option>Farmer's Market</option>
+                                                    <option>Food Bank Site</option>
+                                                    <option>Grow Pgh Garden</option>
+                                                    <option>Summer Meal Site</option>
+                                                    <option>Supermarket</option>
+                                                    <option>Other</option>
+                                                </select>
+                                            </div>
+                                        
+                                            <div class="form-group">
+                                              <label for="address">Address *</label>
+                                              <input type="text" class="form-control" name="address" placeholder="1234 Main St" maxlength="100" required>
+                                            </div>
+                                        
+                                            <div class="form-group">
+                                              <label for="address2">Address line 2</label>
+                                              <input type="text" class="form-control" name="address2" placeholder="Apartment, studio, or floor" maxlength="100">
+                                            </div>
+                                        
+                                            <div class="form-group">
+                                              <label for="city">City *</label>
+                                              <input type="text" class="form-control" name="city" placeholder="Pittsburgh" maxlength="100" required>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="state">State</label>
+                                                    <select name="state" class="form-control">
+                                                      <option selected>PA</option>
+                                                    </select>
+                                                  </div>
+                                              
+                                                  <div class="form-group col-md-6">
+                                                    <label for="zip">Zip *</label>
+                                                    <input type="text" class="form-control" name="zip" placeholder="15222" maxlength="5" required>
+                                                  </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                              <label for="notes">Notes</label>
+                                              <textarea class="form-control" name="notes" rows="3" maxlength="200"></textarea>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
-            <div class="sidebar-pane" id="resultlist">
-                <h1 class="sidebar-header">Results<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span></h1>
-                <br>
-                <p>Click on the map to get a list of nearby food resources.</p>
 
-                <div class="row" id="radiusSlider"><!--Start radius slider -->
-                    <div class="col-md-12">
-                        <div id="servicesFilter" class="panel panel-default togglepad">
-                            <div class="panel-heading">Radius</div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="checkbox-inline togglepad">
-                                            <input type="range" class="form-range" min="400" max="1600" value="800" step="400" id="customRange2">
-                                            <span id="rangeval">800<!-- Default value --></span>
-                                            <span> meters</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>             <!--End radius slider -->
+        <!-- partial -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        <script src='https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js'></script>
+        <script src='https://unpkg.com/leaflet-knn@0.1.0/leaflet-knn.js'></script>
+        <script src="js/food_icons.js"></script>
+        <script src="js/intro-control.js"></script>
+        <script src="js/sidebar-update.js"></script>
+        <script src="js/imported/leaflet-sidebar.js"></script>
+        <script src="js/imported/bootstrap-geocoder.js"></script>
+        <script src="js/imported/intro.js"></script>
+        <script src="js/map-layout.js"></script>
+        <script src="js/script.js"></script>
 
-                <button type="button" class="btn btn-md" id="reset-radius">Clear Results</button>
-                <div id="results" class="container"></div>
-            </div>
-            <div class="sidebar-pane" id="about">
-                <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i><i class="fa fa-caret-down"></i></span></h1>
-                <br>
-                <p>This app was made by awesome volunteers from Code for Pittsburgh!</p>
-                <p>To learn more and contribute, visit our <a href="https://github.com/CodeForPittsburgh/food-access-map-data">GitHub</a> page.</p>
-                <p>Thank you to the <a href="https://www.pittsburghfoodpolicy.org/">Pittsburgh Food Policy Council</a> for ...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- partial -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script src='https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js'></script>
-    <script src='https://unpkg.com/leaflet-knn@0.1.0/leaflet-knn.js'></script>
-    <script src="js/food_icons.js"></script>
-    <script src="js/intro-control.js"></script>
-    <script src="js/sidebar-update.js"></script>
-    <script src="js/imported/leaflet-sidebar.js"></script>
-    <script src="js/imported/bootstrap-geocoder.js"></script>
-    <script src="js/imported/intro.js"></script>
-    <script src="js/map-layout.js"></script>
-    <script src="js/script.js"></script>
-
-</body>
-
+    </body>
 </html>

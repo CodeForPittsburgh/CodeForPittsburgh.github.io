@@ -21,12 +21,14 @@ html {
   border: solid 1px #bbb;
   background-color: #f8f8f8;
 }
-
+#missing-location span {
+  float: right;
+}
 #searchInput {
   width: 100%;
 }
 
-#reset-radius {
+#results-tutorial, #reset-radius {
   margin-bottom: 20px;
 }
 
@@ -98,6 +100,11 @@ html {
   color: white;
 }
 
+.foodrx {
+  background-color: rgb(141, 5, 182);
+  color: white;
+}
+
 input[type='text'] {
   float: left;
   padding: 6px;
@@ -155,6 +162,22 @@ input[type='text'] {
 
 .filterBody {
   font-size: 12px;
+}
+.filter-all .toggle-on {
+  /* background-color: rgb(75, 75, 75); */
+  background-color: rgb(89, 89, 100);
+}
+
+.filter-all .toggle-on:hover{
+  background-color: rgb(75, 75, 75);
+}
+
+.filter-all .toggle-off {
+  background-color: rgb(170, 169, 169);
+}
+
+.form-control {
+  margin-top: 8px;
 }
 
 .sourceOrg {
@@ -222,6 +245,10 @@ input[type='text'] {
 
 .url {
   word-break: break-all;
+}
+
+textarea {
+  resize: none;
 }
 
 /* @media screen and (orientation: landscape) {
