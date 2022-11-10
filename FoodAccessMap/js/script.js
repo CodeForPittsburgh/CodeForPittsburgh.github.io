@@ -80,7 +80,7 @@ function onEachFeature(feature, layer) {
         (feature.properties.food_bucks ==='True' ? 'Food Bucks</br>' : '') +
         (feature.properties.fresh_produce ==='True' ? 'Fresh Produce</br>' : '')+
         (feature.properties.free_distribution ==='True' ? 'Free Distribution' : '')+
-        (feature.properties.food_rx ==='True' ? 'Food RX' : '')
+        (feature.properties.food_rx ==='True' ? 'Food Rx' : '')
     );
     layer.bindPopup(popup);
   }

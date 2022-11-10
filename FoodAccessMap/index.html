@@ -204,7 +204,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="checkbox-inline togglepad">
-                                                    <input type="checkbox" id="filterFoodRX" name="food_rx" checked="checked" data-toggle="toggle">Food RX
+                                                    <input type="checkbox" id="filterFoodRX" name="food_rx" checked="checked" data-toggle="toggle">Food Rx
                                                 </label>
                                             </div>
                                         </div>
@@ -279,7 +279,10 @@
                                     <div class="panel-body">
                                         <form action="https://formsubmit.co/110975dc284b87d1236de4b330ea0dc3" method="POST" id="missing-location">
                                             <input type="hidden" name="_subject" value="A user has submitted a location for the Pittsburgh Food Access Map.">
-                                            <span>* Required Field</span>
+                                            <div id="required-field">
+                                                <span>* Required Field</span>
+                                            </div>
+                                            
                                             <div class="form-group">
                                               <label for="name">Location Name *</label>
                                               <input type="text" class="form-control" name="name" placeholder="Location Name" maxlength="100" required>
@@ -298,7 +301,74 @@
                                                     <option>Other</option>
                                                 </select>
                                             </div>
-                                        
+                                            
+                                            <div id="services-form">
+                                                <legend class="services-form-legend">Does the site have fresh produce or accept any of these benefits?</legend>
+                                                <div id="services-form-radio-options">
+                                                    <div >
+                                                        <span>Yes</span>
+                                                        <span class="center-option">No</span>
+                                                        <span>Unsure</span>
+                                                    </div>
+                                                </div>
+                                                
+                                                <fieldset class="services-form-radios" >
+                                                    <label for="fresh-produce">Fresh Produce *</label>
+                                                    <div>
+                                                        <input type="radio" name="fresh-produce" value="yes" required> 
+                                                        <input type="radio" name="fresh-produce" value="no"  required>
+                                                        <input type="radio" name="fresh-produce" value="unsure" required>
+                                                    </div>                                            
+                                                </fieldset>
+
+                                                <fieldset class="services-form-radios">
+                                                    <label for="snap">SNAP *</label>
+                                                    <div>
+                                                        <input type="radio" name="snap" value="yes" required> 
+                                                        <input type="radio" name="snap" value="no" required>
+                                                        <input type="radio" name="snap" value="unsure" required>
+                                                    </div>
+                                                </fieldset>
+
+                                                <fieldset class="services-form-radios">
+                                                    <label for="wic">WIC *</label>
+                                                    <div>
+                                                        <input type="radio" name="wic" value="yes" required> 
+                                                        <input type="radio" name="wic" value="no" required>
+                                                        <input type="radio" name="wic" value="unsure" required>
+                                                    </div>
+
+                                                </fieldset>
+
+                                                <fieldset class="services-form-radios">
+                                                    <label for="food-bucks">Food Bucks *</label>
+                                                    <div>
+                                                        <input type="radio" name="food-bucks" value="yes" required>
+                                                        <input type="radio" name="food-bucks" value="no" required>
+                                                        <input type="radio" name="food-bucks" value="unsure" required>
+                                                    </div>
+                                                </fieldset>
+
+                                                <fieldset class="services-form-radios">
+                                                    <label for="food-rx">Food Rx *</label>
+                                                    <div>
+                                                        <input type="radio" name="food-rx" value="yes" required>
+                                                        <input type="radio" name="food-rx" value="no" required>
+                                                        <input type="radio" name="food-rx" value="unsure" required>
+                                                    </div>
+                                                </fieldset>
+
+                                                <fieldset class="services-form-radios">
+                                                    <label for="farmers-market-nutrition-program">Farmer's Market nutrition program *</label>
+                                                    <div>
+                                                        <input type="radio" name="farmers-market-nutrition-program" value="yes" required>
+                                                        <input type="radio" name="farmers-market-nutrition-program" value="no" required>
+                                                        <input type="radio" name="farmers-market-nutrition-program" value="unsure" required>
+                                                    </div>
+
+                                                </fieldset>
+                                            </div>
+                                            
                                             <div class="form-group">
                                               <label for="address">Address *</label>
                                               <input type="text" class="form-control" name="address" placeholder="1234 Main St" maxlength="100" required>

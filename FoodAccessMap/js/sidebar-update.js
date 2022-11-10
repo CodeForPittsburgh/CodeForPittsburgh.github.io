@@ -62,7 +62,7 @@ function updateResultsSidebar(foodLocations) {
             if (entry.food_rx === "True") {
                 acceptsText.append($('<br>'));
                 acceptsText.append(
-                    $('<span class="foodrx accepts_icon"></span>').text("Food RX")
+                    $('<span class="foodrx accepts_icon"></span>').text("Food Rx")
                 );
             }
             entryDiv.append(acceptsText);
