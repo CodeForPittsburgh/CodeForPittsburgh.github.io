@@ -1,4 +1,12 @@
-document.querySelector('#reset-radius').addEventListener('click', resetResultsRadius)
+// Listens for click on clear results button in results tab
+document.getElementById('reset-radius').addEventListener('click', resetResultsRadius);
+// Listens for a change in the radius slider in results tab 
+document.getElementById('customRange2').addEventListener('change', parseFilter);
+// Listens for click on View Tutorial button and reruns home tutorial script
+document.getElementById('home-tutorial').addEventListener('click', startIntro);
+// Listens for click on View Tutorial button and reruns results tutorial script
+document.getElementById('results-tutorial').addEventListener('click', resultsIntro);
+
 
 $(document).ready(function () {
   if (window.matchMedia('(max-width: 767px)').matches) {
@@ -71,7 +79,8 @@ function onEachFeature(feature, layer) {
         (feature.properties.fmnp ==='True' ? 'FMNP</br>' : '') +
         (feature.properties.food_bucks ==='True' ? 'Food Bucks</br>' : '') +
         (feature.properties.fresh_produce ==='True' ? 'Fresh Produce</br>' : '')+
-        (feature.properties.free_distribution ==='True' ? 'Free Distribution' : '') 
+        (feature.properties.free_distribution ==='True' ? 'Free Distribution' : '')+
+        (feature.properties.food_rx ==='True' ? 'Food Rx' : '')
     );
     layer.bindPopup(popup);
   }
@@ -121,7 +130,7 @@ function animateCircle() {
   }, 20);
 };
 
-// Returns an object with arrays containing the filtered types and services from the search tab
+// Returns an object with arrays containing the filtered types and services from the home tab
 function getFilterValues() {
   let selectedTypes = [];
   $('#typeFilter input:checked').each(function () {
@@ -181,15 +190,29 @@ function locateOnClick(latlng) {
   // Add search locations to sidebar
   updateResultsSidebar(foodLocations);
   results.addLayer(L.marker(latlng));
+
+  
+  if (window.matchMedia('(min-width: 767px)').matches) {
+    //Check local storage if search raidus intro was previously completed. If not, run it.
+    if (localStorage.getItem('radius-intro-complete') != "true") {
+      resultsIntro();
+    }
+    //Then set radius intro was completed afterward.
+    localStorage.setItem('radius-intro-complete','true');
+  }
 };
 
-// Hides the search radius on the map and shows all filtered locations
+// Hides the search radius on the map and shows all filtered locations, if in mobile will close results tab to show map
 function resetResultsRadius() {
   results.clearLayers();
   map.removeLayer(foodLocations);
   filterCircle.setStyle({ opacity: 0, fillOpacity: 0 });
   parseFilter();
   document.getElementById('results').innerHTML = "";
+  if (window.matchMedia('(max-width: 500px)').matches) {
+    sidebar.close('resultlist');  
+  };
+  map.closePopup();
 };
 
 // Populates the map with only locations specified in the filters and within the search radius if radius is visible
@@ -206,9 +229,10 @@ function parseFilter() {
   }else {
     locateOnClick(latlng);
   }
+  map.closePopup();
 };
 
-//Toggles whether to show/hide filter panes in the search tab of sidebar
+//Toggles whether to show/hide filter panes in the home tab of sidebar
 function toggleFilters() {
   if ($('#filtersPane').is(':hidden')) {
     $('#filtersPane').show();
@@ -216,6 +240,15 @@ function toggleFilters() {
     $('#filtersPane').hide();
   }
 };
+
+// Resets search radius when search bar is used, will close the home tab if user is on mobile.
+search.on('results', function(){
+  resetResultsRadius();
+
+  if (window.matchMedia('(max-width: 500px)').matches) {
+    sidebar.close('home');  
+  }
+});
 
 $.get(
   //retreive the dataset
@@ -276,15 +309,55 @@ $.get(
 var firstUse = true;
 
 // Toggle Change Listener, updates the map when filters are toggled
-$('input:checkbox').change(function () {
+$('input:checkbox').not('#filterAllTypes,#filterAllServices').change(function () {
   parseFilter();
+});
+
+//Listens for change in toggle all in types pane and updates all types filters accordingly
+$('#filterAllTypes').change(function () {
+  //remove toggle event listeners so they are not triggered multiple times by the next step
+  $('input:checkbox').not('#filterAllTypes,#filterAllServices').off()
+
+  //if toggle all types is set to on turn on all of the types filters, if set to off turn off all types filters
+  if ($('#filterAllTypes').prop('checked')) {
+    $("#filterSupermarket,#filterConvenienceStore,#filterGrowPGHGarden,#filterFarmersMarket,#filterSummerMeals,#filterFoodBanks,#filterOther").bootstrapToggle('on');
+  } else {
+    $("#filterSupermarket,#filterConvenienceStore,#filterGrowPGHGarden,#filterFarmersMarket,#filterSummerMeals,#filterFoodBanks,#filterOther").bootstrapToggle('off');
+  }
+
+  parseFilter()
+
+  //rebind the event listener for each individual toggle
+  $('input:checkbox').not('#filterAllTypes,#filterAllServices').change(function () {
+    parseFilter();
+  });
+});
+
+//Listens for change in toggle all in services pane and updates all service filters accordingly
+$('#filterAllServices').change(function () {
+  //remove toggle event listeners so they are not triggered multiple times by the next step
+  $('input:checkbox').not('#filterAllTypes,#filterAllServices').off()
+
+  //if toggle all services is set to on turn on all of the service filters, if set to off turn off all service filters
+  if ($('#filterAllServices').prop('checked')) {
+    $("#filterSNAP,#filterWIC,#filterFMNP,#filterFoodBucks,#filterFreshProduce,#filterFreeDistribution,#filterFoodRX").bootstrapToggle('on');
+  } else {
+    $("#filterSNAP,#filterWIC,#filterFMNP,#filterFoodBucks,#filterFreshProduce,#filterFreeDistribution,#filterFoodRX").bootstrapToggle('off');
+  }
+
+  parseFilter()
+
+  //rebind the event listener for each individual toggle
+  $('input:checkbox').not('#filterAllTypes,#filterAllServices').change(function () {
+    parseFilter();
+  });
 });
 
 // Listens for clicks on map. If it is the first click popup appears explaining search radius. Otherwise will show the radius and populate locations inside raidus.
 map.on('click', function (ev) {
   if (firstUse) {
     var popup = L.popup().setContent(
-      'Clicking in the map will search for resources in a walkable distance. Try it!'
+      'Clicking on the map will search for resources in a walkable distance. Try it!'
     );
     popup.setLatLng(ev.latlng);
     map.openPopup(popup);
@@ -293,11 +366,17 @@ map.on('click', function (ev) {
       sidebar.open('resultlist');
     };
     firstUse = false;
-  } else {
+  }  else {
     locateOnClick(ev.latlng);
     sidebar.open('resultlist');
   }
-
+  if (jQuery.isEmptyObject(foodLocations._layers)) {
+    var popup = L.popup().setContent(
+      "It looks like there aren't any locations here, try clicking a different part of the map or expanding the radius."
+  );
+    popup.setLatLng(ev.latlng);
+    map.openPopup(popup);
+  }
 });
 
 setTimeout(function () {
@@ -309,6 +388,6 @@ setTimeout(function () {
 
 $("#customRange2").on('input propertychange', function (e) {
   mapSearchRadius = $(this).val();
-  $('#rangeval').html(mapSearchRadius);
+  $('#rangeval').html((mapSearchRadius * 0.000621371).toFixed(2).toString());
   filterCircle.setRadius(mapSearchRadius);
 });
