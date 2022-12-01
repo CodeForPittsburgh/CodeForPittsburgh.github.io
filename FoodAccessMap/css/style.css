@@ -22,11 +22,39 @@ html {
   background-color: #f8f8f8;
 }
 
-#searchInput {
-  width: 180px;
+#missing-location #required-field {
+  display: flex;
+  justify-content: flex-end;
 }
 
-#reset-radius {
+#missing-location #services-form-radio-options {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#missing-location #services-form-radio-options div {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+#missing-location input[type='text'] {
+  float: none;
+}
+
+#services-form-radio-options .center-option {
+  padding-left: 10px;
+}
+
+#searchInput {
+  width: 100%;
+}
+
+#services-form {
+  margin-bottom: 20px;
+}
+
+#results-tutorial, #reset-radius {
   margin-bottom: 20px;
 }
 
@@ -65,6 +93,39 @@ html {
   margin: 2px;
 }
 
+.services-form-legend {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.services-form-radios {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.services-form-radios div {
+  min-width: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  padding-right: 10px;
+}
+
+.services-form-radios input {
+  margin-top: 0;
+}
+
+.services-form-radios label {
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
 .accepts_icon {
   border-radius: 5px;
   font-weight: bold;
@@ -95,6 +156,11 @@ html {
 
 .freedistribution {
   background-color: rgb(182, 182, 5);
+  color: white;
+}
+
+.foodrx {
+  background-color: rgb(141, 5, 182);
   color: white;
 }
 
@@ -156,6 +222,23 @@ input[type='text'] {
 .filterBody {
   font-size: 12px;
 }
+.filter-all .toggle-on {
+  /* background-color: rgb(75, 75, 75); */
+  background-color: rgb(89, 89, 100);
+}
+
+.filter-all .toggle-on:hover{
+  background-color: rgb(75, 75, 75);
+}
+
+.filter-all .toggle-off {
+  background-color: rgb(170, 169, 169);
+}
+
+.form-control {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
 
 .sourceOrg {
   font-size: 10px;
@@ -181,7 +264,6 @@ input[type='text'] {
 }
 
 .legend {
-  
   padding: 6px 8px;
   font: 14px Arial, Helvetica, sans-serif;
   background: white;
@@ -222,6 +304,10 @@ input[type='text'] {
 
 .url {
   word-break: break-all;
+}
+
+textarea {
+  resize: none;
 }
 
 /* @media screen and (orientation: landscape) {

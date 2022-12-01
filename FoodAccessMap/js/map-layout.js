@@ -31,7 +31,7 @@ L.control.scale().addTo(map);
 // Create a Tile Layer and add it to the map
 var foodLocations = new L.FeatureGroup();
 var points = [];
-var mapSearchRadius = 500;
+var mapSearchRadius = 805;
 var distanceLine = L.polyline(
   [
     [0, 0],
@@ -52,9 +52,10 @@ var nwBoundsCorner = L.latLng(40.507486, -80.063847);
 var seBoundsCorner = L.latLng(40.385017, -79.837699);
 var mapBounds = L.latLngBounds(nwBoundsCorner, seBoundsCorner);
 var search = new L.esri.BootstrapGeocoder.search({
-  inputTag: 'searchInput',
-  placeholder: 'ex. Bloomfield',
-  searchBounds: mapBounds,
+    inputTag: 'searchInput',
+    placeholder: 'ex. Bloomfield',
+    searchBounds: mapBounds,
+    allowMultipleResults: false
 }).addTo(map);
 
 L.tileLayer(
