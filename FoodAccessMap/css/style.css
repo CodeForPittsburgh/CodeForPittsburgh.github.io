@@ -38,6 +38,10 @@ html {
   width: 50%;
 }
 
+#missing-location input[type='text'] {
+  float: none;
+}
+
 #services-form-radio-options .center-option {
   padding-left: 10px;
 }
@@ -233,6 +237,7 @@ input[type='text'] {
 
 .form-control {
   margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .sourceOrg {
