@@ -74,7 +74,7 @@ var results = new L.LayerGroup().addTo(map);
 foodLocations.addTo(map);
 var myIcon = L.icon({
   iconUrl: './images/bus.png',
-  iconSize: [14, 14],
+  iconSize: [16, 16],
   iconAnchor: [10, 10],
   popupAnchor: [0, -28],
 });
