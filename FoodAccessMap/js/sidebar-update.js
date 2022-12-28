@@ -25,41 +25,41 @@ function updateResultsSidebar(foodLocations) {
         entryDiv.append(address);
         entryDiv.append(googleMapsLink);
         entryDiv.append($('<br>'));
-        if (entry.snap === "True" || entry.wic === "True" || entry.food_bucks === "True" || entry.fresh_produce === "True" || entry.fmnp === "True" || entry.free_distribution === "True" || entry.food_rx === "True" ) {
+        if (entry.snap === true || entry.wic === true || entry.food_bucks === true || entry.fresh_produce === true || entry.fmnp === true || entry.free_distribution === true || entry.food_rx === true ) {
             var acceptsText = $('<div></div>');
-            if (entry.snap === "True") {
+            if (entry.snap === true) {
                 acceptsText.append(
                     $('<span class="snap accepts_icon"></span>').text('SNAP')
                 );
             }
-            if (entry.wic === "True") {
+            if (entry.wic === true) {
                 acceptsText.append(
                     $('<span class="wic accepts_icon"></span>').text('WIC')
                 );
             }
-            if (entry.food_bucks === "True") {
+            if (entry.food_bucks === true) {
                 acceptsText.append(
                     $('<span class="foodbucks accepts_icon"></span>').text('Food Bucks')
                 );
             }
-            if (entry.fresh_produce === "True") {
+            if (entry.fresh_produce === true) {
                 acceptsText.append(
                     $('<span class="freshproduce accepts_icon"></span>').text('Fresh Produce')
                 );
             }
-            if (entry.fmnp === "True") {
+            if (entry.fmnp === true) {
                 acceptsText.append($('<br>'));
                 acceptsText.append(
                     $('<span class="fmnp accepts_icon"></span>').text("Farmer's Market Nutrition Program")
                 );
             }
-            if (entry.free_distribution === "True") {
+            if (entry.free_distribution === true) {
                 acceptsText.append($('<br>'));
                 acceptsText.append(
                     $('<span class="freedistribution accepts_icon"></span>').text("Free Distribution")
                 );
             }
-            if (entry.food_rx === "True") {
+            if (entry.food_rx === true) {
                 acceptsText.append($('<br>'));
                 acceptsText.append(
                     $('<span class="foodrx accepts_icon"></span>').text("Food Rx")
