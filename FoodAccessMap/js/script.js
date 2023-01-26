@@ -74,13 +74,13 @@ function onEachFeature(feature, layer) {
             feature.properties.url +
             '</a></p>'
           : '') +
-        (feature.properties.snap === 'True' ? 'SNAP</br>' : '') +
-        (feature.properties.wic ==='True' ? 'WIC</br>' : '')+
-        (feature.properties.fmnp ==='True' ? 'FMNP</br>' : '') +
-        (feature.properties.food_bucks ==='True' ? 'Food Bucks</br>' : '') +
-        (feature.properties.fresh_produce ==='True' ? 'Fresh Produce</br>' : '')+
-        (feature.properties.free_distribution ==='True' ? 'Free Distribution' : '')+
-        (feature.properties.food_rx ==='True' ? 'Food Rx' : '')
+        (feature.properties.snap === true ? 'SNAP</br>' : '') +
+        (feature.properties.wic === true ? 'WIC</br>' : '')+
+        (feature.properties.fmnp === true ? 'FMNP</br>' : '') +
+        (feature.properties.food_bucks === true ? 'Food Bucks</br>' : '') +
+        (feature.properties.fresh_produce === true ? 'Fresh Produce</br>' : '')+
+        (feature.properties.free_distribution === true ? 'Free Distribution' : '')+
+        (feature.properties.food_rx === true ? 'Food Rx' : '')
     );
     layer.bindPopup(popup);
   }
@@ -97,7 +97,7 @@ function getFilteredLocations() {
       // snap wic fmnp food_bucks fresh_produce free_distribution
       for (let i = 0; i < filters.services.length; i++) {
         let token = filters.services[i];
-        if (feature.properties[token] === "True") {
+        if (feature.properties[token] === true) {
           found = true;
         }
       }
@@ -169,7 +169,7 @@ function locateOnClick(latlng) {
       // snap wic fmnp food_bucks fresh_produce free_distribution
       for (let i = 0; i < filters.services.length; i++) {
         let token = filters.services[i];
-        if (feature.properties[token] === "True") {
+        if (feature.properties[token] === true) {
           found = true;
         }
       }
@@ -251,20 +251,18 @@ search.on('results', function(){
 });
 
 $.get(
-  //retreive the dataset
-  'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-data-transformation/main/food-data/processed-datasets/merged_datasets.csv',
+  //retreive the ndjson dataset
+  'https://raw.githubusercontent.com/CodeForPittsburgh/food-access-data-transformation/main/food-data/processed-datasets/merged_datasets.ndjson',
 
-  function (csvString) {
-    // Use PapaParse to convert string to array of objects
-    var data = Papa.parse(csvString, {
-      header: true,
-      dynamicTyping: true,
-    }).data;
-
+  //pass the retreived dataset into a function to handle initial map population
+  function (ndjson) {
+    //convert NDJSON to array of objects
+    const data = ndjson.split('\n').map(obj => JSON.parse(obj))
+  
     // make a list of different location types in the dataset and alphabatize it. used to make the legend
     var locationTypes = [...new Set(data.map((item) => item.type))].sort();
-
-    //Populate each row with data from csv
+    
+    //Populate each row with data from NDJSON file
     for (var i in data) {
       var row = data[i];
       points.push({
@@ -278,10 +276,11 @@ $.get(
         },
       });
     }
-
+    
     // initial map population
     parseFilter();
 
+    //creates map legend
     var legend = L.control({ position: 'bottomright' });
     legend.onAdd = (map) => {
       var div = L.DomUtil.create('div', 'legend');
