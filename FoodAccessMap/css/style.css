@@ -133,35 +133,38 @@ html {
 }
 
 .snap {
-  background-color: darkgreen;
-  color: white;
+  background-color: rgb(86, 180, 233); 
+  color: black;
 }
 
 .wic {
-  background-color: #ba55d3;
+  background-color: rgb(0, 84, 133); 
+  color: white;
 }
 
 .foodbucks {
-  background-color: #32cd32;
+  background-color: rgb(0, 173, 127);
+  color: black;
 }
 
 .freshproduce {
-  background-color: orangered;
+  background-color: rgb(255, 111, 0);
+  color: black;
 }
 
 .fmnp {
-  background-color: darkred;
-  color: white;
+  background-color: rgb(209, 133, 175);
+  color: black;
 }
 
 .freedistribution {
-  background-color: rgb(182, 182, 5);
-  color: white;
+  background-color: rgb(230, 159, 0);
+  color: black;
 }
 
 .foodrx {
-  background-color: rgb(141, 5, 182);
-  color: white;
+  background-color: rgb(240, 228, 66);
+  color: black;
 }
 
 input[type='text'] {
