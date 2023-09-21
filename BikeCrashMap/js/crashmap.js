@@ -9,8 +9,8 @@ src = "citymapoverlays.js";
 
 var state = {"map": null,
     "filter": {
-        "startYear": 2021,
-        "endYear": 2021,
+        "startYear": 2022,
+        "endYear": 2022,
         "severity": ["Not injured",
             "Killed",
             "Major injury",
@@ -37,20 +37,7 @@ var getSelectValues = function (select) {
     return result;
 };
 
-function updateBikeShare()
-{
-    var locationupdate = document.getElementById('bikeshareToggle');
-    var infoWindow = new google.maps.InfoWindow;
-    console.log('Bike Share Checkbox update: ' + locationupdate.checked);
-    toggleBikeMarkers(state.map, infoWindow, false);
-    if (locationupdate.checked)
-    {
-        toggleBikeMarkers(state.map, infoWindow, true);
-    } else
-    {
-        toggleBikeMarkers(state.map, infoWindow, false);
-    }
-}
+
 
 function update() {
     var severity = getSelectValues(document.getElementById("crashSeverityFilter"));
@@ -92,7 +79,6 @@ function initialize() {
     bindEvent(document.getElementById("crashYearFilterEnd"), "change", update);
     bindEvent(document.getElementById("crashSeverityFilter"), "change", update);
 
-    bindEvent(document.getElementById("bikeshareToggle"), "change", updateBikeShare);
 
     county = new google.maps.Data();
 
@@ -123,25 +109,8 @@ function initialize() {
 
     };
 
-    
-    state.map.addListener('zoom_changed', function () {
-        var locationupdate = document.getElementById('bikeshareToggle');
-        console.log('Location update: ' + locationupdate.checked);
-        var zoomlevel = state.map.getZoom();
-        console.log('Zoom: ' + zoomlevel);
-        toggleBikeMarkers(state.map, infoWindow, false);
-        if (locationupdate.checked)
-        {
-            console.log('Zoom: ' + zoomlevel);
-            if (zoomlevel > 12)
-            {
-                toggleBikeMarkers(state.map, infoWindow, true);
-            } else
-            {
-                toggleBikeMarkers(state.map, infoWindow, false);
-            }
-        }
-    });
+
+
 
     //document.addListener("change", function () {
 
@@ -204,15 +173,14 @@ function initialize() {
     county.setMap(state.map);
 
     var type = "Crash";
-    var bikeLayer = new google.maps.BicyclingLayer();
-    bikeLayer.setMap(state.map);
+
 
     //setBikeMarkers(state.map, locations);
     //getBikeLocations(county.map, infoWindow);
 
     console.log(state.filter.severity);
     // Change this depending on the name of your PHP file
-    downloadUrl("./data/bikecrash.xml", function (data) {
+    downloadUrl("./data/PGbikecrash.xml", function (data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName("marker");
         //alert(markers.length);            
@@ -224,14 +192,26 @@ function initialize() {
             }
             var crashdate = markers[i].getAttribute("CRASH_MONTH");
             var crashtime = markers[i].getAttribute("TIME_OF_DAY");
-            var crashmin, crashhour;
-            if (crashtime.length === 3) {
-                crashmin = crashtime.substring(1);
-                crashhour = crashtime.substring(0, 1);
-            } else {
-                crashmin = crashtime.substring(2);
-                crashhour = crashtime.substring(0, 2);
+           // var crashmin, crashhour;
+            if (crashtime.length === 1)
+            {
+                crashtime = '000' + crashtime;
             }
+            if (crashtime.length === 2)
+            {
+                crashtime = '00' + crashtime;
+            }
+            if (crashtime.length === 3)
+            {
+                crashtime = '0' + crashtime;
+            }
+            //if (crashtime.length === 3) {
+            //    crashmin = crashtime.substring(1);
+            //    crashhour = crashtime.substring(0, 1);
+            //} else {
+            //    crashmin = crashtime.substring(2);
+            //    crashhour = crashtime.substring(0, 2);
+            //}
             var address = markers[i].getAttribute("STREET_NAME");
             var description = markers[i].getAttribute("MAX_SEVERITY_LEVEL");
             if (!state.filter.severity.includes(description)) {
@@ -240,7 +220,14 @@ function initialize() {
             var point = new google.maps.LatLng(
                     parseFloat(markers[i].getAttribute("lat")),
                     parseFloat(markers[i].getAttribute("lng")));
-            var html = "<b>" + address + "</b> <br/>" + type + "<br/>" + "Year:" + crashyear + " Month:" + crashdate + " Time: " + crashhour + ":" + crashmin + "<br/>" + name + "<br/>" + description;
+            var html = "<b>" + type + ' at ' + address + "</b> <br/>" +
+                    "<table align='center' cellpadding='5' border=2>" +
+                    "<tr><th>Year</th><th>Month</th><th>Time</th><th>Location</th><th>Status</th></tr>" +
+                    "<tr><td>" + crashyear + "</td><td>" + crashdate + "</td><td>" + crashtime + "</td>" +
+                    "<td>" + name + "</td><td>" + description +
+                    "</td></tr></br>"
+                    + "</table>";
+
 
             var icon = './img/roundbg_check_black.png';
             if (description === "Killed")
@@ -254,16 +241,10 @@ function initialize() {
             });
             //marker.addListener('click', bindInfoWindow(marker, map, infoWindow, html));
             bindInfoWindow(marker, state.map, infoWindow, html);
-  
+
         }
     });
 
-
-     getBikeLocations(state.map, infoWindow);
-    //setMarkers(state.map);
-    toggleBikeMarkers(state.map,infoWindow,false);
-    //getBikeLocations(state.map, infoWindow);
-    //toggleBikeMarkers(state.map, infoWindow, false);
 }
 
 function bindInfoWindow(marker, map, infoWindow, html) {
@@ -315,67 +296,6 @@ function showMarkers(map) {
 function clearMarkers() {
     setMapOnAll(null);
 }
-function getBikeLocations(map, infoWindow)
-{
-    var locations = new Array;
-    //['1000','Liberty & Stanwix',16,40.441326,-80.004679],
-    downloadUrl("https://api.nextbike.net/maps/nextbike-live.xml?&city=254", function (data) {
-        var xml = data.responseXML;
-        var markers = xml.documentElement.getElementsByTagName("place");
-        //console.log(markers.length);
-        for (var i = 0; i < markers.length; i++) {
 
-            var address = markers[i].getAttribute("name");
-            var bike_racks = markers[i].getAttribute("bike_racks");
-            var number = markers[i].getAttribute("number");
-            // var point = new google.maps.LatLng(
-            var lat = parseFloat(markers[i].getAttribute("lat"));
-            var lng = parseFloat(markers[i].getAttribute("lng"));
-
-            locations[i] = "\"" + number + "," + address + "," + bike_racks + "," + lat + "," + lng + "\"";
-            //}
-            //console.log(locations[i]);
-        }
-        setBikeMarkers2(map, locations, infoWindow);
-    });
-}
-function setBikeMarkers2(map, locations, infoWindow) {
-    //console.log("setBikeMarkers");
-    var Bikeimage = {
-        url: 'img/bicycle.ico',
-        size: new google.maps.Size(26, 26)
-    };
-    for (var i = 0; i < locations.length; i++) {
-        var bikelocations = locations[i].split(",");
-        //console.log("BL" + bikelocations);
-        var point = new google.maps.LatLng(
-                parseFloat(bikelocations[3]),
-                parseFloat(bikelocations[4]));
-        //var myLatLng = new google.maps.LatLng(bikelocations[3], bikelocations[4]);
-        var html = "<b>" + bikelocations[1] + "</b> <br/> Rack Count " + bikelocations[2] + "<br/>";
-        var marker = new google.maps.Marker({
-            position: point,
-            map: map,
-            icon: Bikeimage
-
-        });
-        //console.log(html);
-        markers.push(marker);
-        bindInfoWindow(marker, map, infoWindow, html);
-    }
-     toggleBikeMarkers(state.map,infoWindow,false);
-}
-function toggleBikeMarkers(map, infoWindow, turnon)
-{
-    console.log("Bike Locations are: " + turnon);
-    if (turnon === false)
-    {
-        clearMarkers(map);
-    } else
-    {
-        // getBikeLocations(map, infoWindow);
-        showMarkers(map);
-    }
-}
 google.maps.event.addDomListener(window, 'load', initialize);
 
