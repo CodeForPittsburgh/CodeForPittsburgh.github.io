@@ -1,6 +1,6 @@
-# Code for Pittsburgh website
+# Code for Good website
 
-This Code for Pittsburgh's Jekyll-powered GitHub pages website. It's based on a heavily modified version the Forty Jekyll Theme by <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a>, which is based on the <a href="https://html5up.net" target="_blank">HTML5 UP</a> Forty Jekyll Theme by <a href="https://twitter.com/ajlkn" target="_blank">ajkln</a>. This code is free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+This Code for Good's Jekyll-powered GitHub pages website. It's based on a heavily modified version the Forty Jekyll Theme by <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a>, which is based on the <a href="https://html5up.net" target="_blank">HTML5 UP</a> Forty Jekyll Theme by <a href="https://twitter.com/ajlkn" target="_blank">ajkln</a>. This code is free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
 ---
 
@@ -48,7 +48,7 @@ At the top of each post, add Jekyll front-matter using these categories:
 ```
 ---
 layout: project
-title: A CfP Project
+title: A CFG Project
 description: a clever subtitle for the project
 image: assets/images/aRepresentativeImageOfTheProject.jpg
 lead: Name of person who lead the project

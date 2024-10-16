@@ -1,10 +1,10 @@
 # ------------------------------------
 # SITE INFO SETTINGS
 
-title: Code for Pittsburgh
+title: Code for Good
 #subtitle: Pittsburgh's Code for America Brigade
 email: info@codeforpittsburgh.org
-description: We are Pittsburgh's Code for America Brigade
+description: We are Pittsburgh's Code for Good
 #baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://codeforpittsburgh.github.io"
 author:
@@ -17,9 +17,9 @@ phone: (412) 555-5555
 
 # Social media
 github_url: https://github.com/codeforpittsburgh
-twitter_url: https://twitter.com/codeforpgh
-meetup_url: https://www.meetup.com/codeforpgh
-slack_url: https://t.co/I6wuTtmtYa
+twitter_url: 
+meetup_url: 
+slack_url: 
 500px_url:
 facebook_url:
 gitlab_url: 
