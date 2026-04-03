@@ -84,7 +84,7 @@ function FishFryStatus(ashwednesday, goodfriday)
     {
         rc = 1;
     }
-    if (tt >= gf)
+    if (tt > gf)
     {
         rc = 2;
         var d = new Date();
