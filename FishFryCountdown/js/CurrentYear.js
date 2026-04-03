@@ -71,15 +71,20 @@ function FishFryStatus(ashwednesday, goodfriday)
 {
     var rc = 0;
     days = 0;
+    //alert(ashwednesday + " " + goodfriday);
+      var t = addDays(new Date(), days);
+    //alert(t);
+    //alert(getMonth(t.getDate()+1));
+    var currentday = getMonth(t.getDate()+1) + " " + t.getDate()+ " " + t.getFullYear();
+    //alert(currentday+ " " +ashwednesday + " " + goodfriday);
 
-    var t = addDays(new Date(), days);
-
-    var tt =  Date.parse(t);
+    var tt = Date.parse(t);
     //alert(tt);
     var at = Date.parse(ashwednesday);
     //alert(at);
     var gf = Date.parse(goodfriday);
-    //alert(t + " " + tt + " " + at + " " + gf);
+    //alert(tt - gf);
+    //alert(t + " " + tt + " " + at + " " + gf );
     if ((tt >= at) && (tt < gf))
     {
         rc = 1;
@@ -91,11 +96,11 @@ function FishFryStatus(ashwednesday, goodfriday)
         var cy = d.getFullYear() + 1;
         nextyeardates(cy);
     }
-        if (tt === gf)
+    if (currentday === goodfriday)
     {
         rc = 3;
     }
-    alert(rc);
+    //alert(rc);
     return rc;
 }
 function addDays(date, days) {

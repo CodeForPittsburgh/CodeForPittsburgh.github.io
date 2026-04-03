@@ -69,8 +69,8 @@
                 var AshWednesdayresults = "Ash Wednesday " + cy + " is on " + month + " " + day;
                 document.getElementById("AshWednesday").innerHTML = AshWednesdayresults;
                 
-                var AshWednesdaytargettime = month + " " + day + " " + cy + " 16:00:00 GMT-0500";
-                var targettime = month + " " + day + " " + cy + " 16:00:00 GMT-0500";
+                var AshWednesdaytargettime = month + " " + day + " " + cy;
+                var targettime = month + " " + day + " " + cy;
                 //alert(targettime);
                 //var label = "AshWednesday";
                 //document.getElementById(label).innerHTML = results;
@@ -97,7 +97,7 @@
             message[0] = "Fish Fry Starts in:";
             message[1] = "Fish Fry has started:";
             message[2] = "Fish Fry Starts Next Year on Ash Wednesday " ;
-            message[3] = "Last Fish Fry of the yeat";
+            message[3] = "Last Fish Fry of the year";
             document.getElementById("message").innerHTML = message[fishfrystatus];            
                 
             if (fishfrystatus === 0)
