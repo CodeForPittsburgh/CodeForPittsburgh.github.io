@@ -91,6 +91,10 @@ function FishFryStatus(ashwednesday, goodfriday)
         var cy = d.getFullYear() + 1;
         nextyeardates(cy);
     }
+        if (tt === gf)
+    {
+        rc = 3;
+    }
     //alert(rc);
     return rc;
 }
