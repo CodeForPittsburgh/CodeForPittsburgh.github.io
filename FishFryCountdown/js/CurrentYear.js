@@ -95,7 +95,7 @@ function FishFryStatus(ashwednesday, goodfriday)
     {
         rc = 3;
     }
-    //alert(rc);
+    alert(rc);
     return rc;
 }
 function addDays(date, days) {
